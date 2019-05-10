@@ -13,5 +13,6 @@ data class Delivery(
     @ColumnInfo var payType: String = "",
     @ColumnInfo var address: String = "",
     @ColumnInfo var cost: Int = 0,
-    @ColumnInfo var comment: String = ""
+    @ColumnInfo var comment: String = "",
+    @ColumnInfo var expense: Int = 0
 )

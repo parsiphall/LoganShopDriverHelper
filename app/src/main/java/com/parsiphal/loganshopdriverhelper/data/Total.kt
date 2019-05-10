@@ -7,6 +7,7 @@ import android.arch.persistence.room.PrimaryKey
 @Entity
 data class Total(
     @PrimaryKey(autoGenerate = true) @ColumnInfo var id: Long = 0,
+    @ColumnInfo var dayOrMonth: Int = 0,
     @ColumnInfo var carModel: String = "",
     @ColumnInfo var date: String = "",
     @ColumnInfo var morningODO: Int = 0,
