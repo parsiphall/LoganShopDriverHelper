@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Logan Shop Driver Helper</string>
+    <string name="title_shift">Смена</string>
+    <string name="title_delivery">Доставка</string>
+    <string name="title_total">Отчёт</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
