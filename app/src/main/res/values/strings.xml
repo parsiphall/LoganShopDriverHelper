@@ -6,4 +6,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="date">Дата</string>
+    <string name="morning">Утро</string>
+    <string name="odo">Пробег</string>
+    <string name="fuel">Бензин</string>
+    <string name="evening">Вечер</string>
+    <string name="writeTo">Записать</string>
+    <string name="newShift">Новая смена</string>
+    <string name="closeShift">Закрыть смену</string>
+
+    <string-array name="cars">
+        <item>Logan</item>
+        <item>X-Ray</item>
+    </string-array>
 </resources>
