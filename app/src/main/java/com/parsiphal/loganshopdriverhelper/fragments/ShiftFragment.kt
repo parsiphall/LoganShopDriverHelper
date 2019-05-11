@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.parsiphal.loganshopdriverhelper.R
+import kotlinx.android.synthetic.main.fragment_shift.*
 
 class ShiftFragment : Fragment() {
 
@@ -15,5 +16,10 @@ class ShiftFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_shift, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        shift_bottom_bar.selectedItemId = R.id.shift_close_shift
     }
 }
