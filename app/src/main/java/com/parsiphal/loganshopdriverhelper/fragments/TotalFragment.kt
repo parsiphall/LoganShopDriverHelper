@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 
 import com.parsiphal.loganshopdriverhelper.R
+import kotlinx.android.synthetic.main.fragment_total.*
 
 class TotalFragment : MvpAppCompatFragment() {
 
@@ -17,4 +18,8 @@ class TotalFragment : MvpAppCompatFragment() {
         return inflater.inflate(R.layout.fragment_total, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        total_bottom_bar.selectedItemId = R.id.total_month
+    }
 }

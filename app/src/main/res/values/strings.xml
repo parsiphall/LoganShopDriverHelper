@@ -20,6 +20,24 @@
     <string name="address">Адрес</string>
     <string name="cost">Сумма</string>
     <string name="comment">Комментарий</string>
+    <string name="total_day">Дневной</string>
+    <string name="total_month">Месячный</string>
+    <string name="car">Машина</string>
+    <string name="odo_morning">Пробег утро:</string>
+    <string name="odo_evening">Пробег вечер:</string>
+    <string name="fuel_morning">Бензин утро:</string>
+    <string name="fuel_evening">Бензин вечер:</string>
+    <string name="fuel_dividers">делений</string>
+    <string name="km">км</string>
+    <string name="totalMoney">Общий приход:</string>
+    <string name="logan_divider">Logan</string>
+    <string name="deliveryValue">Количество доставок:</string>
+    <string name="money">Приход:</string>
+    <string name="cash">Наличные:</string>
+    <string name="card">Безнал.:</string>
+    <string name="vesta_divider">Vesta</string>
+    <string name="expenses">Расходы:</string>
+    <string name="salary">Начислено:</string>
 
     <string-array name="cars">
         <item>Logan</item>
