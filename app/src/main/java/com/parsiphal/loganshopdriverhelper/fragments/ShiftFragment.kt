@@ -1,15 +1,15 @@
 package com.parsiphal.loganshopdriverhelper.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.arellomobile.mvp.MvpAppCompatFragment
 
 import com.parsiphal.loganshopdriverhelper.R
 import kotlinx.android.synthetic.main.fragment_shift.*
 
-class ShiftFragment : Fragment() {
+class ShiftFragment : MvpAppCompatFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

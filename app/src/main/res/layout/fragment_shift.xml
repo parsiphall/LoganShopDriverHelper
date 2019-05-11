@@ -75,6 +75,7 @@
             android:id="@+id/shift_button"
             android:layout_below="@id/shift_evening_data">
         <Button
+                android:id="@+id/shift_write"
                 android:layout_marginTop="10dp"
                 android:text="@string/writeTo"
                 android:layout_width="wrap_content"

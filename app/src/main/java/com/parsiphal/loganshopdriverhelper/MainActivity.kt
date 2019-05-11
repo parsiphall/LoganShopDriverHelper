@@ -7,12 +7,24 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.fragments.DeliveryFragment
 import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragment
 import com.parsiphal.loganshopdriverhelper.fragments.TotalFragment
+import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
+
+    override fun fragmentPlace(fragment: MvpAppCompatFragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .replace(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -39,14 +51,5 @@ class MainActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         navView.selectedItemId = R.id.navigation_dashboard
         fragmentPlace(DeliveryFragment())
-    }
-
-    private fun fragmentPlace(fragment: Fragment){
-        supportFragmentManager
-            .beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .replace(R.id.container, fragment)
-            .addToBackStack(null)
-            .commit()
     }
 }

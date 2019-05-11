@@ -14,9 +14,29 @@
     <string name="writeTo">Записать</string>
     <string name="newShift">Новая смена</string>
     <string name="closeShift">Закрыть смену</string>
+    <string name="type">Тип</string>
+    <string name="whose">От кого</string>
+    <string name="payType">Оплата</string>
+    <string name="address">Адрес</string>
+    <string name="cost">Сумма</string>
+    <string name="comment">Комментарий</string>
 
     <string-array name="cars">
         <item>Logan</item>
         <item>X-Ray</item>
+    </string-array>
+    <string-array name="work_type">
+        <item>Доставка</item>
+        <item>Поручение</item>
+        <item>Расход</item>
+        <item>Прочее</item>
+    </string-array>
+    <string-array name="delivery_type">
+        <item>Logan</item>
+        <item>Vesta</item>
+    </string-array>
+    <string-array name="payType">
+        <item>Наличные</item>
+        <item>Карта</item>
     </string-array>
 </resources>
