@@ -20,6 +20,5 @@ class ShiftFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        shift_bottom_bar.selectedItemId = R.id.shift_close_shift
     }
 }

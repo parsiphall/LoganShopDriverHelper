@@ -2,17 +2,14 @@ package com.parsiphal.loganshopdriverhelper
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
-import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.fragments.DeliveryFragment
 import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragment
 import com.parsiphal.loganshopdriverhelper.fragments.TotalFragment
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
@@ -26,17 +23,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             .commit()
     }
 
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val onNavigationItemMainSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
+            R.id.navigation_shift -> {
                 fragmentPlace(ShiftFragment())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_delivery -> {
                 fragmentPlace(DeliveryFragment())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
+            R.id.navigation_total -> {
                 fragmentPlace(TotalFragment())
                 return@OnNavigationItemSelectedListener true
             }
@@ -47,9 +44,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        navView.selectedItemId = R.id.navigation_dashboard
+        nav_view.setOnNavigationItemSelectedListener(onNavigationItemMainSelectedListener)
+        nav_view.selectedItemId = R.id.navigation_delivery
         fragmentPlace(DeliveryFragment())
     }
 }

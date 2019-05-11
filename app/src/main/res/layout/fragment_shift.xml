@@ -81,15 +81,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
-    <android.support.design.widget.BottomNavigationView
-            android:id="@+id/shift_bottom_bar"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="0dp"
             android:layout_marginBottom="?attr/actionBarSize"
-            android:background="?android:attr/windowBackground"
-            android:layout_alignParentBottom="true"
-            app:menu="@menu/shift_menu"/>
+            android:layout_alignParentBottom="true">
+        <Button
+                android:id="@+id/total_day_button"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/newShift"/>
+        <Button
+                android:id="@+id/total_month_button"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/closeShift"/>
+    </LinearLayout>
 
 </RelativeLayout>
