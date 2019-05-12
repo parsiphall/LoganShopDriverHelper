@@ -149,10 +149,6 @@
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/salary"/>
-            <EditText
-                    android:id="@+id/month_family"
-                    android:inputType="text"
-                    style="@style/dayAndMonthTextView"/>
             <TextView
                     android:id="@+id/month_salary_textView"
                     style="@style/dayAndMonthTextView"/>

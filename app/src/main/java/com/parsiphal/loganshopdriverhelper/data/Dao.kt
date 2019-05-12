@@ -9,16 +9,10 @@ import android.arch.persistence.room.OnConflictStrategy
 interface Dao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addShift(shift: Shift)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addDelivery(delivery: Delivery)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addTotal(total: Total)
-
-    @Delete
-    fun deleteShift(shift: Shift)
 
     @Delete
     fun deleteDelivery(delivery: Delivery)

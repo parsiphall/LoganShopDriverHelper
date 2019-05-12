@@ -13,7 +13,6 @@
     <string name="evening">Вечер</string>
     <string name="writeTo">Записать</string>
     <string name="newShift">Новая смена</string>
-    <string name="closeShift">Закрыть смену</string>
     <string name="type">Тип</string>
     <string name="whose">От кого</string>
     <string name="payType">Оплата</string>
@@ -27,7 +26,7 @@
     <string name="odo_evening">Пробег вечер:</string>
     <string name="fuel_morning">Бензин утро:</string>
     <string name="fuel_evening">Бензин вечер:</string>
-    <string name="fuel_dividers">делений</string>
+    <string name="fuel_dividers">дел</string>
     <string name="km">км</string>
     <string name="totalMoney">Общий приход:</string>
     <string name="logan_divider">Logan</string>
@@ -39,6 +38,9 @@
     <string name="expenses">Расходы:</string>
     <string name="salary">Начислено:</string>
     <string name="shiftsValue">Количество смен:</string>
+    <string name="family">Фамилия</string>
+    <string name="recorded">Записано</string>
+    <string name="dontForgetDate">Не забудь проставить дату!</string>
 
     <string-array name="cars">
         <item>Logan</item>
