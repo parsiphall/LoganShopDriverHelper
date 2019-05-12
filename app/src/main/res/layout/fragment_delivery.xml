@@ -9,7 +9,8 @@
     <android.support.v7.widget.RecyclerView
             android:id="@+id/delivery_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="?attr/actionBarSize"/>
 
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/delivery_fab"
@@ -17,6 +18,7 @@
             android:src="@drawable/ic_add_black_24dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
+            android:layout_marginRight="4dp"
             android:layout_marginBottom="?attr/actionBarSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

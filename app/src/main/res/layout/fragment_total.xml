@@ -6,10 +6,44 @@
                 android:layout_height="match_parent"
                 tools:context=".fragments.TotalFragment">
 
+    <LinearLayout
+            android:id="@+id/total_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+        <TextView
+                android:id="@+id/total_item_dayOrMonth"
+                style="@style/totalItemTextView"
+                android:layout_weight="0.5"
+                android:hint=""/>
+        <TextView
+                android:id="@+id/total_item_date"
+                style="@style/totalItemTextView"
+                android:layout_weight="3"
+                android:text="@string/date"/>
+        <TextView
+                android:id="@+id/total_item_salary"
+                style="@style/totalItemTextView"
+                android:text="@string/dollar"/>
+        <TextView
+                android:id="@+id/total_item_dist"
+                style="@style/totalItemTextView"
+                android:text="@string/odo"/>
+        <ImageButton
+                android:id="@+id/total_delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_weight="0"
+                android:src="@android:drawable/ic_menu_delete"
+                android:visibility="invisible"/>
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
             android:id="@+id/total_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/total_top"/>
 
     <LinearLayout
             android:layout_width="match_parent"

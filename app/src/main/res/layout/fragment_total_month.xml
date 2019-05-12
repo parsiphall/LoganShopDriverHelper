@@ -61,9 +61,31 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/month_logan_divider"
+                android:id="@+id/month_total_money_cash"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/month_total_money">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/totalMoneyCash"/>
+            <TextView
+                    android:id="@+id/month_total_cash_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/month_total_money_card"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_total_money_cash">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/totalMoneyCard"/>
+            <TextView
+                    android:id="@+id/month_total_card_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/month_logan_divider"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_total_money_card">
             <TextView
                     style="@style/dayAndMonthTextViewWide"
                     android:text="@string/logan_divider"/>
@@ -159,7 +181,7 @@
                 android:id="@+id/shift_button"
                 android:layout_below="@id/month_salary">
             <Button
-                    android:id="@+id/day_write"
+                    android:id="@+id/month_write"
                     android:layout_marginTop="10dp"
                     android:text="@string/writeTo"
                     android:layout_width="wrap_content"

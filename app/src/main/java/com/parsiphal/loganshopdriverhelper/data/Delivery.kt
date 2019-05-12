@@ -8,9 +8,9 @@ import android.arch.persistence.room.PrimaryKey
 data class Delivery(
     @PrimaryKey(autoGenerate = true) @ColumnInfo var id: Long = 0,
     @ColumnInfo var deliveryDate: String = "",
-    @ColumnInfo var workType: String = "",
-    @ColumnInfo var deliveryType: String = "",
-    @ColumnInfo var payType: String = "",
+    @ColumnInfo var workType: Int = 0,
+    @ColumnInfo var deliveryType: Int = 0,
+    @ColumnInfo var payType: Int = 0,
     @ColumnInfo var address: String = "",
     @ColumnInfo var cost: Int = 0,
     @ColumnInfo var comment: String = "",

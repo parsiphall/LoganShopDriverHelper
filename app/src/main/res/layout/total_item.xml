@@ -10,13 +10,15 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-    android:gravity="center_vertical">
+            android:gravity="center_vertical">
         <TextView
                 android:id="@+id/total_item_dayOrMonth"
-                style="@style/totalItemTextView"/>
+                style="@style/totalItemTextView"
+                android:layout_weight="0.5"/>
         <TextView
                 android:id="@+id/total_item_date"
-                style="@style/totalItemTextView"/>
+                style="@style/totalItemTextView"
+                android:layout_weight="3"/>
         <TextView
                 android:id="@+id/total_item_salary"
                 style="@style/totalItemTextView"/>
@@ -24,7 +26,7 @@
                 android:id="@+id/total_item_dist"
                 style="@style/totalItemTextView"/>
         <ImageButton
-                android:id="@+id/delivery_delete_button"
+                android:id="@+id/total_delete_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"

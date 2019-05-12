@@ -12,6 +12,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_shift.*
+import java.lang.Exception
 import java.util.*
 
 class ShiftFragment : MvpAppCompatFragment() {
@@ -27,25 +28,35 @@ class ShiftFragment : MvpAppCompatFragment() {
         super.onViewCreated(view, savedInstanceState)
         getData()
         shift_write.setOnClickListener {
-            prefs.family = shift_family_editText.text.toString()
-            prefs.date = shift_date.text.toString()
-            prefs.car = shift_car_spinner.selectedItem.toString()
-            prefs.carPosition = shift_car_spinner.selectedItemPosition
-            prefs.morningODO = shift_odo_morning.text.toString().toInt()
-            prefs.morningFuel = shift_fuel_morning.text.toString().toInt()
-            prefs.eveningODO = shift_odo_evening.text.toString().toInt()
-            prefs.eveningFuel = shift_fuel_evening.text.toString().toInt()
-            Snackbar.make(view, getString(R.string.recorded), Snackbar.LENGTH_SHORT).show()
+            try {
+                prefs.family = shift_family_editText.text.toString()
+                prefs.date = shift_date.text.toString()
+                prefs.car = shift_car_spinner.selectedItem.toString()
+                prefs.carPosition = shift_car_spinner.selectedItemPosition
+                prefs.morningODO = shift_odo_morning.text.toString().toInt()
+                prefs.morningFuel = shift_fuel_morning.text.toString().toInt()
+                prefs.eveningODO = shift_odo_evening.text.toString().toInt()
+                prefs.eveningFuel = shift_fuel_evening.text.toString().toInt()
+                Snackbar.make(view, getString(R.string.recorded), Snackbar.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Snackbar.make(view, getString(R.string.wrongData), Snackbar.LENGTH_SHORT).show()
+            }
         }
         shift_date.setOnClickListener {
             datePickerDialog(it)
         }
         shift_new_button.setOnClickListener {
-            shift_odo_morning.setText(shift_odo_evening.text.toString())
-            shift_fuel_morning.setText(shift_fuel_evening.text.toString())
-            shift_odo_evening.setText("0")
-            shift_fuel_evening.setText("0")
-            Snackbar.make(view, getString(R.string.dontForgetDate), Snackbar.LENGTH_LONG).show()
+            try {
+                shift_odo_morning.setText(shift_odo_evening.text.toString())
+                shift_fuel_morning.setText(shift_fuel_evening.text.toString())
+                shift_odo_evening.setText("0")
+                shift_fuel_evening.setText("0")
+                Snackbar.make(view, getString(R.string.dontForgetDate), Snackbar.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Snackbar.make(view, getString(R.string.wrongData), Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 

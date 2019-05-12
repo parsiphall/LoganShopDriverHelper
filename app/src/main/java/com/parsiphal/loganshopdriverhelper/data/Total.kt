@@ -3,6 +3,7 @@ package com.parsiphal.loganshopdriverhelper.data
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class Total(
@@ -24,5 +25,8 @@ data class Total(
     @ColumnInfo var vestaCash: Int = 0,
     @ColumnInfo var vestaCard: Int = 0,
     @ColumnInfo var expenses: Int = 0,
-    @ColumnInfo var salary: Int = 0
-)
+    @ColumnInfo var salary: Int = 0,
+    @ColumnInfo var totalCash: Int = 0,
+    @ColumnInfo var totalCard: Int = 0,
+    @ColumnInfo var totalShifts: Int = 0
+) : Serializable

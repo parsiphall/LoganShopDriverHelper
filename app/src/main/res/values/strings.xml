@@ -36,14 +36,21 @@
     <string name="card">Безнал.:</string>
     <string name="vesta_divider">Vesta</string>
     <string name="expenses">Расходы:</string>
-    <string name="salary">Начислено:</string>
+    <string name="salary">Начислено</string>
     <string name="shiftsValue">Количество смен:</string>
     <string name="family">Фамилия</string>
     <string name="recorded">Записано</string>
     <string name="dontForgetDate">Не забудь проставить дату!</string>
+    <string name="wrongData">Не верные данные</string>
+    <string name="adMessage">Удалить?</string>
+    <string name="adBtn1">Да</string>
+    <string name="adBtn2">Нет</string>
+    <string name="totalMoneyCash">Общий нал.:</string>
+    <string name="totalMoneyCard">Общий безнал.:</string>
+    <string name="dollar">$</string>
 
     <string-array name="cars">
-        <item>Logan</item>
+        <item>Largus</item>
         <item>X-Ray</item>
     </string-array>
     <string-array name="work_type">

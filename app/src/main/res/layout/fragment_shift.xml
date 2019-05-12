@@ -6,6 +6,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         tools:context=".fragments.ShiftFragment">
+
     <LinearLayout
             android:id="@+id/shift_family"
             style="@style/shiftLinearLayout">
@@ -46,8 +47,20 @@
     </LinearLayout>
     <LinearLayout
             style="@style/shiftLinearLayout"
-            android:id="@+id/shift_morning_data"
+            android:id="@+id/shift_ODO_fuel_divider1"
             android:layout_below="@id/shift_morning_divider">
+        <TextView
+                style="@style/shiftEditTexts"
+                android:hint="@string/odo"/>
+        <TextView
+                style="@style/shiftEditTexts"
+                android:hint="@string/fuel"/>
+
+    </LinearLayout>
+    <LinearLayout
+            style="@style/shiftLinearLayout"
+            android:id="@+id/shift_morning_data"
+            android:layout_below="@id/shift_ODO_fuel_divider1">
         <EditText
                 android:id="@+id/shift_odo_morning"
                 style="@style/shiftEditTexts"
@@ -68,8 +81,20 @@
     </LinearLayout>
     <LinearLayout
             style="@style/shiftLinearLayout"
-            android:id="@+id/shift_evening_data"
+            android:id="@+id/shift_ODO_fuel_divider2"
             android:layout_below="@id/shift_evening_divider">
+        <TextView
+                style="@style/shiftEditTexts"
+                android:hint="@string/odo"/>
+        <TextView
+                style="@style/shiftEditTexts"
+                android:hint="@string/fuel"/>
+
+    </LinearLayout>
+    <LinearLayout
+            style="@style/shiftLinearLayout"
+            android:id="@+id/shift_evening_data"
+            android:layout_below="@id/shift_ODO_fuel_divider2">
         <EditText
                 android:id="@+id/shift_odo_evening"
                 style="@style/shiftEditTexts"

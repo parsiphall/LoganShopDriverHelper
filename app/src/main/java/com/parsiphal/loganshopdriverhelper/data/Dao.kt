@@ -1,9 +1,7 @@
 package com.parsiphal.loganshopdriverhelper.data
 
+import android.arch.persistence.room.*
 import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
 
 @Dao
 interface Dao {
@@ -13,6 +11,18 @@ interface Dao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addTotal(total: Total)
+
+    @Query("SELECT * FROM Delivery")
+    fun getAllDeliveries(): List<Delivery>
+
+    @Query("SELECT * FROM Total")
+    fun getAllTotals(): List<Total>
+
+    @Query("SELECT * FROM Delivery WHERE deliveryDate LIKE :date")
+    fun getDeliveriesByDate(date: String): List<Delivery>
+
+    @Query("SELECT * FROM Delivery WHERE deliveryDate LIKE :month")
+    fun getDeliveriesByMonth(month: String): List<Delivery>
 
     @Delete
     fun deleteDelivery(delivery: Delivery)

@@ -23,6 +23,16 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             .commit()
     }
 
+    override fun fragmentPlaceWithArgs(fragment: MvpAppCompatFragment, args: Bundle) {
+        fragment.arguments = args
+        supportFragmentManager
+            .beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .replace(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     private val onNavigationItemMainSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_shift -> {
