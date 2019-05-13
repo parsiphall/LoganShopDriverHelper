@@ -32,4 +32,3 @@ class MainApp : Application() {
 }
 
 //TODO Export
-//TODO Design

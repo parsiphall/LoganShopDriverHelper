@@ -1,5 +1,6 @@
 package com.parsiphal.loganshopdriverhelper.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +52,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_write.setOnClickListener {
             saveData()
             activity?.onBackPressed()
+        }
+        day_share.setOnClickListener {
+            shareData()
         }
     }
 
@@ -223,5 +227,32 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_expenses_textView.text = total.expenses.toString()
         day_family.text = prefs.family
         day_salary_textView.text = total.salary.toString()
+    }
+
+    private fun shareData() = GlobalScope.launch {
+        val textToSend = "${day_car_textView.text}\n" +
+                "${day_date_textView.text}\n" +
+                "${resources.getString(R.string.odo_morning)} ${day_morning_odo_textView.text}\n" +
+                "${resources.getString(R.string.odo_evening)} ${day_evening_odo_textView.text}\n" +
+                "${resources.getString(R.string.fuel_morning)} ${day_morning_fuel_textView.text} ${resources.getString(R.string.fuel_dividers)}\n" +
+                "${resources.getString(R.string.fuel_evening)} ${day_evening_fuel_textView.text} ${resources.getString(R.string.fuel_dividers)}\n" +
+                "${resources.getString(R.string.totalMoney)} ${day_total_money_textView.text}\n" +
+                "${resources.getString(R.string.logan_divider)}\n" +
+                "${resources.getString(R.string.deliveryValue)} ${day_logan_delivery_value_textView.text}\n" +
+                "${resources.getString(R.string.money)} ${day_logan_money_textView.text}\n" +
+                "${resources.getString(R.string.cash)} ${day_logan_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)} ${day_logan_card_textView.text}\n" +
+                "${resources.getString(R.string.vesta_divider)}\n" +
+                "${resources.getString(R.string.deliveryValue)} ${day_vesta_delivery_value_textView.text}\n" +
+                "${resources.getString(R.string.money)} ${day_vesta_money_textView.text}\n" +
+                "${resources.getString(R.string.cash)} ${day_vesta_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)} ${day_vesta_card_textView.text}\n" +
+                "${resources.getString(R.string.expenses)} ${day_expenses_textView.text}\n" +
+                "${resources.getString(R.string.salary)} ${prefs.family} ${day_salary_textView.text}"
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.putExtra(Intent.EXTRA_TEXT, textToSend)
+        sendIntent.type = "text/plain"
+        startActivity(Intent.createChooser(sendIntent, resources.getString(R.string.share)))
     }
 }

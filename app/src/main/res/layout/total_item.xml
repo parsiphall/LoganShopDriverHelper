@@ -5,8 +5,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginRight="4dp">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -14,7 +13,8 @@
         <TextView
                 android:id="@+id/total_item_dayOrMonth"
                 style="@style/totalItemTextView"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5"
+                android:textColor="#51361a"/>
         <TextView
                 android:id="@+id/total_item_date"
                 style="@style/totalItemTextView"

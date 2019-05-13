@@ -48,6 +48,7 @@
     <string name="totalMoneyCash">Общий нал.:</string>
     <string name="totalMoneyCard">Общий безнал.:</string>
     <string name="dollar">$</string>
+    <string name="share">Отправить</string>
 
     <string-array name="cars">
         <item>Largus</item>
