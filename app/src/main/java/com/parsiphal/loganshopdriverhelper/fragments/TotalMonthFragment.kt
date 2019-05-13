@@ -1,6 +1,8 @@
 package com.parsiphal.loganshopdriverhelper.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +56,9 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_write.setOnClickListener {
             saveData()
             activity?.onBackPressed()
+        }
+        month_share.setOnClickListener {
+            shareDate()
         }
     }
 
@@ -216,11 +221,30 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         return salary.toString()
     }
 
+    private fun saveData() = GlobalScope.launch {
+        total.dayOrMonth = 1
+        total.date = prefs.date!!
+        total.totalShifts = month_total_shifts_value_textView.text.toString().toInt()
+        total.totalDeliveries = month_total_delivery_value_textView.text.toString().toInt()
+        total.totalMoney = month_total_money_textView.text.toString().toInt()
+        total.totalCash = month_total_cash_textView.text.toString().toInt()
+        total.totalCard = month_total_card_textView.text.toString().toInt()
+        total.loganMoney = month_logan_money_textView.text.toString().toInt()
+        total.loganCash = month_logan_cash_textView.text.toString().toInt()
+        total.loganCard = month_logan_card_textView.text.toString().toInt()
+        total.vestaMoney = month_vesta_money_textView.text.toString().toInt()
+        total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
+        total.vestaCard = month_vesta_card_textView.text.toString().toInt()
+        total.salary = month_salary_textView.text.toString().toInt()
+        DB.getDao().addTotal(total)
+    }
+
     private fun placeData() {
         month_month.text = "${total.date[3]}${total.date[4]}"
         month_year.text = "${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
         month_family_textView.text = prefs.family
         month_total_shifts_value_textView.text = total.totalShifts.toString()
+        month_total_delivery_value_textView.text = total.totalDeliveries.toString()
         month_total_money_textView.text = total.totalMoney.toString()
         month_total_cash_textView.text = total.totalCash.toString()
         month_total_card_textView.text = total.totalCard.toString()
@@ -233,20 +257,21 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_salary_textView.text = total.salary.toString()
     }
 
-    private fun saveData() = GlobalScope.launch {
-        total.dayOrMonth = 1
-        total.date = prefs.date!!
-        total.totalShifts = month_total_shifts_value_textView.text.toString().toInt()
-        total.totalMoney = month_total_money_textView.text.toString().toInt()
-        total.totalCash = month_total_cash_textView.text.toString().toInt()
-        total.totalCard = month_total_card_textView.text.toString().toInt()
-        total.loganMoney = month_logan_money_textView.text.toString().toInt()
-        total.loganCash = month_logan_cash_textView.text.toString().toInt()
-        total.loganCard = month_logan_card_textView.text.toString().toInt()
-        total.vestaMoney = month_vesta_money_textView.text.toString().toInt()
-        total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
-        total.vestaCard = month_vesta_card_textView.text.toString().toInt()
-        total.salary = month_salary_textView.text.toString().toInt()
-        DB.getDao().addTotal(total)
+    private fun shareDate() = GlobalScope.launch {
+        val textToSend = "${month_month.text} / ${month_year.text}\n" +
+                "${prefs.family}\n" +
+                "${resources.getString(R.string.shiftsValue)} ${month_total_shifts_value_textView.text}\n" +
+                "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_textView.text}\n" +
+                "${resources.getString(R.string.totalMoney)} ${month_total_money_textView.text}\n" +
+                "${resources.getString(R.string.logan_divider)}\n" +
+                "${resources.getString(R.string.money)} ${month_logan_money_textView.text}\n" +
+                "${resources.getString(R.string.vesta_divider)}\n" +
+                "${resources.getString(R.string.money)} ${month_vesta_money_textView.text}\n" +
+                "${resources.getString(R.string.salary)} ${month_salary_textView.text}"
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.putExtra(Intent.EXTRA_TEXT, textToSend)
+        sendIntent.type = "text/plain"
+        startActivity(Intent.createChooser(sendIntent, resources.getString(R.string.share)))
     }
 }
