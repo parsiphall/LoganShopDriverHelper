@@ -51,8 +51,10 @@
     <string name="share">Отправить</string>
 
     <string-array name="cars">
-        <item>Largus</item>
-        <item>X-Ray</item>
+        <item>Север Largus</item>
+        <item>Юг Largus</item>
+        <item>Севере X-Ray</item>
+        <item>Юг X-Ray</item>
     </string-array>
     <string-array name="work_type">
         <item>Доставка</item>
