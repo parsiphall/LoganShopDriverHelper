@@ -15,7 +15,8 @@
                 android:id="@+id/total_item_dayOrMonth"
                 style="@style/totalItemTextView"
                 android:layout_weight="0.5"
-                android:hint=""/>
+                android:hint=""
+                android:background="#2f2f2f"/>
         <TextView
                 android:id="@+id/total_item_date"
                 style="@style/totalItemTextView"
