@@ -15,9 +15,11 @@ import com.parsiphal.loganshopdriverhelper.data.Delivery
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_new_delivery.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class NewDeliveryFragment : MvpAppCompatFragment() {
 
     private lateinit var delivery: Delivery

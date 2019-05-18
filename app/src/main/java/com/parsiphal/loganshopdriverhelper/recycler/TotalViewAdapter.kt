@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Total
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class TotalViewAdapter(
     private var items: List<Total>,
     private val context: Context
@@ -50,7 +53,6 @@ class TotalViewAdapter(
             val btn2 = context.getString(R.string.adBtn2)
             ad.setPositiveButton(btn1) { _, _ ->
                 delete(position)
-                dataChanged(items)
             }
             ad.setNegativeButton(btn2) { dialog, _ ->
                 dialog.cancel()
@@ -66,5 +68,9 @@ class TotalViewAdapter(
 
     private fun delete(position: Int) = GlobalScope.launch {
         DB.getDao().deleteTotal(items[position])
+        items = DB.getDao().getAllTotals()
+        MainScope().launch {
+            notifyDataSetChanged()
+        }
     }
 }

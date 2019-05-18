@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class DeliveryViewAdapter(
     private var items: List<Delivery>,
     private val context: Context
@@ -50,7 +52,6 @@ class DeliveryViewAdapter(
             val btn2 = context.getString(R.string.adBtn2)
             ad.setPositiveButton(btn1) { _, _ ->
                 delete(position)
-                dataChanged(items)
             }
             ad.setNegativeButton(btn2) { dialog, _ ->
                 dialog.cancel()
@@ -66,5 +67,9 @@ class DeliveryViewAdapter(
 
     private fun delete(position: Int) = GlobalScope.launch {
         DB.getDao().deleteDelivery(items[position])
+        items = DB.getDao().getAllDeliveries()
+        MainScope().launch {
+            notifyDataSetChanged()
+        }
     }
 }
