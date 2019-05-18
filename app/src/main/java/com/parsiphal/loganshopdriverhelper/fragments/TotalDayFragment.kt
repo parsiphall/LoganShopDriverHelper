@@ -181,6 +181,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             if (position.workType == 2)
                 expenses += "${position.comment}: ${position.cost} "
         }
+        if (expenses == "") expenses = "0"
         return expenses
     }
 

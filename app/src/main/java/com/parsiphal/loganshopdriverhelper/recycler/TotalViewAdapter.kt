@@ -13,6 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 @ExperimentalCoroutinesApi
 class TotalViewAdapter(
@@ -69,6 +70,7 @@ class TotalViewAdapter(
     private fun delete(position: Int) = GlobalScope.launch {
         DB.getDao().deleteTotal(items[position])
         items = DB.getDao().getAllTotals()
+        Collections.reverse(items)
         MainScope().launch {
             notifyDataSetChanged()
         }

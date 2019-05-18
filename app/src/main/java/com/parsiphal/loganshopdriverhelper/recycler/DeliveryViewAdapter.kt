@@ -13,6 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 @ExperimentalCoroutinesApi
 class DeliveryViewAdapter(
@@ -68,6 +69,7 @@ class DeliveryViewAdapter(
     private fun delete(position: Int) = GlobalScope.launch {
         DB.getDao().deleteDelivery(items[position])
         items = DB.getDao().getAllDeliveries()
+        Collections.reverse(items)
         MainScope().launch {
             notifyDataSetChanged()
         }
