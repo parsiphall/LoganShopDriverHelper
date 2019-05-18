@@ -1,8 +1,8 @@
 package com.parsiphal.loganshopdriverhelper.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +12,7 @@ import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
 import com.parsiphal.loganshopdriverhelper.data.Total
+import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_total_month.*
 import kotlinx.coroutines.GlobalScope
@@ -24,6 +25,12 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var items: List<Delivery> = ArrayList()
     private lateinit var total: Total
     private var newTotal = true
+    private lateinit var callBackActivity: MainView
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        callBackActivity = context as MainView
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +62,8 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         }
         month_write.setOnClickListener {
             saveData()
-            activity?.onBackPressed()
+//            activity?.onBackPressed()
+            callBackActivity.fragmentPlace(TotalFragment())
         }
         month_share.setOnClickListener {
             shareDate()
@@ -76,9 +84,11 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_total_money_textView.text = totalMoney()
         month_total_cash_textView.text = totalCash()
         month_total_card_textView.text = totalCard()
+        month_total_delivery_value_logan_textView.text = totalDeliveryLogan()
         month_logan_money_textView.text = loganMoney()
         month_logan_cash_textView.text = loganCash()
         month_logan_card_textView.text = loganCard()
+        month_total_delivery_value_vesta_textView.text = totalDeliveryVesta()
         month_vesta_money_textView.text = vestaMoney()
         month_vesta_cash_textView.text = vestaCash()
         month_vesta_card_textView.text = vestaCard()
@@ -156,6 +166,16 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         return totalCard.toString()
     }
 
+    private fun totalDeliveryLogan(): String {
+        var totalDeliveryLogan = 0
+        for (position in items) {
+            if (position.workType == 0 && position.deliveryType == 0) {
+                totalDeliveryLogan += 1
+            }
+        }
+        return totalDeliveryLogan.toString()
+    }
+
     private fun loganMoney(): String {
         var loganMoney = 0
         for (position in items) {
@@ -181,6 +201,16 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 loganCard += position.cost
         }
         return loganCard.toString()
+    }
+
+    private fun totalDeliveryVesta(): String {
+        var totalDeliveryVesta = 0
+        for (position in items) {
+            if (position.workType == 0 && position.deliveryType == 1) {
+                totalDeliveryVesta += 1
+            }
+        }
+        return totalDeliveryVesta.toString()
     }
 
     private fun vestaMoney(): String {
@@ -229,9 +259,11 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         total.totalMoney = month_total_money_textView.text.toString().toInt()
         total.totalCash = month_total_cash_textView.text.toString().toInt()
         total.totalCard = month_total_card_textView.text.toString().toInt()
+        total.loganDeliveryValue = month_total_delivery_value_logan_textView.text.toString().toInt()
         total.loganMoney = month_logan_money_textView.text.toString().toInt()
         total.loganCash = month_logan_cash_textView.text.toString().toInt()
         total.loganCard = month_logan_card_textView.text.toString().toInt()
+        total.vestaDeliveryValue = month_total_delivery_value_vesta_textView.text.toString().toInt()
         total.vestaMoney = month_vesta_money_textView.text.toString().toInt()
         total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
         total.vestaCard = month_vesta_card_textView.text.toString().toInt()
@@ -248,9 +280,11 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_total_money_textView.text = total.totalMoney.toString()
         month_total_cash_textView.text = total.totalCash.toString()
         month_total_card_textView.text = total.totalCard.toString()
+        month_total_delivery_value_logan_textView.text = total.loganDeliveryValue.toString()
         month_logan_money_textView.text = total.loganMoney.toString()
         month_logan_cash_textView.text = total.loganCash.toString()
         month_logan_card_textView.text = total.loganCard.toString()
+        month_total_delivery_value_vesta_textView.text = total.vestaDeliveryValue.toString()
         month_vesta_money_textView.text = total.vestaMoney.toString()
         month_vesta_cash_textView.text = total.vestaCash.toString()
         month_vesta_card_textView.text = total.vestaCard.toString()
@@ -264,8 +298,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_textView.text}\n" +
                 "${resources.getString(R.string.totalMoney)} ${month_total_money_textView.text}\n" +
                 "${resources.getString(R.string.logan_divider)}\n" +
+                "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_logan_textView.text}\n" +
                 "${resources.getString(R.string.money)} ${month_logan_money_textView.text}\n" +
                 "${resources.getString(R.string.vesta_divider)}\n" +
+                "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_vesta_textView.text}\n" +
                 "${resources.getString(R.string.money)} ${month_vesta_money_textView.text}\n" +
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}"
         val sendIntent = Intent()

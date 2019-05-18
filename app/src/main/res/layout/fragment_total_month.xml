@@ -91,9 +91,20 @@
                     android:text="@string/logan_divider"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/month_logan_money"
+                android:id="@+id/month_total_delivery_value_logan"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/month_logan_divider">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/deliveryValue"/>
+            <TextView
+                    android:id="@+id/month_total_delivery_value_logan_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/month_logan_money"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_total_delivery_value_logan">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/money"/>
@@ -132,9 +143,20 @@
                     android:text="@string/vesta_divider"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/month_vesta_money"
+                android:id="@+id/month_total_delivery_value_vesta"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/month_vesta_divider">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/deliveryValue"/>
+            <TextView
+                    android:id="@+id/month_total_delivery_value_vesta_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/month_vesta_money"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_total_delivery_value_vesta">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/money"/>

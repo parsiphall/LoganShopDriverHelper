@@ -28,14 +28,14 @@ class DeliveryViewAdapter(
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: DeliveryViewHolder, position: Int) {
-        if (items[position].workType != 0) {
-            holder.deliveryType.visibility = View.GONE
-            holder.payType.visibility = View.GONE
-            holder.address.visibility = View.GONE
-            if (items[position].workType == 1 && items[position].workType == 3) {
-                holder.cost.visibility = View.GONE
-            }
-        }
+//        if (items[position].workType != 0) {
+//            holder.deliveryType.visibility = View.GONE
+//            holder.payType.visibility = View.GONE
+//            holder.address.visibility = View.GONE
+//            if (items[position].workType == 1 && items[position].workType == 3) {
+//                holder.cost.visibility = View.GONE
+//            }
+//        }
         holder.deliveryDate.text = items[position].deliveryDate
         holder.workType.text = context.resources.getStringArray(R.array.work_type)[items[position].workType]
         holder.deliveryType.text = context.resources.getStringArray(R.array.delivery_type)[items[position].deliveryType]

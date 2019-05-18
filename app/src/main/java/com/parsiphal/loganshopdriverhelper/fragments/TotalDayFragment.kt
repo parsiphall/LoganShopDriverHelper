@@ -1,5 +1,6 @@
 package com.parsiphal.loganshopdriverhelper.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
 import com.parsiphal.loganshopdriverhelper.data.Total
+import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_total_day.*
 import kotlinx.coroutines.GlobalScope
@@ -21,6 +23,12 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var items: List<Delivery> = ArrayList()
     private lateinit var total: Total
     private var newTotal = true
+    private lateinit var callBackActivity: MainView
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        callBackActivity = context as MainView
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +59,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
         }
         day_write.setOnClickListener {
             saveData()
-            activity?.onBackPressed()
+//            activity?.onBackPressed()
+            callBackActivity.fragmentPlace(TotalFragment())
         }
         day_share.setOnClickListener {
             shareData()
@@ -167,12 +176,12 @@ class TotalDayFragment : MvpAppCompatFragment() {
     }
 
     private fun expenses(): String {
-        var expenses = 0
+        var expenses = ""
         for (position in items) {
             if (position.workType == 2)
-                expenses += position.cost
+                expenses += "${position.comment}: ${position.cost} "
         }
-        return expenses.toString()
+        return expenses
     }
 
     private fun salary(): String {
@@ -203,7 +212,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         total.vestaMoney = day_vesta_money_textView.text.toString().toInt()
         total.vestaCash = day_vesta_cash_textView.text.toString().toInt()
         total.vestaCard = day_vesta_card_textView.text.toString().toInt()
-        total.expenses = day_expenses_textView.text.toString().toInt()
+        total.expensesString = day_expenses_textView.text.toString()
         total.salary = day_salary_textView.text.toString().toInt()
         DB.getDao().addTotal(total)
     }
@@ -224,7 +233,11 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_money_textView.text = total.vestaMoney.toString()
         day_vesta_cash_textView.text = total.vestaCash.toString()
         day_vesta_card_textView.text = total.vestaCard.toString()
-        day_expenses_textView.text = total.expenses.toString()
+        day_expenses_textView.text = if (total.expenses != 0) {
+            total.expenses.toString()
+        } else {
+            total.expensesString
+        }
         day_family.text = prefs.family
         day_salary_textView.text = total.salary.toString()
     }

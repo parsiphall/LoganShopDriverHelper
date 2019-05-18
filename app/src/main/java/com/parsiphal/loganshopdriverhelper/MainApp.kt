@@ -1,7 +1,9 @@
 package com.parsiphal.loganshopdriverhelper
 
 import android.app.Application
+import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Room
+import android.arch.persistence.room.migration.Migration
 import com.parsiphal.loganshopdriverhelper.data.DataBase
 import com.parsiphal.loganshopdriverhelper.data.Preferences
 
@@ -24,9 +26,17 @@ class MainApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        val mig1to2 = object : Migration(1,2){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Total ADD COLUMN expensesString TEXT DEFAULT '' NOT NULL")
+            }
+        }
+
         prefs = Preferences(applicationContext)
         mDataBase = Room
             .databaseBuilder(applicationContext, DataBase::class.java, DB_NAME)
+            .addMigrations(mig1to2)
             .build()
     }
 }

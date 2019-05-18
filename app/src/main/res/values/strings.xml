@@ -53,7 +53,7 @@
     <string-array name="cars">
         <item>Север Largus</item>
         <item>Юг Largus</item>
-        <item>Севере X-Ray</item>
+        <item>Север X-Ray</item>
         <item>Юг X-Ray</item>
     </string-array>
     <string-array name="work_type">

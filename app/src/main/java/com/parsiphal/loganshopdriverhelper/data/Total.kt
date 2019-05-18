@@ -29,5 +29,6 @@ data class Total(
     @ColumnInfo var totalCash: Int = 0,
     @ColumnInfo var totalCard: Int = 0,
     @ColumnInfo var totalShifts: Int = 0,
-    @ColumnInfo var totalDeliveries: Int = 0
+    @ColumnInfo var totalDeliveries: Int = 0,
+    @ColumnInfo var expensesString: String = ""
 ) : Serializable

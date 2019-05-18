@@ -1,5 +1,6 @@
 package com.parsiphal.loganshopdriverhelper.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
+import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_new_delivery.*
 import kotlinx.coroutines.GlobalScope
@@ -19,6 +21,12 @@ import kotlinx.coroutines.launch
 class NewDeliveryFragment : MvpAppCompatFragment() {
 
     private lateinit var delivery: Delivery
+    private lateinit var callBackActivity: MainView
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        callBackActivity = context as MainView
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +95,8 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     }
                 }
                 saveToBase()
-                activity?.onBackPressed()
+//                activity?.onBackPressed()
+                callBackActivity.fragmentPlace(DeliveryFragment())
             } catch (e: Exception) {
                 e.printStackTrace()
                 Snackbar.make(view, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
