@@ -50,11 +50,17 @@
     <string name="dollar">$</string>
     <string name="share">Отправить</string>
 
+    <string-array name="region">
+        <item>Север</item>
+        <item>Юг</item>
+        <item>Зона 1</item>
+        <item>Зона 2</item>
+        <item>Зона 3</item>
+    </string-array>
     <string-array name="cars">
-        <item>Север Largus</item>
-        <item>Юг Largus</item>
-        <item>Север X-Ray</item>
-        <item>Юг X-Ray</item>
+        <item>Largus</item>
+        <item>X-Ray</item>
+        <item>Sandero</item>
     </string-array>
     <string-array name="work_type">
         <item>Доставка</item>

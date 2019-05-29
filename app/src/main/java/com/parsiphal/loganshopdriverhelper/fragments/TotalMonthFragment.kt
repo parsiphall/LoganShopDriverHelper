@@ -297,12 +297,18 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.shiftsValue)} ${month_total_shifts_value_textView.text}\n" +
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_textView.text}\n" +
                 "${resources.getString(R.string.totalMoney)} ${month_total_money_textView.text}\n" +
+                "${resources.getString(R.string.cash)} ${month_total_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)} ${month_total_card_textView.text}\n" +
                 "${resources.getString(R.string.logan_divider)}\n" +
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_logan_textView.text}\n" +
                 "${resources.getString(R.string.money)} ${month_logan_money_textView.text}\n" +
+                "${resources.getString(R.string.cash)} ${month_logan_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)} ${month_logan_card_textView.text}\n" +
                 "${resources.getString(R.string.vesta_divider)}\n" +
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_vesta_textView.text}\n" +
                 "${resources.getString(R.string.money)} ${month_vesta_money_textView.text}\n" +
+                "${resources.getString(R.string.cash)} ${month_vesta_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)} ${month_vesta_card_textView.text}\n" +
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}"
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

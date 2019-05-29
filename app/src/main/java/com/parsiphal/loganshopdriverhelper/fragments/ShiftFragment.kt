@@ -31,6 +31,8 @@ class ShiftFragment : MvpAppCompatFragment() {
             try {
                 prefs.family = shift_family_editText.text.toString()
                 prefs.date = shift_date.text.toString()
+                prefs.region = shift_region_spinner.selectedItem.toString()
+                prefs.regionPosition = shift_region_spinner.selectedItemPosition
                 prefs.car = shift_car_spinner.selectedItem.toString()
                 prefs.carPosition = shift_car_spinner.selectedItemPosition
                 prefs.morningODO = shift_odo_morning.text.toString().toInt()
@@ -63,6 +65,7 @@ class ShiftFragment : MvpAppCompatFragment() {
     private fun getData() {
         shift_family_editText.setText(prefs.family)
         shift_date.text = prefs.date
+        shift_region_spinner.setSelection(prefs.regionPosition!!)
         shift_car_spinner.setSelection(prefs.carPosition!!)
         shift_odo_morning.setText(prefs.morningODO!!.toString())
         shift_fuel_morning.setText(prefs.morningFuel!!.toString())

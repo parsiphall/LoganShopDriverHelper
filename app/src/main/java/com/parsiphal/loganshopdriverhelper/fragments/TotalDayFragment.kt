@@ -73,7 +73,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
 
     private fun setData() {
         Thread.sleep(1000)
-        day_car_textView.text = prefs.car
+        val car = "${prefs.region} - ${prefs.car}"
+        day_car_textView.text = car
         day_date_textView.text = prefs.date
         day_morning_odo_textView.text = prefs.morningODO.toString()
         day_evening_odo_textView.text = prefs.eveningODO.toString()
@@ -198,7 +199,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
 
     private fun saveData() = GlobalScope.launch {
         total.dayOrMonth = 0
-        total.carModel = prefs.car!!
+        val car = "${prefs.region} - ${prefs.car}"
+        total.carModel = car
         total.date = prefs.date!!
         total.morningODO = prefs.morningODO!!
         total.eveningODO = prefs.eveningODO!!

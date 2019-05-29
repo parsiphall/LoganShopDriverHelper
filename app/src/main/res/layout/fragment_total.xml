@@ -43,9 +43,11 @@
             android:id="@+id/total_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/total_top"/>
+            android:layout_below="@id/total_top"
+            android:layout_above="@id/total_buttons"/>
 
     <LinearLayout
+            android:id="@+id/total_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="?attr/actionBarSize"

@@ -31,6 +31,13 @@
         <item name="android:textSize">20sp</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="shiftSpinner">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+    </style>
         <!-- New delivery fragment styles -->
     <style name="newDeliveryLinearLayout">
         <item name="android:layout_marginTop">8dp</item>

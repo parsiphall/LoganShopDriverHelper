@@ -37,12 +37,14 @@
                     android:textAlignment="center"
                     android:hint="@string/date"/>
             <Spinner
-                    android:id="@+id/shift_car_spinner"
                     android:textAlignment="center"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    style="@style/shiftSpinner"
+                    android:id="@+id/shift_region_spinner"
+                    android:entries="@array/region"/>
+            <Spinner
+                    android:textAlignment="center"
+                    style="@style/shiftSpinner"
+                    android:id="@+id/shift_car_spinner"
                     android:entries="@array/cars"/>
         </LinearLayout>
         <LinearLayout
