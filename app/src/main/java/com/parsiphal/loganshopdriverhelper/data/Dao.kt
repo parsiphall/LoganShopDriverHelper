@@ -24,6 +24,9 @@ interface Dao {
     @Query("SELECT * FROM Delivery WHERE deliveryDate LIKE :month")
     fun getDeliveriesByMonth(month: String): List<Delivery>
 
+    @Query("SELECT * FROM Total WHERE date LIKE :month")
+    fun getTotalsByMonth(month: String): List<Total>
+
     @Delete
     fun deleteDelivery(delivery: Delivery)
 

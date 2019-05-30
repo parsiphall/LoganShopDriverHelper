@@ -26,6 +26,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private lateinit var total: Total
     private var newTotal = true
     private lateinit var callBackActivity: MainView
+    private var deltaODO = 0
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -56,6 +57,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             val search = "${prefs.date!![2]}${prefs.date!![3]}${prefs.date!![4]}${prefs.date!![5]}"
             getData(search)
             setData()
+            deltaODO(search)
         } else {
             month_write.visibility = View.GONE
             placeData()
@@ -251,6 +253,13 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         return salary.toString()
     }
 
+    private fun deltaODO(search: String) = GlobalScope.launch {
+        val totals = DB.getDao().getTotalsByMonth("%$search%")
+        for (position in totals) {
+            deltaODO += position.deltaODO
+        }
+    }
+
     private fun saveData() = GlobalScope.launch {
         total.dayOrMonth = 1
         total.date = prefs.date!!
@@ -268,6 +277,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
         total.vestaCard = month_vesta_card_textView.text.toString().toInt()
         total.salary = month_salary_textView.text.toString().toInt()
+        total.deltaODO = deltaODO
         DB.getDao().addTotal(total)
     }
 

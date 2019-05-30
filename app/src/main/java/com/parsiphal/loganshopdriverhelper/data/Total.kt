@@ -30,5 +30,6 @@ data class Total(
     @ColumnInfo var totalCard: Int = 0,
     @ColumnInfo var totalShifts: Int = 0,
     @ColumnInfo var totalDeliveries: Int = 0,
-    @ColumnInfo var expensesString: String = "0"
+    @ColumnInfo var expensesString: String = "0",
+    @ColumnInfo var deltaODO: Int = 0
 ) : Serializable

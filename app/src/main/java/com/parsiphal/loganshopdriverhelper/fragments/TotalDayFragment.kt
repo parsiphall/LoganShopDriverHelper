@@ -197,6 +197,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
         return salary.toString()
     }
 
+    private fun deltaODO(): Int = total.eveningODO - total.morningODO
+
     private fun saveData() = GlobalScope.launch {
         total.dayOrMonth = 0
         val car = "${prefs.region} - ${prefs.car}"
@@ -217,6 +219,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         total.vestaCard = day_vesta_card_textView.text.toString().toInt()
         total.expensesString = day_expenses_textView.text.toString()
         total.salary = day_salary_textView.text.toString().toInt()
+        total.deltaODO = deltaODO()
         DB.getDao().addTotal(total)
     }
 

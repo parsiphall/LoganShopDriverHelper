@@ -44,11 +44,15 @@ class TotalViewAdapter(
                 Color.CYAN
             }
         )
-        holder.date.text = items[position].date
+        holder.date.text = if (items[position].dayOrMonth == 0) {
+            items[position].date
+        } else {
+            "${items[position].date[3]}${items[position].date[4]}"
+        }
         holder.salary.text = items[position].salary.toString()
-        holder.distance.text = (items[position].eveningODO - items[position].morningODO).toString()
+        holder.distance.text = items[position].deltaODO.toString()
         holder.delete.setOnClickListener {
-            ad.setTitle(items[position].date)
+            ad.setTitle(holder.date.text)
             ad.setMessage(context.getString(R.string.adMessage))
             val btn1 = context.getString(R.string.adBtn1)
             val btn2 = context.getString(R.string.adBtn2)

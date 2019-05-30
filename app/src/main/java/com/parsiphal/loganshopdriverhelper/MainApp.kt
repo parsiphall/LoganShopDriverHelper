@@ -27,16 +27,23 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val mig1to2 = object : Migration(1,2){
+        val mig1to2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE Total ADD COLUMN expensesString TEXT DEFAULT '' NOT NULL")
             }
         }
 
+        val mig2to3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Total ADD COLUMN deltaODO INTEGER DEFAULT 0 NOT NULL")
+            }
+
+        }
+
         prefs = Preferences(applicationContext)
         mDataBase = Room
             .databaseBuilder(applicationContext, DataBase::class.java, DB_NAME)
-            .addMigrations(mig1to2)
+            .addMigrations(mig1to2, mig2to3)
             .build()
     }
 }
