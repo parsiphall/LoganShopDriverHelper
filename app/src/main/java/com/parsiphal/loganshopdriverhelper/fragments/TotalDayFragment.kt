@@ -81,6 +81,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_morning_fuel_textView.text = prefs.morningFuel.toString()
         day_evening_fuel_textView.text = prefs.eveningFuel.toString()
         day_total_money_textView.text = totalMoney()
+        day_total_money_cash_textView.text = totalCash()
+        day_total_money_card_textView.text = totalCard()
         day_logan_delivery_value_textView.text = deliveryValueLogan()
         day_logan_money_textView.text = loganMoney()
         day_logan_cash_textView.text = loganCash()
@@ -102,6 +104,24 @@ class TotalDayFragment : MvpAppCompatFragment() {
             }
         }
         return totalMoney.toString()
+    }
+
+    private fun totalCash(): String {
+        var totalCash = 0
+        for (position in items) {
+            if (position.workType == 0 && position.payType == 0)
+                totalCash += position.cost
+        }
+        return totalCash.toString()
+    }
+
+    private fun totalCard(): String {
+        var totalCard = 0
+        for (position in items) {
+            if (position.workType == 0 && position.payType == 1)
+                totalCard += position.cost
+        }
+        return totalCard.toString()
     }
 
     private fun deliveryValueLogan(): String {
@@ -209,6 +229,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
         total.morningFuel = prefs.morningFuel!!
         total.eveningFuel = prefs.eveningFuel!!
         total.totalMoney = day_total_money_textView.text.toString().toInt()
+        total.totalCash = day_total_money_cash_textView.text.toString().toInt()
+        total.totalCard = day_total_money_card_textView.text.toString().toInt()
         total.loganDeliveryValue = day_logan_delivery_value_textView.text.toString().toInt()
         total.loganMoney = day_logan_money_textView.text.toString().toInt()
         total.loganCash = day_logan_cash_textView.text.toString().toInt()
@@ -231,6 +253,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_morning_fuel_textView.text = total.morningFuel.toString()
         day_evening_fuel_textView.text = total.eveningFuel.toString()
         day_total_money_textView.text = total.totalMoney.toString()
+        day_total_money_cash_textView.text = total.totalCash.toString()
+        day_total_money_card_textView.text = total.totalCard.toString()
         day_logan_delivery_value_textView.text = total.loganDeliveryValue.toString()
         day_logan_money_textView.text = total.loganMoney.toString()
         day_logan_cash_textView.text = total.loganMoney.toString()

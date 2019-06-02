@@ -104,9 +104,31 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_logan_divider"
+                android:id="@+id/day_total_money_cash"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/day_total_money">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/totalMoneyCash"/>
+            <TextView
+                    android:id="@+id/day_total_money_cash_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_money_card"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_total_money_cash">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/totalMoneyCard"/>
+            <TextView
+                    android:id="@+id/day_total_money_card_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_divider"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_total_money_card">
             <TextView
                     style="@style/dayAndMonthTextViewWide"
                     android:text="@string/logan_divider"/>
