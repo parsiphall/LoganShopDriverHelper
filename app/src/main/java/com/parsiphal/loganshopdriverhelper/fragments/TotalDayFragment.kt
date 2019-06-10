@@ -3,6 +3,7 @@ package com.parsiphal.loganshopdriverhelper.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -220,29 +221,34 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private fun deltaODO(): Int = total.eveningODO - total.morningODO
 
     private fun saveData() = GlobalScope.launch {
-        total.dayOrMonth = 0
-        val car = "${prefs.region} - ${prefs.car}"
-        total.carModel = car
-        total.date = prefs.date!!
-        total.morningODO = prefs.morningODO!!
-        total.eveningODO = prefs.eveningODO!!
-        total.morningFuel = prefs.morningFuel!!
-        total.eveningFuel = prefs.eveningFuel!!
-        total.totalMoney = day_total_money_textView.text.toString().toInt()
-        total.totalCash = day_total_money_cash_textView.text.toString().toInt()
-        total.totalCard = day_total_money_card_textView.text.toString().toInt()
-        total.loganDeliveryValue = day_logan_delivery_value_textView.text.toString().toInt()
-        total.loganMoney = day_logan_money_textView.text.toString().toInt()
-        total.loganCash = day_logan_cash_textView.text.toString().toInt()
-        total.loganCard = day_logan_card_textView.text.toString().toInt()
-        total.vestaDeliveryValue = day_vesta_delivery_value_textView.text.toString().toInt()
-        total.vestaMoney = day_vesta_money_textView.text.toString().toInt()
-        total.vestaCash = day_vesta_cash_textView.text.toString().toInt()
-        total.vestaCard = day_vesta_card_textView.text.toString().toInt()
-        total.expensesString = day_expenses_textView.text.toString()
-        total.salary = day_salary_textView.text.toString().toInt()
-        total.deltaODO = deltaODO()
-        DB.getDao().addTotal(total)
+        try {
+            total.dayOrMonth = 0
+            val car = "${prefs.region} - ${prefs.car}"
+            total.carModel = car
+            total.date = prefs.date!!
+            total.morningODO = prefs.morningODO!!
+            total.eveningODO = prefs.eveningODO!!
+            total.morningFuel = prefs.morningFuel!!
+            total.eveningFuel = prefs.eveningFuel!!
+            total.totalMoney = day_total_money_textView.text.toString().toInt()
+            total.totalCash = day_total_money_cash_textView.text.toString().toInt()
+            total.totalCard = day_total_money_card_textView.text.toString().toInt()
+            total.loganDeliveryValue = day_logan_delivery_value_textView.text.toString().toInt()
+            total.loganMoney = day_logan_money_textView.text.toString().toInt()
+            total.loganCash = day_logan_cash_textView.text.toString().toInt()
+            total.loganCard = day_logan_card_textView.text.toString().toInt()
+            total.vestaDeliveryValue = day_vesta_delivery_value_textView.text.toString().toInt()
+            total.vestaMoney = day_vesta_money_textView.text.toString().toInt()
+            total.vestaCash = day_vesta_cash_textView.text.toString().toInt()
+            total.vestaCard = day_vesta_card_textView.text.toString().toInt()
+            total.expensesString = day_expenses_textView.text.toString()
+            total.salary = day_salary_textView.text.toString().toInt()
+            total.deltaODO = deltaODO()
+            DB.getDao().addTotal(total)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Snackbar.make(view!!, getString(R.string.someError), Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun placeData() {

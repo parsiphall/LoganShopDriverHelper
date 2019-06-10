@@ -3,6 +3,7 @@ package com.parsiphal.loganshopdriverhelper.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_total_month.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -261,24 +263,29 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     }
 
     private fun saveData() = GlobalScope.launch {
-        total.dayOrMonth = 1
-        total.date = prefs.date!!
-        total.totalShifts = month_total_shifts_value_textView.text.toString().toInt()
-        total.totalDeliveries = month_total_delivery_value_textView.text.toString().toInt()
-        total.totalMoney = month_total_money_textView.text.toString().toInt()
-        total.totalCash = month_total_cash_textView.text.toString().toInt()
-        total.totalCard = month_total_card_textView.text.toString().toInt()
-        total.loganDeliveryValue = month_total_delivery_value_logan_textView.text.toString().toInt()
-        total.loganMoney = month_logan_money_textView.text.toString().toInt()
-        total.loganCash = month_logan_cash_textView.text.toString().toInt()
-        total.loganCard = month_logan_card_textView.text.toString().toInt()
-        total.vestaDeliveryValue = month_total_delivery_value_vesta_textView.text.toString().toInt()
-        total.vestaMoney = month_vesta_money_textView.text.toString().toInt()
-        total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
-        total.vestaCard = month_vesta_card_textView.text.toString().toInt()
-        total.salary = month_salary_textView.text.toString().toInt()
-        total.deltaODO = deltaODO
-        DB.getDao().addTotal(total)
+        try {
+            total.dayOrMonth = 1
+            total.date = prefs.date!!
+            total.totalShifts = month_total_shifts_value_textView.text.toString().toInt()
+            total.totalDeliveries = month_total_delivery_value_textView.text.toString().toInt()
+            total.totalMoney = month_total_money_textView.text.toString().toInt()
+            total.totalCash = month_total_cash_textView.text.toString().toInt()
+            total.totalCard = month_total_card_textView.text.toString().toInt()
+            total.loganDeliveryValue = month_total_delivery_value_logan_textView.text.toString().toInt()
+            total.loganMoney = month_logan_money_textView.text.toString().toInt()
+            total.loganCash = month_logan_cash_textView.text.toString().toInt()
+            total.loganCard = month_logan_card_textView.text.toString().toInt()
+            total.vestaDeliveryValue = month_total_delivery_value_vesta_textView.text.toString().toInt()
+            total.vestaMoney = month_vesta_money_textView.text.toString().toInt()
+            total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
+            total.vestaCard = month_vesta_card_textView.text.toString().toInt()
+            total.salary = month_salary_textView.text.toString().toInt()
+            total.deltaODO = deltaODO
+            DB.getDao().addTotal(total)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Snackbar.make(view!!, getString(R.string.someError), Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun placeData() {
