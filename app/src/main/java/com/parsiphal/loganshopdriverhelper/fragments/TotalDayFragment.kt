@@ -263,7 +263,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_total_money_card_textView.text = total.totalCard.toString()
         day_logan_delivery_value_textView.text = total.loganDeliveryValue.toString()
         day_logan_money_textView.text = total.loganMoney.toString()
-        day_logan_cash_textView.text = total.loganMoney.toString()
+        day_logan_cash_textView.text = total.loganCash.toString()
         day_logan_card_textView.text = total.loganCard.toString()
         day_vesta_delivery_value_textView.text = total.vestaDeliveryValue.toString()
         day_vesta_money_textView.text = total.vestaMoney.toString()
