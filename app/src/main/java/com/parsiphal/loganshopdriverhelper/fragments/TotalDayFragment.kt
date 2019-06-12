@@ -214,7 +214,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 totalMoney += position.cost
             }
         }
-        val salary: Int = (1500 + totalMoney / 100 * 2)
+        val salary: Int = (1500 + totalMoney * 2 / 100)
         return salary.toString()
     }
 
