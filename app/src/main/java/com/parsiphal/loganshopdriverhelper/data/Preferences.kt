@@ -4,6 +4,7 @@ import android.content.Context
 
 const val PREFS_FILENAME = "com.parsiphal.loganshopdriverhelper.prefs"
 const val FAMILY = "family"
+const val BONUS = "bonus"
 const val DATE = "date"
 const val REGION = "region"
 const val REGION_POSITION = "region_position"
@@ -20,6 +21,10 @@ class Preferences(context: Context) {
     var family: String?
         get() = prefs.getString(FAMILY, "")
         set(value) = prefs.edit().putString(FAMILY, value).apply()
+
+    var bonus: Boolean
+        get() = prefs.getBoolean(BONUS, false)
+        set(value) = prefs.edit().putBoolean(BONUS, value).apply()
 
     var date: String?
         get() = prefs.getString(DATE, "")

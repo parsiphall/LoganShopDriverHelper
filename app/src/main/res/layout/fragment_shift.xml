@@ -23,6 +23,12 @@
                     style="@style/shiftEditTexts"
                     android:inputType="text"
                     android:hint="@string/family"/>
+            <CheckBox
+                    android:id="@+id/shift_bonus_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bonus"/>
         </LinearLayout>
         <LinearLayout
                 style="@style/shiftLinearLayout"

@@ -30,6 +30,7 @@ class ShiftFragment : MvpAppCompatFragment() {
         shift_write.setOnClickListener {
             try {
                 prefs.family = shift_family_editText.text.toString()
+                prefs.bonus = shift_bonus_checkbox.isChecked
                 prefs.date = shift_date.text.toString()
                 prefs.region = shift_region_spinner.selectedItem.toString()
                 prefs.regionPosition = shift_region_spinner.selectedItemPosition
@@ -64,6 +65,7 @@ class ShiftFragment : MvpAppCompatFragment() {
 
     private fun getData() {
         shift_family_editText.setText(prefs.family)
+        shift_bonus_checkbox.isChecked = prefs.bonus
         shift_date.text = prefs.date
         shift_region_spinner.setSelection(prefs.regionPosition!!)
         shift_car_spinner.setSelection(prefs.carPosition!!)
