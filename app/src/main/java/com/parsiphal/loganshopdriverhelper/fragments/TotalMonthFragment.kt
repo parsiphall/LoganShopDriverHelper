@@ -58,6 +58,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         if (newTotal) {
             val search = "${prefs.date!![2]}${prefs.date!![3]}${prefs.date!![4]}${prefs.date!![5]}"
             getData(search)
+            salary(search)
             setData()
             deltaODO(search)
         } else {
@@ -96,7 +97,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_money_textView.text = vestaMoney()
         month_vesta_cash_textView.text = vestaCash()
         month_vesta_card_textView.text = vestaCard()
-        month_salary_textView.text = salary()
+//        month_salary_textView.text = salary.toString()
     }
 
     private fun totalShifts(): String {
@@ -244,15 +245,13 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         return vestaCard.toString()
     }
 
-    private fun salary(): String {
-        var totalMoney = 0
-        for (position in items) {
-            if (position.workType == 0) {
-                totalMoney += position.cost
-            }
+    private fun salary(search: String) = GlobalScope.launch {
+        val totals = DB.getDao().getTotalsByMonth("%$search%")
+        var salary = 0
+        for (position in totals) {
+            salary += position.salary
         }
-        val salary: Int = (1500 * totalShifts().toInt() + totalMoney * 2 / 100)
-        return salary.toString()
+        month_salary_textView.text = salary.toString()
     }
 
     private fun deltaODO(search: String) = GlobalScope.launch {
