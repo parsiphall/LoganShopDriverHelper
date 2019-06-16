@@ -42,6 +42,7 @@
     <string name="recorded">Записано</string>
     <string name="dontForgetDate">Не забудь проставить дату!</string>
     <string name="wrongData">Не верные данные</string>
+    <string name="error">Ошибка</string>
     <string name="someError">Неизвестная ошибка. Повторите ещё раз</string>
     <string name="adMessage">Удалить?</string>
     <string name="adBtn1">Да</string>
@@ -50,6 +51,7 @@
     <string name="totalMoneyCard">Общий безнал.:</string>
     <string name="dollar">$</string>
     <string name="share">Отправить</string>
+    <string name="mid_salary">Средняя:</string>
 
     <string-array name="region">
         <item>Север</item>

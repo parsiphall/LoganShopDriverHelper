@@ -28,6 +28,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private lateinit var total: Total
     private var newTotal = true
     private lateinit var callBackActivity: MainView
+    private var salary = 0
     private var deltaODO = 0
 
     override fun onAttach(context: Context?) {
@@ -98,6 +99,13 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_cash_textView.text = vestaCash()
         month_vesta_card_textView.text = vestaCard()
 //        month_salary_textView.text = salary.toString()
+        try {
+            month_mid_salary_textView.text = "${salary / totalShifts().toInt()}"
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Snackbar.make(view!!, getString(R.string.error), Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun totalShifts(): String {
@@ -247,7 +255,6 @@ class TotalMonthFragment : MvpAppCompatFragment() {
 
     private fun salary(search: String) = GlobalScope.launch {
         val totals = DB.getDao().getTotalsByMonth("%$search%")
-        var salary = 0
         for (position in totals) {
             salary += position.salary
         }
@@ -305,6 +312,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_cash_textView.text = total.vestaCash.toString()
         month_vesta_card_textView.text = total.vestaCard.toString()
         month_salary_textView.text = total.salary.toString()
+        month_mid_salary_textView.text = "${total.salary / total.totalShifts}"
     }
 
     private fun shareDate() = GlobalScope.launch {

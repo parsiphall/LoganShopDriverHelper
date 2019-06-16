@@ -198,10 +198,21 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/month_mid_salary"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_salary">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/mid_salary"/>
+            <TextView
+                    android:id="@+id/month_mid_salary_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
                 style="@style/shiftLinearLayout"
                 android:gravity="center_horizontal"
                 android:id="@+id/shift_button"
-                android:layout_below="@id/month_salary">
+                android:layout_below="@id/month_mid_salary">
             <Button
                     android:id="@+id/month_write"
                     android:layout_marginTop="10dp"
