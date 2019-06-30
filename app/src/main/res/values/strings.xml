@@ -60,6 +60,7 @@
         <item>Зона 1</item>
         <item>Зона 2</item>
         <item>Зона 3</item>
+        <item>Весь город</item>
     </string-array>
     <string-array name="cars">
         <item>Largus</item>
