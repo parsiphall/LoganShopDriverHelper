@@ -49,3 +49,5 @@ class MainApp : Application() {
 }
 
 //TODO Export
+//TODO Аванс
+//TODO Переделать карточку на фрагменте доставок. Сделать универсальную.
