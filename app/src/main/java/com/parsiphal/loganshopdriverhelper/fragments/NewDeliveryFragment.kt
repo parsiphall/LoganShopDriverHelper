@@ -56,35 +56,87 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_pay_type.visibility = View.VISIBLE
                         newDelivery_address.visibility = View.VISIBLE
                         newDelivery_cost.visibility = View.VISIBLE
+                        newDelivery_cost_cash.visibility = View.VISIBLE
+                        newDelivery_move.visibility = View.GONE
                     }
-                    1, 3 -> {
+                    1 -> {
                         newDelivery_delivery_type.visibility = View.GONE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_address.visibility = View.GONE
                         newDelivery_cost.visibility = View.GONE
+                        newDelivery_cost_cash.visibility = View.GONE
+                        newDelivery_move.visibility = View.VISIBLE
                     }
                     2 -> {
                         newDelivery_delivery_type.visibility = View.GONE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_address.visibility = View.GONE
+                        newDelivery_cost.visibility = View.GONE
+                        newDelivery_cost_cash.visibility = View.GONE
+                        newDelivery_move.visibility = View.GONE
+                    }
+                    3 -> {
+                        newDelivery_delivery_type.visibility = View.GONE
+                        newDelivery_pay_type.visibility = View.GONE
+                        newDelivery_address.visibility = View.GONE
                         newDelivery_cost.visibility = View.VISIBLE
+                        newDelivery_cost_cash.visibility = View.GONE
+                        newDelivery_move.visibility = View.GONE
+                    }
+                    4 -> {
+                        newDelivery_delivery_type.visibility = View.GONE
+                        newDelivery_pay_type.visibility = View.GONE
+                        newDelivery_address.visibility = View.GONE
+                        newDelivery_cost.visibility = View.GONE
+                        newDelivery_cost_cash.visibility = View.GONE
+                        newDelivery_move.visibility = View.GONE
+                    }
+                    5 -> {
+                        newDelivery_delivery_type.visibility = View.GONE
+                        newDelivery_pay_type.visibility = View.GONE
+                        newDelivery_address.visibility = View.GONE
+                        newDelivery_cost.visibility = View.VISIBLE
+                        newDelivery_cost_cash.visibility = View.GONE
+                        newDelivery_move.visibility = View.GONE
                     }
                 }
             }
         })
         newDelivery_write.setOnClickListener {
             try {
-                when {
-                    newDelivery_work_type_spinner.selectedItemPosition == 0 -> {
+                when (newDelivery_work_type_spinner.selectedItemPosition) {
+                    0 -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType = newDelivery_delivery_type_spinner.selectedItemPosition
                         delivery.payType = newDelivery_pay_type_spinner.selectedItemPosition
                         delivery.address = newDelivery_address.text.toString()
                         delivery.cost = newDelivery_cost_editText.text.toString().toInt()
+                        if (newDelivery_cost_cash_editText.text.toString() == "") {
+                            delivery.expense = 0
+                        } else {
+                            delivery.expense =
+                                (newDelivery_cost_cash_editText.text.toString().toInt() - newDelivery_cost_editText.text.toString().toInt())
+                        }
                         delivery.comment = newDelivery_comment.text.toString()
                     }
-                    newDelivery_work_type_spinner.selectedItemPosition == 2 -> {
+                    1 -> {
+                        delivery.deliveryDate = prefs.date!!
+                        delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
+                        if (newDelivery_comment.text.toString() == "") {
+                            delivery.comment = "${resources.getString(R.string.move_from)} " +
+                                    "${newDelivery_move_from_spinner.selectedItem} " +
+                                    "${resources.getString(R.string.move_to)} " +
+                                    "${newDelivery_move_to_spinner.selectedItem}"
+                        } else {
+                            delivery.comment = "${resources.getString(R.string.move_from)} " +
+                                    "${newDelivery_move_from_spinner.selectedItem} " +
+                                    "${resources.getString(R.string.move_to)} " +
+                                    "${newDelivery_move_to_spinner.selectedItem}\n" +
+                                    "${newDelivery_comment.text}"
+                        }
+                    }
+                    3, 5 -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.comment = newDelivery_comment.text.toString()
@@ -97,7 +149,6 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     }
                 }
                 saveToBase()
-//                activity?.onBackPressed()
                 callBackActivity.fragmentPlace(DeliveryFragment())
             } catch (e: Exception) {
                 e.printStackTrace()

@@ -29,7 +29,11 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var newTotal = true
     private lateinit var callBackActivity: MainView
     private var salary = 0
+    private var teaMoney = 0
     private var deltaODO = 0
+    private var totalDeliveries = 0
+    private var totalMove = 0
+    private var totalTask = 0
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -57,9 +61,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (newTotal) {
-            val search = "${prefs.date!![2]}${prefs.date!![3]}${prefs.date!![4]}${prefs.date!![5]}"
+            val search =
+                "${prefs.date!![2]}${prefs.date!![3]}${prefs.date!![4]}${prefs.date!![5]}${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
             getData(search)
-            salary(search)
+            calculateSum(search)
             setData()
             deltaODO(search)
         } else {
@@ -68,7 +73,6 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         }
         month_write.setOnClickListener {
             saveData()
-//            activity?.onBackPressed()
             callBackActivity.fragmentPlace(TotalFragment())
         }
         month_share.setOnClickListener {
@@ -86,7 +90,6 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_year.text = "${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
         month_family_textView.text = prefs.family
         month_total_shifts_value_textView.text = totalShifts()
-        month_total_delivery_value_textView.text = totalDeliveryValue()
         month_total_money_textView.text = totalMoney()
         month_total_cash_textView.text = totalCash()
         month_total_card_textView.text = totalCard()
@@ -98,7 +101,6 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_money_textView.text = vestaMoney()
         month_vesta_cash_textView.text = vestaCash()
         month_vesta_card_textView.text = vestaCard()
-//        month_salary_textView.text = salary.toString()
         try {
             month_mid_salary_textView.text = "${salary / totalShifts().toInt()}"
         } catch (e: Exception) {
@@ -139,16 +141,6 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             dayOfMonth++
         } while (dayOfMonth < 32)
         return totalShifts.toString()
-    }
-
-    private fun totalDeliveryValue(): String {
-        var totalDeliveryValue = 0
-        for (position in items) {
-            if (position.workType == 0) {
-                totalDeliveryValue += 1
-            }
-        }
-        return totalDeliveryValue.toString()
     }
 
     private fun totalMoney(): String {
@@ -253,12 +245,20 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         return vestaCard.toString()
     }
 
-    private fun salary(search: String) = GlobalScope.launch {
+    private fun calculateSum(search: String) = GlobalScope.launch {
         val totals = DB.getDao().getTotalsByMonth("%$search%")
         for (position in totals) {
             salary += position.salary
+            teaMoney += position.expenses
+            totalDeliveries += position.totalDeliveries
+            totalMove += position.totalMove
+            totalTask += position.totalTask
         }
+        month_total_delivery_value_textView.text = totalDeliveries.toString()
+        month_total_move_textView.text = totalMove.toString()
+        month_total_task_textView.text = totalTask.toString()
         month_salary_textView.text = salary.toString()
+        month_tea_textView.text = teaMoney.toString()
     }
 
     private fun deltaODO(search: String) = GlobalScope.launch {
@@ -273,7 +273,9 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.dayOrMonth = 1
             total.date = prefs.date!!
             total.totalShifts = month_total_shifts_value_textView.text.toString().toInt()
-            total.totalDeliveries = month_total_delivery_value_textView.text.toString().toInt()
+            total.totalDeliveries = totalDeliveries
+            total.totalMove = totalMove
+            total.totalTask = totalTask
             total.totalMoney = month_total_money_textView.text.toString().toInt()
             total.totalCash = month_total_cash_textView.text.toString().toInt()
             total.totalCard = month_total_card_textView.text.toString().toInt()
@@ -286,6 +288,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
             total.vestaCard = month_vesta_card_textView.text.toString().toInt()
             total.salary = month_salary_textView.text.toString().toInt()
+            total.expenses = month_tea_textView.text.toString().toInt()
             total.deltaODO = deltaODO
             DB.getDao().addTotal(total)
         } catch (e: Exception) {
@@ -300,6 +303,8 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_family_textView.text = prefs.family
         month_total_shifts_value_textView.text = total.totalShifts.toString()
         month_total_delivery_value_textView.text = total.totalDeliveries.toString()
+        month_total_move_textView.text = total.totalMove.toString()
+        month_total_task_textView.text = total.totalTask.toString()
         month_total_money_textView.text = total.totalMoney.toString()
         month_total_cash_textView.text = total.totalCash.toString()
         month_total_card_textView.text = total.totalCard.toString()
@@ -313,6 +318,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_card_textView.text = total.vestaCard.toString()
         month_salary_textView.text = total.salary.toString()
         month_mid_salary_textView.text = "${total.salary / total.totalShifts}"
+        month_tea_textView.text = total.expenses.toString()
     }
 
     private fun shareDate() = GlobalScope.launch {
@@ -320,6 +326,8 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${prefs.family}\n" +
                 "${resources.getString(R.string.shiftsValue)} ${month_total_shifts_value_textView.text}\n" +
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_textView.text}\n" +
+                "${resources.getString(R.string.total_move)} ${month_total_move_textView.text}\n" +
+                "${resources.getString(R.string.total_task)} ${month_total_task_textView.text}\n" +
                 "${resources.getString(R.string.totalMoney)} ${month_total_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${month_total_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${month_total_card_textView.text}\n" +

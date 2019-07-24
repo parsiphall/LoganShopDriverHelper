@@ -25,6 +25,10 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private lateinit var total: Total
     private var newTotal = true
     private lateinit var callBackActivity: MainView
+    private var salary = 0
+    private var totalDeliveries = 0
+    private var totalMove = 0
+    private var totalTask = 0
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -54,6 +58,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         if (newTotal) {
             getData()
             setData()
+            calculateSum()
         } else {
             day_write.visibility = View.GONE
             placeData()
@@ -94,7 +99,17 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_card_textView.text = vestaCard()
         day_expenses_textView.text = expenses()
         day_family.text = prefs.family
-        day_salary_textView.text = salary()
+        day_tea_textVew.text = teaMoney()
+    }
+
+    private fun teaMoney(): String {
+        var teaMoney = 0
+        for (position in items) {
+            if (position.workType == 0) {
+                teaMoney += position.expense
+            }
+        }
+        return teaMoney.toString()
     }
 
     private fun totalMoney(): String {
@@ -200,26 +215,45 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private fun expenses(): String {
         var expenses = ""
         for (position in items) {
-            if (position.workType == 2)
-                expenses += "${position.comment}: ${position.cost} "
+            if (position.workType == 3)
+                expenses += "${position.comment} - ${position.cost} "
         }
         if (expenses == "") expenses = "0"
         return expenses
     }
 
-    private fun salary(): String {
-        var totalMoney = 0
+    //    private fun salary(): String {
+//        var totalMoney = 0
+//        for (position in items) {
+//            if (position.workType == 0) {
+//                totalMoney += position.cost
+//            }
+//        }
+//        val salary = if (prefs.bonus) {
+//            (1600 + totalMoney * 2 / 100)
+//        } else {
+//            (1500 + totalMoney * 2 / 100)
+//        }
+//        return salary.toString()
+//    }
+
+    private fun calculateSum() {
         for (position in items) {
             if (position.workType == 0) {
-                totalMoney += position.cost
+                totalDeliveries++
+            }
+            if (position.workType == 1) {
+                totalMove++
+            }
+            if (position.workType == 2) {
+                totalTask++
             }
         }
-        val salary = if (prefs.bonus) {
-            (1600 + totalMoney * 2 / 100)
-        } else {
-            (1500 + totalMoney * 2 / 100)
-        }
-        return salary.toString()
+        salary = (1700 + totalDeliveries * 50 + totalMove * 50 + totalTask * 50)
+        day_total_deliveries_textVew.text = totalDeliveries.toString()
+        day_total_move_textView.text = totalMove.toString()
+        day_total_task_textView.text = totalTask.toString()
+        day_salary_textView.text = salary.toString()
     }
 
     private fun deltaODO(): Int = total.eveningODO - total.morningODO
@@ -246,7 +280,11 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.vestaCash = day_vesta_cash_textView.text.toString().toInt()
             total.vestaCard = day_vesta_card_textView.text.toString().toInt()
             total.expensesString = day_expenses_textView.text.toString()
+            total.totalDeliveries = totalDeliveries
+            total.totalMove = totalMove
+            total.totalTask = totalTask
             total.salary = day_salary_textView.text.toString().toInt()
+            total.expenses = day_tea_textVew.text.toString().toInt()
             total.deltaODO = deltaODO()
             DB.getDao().addTotal(total)
         } catch (e: Exception) {
@@ -273,11 +311,11 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_money_textView.text = total.vestaMoney.toString()
         day_vesta_cash_textView.text = total.vestaCash.toString()
         day_vesta_card_textView.text = total.vestaCard.toString()
-        day_expenses_textView.text = if (total.expenses != 0) {
-            total.expenses.toString()
-        } else {
-            total.expensesString
-        }
+        day_expenses_textView.text = total.expensesString
+        day_total_deliveries_textVew.text = total.totalDeliveries.toString()
+        day_total_move_textView.text = total.totalMove.toString()
+        day_total_task_textView.text = total.totalTask.toString()
+        day_tea_textVew.text = total.expenses.toString()
         day_family.text = prefs.family
         day_salary_textView.text = total.salary.toString()
     }
@@ -301,6 +339,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.cash)} ${day_vesta_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${day_vesta_card_textView.text}\n" +
                 "${resources.getString(R.string.expenses)} ${day_expenses_textView.text}\n" +
+                "${resources.getString(R.string.total_deliveries)} ${day_total_deliveries_textVew.text}\n" +
+                "${resources.getString(R.string.total_move)} ${day_total_move_textView.text}\n" +
+                "${resources.getString(R.string.total_task)} ${day_total_task_textView.text}\n" +
                 "${resources.getString(R.string.salary)} ${prefs.family} ${day_salary_textView.text}"
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

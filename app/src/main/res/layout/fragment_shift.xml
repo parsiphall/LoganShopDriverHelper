@@ -28,7 +28,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.3"
                     android:layout_height="wrap_content"
-                    android:text="@string/bonus"/>
+                    android:text="@string/bonus"
+                    android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
                 style="@style/shiftLinearLayout"
@@ -64,7 +65,8 @@
         <LinearLayout
                 style="@style/shiftLinearLayout"
                 android:id="@+id/shift_ODO_fuel_divider1"
-                android:layout_below="@id/shift_morning_divider">
+                android:layout_below="@id/shift_morning_divider"
+                android:visibility="gone">
             <TextView
                     style="@style/shiftEditTexts"
                     android:hint="@string/odo"/>
@@ -98,7 +100,8 @@
         <LinearLayout
                 style="@style/shiftLinearLayout"
                 android:id="@+id/shift_ODO_fuel_divider2"
-                android:layout_below="@id/shift_evening_divider">
+                android:layout_below="@id/shift_evening_divider"
+                android:visibility="gone">
             <TextView
                     style="@style/shiftEditTexts"
                     android:hint="@string/odo"/>

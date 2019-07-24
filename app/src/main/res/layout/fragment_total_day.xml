@@ -241,9 +241,42 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_salary"
+                android:id="@+id/day_total_deliveries"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/day_expenses">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_deliveries"/>
+            <TextView
+                    android:id="@+id/day_total_deliveries_textVew"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_total_deliveries">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_move"/>
+            <TextView
+                    android:id="@+id/day_total_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_total_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_task"/>
+            <TextView
+                    android:id="@+id/day_total_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_salary"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_total_task">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/salary"/>
@@ -255,10 +288,21 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/day_tea"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_salary">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/tea_money"/>
+            <TextView
+                    android:id="@+id/day_tea_textVew"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
                 style="@style/shiftLinearLayout"
                 android:gravity="center_horizontal"
                 android:id="@+id/shift_button"
-                android:layout_below="@id/day_salary">
+                android:layout_below="@id/day_tea">
             <Button
                     android:id="@+id/day_write"
                     android:layout_marginTop="10dp"

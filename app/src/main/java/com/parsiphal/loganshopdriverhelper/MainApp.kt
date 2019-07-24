@@ -40,14 +40,24 @@ class MainApp : Application() {
 
         }
 
+        val mig3to4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Total ADD COLUMN totalMove INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN totalTask INTEGER DEFAULT 0 NOT NULL")
+            }
+        }
+
         prefs = Preferences(applicationContext)
         mDataBase = Room
             .databaseBuilder(applicationContext, DataBase::class.java, DB_NAME)
-            .addMigrations(mig1to2, mig2to3)
+            .addMigrations(mig1to2, mig2to3, mig3to4)
             .build()
     }
 }
 
 //TODO Export
-//TODO Аванс
+
+//TODO Учёт аванса
+//TODO Перевести уровни топлива на spinner
+//TODO Сохранение топлива и пробега по авто
 //TODO Переделать карточку на фрагменте доставок. Сделать универсальную.

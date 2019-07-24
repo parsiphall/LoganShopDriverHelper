@@ -50,9 +50,31 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/month_total_money"
+                android:id="@+id/month_total_move"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/month_total_delivery_value">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_move"/>
+            <TextView
+                    android:id="@+id/month_total_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/month_total_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_total_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_task"/>
+            <TextView
+                    android:id="@+id/month_total_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/month_total_money"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_total_task">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/totalMoney"/>
@@ -209,10 +231,21 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/month_tea"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_mid_salary">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/tea_money"/>
+            <TextView
+                    android:id="@+id/month_tea_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
                 style="@style/shiftLinearLayout"
                 android:gravity="center_horizontal"
                 android:id="@+id/shift_button"
-                android:layout_below="@id/month_mid_salary">
+                android:layout_below="@id/month_tea">
             <Button
                     android:id="@+id/month_write"
                     android:layout_marginTop="10dp"

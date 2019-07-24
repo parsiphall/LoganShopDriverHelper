@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Logan Shop Driver Helper</string>
     <string name="title_shift">Смена</string>
-    <string name="title_delivery">Доставка</string>
+    <string name="title_delivery">Записи</string>
     <string name="title_total">Отчёт</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -53,6 +53,13 @@
     <string name="share">Отправить</string>
     <string name="mid_salary">Средняя:</string>
     <string name="bonus">Бонус</string>
+    <string name="move_from">Из:</string>
+    <string name="move_to">В:</string>
+    <string name="money_take">Получено</string>
+    <string name="tea_money">Чаевые:</string>
+    <string name="total_deliveries">Всего доставок:</string>
+    <string name="total_move">Перемещений:</string>
+    <string name="total_task">Поручений:</string>
 
     <string-array name="region">
         <item>Север</item>
@@ -69,9 +76,11 @@
     </string-array>
     <string-array name="work_type">
         <item>Доставка</item>
+        <item>Перемещение</item>
         <item>Поручение</item>
         <item>Расход</item>
         <item>Прочее</item>
+        <item>Аванс</item>
     </string-array>
     <string-array name="delivery_type">
         <item>Logan</item>
@@ -80,5 +89,32 @@
     <string-array name="payType">
         <item>Наличные</item>
         <item>Карта</item>
+    </string-array>
+    <string-array name="fuel_8">
+        <item>1/8</item>
+        <item>2/8</item>
+        <item>3/8</item>
+        <item>4/8</item>
+        <item>5/8</item>
+        <item>6/8</item>
+        <item>7/8</item>
+        <item>8/8</item>
+    </string-array>
+    <string-array name="fuel_9">
+        <item>1/9</item>
+        <item>2/9</item>
+        <item>3/9</item>
+        <item>4/9</item>
+        <item>5/9</item>
+        <item>6/9</item>
+        <item>7/9</item>
+        <item>8/9</item>
+        <item>9/9</item>
+    </string-array>
+    <string-array name="shops">
+        <item>Жукова</item>
+        <item>Культуры</item>
+        <item>Седова</item>
+        <item>Химиков</item>
     </string-array>
 </resources>
