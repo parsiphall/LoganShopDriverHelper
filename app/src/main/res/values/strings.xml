@@ -58,8 +58,10 @@
     <string name="money_take">Получено</string>
     <string name="tea_money">Чаевые:</string>
     <string name="total_deliveries">Всего доставок:</string>
-    <string name="total_move">Перемещений:</string>
-    <string name="total_task">Поручений:</string>
+    <string name="total_moves">Перемещения</string>
+    <string name="total_tasks">Поручения</string>
+    <string name="total_total">Всего:</string>
+    <string name="total_money">Деньги</string>
 
     <string-array name="region">
         <item>Север</item>

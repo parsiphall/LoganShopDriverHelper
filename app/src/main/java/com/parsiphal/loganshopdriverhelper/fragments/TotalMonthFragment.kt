@@ -326,8 +326,8 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${prefs.family}\n" +
                 "${resources.getString(R.string.shiftsValue)} ${month_total_shifts_value_textView.text}\n" +
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_textView.text}\n" +
-                "${resources.getString(R.string.total_move)} ${month_total_move_textView.text}\n" +
-                "${resources.getString(R.string.total_task)} ${month_total_task_textView.text}\n" +
+                "${resources.getString(R.string.total_moves)} ${month_total_move_textView.text}\n" +
+                "${resources.getString(R.string.total_tasks)} ${month_total_task_textView.text}\n" +
                 "${resources.getString(R.string.totalMoney)} ${month_total_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${month_total_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${month_total_card_textView.text}\n" +

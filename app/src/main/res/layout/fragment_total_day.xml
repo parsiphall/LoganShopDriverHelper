@@ -104,9 +104,20 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_total_money_cash"
+                android:id="@+id/day_total_deliveries"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/day_total_money">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_deliveries"/>
+            <TextView
+                    android:id="@+id/day_total_deliveries_textVew"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_money_cash"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_total_deliveries">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/totalMoneyCash"/>
@@ -230,9 +241,99 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/day_total_move_divider"
+                android:layout_below="@id/day_vesta_card"
+                style="@style/dayAndMonthLinearLayout">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_moves"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_total_move_divider">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/logan_divider"/>
+            <TextView
+                    android:id="@+id/day_logan_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/vesta_divider"/>
+            <TextView
+                    android:id="@+id/day_vesta_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_total"/>
+            <TextView
+                    android:id="@+id/day_total_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_task_divider"
+                android:layout_below="@id/day_total_move"
+                style="@style/dayAndMonthLinearLayout">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_tasks"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_total_task_divider">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/logan_divider"/>
+            <TextView
+                    android:id="@+id/day_logan_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/vesta_divider"/>
+            <TextView
+                    android:id="@+id/day_vesta_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_total"/>
+            <TextView
+                    android:id="@+id/day_total_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_money_divider"
+                android:layout_below="@id/day_total_task"
+                style="@style/dayAndMonthLinearLayout">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_money"/>
+        </LinearLayout>
+        <LinearLayout
                 android:id="@+id/day_expenses"
                 style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/day_vesta_card">
+                android:layout_below="@id/day_money_divider">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/expenses"/>
@@ -241,48 +342,12 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_total_deliveries"
+                android:id="@+id/day_salary"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/day_expenses">
             <TextView
                     style="@style/dayAndMonthTextView"
-                    android:text="@string/total_deliveries"/>
-            <TextView
-                    android:id="@+id/day_total_deliveries_textVew"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/day_total_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/day_total_deliveries">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/total_move"/>
-            <TextView
-                    android:id="@+id/day_total_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/day_total_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/day_total_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/total_task"/>
-            <TextView
-                    android:id="@+id/day_total_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/day_salary"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/day_total_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
                     android:text="@string/salary"/>
-            <TextView
-                    android:id="@+id/day_family"
-                    style="@style/dayAndMonthTextView"/>
             <TextView
                     android:id="@+id/day_salary_textView"
                     style="@style/dayAndMonthTextView"/>

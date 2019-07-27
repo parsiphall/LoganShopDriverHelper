@@ -60,7 +60,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_move.visibility = View.GONE
                     }
                     1 -> {
-                        newDelivery_delivery_type.visibility = View.GONE
+                        newDelivery_delivery_type.visibility = View.VISIBLE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_address.visibility = View.GONE
                         newDelivery_cost.visibility = View.GONE
@@ -68,7 +68,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_move.visibility = View.VISIBLE
                     }
                     2 -> {
-                        newDelivery_delivery_type.visibility = View.GONE
+                        newDelivery_delivery_type.visibility = View.VISIBLE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_address.visibility = View.GONE
                         newDelivery_cost.visibility = View.GONE

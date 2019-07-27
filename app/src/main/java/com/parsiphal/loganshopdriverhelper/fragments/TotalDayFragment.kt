@@ -29,6 +29,10 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var totalDeliveries = 0
     private var totalMove = 0
     private var totalTask = 0
+    private var loganMove = 0
+    private var loganTask = 0
+    private var vestaMove = 0
+    private var vestaTask = 0
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -65,7 +69,6 @@ class TotalDayFragment : MvpAppCompatFragment() {
         }
         day_write.setOnClickListener {
             saveData()
-//            activity?.onBackPressed()
             callBackActivity.fragmentPlace(TotalFragment())
         }
         day_share.setOnClickListener {
@@ -98,7 +101,6 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_cash_textView.text = vestaCash()
         day_vesta_card_textView.text = vestaCard()
         day_expenses_textView.text = expenses()
-        day_family.text = prefs.family
         day_tea_textVew.text = teaMoney()
     }
 
@@ -242,16 +244,28 @@ class TotalDayFragment : MvpAppCompatFragment() {
             if (position.workType == 0) {
                 totalDeliveries++
             }
-            if (position.workType == 1) {
-                totalMove++
+            if (position.workType == 1 && position.deliveryType == 0) {
+                loganMove++
             }
-            if (position.workType == 2) {
-                totalTask++
+            if (position.workType == 1 && position.deliveryType == 1) {
+                vestaMove++
+            }
+            if (position.workType == 2 && position.deliveryType == 0) {
+                loganTask++
+            }
+            if (position.workType == 2 && position.deliveryType == 1) {
+                vestaTask++
             }
         }
+        totalMove = loganMove + vestaMove
+        totalTask = loganTask + vestaTask
         salary = (1700 + totalDeliveries * 50 + totalMove * 50 + totalTask * 50)
         day_total_deliveries_textVew.text = totalDeliveries.toString()
+        day_logan_move_textView.text = loganMove.toString()
+        day_vesta_move_textView.text = vestaMove.toString()
         day_total_move_textView.text = totalMove.toString()
+        day_logan_task_textView.text = loganTask.toString()
+        day_vesta_task_textView.text = vestaTask.toString()
         day_total_task_textView.text = totalTask.toString()
         day_salary_textView.text = salary.toString()
     }
@@ -281,7 +295,11 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.vestaCard = day_vesta_card_textView.text.toString().toInt()
             total.expensesString = day_expenses_textView.text.toString()
             total.totalDeliveries = totalDeliveries
+            total.loganMove = loganMove
+            total.vestaMove = vestaMove
             total.totalMove = totalMove
+            total.loganTask = loganTask
+            total.vestaTask = vestaTask
             total.totalTask = totalTask
             total.salary = day_salary_textView.text.toString().toInt()
             total.expenses = day_tea_textVew.text.toString().toInt()
@@ -313,10 +331,13 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_card_textView.text = total.vestaCard.toString()
         day_expenses_textView.text = total.expensesString
         day_total_deliveries_textVew.text = total.totalDeliveries.toString()
+        day_logan_move_textView.text = total.loganMove.toString()
+        day_vesta_move_textView.text = total.vestaMove.toString()
         day_total_move_textView.text = total.totalMove.toString()
+        day_logan_task_textView.text = total.loganTask.toString()
+        day_vesta_task_textView.text = total.vestaTask.toString()
         day_total_task_textView.text = total.totalTask.toString()
         day_tea_textVew.text = total.expenses.toString()
-        day_family.text = prefs.family
         day_salary_textView.text = total.salary.toString()
     }
 
@@ -327,7 +348,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.odo_evening)} ${day_evening_odo_textView.text}\n" +
                 "${resources.getString(R.string.fuel_morning)} ${day_morning_fuel_textView.text} ${resources.getString(R.string.fuel_dividers)}\n" +
                 "${resources.getString(R.string.fuel_evening)} ${day_evening_fuel_textView.text} ${resources.getString(R.string.fuel_dividers)}\n" +
+                "\n" +
                 "${resources.getString(R.string.totalMoney)} ${day_total_money_textView.text}\n" +
+                "${resources.getString(R.string.total_deliveries)} ${day_total_deliveries_textVew.text}\n" +
                 "${resources.getString(R.string.logan_divider)}\n" +
                 "${resources.getString(R.string.deliveryValue)} ${day_logan_delivery_value_textView.text}\n" +
                 "${resources.getString(R.string.money)} ${day_logan_money_textView.text}\n" +
@@ -338,10 +361,19 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.money)} ${day_vesta_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${day_vesta_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${day_vesta_card_textView.text}\n" +
+                "\n" +
+                "${resources.getString(R.string.total_moves)}\n" +
+                "${resources.getString(R.string.logan_divider)}: ${day_logan_move_textView.text}\n" +
+                "${resources.getString(R.string.vesta_divider)}: ${day_vesta_move_textView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${day_total_move_textView.text}\n" +
+                "\n" +
+                "${resources.getString(R.string.total_tasks)}\n" +
+                "${resources.getString(R.string.logan_divider)}: ${day_logan_task_textView.text}\n" +
+                "${resources.getString(R.string.vesta_divider)}: ${day_vesta_task_textView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${day_total_task_textView.text}\n" +
+                "\n" +
                 "${resources.getString(R.string.expenses)} ${day_expenses_textView.text}\n" +
-                "${resources.getString(R.string.total_deliveries)} ${day_total_deliveries_textVew.text}\n" +
-                "${resources.getString(R.string.total_move)} ${day_total_move_textView.text}\n" +
-                "${resources.getString(R.string.total_task)} ${day_total_task_textView.text}\n" +
+                "\n" +
                 "${resources.getString(R.string.salary)} ${prefs.family} ${day_salary_textView.text}"
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

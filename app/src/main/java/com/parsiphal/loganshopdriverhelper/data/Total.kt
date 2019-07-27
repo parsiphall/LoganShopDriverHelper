@@ -33,5 +33,9 @@ data class Total(
     @ColumnInfo var expensesString: String = "0",
     @ColumnInfo var deltaODO: Int = 0,
     @ColumnInfo var totalMove: Int = 0,
-    @ColumnInfo var totalTask: Int = 0
+    @ColumnInfo var totalTask: Int = 0,
+    @ColumnInfo var loganMove: Int = 0,
+    @ColumnInfo var loganTask: Int = 0,
+    @ColumnInfo var vestaMove: Int = 0,
+    @ColumnInfo var vestaTask: Int = 0
 ) : Serializable
