@@ -37,5 +37,8 @@ data class Total(
     @ColumnInfo var loganMove: Int = 0,
     @ColumnInfo var loganTask: Int = 0,
     @ColumnInfo var vestaMove: Int = 0,
-    @ColumnInfo var vestaTask: Int = 0
+    @ColumnInfo var vestaTask: Int = 0,
+    @ColumnInfo var expensesFuel: Int = 0,
+    @ColumnInfo var expensesWash: Int = 0,
+    @ColumnInfo var expensesOther: Int = 0
 ) : Serializable

@@ -323,28 +323,69 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_money_divider"
+                android:id="@+id/day_expenses_divider"
                 android:layout_below="@id/day_total_task"
+                style="@style/dayAndMonthLinearLayout">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/expenses"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_expenses"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_expenses_divider">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/total_total"/>
+            <TextView
+                    android:id="@+id/day_expenses_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_expenses_fuel"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_expenses">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/fuel"/>
+            <TextView
+                    android:id="@+id/day_expenses_fuel_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_expenses_wash"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_expenses_fuel">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/wash"/>
+            <TextView
+                    android:id="@+id/day_expenses_wash_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_expenses_other"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_expenses_wash">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/other"/>
+            <TextView
+                    android:id="@+id/day_expenses_other_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_money_divider"
+                android:layout_below="@id/day_expenses_other"
                 style="@style/dayAndMonthLinearLayout">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/total_money"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_expenses"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/day_money_divider">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/expenses"/>
-            <TextView
-                    android:id="@+id/day_expenses_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
                 android:id="@+id/day_salary"
                 style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/day_expenses">
+                android:layout_below="@id/day_money_divider">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/salary"/>

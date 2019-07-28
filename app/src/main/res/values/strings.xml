@@ -28,14 +28,15 @@
     <string name="fuel_evening">Бензин вечер:</string>
     <string name="fuel_dividers">дел</string>
     <string name="km">км</string>
-    <string name="totalMoney">Общий приход:</string>
+    <string name="totalMoney">Общий приход</string>
     <string name="logan_divider">Logan</string>
-    <string name="deliveryValue">Количество доставок:</string>
-    <string name="money">Приход:</string>
+    <string name="deliveryValue">Кол-во доставок</string>
+    <string name="money">Приход</string>
     <string name="cash">Наличные:</string>
     <string name="card">Безнал.:</string>
     <string name="vesta_divider">Vesta</string>
-    <string name="expenses">Расходы:</string>
+    <string name="expenses">Расходы</string>
+    <string name="target">Цель</string>
     <string name="salary">Начислено:</string>
     <string name="shiftsValue">Количество смен:</string>
     <string name="family">Фамилия</string>
@@ -57,11 +58,13 @@
     <string name="move_to">В:</string>
     <string name="money_take">Получено</string>
     <string name="tea_money">Чаевые:</string>
-    <string name="total_deliveries">Всего доставок:</string>
+    <string name="total_deliveries">Всего доставок</string>
     <string name="total_moves">Перемещения</string>
     <string name="total_tasks">Поручения</string>
     <string name="total_total">Всего:</string>
-    <string name="total_money">Деньги</string>
+    <string name="total_money">Заработок</string>
+    <string name="wash">Мойка</string>
+    <string name="other">Прочее</string>
 
     <string-array name="region">
         <item>Север</item>
@@ -118,5 +121,10 @@
         <item>Культуры</item>
         <item>Седова</item>
         <item>Химиков</item>
+    </string-array>
+    <string-array name="expenses">
+        <item>Бензин</item>
+        <item>Мойка</item>
+        <item>Прочее</item>
     </string-array>
 </resources>

@@ -46,6 +46,18 @@
                     style="@style/newDeliverySpinners"
                     android:entries="@array/payType"/>
         </LinearLayout>
+        <LinearLayout
+                android:id="@+id/newDelivery_expense"
+                style="@style/newDeliveryLinearLayout"
+                android:layout_below="@id/newDelivery_pay_type">
+            <TextView
+                    style="@style/newDeliveryTextView"
+                    android:text="@string/target"/>
+            <Spinner
+                    android:id="@+id/newDelivery_expense_spinner"
+                    style="@style/newDeliverySpinners"
+                    android:entries="@array/expenses"/>
+        </LinearLayout>
         <EditText
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="4dp"
@@ -57,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address"
-                android:layout_below="@id/newDelivery_pay_type"/>
+                android:layout_below="@id/newDelivery_expense"/>
         <LinearLayout
                 android:id="@+id/newDelivery_cost"
                 style="@style/newDeliveryLinearLayout"
