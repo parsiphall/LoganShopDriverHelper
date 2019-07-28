@@ -139,10 +139,21 @@
                 android:hint="@string/comment"
                 android:layout_below="@id/newDelivery_move"/>
         <LinearLayout
+                android:id="@+id/newDelivery_isSalary"
+                style="@style/newDeliveryLinearLayout"
+                android:gravity="center_horizontal"
+                android:layout_below="@id/newDelivery_comment">
+            <CheckBox
+                    android:id="@+id/newDelivery_isSalary_CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/no_salary"/>
+        </LinearLayout>
+        <LinearLayout
                 style="@style/newDeliveryLinearLayout"
                 android:gravity="center_horizontal"
                 android:id="@+id/shift_button"
-                android:layout_below="@id/newDelivery_comment">
+                android:layout_below="@id/newDelivery_isSalary">
             <Button
                     android:id="@+id/newDelivery_write"
                     android:layout_marginTop="10dp"

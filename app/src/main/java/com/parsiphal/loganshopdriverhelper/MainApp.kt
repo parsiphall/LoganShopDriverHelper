@@ -65,10 +65,18 @@ class MainApp : Application() {
             }
         }
 
+        val mig6to7 = object : Migration(6, 7) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Delivery ADD COLUMN ifSalary INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN movesWithSalary INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN tasksWithSalary INTEGER DEFAULT 0 NOT NULL")
+            }
+        }
+
         prefs = Preferences(applicationContext)
         mDataBase = Room
             .databaseBuilder(applicationContext, DataBase::class.java, DB_NAME)
-            .addMigrations(mig1to2, mig2to3, mig3to4, mig4to5, mig5to6)
+            .addMigrations(mig1to2, mig2to3, mig3to4, mig4to5, mig5to6, mig6to7)
             .build()
     }
 }

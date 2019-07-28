@@ -40,5 +40,7 @@ data class Total(
     @ColumnInfo var vestaTask: Int = 0,
     @ColumnInfo var expensesFuel: Int = 0,
     @ColumnInfo var expensesWash: Int = 0,
-    @ColumnInfo var expensesOther: Int = 0
+    @ColumnInfo var expensesOther: Int = 0,
+    @ColumnInfo var movesWithSalary: Int = 0,
+    @ColumnInfo var tasksWithSalary: Int = 0
 ) : Serializable

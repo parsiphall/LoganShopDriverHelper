@@ -59,6 +59,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_cost.visibility = View.VISIBLE
                         newDelivery_cost_cash.visibility = View.VISIBLE
                         newDelivery_move.visibility = View.GONE
+                        newDelivery_isSalary.visibility = View.GONE
                     }
                     1 -> {
                         newDelivery_delivery_type.visibility = View.VISIBLE
@@ -68,6 +69,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_cost.visibility = View.GONE
                         newDelivery_cost_cash.visibility = View.GONE
                         newDelivery_move.visibility = View.VISIBLE
+                        newDelivery_isSalary.visibility = View.VISIBLE
                     }
                     2 -> {
                         newDelivery_delivery_type.visibility = View.VISIBLE
@@ -77,6 +79,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_cost.visibility = View.GONE
                         newDelivery_cost_cash.visibility = View.GONE
                         newDelivery_move.visibility = View.GONE
+                        newDelivery_isSalary.visibility = View.VISIBLE
                     }
                     3 -> {
                         newDelivery_delivery_type.visibility = View.GONE
@@ -86,6 +89,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_cost.visibility = View.VISIBLE
                         newDelivery_cost_cash.visibility = View.GONE
                         newDelivery_move.visibility = View.GONE
+                        newDelivery_isSalary.visibility = View.GONE
                     }
                     4 -> {
                         newDelivery_delivery_type.visibility = View.GONE
@@ -95,6 +99,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_cost.visibility = View.GONE
                         newDelivery_cost_cash.visibility = View.GONE
                         newDelivery_move.visibility = View.GONE
+                        newDelivery_isSalary.visibility = View.GONE
                     }
                     5 -> {
                         newDelivery_delivery_type.visibility = View.GONE
@@ -104,6 +109,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         newDelivery_cost.visibility = View.VISIBLE
                         newDelivery_cost_cash.visibility = View.GONE
                         newDelivery_move.visibility = View.GONE
+                        newDelivery_isSalary.visibility = View.GONE
                     }
                 }
             }
@@ -130,24 +136,50 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType = newDelivery_delivery_type_spinner.selectedItemPosition
-                        if (newDelivery_comment.text.toString() == "") {
-                            delivery.comment = "${resources.getString(R.string.move_from)} " +
-                                    "${newDelivery_move_from_spinner.selectedItem} " +
-                                    "${resources.getString(R.string.move_to)} " +
-                                    "${newDelivery_move_to_spinner.selectedItem}"
+                        if (newDelivery_isSalary_CheckBox.isChecked) {
+                            delivery.ifSalary = 0
+                            if (newDelivery_comment.text.toString() == "") {
+                                delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
+                                        "${resources.getString(R.string.move_from)} " +
+                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${resources.getString(R.string.move_to)} " +
+                                        "${newDelivery_move_to_spinner.selectedItem}"
+                            } else {
+                                delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
+                                        "${resources.getString(R.string.move_from)} " +
+                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${resources.getString(R.string.move_to)} " +
+                                        "${newDelivery_move_to_spinner.selectedItem}\n" +
+                                        "${newDelivery_comment.text}"
+                            }
                         } else {
-                            delivery.comment = "${resources.getString(R.string.move_from)} " +
-                                    "${newDelivery_move_from_spinner.selectedItem} " +
-                                    "${resources.getString(R.string.move_to)} " +
-                                    "${newDelivery_move_to_spinner.selectedItem}\n" +
-                                    "${newDelivery_comment.text}"
+                            delivery.ifSalary = 1
+                            if (newDelivery_comment.text.toString() == "") {
+                                delivery.comment = "${resources.getString(R.string.move_from)} " +
+                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${resources.getString(R.string.move_to)} " +
+                                        "${newDelivery_move_to_spinner.selectedItem}"
+                            } else {
+                                delivery.comment = "${resources.getString(R.string.move_from)} " +
+                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${resources.getString(R.string.move_to)} " +
+                                        "${newDelivery_move_to_spinner.selectedItem}\n" +
+                                        "${newDelivery_comment.text}"
+                            }
                         }
                     }
                     2 -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType = newDelivery_delivery_type_spinner.selectedItemPosition
-                        delivery.comment = newDelivery_comment.text.toString()
+                        if (newDelivery_isSalary_CheckBox.isChecked) {
+                            delivery.ifSalary = 0
+                            delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
+                                    "${newDelivery_comment.text}"
+                        } else {
+                            delivery.ifSalary = 1
+                            delivery.comment = newDelivery_comment.text.toString()
+                        }
                     }
                     3 -> {
                         delivery.deliveryDate = prefs.date!!

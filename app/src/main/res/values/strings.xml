@@ -65,6 +65,7 @@
     <string name="total_money">Заработок</string>
     <string name="wash">Мойка</string>
     <string name="other">Прочее</string>
+    <string name="no_salary">Не оплачивается</string>
 
     <string-array name="region">
         <item>Север</item>

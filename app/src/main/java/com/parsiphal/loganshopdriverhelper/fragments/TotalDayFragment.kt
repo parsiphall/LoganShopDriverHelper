@@ -27,12 +27,18 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private lateinit var callBackActivity: MainView
     private var salary = 0
     private var totalDeliveries = 0
+    private var totalMoveToPay = 0
+    private var totalTaskToPay = 0
     private var totalMove = 0
     private var totalTask = 0
-    private var loganMove = 0
-    private var loganTask = 0
-    private var vestaMove = 0
-    private var vestaTask = 0
+    private var loganMoveWithSalary = 0
+    private var loganTaskWithSalary = 0
+    private var vestaMoveWithSalary = 0
+    private var vestaTaskWithSalary = 0
+    private var loganMoveWithOutSalary = 0
+    private var loganTaskWithOutSalary = 0
+    private var vestaMoveWithOutSalary = 0
+    private var vestaTaskWithOutSalary = 0
     private var expenseFuel = 0
     private var expenseWash = 0
     private var expenseOther = 0
@@ -246,17 +252,29 @@ class TotalDayFragment : MvpAppCompatFragment() {
             if (position.workType == 0) {
                 totalDeliveries++
             }
-            if (position.workType == 1 && position.deliveryType == 0) {
-                loganMove++
+            if (position.workType == 1 && position.deliveryType == 0 && position.ifSalary == 1) {
+                loganMoveWithSalary++
             }
-            if (position.workType == 1 && position.deliveryType == 1) {
-                vestaMove++
+            if (position.workType == 1 && position.deliveryType == 1 && position.ifSalary == 1) {
+                vestaMoveWithSalary++
             }
-            if (position.workType == 2 && position.deliveryType == 0) {
-                loganTask++
+            if (position.workType == 2 && position.deliveryType == 0 && position.ifSalary == 1) {
+                loganTaskWithSalary++
             }
-            if (position.workType == 2 && position.deliveryType == 1) {
-                vestaTask++
+            if (position.workType == 2 && position.deliveryType == 1 && position.ifSalary == 1) {
+                vestaTaskWithSalary++
+            }
+            if (position.workType == 1 && position.deliveryType == 0 && position.ifSalary == 0) {
+                loganMoveWithOutSalary++
+            }
+            if (position.workType == 1 && position.deliveryType == 1 && position.ifSalary == 0) {
+                vestaMoveWithOutSalary++
+            }
+            if (position.workType == 2 && position.deliveryType == 0 && position.ifSalary == 0) {
+                loganTaskWithOutSalary++
+            }
+            if (position.workType == 2 && position.deliveryType == 1 && position.ifSalary == 0) {
+                vestaTaskWithOutSalary++
             }
             if (position.workType == 3 && position.expenseType == 0) {
                 expenseFuel += position.cost
@@ -268,16 +286,18 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 expenseOther += position.cost
             }
         }
-        totalMove = loganMove + vestaMove
-        totalTask = loganTask + vestaTask
-        salary = (1700 + totalDeliveries * 50 + totalMove * 50 + totalTask * 50)
+        totalMoveToPay = loganMoveWithSalary + vestaMoveWithSalary
+        totalTaskToPay = loganTaskWithSalary + vestaTaskWithSalary
+        totalMove = totalMoveToPay + loganMoveWithOutSalary + vestaMoveWithOutSalary
+        totalTask = totalTaskToPay + loganTaskWithOutSalary + vestaTaskWithOutSalary
+        salary = (1700 + totalDeliveries * 50 + totalMoveToPay * 50 + totalTaskToPay * 50)
         day_total_deliveries_textVew.text = totalDeliveries.toString()
-        day_logan_move_textView.text = loganMove.toString()
-        day_vesta_move_textView.text = vestaMove.toString()
-        day_total_move_textView.text = totalMove.toString()
-        day_logan_task_textView.text = loganTask.toString()
-        day_vesta_task_textView.text = vestaTask.toString()
-        day_total_task_textView.text = totalTask.toString()
+        day_logan_move_textView.text = (loganMoveWithSalary + loganMoveWithOutSalary).toString()
+        day_vesta_move_textView.text = (vestaMoveWithSalary + vestaMoveWithOutSalary).toString()
+        day_total_move_textView.text = "${totalMoveToPay}(${totalMove})"
+        day_logan_task_textView.text = (loganTaskWithSalary + loganTaskWithOutSalary).toString()
+        day_vesta_task_textView.text = (vestaTaskWithSalary + vestaTaskWithOutSalary).toString()
+        day_total_task_textView.text = "${totalTaskToPay}(${totalTask})"
 
         day_expenses_textView.text = (expenseFuel + expenseWash + expenseOther).toString()
         day_expenses_fuel_textView.text = expenseFuel.toString()
@@ -314,11 +334,13 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.expensesWash = expenseWash
             total.expensesOther = expenseOther
             total.totalDeliveries = totalDeliveries
-            total.loganMove = loganMove
-            total.vestaMove = vestaMove
+            total.loganMove = (loganMoveWithSalary + loganMoveWithOutSalary)
+            total.vestaMove = (vestaMoveWithSalary + vestaMoveWithOutSalary)
+            total.movesWithSalary = totalMoveToPay
             total.totalMove = totalMove
-            total.loganTask = loganTask
-            total.vestaTask = vestaTask
+            total.loganTask = (loganTaskWithSalary + loganTaskWithOutSalary)
+            total.vestaTask = (vestaTaskWithSalary + vestaTaskWithOutSalary)
+            total.tasksWithSalary = totalTaskToPay
             total.totalTask = totalTask
             total.salary = day_salary_textView.text.toString().toInt()
             total.expenses = day_tea_textVew.text.toString().toInt()
@@ -355,10 +377,10 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_total_deliveries_textVew.text = total.totalDeliveries.toString()
         day_logan_move_textView.text = total.loganMove.toString()
         day_vesta_move_textView.text = total.vestaMove.toString()
-        day_total_move_textView.text = total.totalMove.toString()
+        day_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
         day_logan_task_textView.text = total.loganTask.toString()
         day_vesta_task_textView.text = total.vestaTask.toString()
-        day_total_task_textView.text = total.totalTask.toString()
+        day_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
         day_tea_textVew.text = total.expenses.toString()
         day_salary_textView.text = total.salary.toString()
     }
