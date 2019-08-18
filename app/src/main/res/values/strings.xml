@@ -66,6 +66,7 @@
     <string name="wash">Мойка</string>
     <string name="other">Прочее</string>
     <string name="no_salary">Не оплачивается</string>
+    <string name="prepay">Аванс:</string>
 
     <string-array name="region">
         <item>Север</item>

@@ -42,5 +42,6 @@ data class Total(
     @ColumnInfo var expensesWash: Int = 0,
     @ColumnInfo var expensesOther: Int = 0,
     @ColumnInfo var movesWithSalary: Int = 0,
-    @ColumnInfo var tasksWithSalary: Int = 0
+    @ColumnInfo var tasksWithSalary: Int = 0,
+    @ColumnInfo var prepay: Int = 0
 ) : Serializable

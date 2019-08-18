@@ -222,17 +222,17 @@ class TotalDayFragment : MvpAppCompatFragment() {
         return vestaCard.toString()
     }
 
-    private fun expenses(): String {
-        var expenses = ""
-        for (position in items) {
-            if (position.workType == 3)
-                expenses += "${position.comment} - ${position.cost} "
-        }
-        if (expenses == "") expenses = "0"
-        return expenses
-    }
-
-    //    private fun salary(): String {
+//    private fun expenses(): String {
+//        var expenses = ""
+//        for (position in items) {
+//            if (position.workType == 3)
+//                expenses += "${position.comment} - ${position.cost} "
+//        }
+//        if (expenses == "") expenses = "0"
+//        return expenses
+//    }
+//
+//    private fun salary(): String {
 //        var totalMoney = 0
 //        for (position in items) {
 //            if (position.workType == 0) {

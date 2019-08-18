@@ -242,10 +242,21 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/prepay"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/month_tea">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/prepay"/>
+            <TextView
+                    android:id="@+id/month_prepay_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
                 style="@style/shiftLinearLayout"
                 android:gravity="center_horizontal"
                 android:id="@+id/shift_button"
-                android:layout_below="@id/month_tea">
+                android:layout_below="@id/prepay">
             <Button
                     android:id="@+id/month_write"
                     android:layout_marginTop="10dp"
