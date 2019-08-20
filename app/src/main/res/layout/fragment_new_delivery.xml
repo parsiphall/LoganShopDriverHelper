@@ -23,9 +23,20 @@
                     android:entries="@array/work_type"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/newDelivery_delivery_type"
+                android:id="@+id/newDelivery_salary_type"
                 style="@style/newDeliveryLinearLayout"
                 android:layout_below="@id/newDelivery_work_type">
+            <TextView
+                    style="@style/newDeliveryTextView"/>
+            <Spinner
+                    android:id="@+id/newDelivery_salary_type_spinner"
+                    style="@style/newDeliverySpinners"
+                    android:entries="@array/salary_type"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/newDelivery_delivery_type"
+                style="@style/newDeliveryLinearLayout"
+                android:layout_below="@id/newDelivery_salary_type">
             <TextView
                     style="@style/newDeliveryTextView"
                     android:text="@string/whose"/>

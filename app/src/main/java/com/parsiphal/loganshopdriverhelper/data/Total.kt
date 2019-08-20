@@ -43,5 +43,10 @@ data class Total(
     @ColumnInfo var expensesOther: Int = 0,
     @ColumnInfo var movesWithSalary: Int = 0,
     @ColumnInfo var tasksWithSalary: Int = 0,
-    @ColumnInfo var prepay: Int = 0
+    @ColumnInfo var prepay: Int = 0,
+    @ColumnInfo var holidayPay: Int = 0,
+    @ColumnInfo var carIndex: Int = -1,
+    @ColumnInfo var largusShifts: Int = 0,
+    @ColumnInfo var sanderoShifts: Int = 0,
+    @ColumnInfo var xrayShifts: Int = 0
 ) : Serializable

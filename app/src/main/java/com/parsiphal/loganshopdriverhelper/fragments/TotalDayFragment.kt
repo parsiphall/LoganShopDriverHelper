@@ -345,6 +345,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.salary = day_salary_textView.text.toString().toInt()
             total.expenses = day_tea_textVew.text.toString().toInt()
             total.deltaODO = deltaODO()
+            total.carIndex = prefs.carPosition!!
             DB.getDao().addTotal(total)
         } catch (e: Exception) {
             e.printStackTrace()

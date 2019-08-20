@@ -32,10 +32,17 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var teaMoney = 0
     private var deltaODO = 0
     private var totalDeliveries = 0
+    private var loganMove = 0
+    private var vestaMove = 0
     private var totalMove = 0
     private var totalMoveWithSalary = 0
+    private var loganTask = 0
+    private var vestaTask = 0
     private var totalTask = 0
     private var totalTaskWithSalary = 0
+    private var largusShifts = 0
+    private var sanderoShifts = 0
+    private var xrayShifts = 0
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -104,8 +111,11 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_cash_textView.text = vestaCash()
         month_vesta_card_textView.text = vestaCard()
         month_prepay_textView.text = prepay()
+        month_holiday_pay_textView.text = holiday()
         try {
             month_mid_salary_textView.text = "${salary / totalShifts().toInt()}"
+            month_to_recieve_textView.text =
+                "${salary - month_prepay_textView.text.toString().toInt() - month_holiday_pay_textView.text.toString().toInt()}"
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.error), Snackbar.LENGTH_SHORT).show()
@@ -251,26 +261,52 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private fun prepay(): String {
         var prepay = 0
         for (position in items) {
-            if (position.workType == 5) {
+            if (position.workType == 5 && position.deliveryType == 0) {
                 prepay += position.cost
             }
         }
         return prepay.toString()
     }
 
+    private fun holiday(): String {
+        var holiday = 0
+        for (position in items) {
+            if (position.workType == 5 && position.deliveryType == 1) {
+                holiday += position.cost
+            }
+        }
+        return holiday.toString()
+    }
+
     private fun calculateSum(search: String) = GlobalScope.launch {
         val totals = DB.getDao().getTotalsByMonth("%$search%")
         for (position in totals) {
+            when {
+                position.carIndex == 0 -> largusShifts++
+                position.carIndex == 1 -> sanderoShifts++
+                position.carIndex == 2 -> xrayShifts++
+            }
             salary += position.salary
             teaMoney += position.expenses
             totalDeliveries += position.totalDeliveries
+            loganMove += position.loganMove
+            vestaMove += position.vestaMove
             totalMove += position.totalMove
             totalMoveWithSalary += position.movesWithSalary
+            loganTask += position.loganTask
+            vestaTask += position.vestaTask
             totalTask += position.totalTask
             totalTaskWithSalary += position.tasksWithSalary
         }
+        month_largus_count_textView.text = largusShifts.toString()
+        month_sandero_count_textView.text = sanderoShifts.toString()
+        month_xray_count_textView.text = xrayShifts.toString()
         month_total_delivery_value_textView.text = totalDeliveries.toString()
+        month_logan_move_textView.text = loganMove.toString()
+        month_vesta_move_textView.text = vestaMove.toString()
         month_total_move_textView.text = "${totalMoveWithSalary}(${totalMove})"
+        month_logan_task_textView.text = loganTask.toString()
+        month_vesta_task_textView.text = vestaTask.toString()
         month_total_task_textView.text = "${totalTaskWithSalary}(${totalTask})"
         month_salary_textView.text = salary.toString()
         month_tea_textView.text = teaMoney.toString()
@@ -290,8 +326,12 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.totalShifts = month_total_shifts_value_textView.text.toString().toInt()
             total.totalDeliveries = totalDeliveries
             total.movesWithSalary = totalMoveWithSalary
+            total.loganMove = loganMove
+            total.vestaMove = vestaMove
             total.totalMove = totalMove
             total.tasksWithSalary = totalTaskWithSalary
+            total.loganTask = loganTask
+            total.vestaTask = vestaTask
             total.totalTask = totalTask
             total.totalMoney = month_total_money_textView.text.toString().toInt()
             total.totalCash = month_total_cash_textView.text.toString().toInt()
@@ -308,6 +348,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.expenses = month_tea_textView.text.toString().toInt()
             total.deltaODO = deltaODO
             total.prepay = month_prepay_textView.text.toString().toInt()
+            total.holidayPay = month_holiday_pay_textView.text.toString().toInt()
+            total.largusShifts = month_largus_count_textView.text.toString().toInt()
+            total.sanderoShifts = month_sandero_count_textView.text.toString().toInt()
+            total.xrayShifts = month_xray_count_textView.text.toString().toInt()
             DB.getDao().addTotal(total)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -321,7 +365,11 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_family_textView.text = prefs.family
         month_total_shifts_value_textView.text = total.totalShifts.toString()
         month_total_delivery_value_textView.text = total.totalDeliveries.toString()
+        month_logan_move_textView.text = total.loganMove.toString()
+        month_vesta_move_textView.text = total.vestaMove.toString()
         month_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
+        month_logan_task_textView.text = total.loganTask.toString()
+        month_vesta_task_textView.text = total.vestaTask.toString()
         month_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
         month_total_money_textView.text = total.totalMoney.toString()
         month_total_cash_textView.text = total.totalCash.toString()
@@ -338,30 +386,52 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_mid_salary_textView.text = "${total.salary / total.totalShifts}"
         month_tea_textView.text = total.expenses.toString()
         month_prepay_textView.text = total.prepay.toString()
+        month_holiday_pay_textView.text = total.holidayPay.toString()
+        month_to_recieve_textView.text = "${total.salary - total.prepay - total.holidayPay}"
+        month_largus_count_textView.text = total.largusShifts.toString()
+        month_sandero_count_textView.text = total.sanderoShifts.toString()
+        month_xray_count_textView.text = total.xrayShifts.toString()
     }
 
     private fun shareDate() = GlobalScope.launch {
         val textToSend = "${month_month.text} / ${month_year.text}\n" +
                 "${prefs.family}\n" +
                 "${resources.getString(R.string.shiftsValue)} ${month_total_shifts_value_textView.text}\n" +
+                "${resources.getString(R.string.car_largus)}: ${month_largus_count_textView.text}\n" +
+                "${resources.getString(R.string.car_sandero)}: ${month_sandero_count_textView.text}\n" +
+                "${resources.getString(R.string.car_x_ray)}: ${month_xray_count_textView.text}\n" +
+                "\n" +
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_textView.text}\n" +
-                "${resources.getString(R.string.total_moves)} ${month_total_move_textView.text}\n" +
-                "${resources.getString(R.string.total_tasks)} ${month_total_task_textView.text}\n" +
                 "${resources.getString(R.string.totalMoney)} ${month_total_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${month_total_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${month_total_card_textView.text}\n" +
+                "\n" +
                 "${resources.getString(R.string.logan_divider)}\n" +
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_logan_textView.text}\n" +
                 "${resources.getString(R.string.money)} ${month_logan_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${month_logan_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${month_logan_card_textView.text}\n" +
+                "\n" +
                 "${resources.getString(R.string.vesta_divider)}\n" +
                 "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_vesta_textView.text}\n" +
                 "${resources.getString(R.string.money)} ${month_vesta_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${month_vesta_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${month_vesta_card_textView.text}\n" +
+                "\n" +
+                "${resources.getString(R.string.total_moves)}\n" +
+                "${resources.getString(R.string.logan_divider)}: ${month_logan_move_textView.text}\n" +
+                "${resources.getString(R.string.vesta_divider)}: ${month_vesta_move_textView.text}\n" +
+                "${resources.getString(R.string.total_moves)} ${month_total_move_textView.text}\n" +
+                "\n" +
+                "${resources.getString(R.string.total_tasks)}\n" +
+                "${resources.getString(R.string.logan_divider)}: ${month_logan_task_textView.text}\n" +
+                "${resources.getString(R.string.vesta_divider)}: ${month_vesta_task_textView.text}\n" +
+                "${resources.getString(R.string.total_tasks)} ${month_total_task_textView.text}\n" +
+                "\n" +
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
-                "${resources.getString(R.string.prepay)} ${month_prepay_textView.text}"
+                "${resources.getString(R.string.prepay)} ${month_prepay_textView.text}\n" +
+                "${resources.getString(R.string.holiday_pay)} ${month_holiday_pay_textView.text}\n" +
+                "${resources.getString(R.string.money_to_recieve)} ${month_to_recieve_textView.text}"
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(Intent.EXTRA_TEXT, textToSend)

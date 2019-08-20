@@ -67,6 +67,12 @@
     <string name="other">Прочее</string>
     <string name="no_salary">Не оплачивается</string>
     <string name="prepay">Аванс:</string>
+    <string name="car_largus">Largus</string>
+    <string name="car_sandero">Sandero</string>
+    <string name="car_x_ray">X-Ray</string>
+    <string name="holiday_pay">Отпускные:</string>
+    <string name="money_to_recieve">К выплате:</string>
+    <string name="pays">Выплаты:</string>
 
     <string-array name="region">
         <item>Север</item>
@@ -87,7 +93,11 @@
         <item>Поручение</item>
         <item>Расход</item>
         <item>Прочее</item>
+        <item>Выплата</item>
+    </string-array>
+    <string-array name="salary_type">
         <item>Аванс</item>
+        <item>Отпускные</item>
     </string-array>
     <string-array name="delivery_type">
         <item>Logan</item>

@@ -53,6 +53,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                 when (position) {
                     0 -> {
                         newDelivery_delivery_type.visibility = View.VISIBLE
+                        newDelivery_salary_type.visibility = View.GONE
                         newDelivery_pay_type.visibility = View.VISIBLE
                         newDelivery_expense.visibility = View.GONE
                         newDelivery_address.visibility = View.VISIBLE
@@ -63,6 +64,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     }
                     1 -> {
                         newDelivery_delivery_type.visibility = View.VISIBLE
+                        newDelivery_salary_type.visibility = View.GONE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_expense.visibility = View.GONE
                         newDelivery_address.visibility = View.GONE
@@ -73,6 +75,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     }
                     2 -> {
                         newDelivery_delivery_type.visibility = View.VISIBLE
+                        newDelivery_salary_type.visibility = View.GONE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_expense.visibility = View.GONE
                         newDelivery_address.visibility = View.GONE
@@ -83,6 +86,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     }
                     3 -> {
                         newDelivery_delivery_type.visibility = View.GONE
+                        newDelivery_salary_type.visibility = View.GONE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_expense.visibility = View.VISIBLE
                         newDelivery_address.visibility = View.GONE
@@ -93,6 +97,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     }
                     4 -> {
                         newDelivery_delivery_type.visibility = View.GONE
+                        newDelivery_salary_type.visibility = View.GONE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_expense.visibility = View.GONE
                         newDelivery_address.visibility = View.GONE
@@ -103,6 +108,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     }
                     5 -> {
                         newDelivery_delivery_type.visibility = View.GONE
+                        newDelivery_salary_type.visibility = View.VISIBLE
                         newDelivery_pay_type.visibility = View.GONE
                         newDelivery_expense.visibility = View.GONE
                         newDelivery_address.visibility = View.GONE
@@ -202,7 +208,9 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     5 -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
-                        delivery.comment = newDelivery_comment.text.toString()
+                        delivery.deliveryType = newDelivery_salary_type_spinner.selectedItemPosition
+                        delivery.comment = "${newDelivery_salary_type_spinner.selectedItem}\n" +
+                                "${newDelivery_comment.text}"
                         delivery.cost = newDelivery_cost_editText.text.toString().toInt()
                     }
                 }
