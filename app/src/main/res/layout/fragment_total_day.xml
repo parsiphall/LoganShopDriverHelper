@@ -405,10 +405,32 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/day_prepay"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_tea">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/prepay"/>
+            <TextView
+                    android:id="@+id/day_prepay_textVew"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_holiday"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_prepay">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/holiday_pay"/>
+            <TextView
+                    android:id="@+id/day_holiday_textVew"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
                 style="@style/shiftLinearLayout"
                 android:gravity="center_horizontal"
                 android:id="@+id/shift_button"
-                android:layout_below="@id/day_tea">
+                android:layout_below="@id/day_holiday">
             <Button
                     android:id="@+id/day_write"
                     android:layout_marginTop="10dp"
