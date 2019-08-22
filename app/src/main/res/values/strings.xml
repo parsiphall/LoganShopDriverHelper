@@ -76,10 +76,8 @@
 
     <string-array name="region">
         <item>Север</item>
+        <item>Центр</item>
         <item>Юг</item>
-        <item>Зона 1</item>
-        <item>Зона 2</item>
-        <item>Зона 3</item>
         <item>Весь город</item>
     </string-array>
     <string-array name="cars">
