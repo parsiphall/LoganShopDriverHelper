@@ -3,7 +3,7 @@
     <string name="title_shift">Смена</string>
     <string name="title_delivery">Записи</string>
     <string name="title_total">Отчёт</string>
-    <string name="version">version 0.2.8.1</string>
+    <string name="version">v0.2.8.2</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
