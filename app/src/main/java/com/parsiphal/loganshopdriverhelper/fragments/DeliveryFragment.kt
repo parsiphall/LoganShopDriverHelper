@@ -51,6 +51,10 @@ class DeliveryFragment : MvpAppCompatFragment() {
         delivery_fab.setOnClickListener {
             callBackActivity.fragmentPlace(NewDeliveryFragment())
         }
+        delivery_fab.setOnLongClickListener {
+            callBackActivity.fragmentPlace(MaintananceFragment())
+            return@setOnLongClickListener true
+        }
     }
 
     private fun getData() = GlobalScope.launch {

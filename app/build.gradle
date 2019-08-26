@@ -10,10 +10,10 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.parsiphal.loganshopdriverhelper2"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
-        versionCode 29
-        versionName "0.2.8.2"
+        versionCode 30
+        versionName "0.2.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
