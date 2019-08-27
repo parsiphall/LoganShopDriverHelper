@@ -16,5 +16,7 @@ data class Delivery(
     @ColumnInfo var comment: String = "",
     @ColumnInfo var expense: Int = 0,
     @ColumnInfo var expenseType: Int = 0,
-    @ColumnInfo var ifSalary: Int = 0
+    @ColumnInfo var ifSalary: Int = 0,
+    @ColumnInfo var moveFrom: Int = 0,
+    @ColumnInfo var moveTo: Int = 0
 )

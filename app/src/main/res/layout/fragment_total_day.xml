@@ -260,9 +260,53 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_vesta_move"
+                android:id="@+id/day_logan_zhukova_move"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/day_logan_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_zhukova"/>
+            <TextView
+                    android:id="@+id/day_logan_zhukova_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_kulturi_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_zhukova_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_kulturi"/>
+            <TextView
+                    android:id="@+id/day_logan_kulturi_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_sedova_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_kulturi_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_sedova"/>
+            <TextView
+                    android:id="@+id/day_logan_sedova_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_himikov_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_sedova_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_himikov"/>
+            <TextView
+                    android:id="@+id/day_logan_himikov_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_himikov_move">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/vesta_divider"/>
@@ -271,9 +315,53 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_total_move"
+                android:id="@+id/day_vesta_zhukova_move"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/day_vesta_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_zhukova"/>
+            <TextView
+                    android:id="@+id/day_vesta_zhukova_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_kulturi_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_zhukova_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_kulturi"/>
+            <TextView
+                    android:id="@+id/day_vesta_kulturi_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_sedova_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_kulturi_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_sedova"/>
+            <TextView
+                    android:id="@+id/day_vesta_sedova_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_himikov_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_sedova_move">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_himikov"/>
+            <TextView
+                    android:id="@+id/day_vesta_himikov_move_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_move"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_himikov_move">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/total_total"/>
@@ -301,9 +389,64 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_vesta_task"
+                android:id="@+id/day_logan_zhukova_task"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/day_logan_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_zhukova"/>
+            <TextView
+                    android:id="@+id/day_logan_zhukova_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_kulturi_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_zhukova_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_kulturi"/>
+            <TextView
+                    android:id="@+id/day_logan_kulturi_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_sedova_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_kulturi_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_sedova"/>
+            <TextView
+                    android:id="@+id/day_logan_sedova_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_himikov_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_sedova_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_himikov"/>
+            <TextView
+                    android:id="@+id/day_logan_himikov_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_logan_else_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_himikov_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/switch_else"/>
+            <TextView
+                    android:id="@+id/day_logan_else_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_logan_else_task">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/vesta_divider"/>
@@ -312,9 +455,64 @@
                     style="@style/dayAndMonthTextView"/>
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/day_total_task"
+                android:id="@+id/day_vesta_zhukova_task"
                 style="@style/dayAndMonthLinearLayout"
                 android:layout_below="@id/day_vesta_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_zhukova"/>
+            <TextView
+                    android:id="@+id/day_vesta_zhukova_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_kulturi_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_zhukova_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_kulturi"/>
+            <TextView
+                    android:id="@+id/day_vesta_kulturi_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_sedova_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_kulturi_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_sedova"/>
+            <TextView
+                    android:id="@+id/day_vesta_sedova_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_himikov_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_sedova_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/shop_himikov"/>
+            <TextView
+                    android:id="@+id/day_vesta_himikov_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_vesta_else_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_himikov_task">
+            <TextView
+                    style="@style/dayAndMonthTextView"
+                    android:text="@string/switch_else"/>
+            <TextView
+                    android:id="@+id/day_vesta_else_task_textView"
+                    style="@style/dayAndMonthTextView"/>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/day_total_task"
+                style="@style/dayAndMonthLinearLayout"
+                android:layout_below="@id/day_vesta_else_task">
             <TextView
                     style="@style/dayAndMonthTextView"
                     android:text="@string/total_total"/>

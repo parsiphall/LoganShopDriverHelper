@@ -14,7 +14,6 @@ const val MORNING_ODO = "morning_odo"
 const val MORNING_FUEL = "morning_fuel"
 const val EVENING_ODO = "evening_odo"
 const val EVENING_FUEL = "evening_fuel"
-const val LAUNCH_COUNT = "launch_count"
 
 class Preferences(context: Context) {
     private val prefs = context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
@@ -62,8 +61,4 @@ class Preferences(context: Context) {
     var eveningFuel: Int?
         get() = prefs.getInt(EVENING_FUEL, 0)
         set(value) = prefs.edit().putInt(EVENING_FUEL, value!!).apply()
-
-    var launchCount: Int?
-        get() = prefs.getInt(LAUNCH_COUNT, 0)
-        set(value) = prefs.edit().putInt(LAUNCH_COUNT, value!!).apply()
 }

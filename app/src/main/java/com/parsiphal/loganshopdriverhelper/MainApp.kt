@@ -91,15 +91,65 @@ class MainApp : Application() {
             }
         }
 
+        val mig9to10 = object : Migration(9, 10) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Delivery ADD COLUMN moveFrom INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Delivery ADD COLUMN moveTo INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveFromZhukova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveFromKulturi INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveFromSedova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveFromHimikov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveToZhukova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveToKulturi INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveToSedova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveToHimikov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveFromZhukova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveFromKulturi INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveFromSedova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveFromHimikov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveToZhukova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveToKulturi INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveToSedova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveToHimikov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskFromZhukova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskFromKulturi INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskFromSedova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskFromHimikov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskToZhukova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskToKulturi INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskToSedova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskToHimikov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskElse INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskFromZhukova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskFromKulturi INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskFromSedova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskFromHimikov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskToZhukova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskToKulturi INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskToSedova INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskToHimikov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskElse INTEGER DEFAULT 0 NOT NULL")
+            }
+        }
+
         prefs = Preferences(applicationContext)
         mDataBase = Room
             .databaseBuilder(applicationContext, DataBase::class.java, DB_NAME)
-            .addMigrations(mig1to2, mig2to3, mig3to4, mig4to5, mig5to6, mig6to7, mig7to8, mig8to9)
+            .addMigrations(
+                mig1to2,
+                mig2to3,
+                mig3to4,
+                mig4to5,
+                mig5to6,
+                mig6to7,
+                mig7to8,
+                mig8to9,
+                mig9to10
+            )
             .build()
     }
 }
 
-//TODO Export
 
 //TODO Перевести уровни топлива на spinner
 //TODO Сохранение топлива и пробега по авто

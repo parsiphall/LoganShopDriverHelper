@@ -62,12 +62,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
         nav_view.setOnNavigationItemSelectedListener(onNavigationItemMainSelectedListener)
         nav_view.selectedItemId = R.id.navigation_delivery
-//        if (prefs.launchCount == 0) {
-//            fragmentPlace(MaintananceFragment())
-//            prefs.launchCount = 1
-//        } else {
-//            fragmentPlace(DeliveryFragment())
-//        }
          if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(

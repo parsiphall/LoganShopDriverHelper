@@ -69,6 +69,17 @@
                     style="@style/newDeliverySpinners"
                     android:entries="@array/expenses"/>
         </LinearLayout>
+        <LinearLayout
+                android:id="@+id/newDelivery_move_task"
+                style="@style/newDeliveryLinearLayout"
+                android:layout_below="@id/newDelivery_expense">
+            <Switch
+                    style="@style/newDeliverySpinners"
+                    android:id="@+id/newDelivery_move_task_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/switch_between_shops"/>
+        </LinearLayout>
         <EditText
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="4dp"
@@ -80,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address"
-                android:layout_below="@id/newDelivery_expense"/>
+                android:layout_below="@id/newDelivery_move_task"/>
         <LinearLayout
                 android:id="@+id/newDelivery_cost"
                 style="@style/newDeliveryLinearLayout"
