@@ -10,7 +10,7 @@
     <string name="date">Дата</string>
     <string name="morning">Утро</string>
     <string name="odo">Пробег</string>
-    <string name="fuel">Бензин</string>
+    <string name="fuel">Бензин:</string>
     <string name="evening">Вечер</string>
     <string name="writeTo">Записать</string>
     <string name="newShift">Новая смена</string>

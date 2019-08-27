@@ -1,140 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         tools:context=".fragments.ShiftFragment">
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
         <Button
                 android:id="@+id/shift_new_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/newShift"/>
+                android:text="@string/newShift" />
+
         <LinearLayout
                 android:id="@+id/shift_family"
                 style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_new_button">
+
             <EditText
                     android:id="@+id/shift_family_editText"
                     style="@style/shiftEditTexts"
-                    android:inputType="text"
-                    android:hint="@string/family"/>
+                    android:hint="@string/family"
+                    android:inputType="text" />
+
             <CheckBox
                     android:id="@+id/shift_bonus_checkbox"
                     android:layout_width="0dp"
-                    android:layout_weight="0.3"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
                     android:text="@string/bonus"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
         </LinearLayout>
+
         <LinearLayout
-                style="@style/shiftLinearLayout"
                 android:id="@+id/shift_date_and_car"
+                style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_family">
+
             <TextView
                     android:id="@+id/shift_date"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/date"
                     android:textAlignment="center"
-                    android:hint="@string/date"/>
+                    android:textSize="20sp" />
+
             <Spinner
-                    android:textAlignment="center"
-                    style="@style/shiftSpinner"
                     android:id="@+id/shift_region_spinner"
-                    android:entries="@array/region"/>
-            <Spinner
-                    android:textAlignment="center"
                     style="@style/shiftSpinner"
+                    android:entries="@array/region"
+                    android:textAlignment="center" />
+
+            <Spinner
                     android:id="@+id/shift_car_spinner"
-                    android:entries="@array/cars"/>
+                    style="@style/shiftSpinner"
+                    android:entries="@array/cars"
+                    android:textAlignment="center" />
         </LinearLayout>
+
         <LinearLayout
-                style="@style/shiftLinearLayout"
                 android:id="@+id/shift_morning_divider"
+                style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_date_and_car">
+
             <TextView
                     style="@style/shiftTextViewDividers"
-                    android:text="@string/morning"/>
+                    android:text="@string/morning" />
         </LinearLayout>
+
         <LinearLayout
-                style="@style/shiftLinearLayout"
                 android:id="@+id/shift_ODO_fuel_divider1"
+                style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_morning_divider"
                 android:visibility="gone">
+
             <TextView
                     style="@style/shiftEditTexts"
-                    android:hint="@string/odo"/>
+                    android:hint="@string/odo" />
+
             <TextView
                     style="@style/shiftEditTexts"
-                    android:hint="@string/fuel"/>
+                    android:hint="@string/fuel" />
 
         </LinearLayout>
+
         <LinearLayout
-                style="@style/shiftLinearLayout"
                 android:id="@+id/shift_morning_data"
+                style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_ODO_fuel_divider1">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/km"
+                    android:textSize="20sp" />
+
             <EditText
                     android:id="@+id/shift_odo_morning"
                     style="@style/shiftEditTexts"
-                    android:hint="@string/odo"/>
-            <EditText
-                    android:id="@+id/shift_fuel_morning"
-                    style="@style/shiftEditTexts"
-                    android:hint="@string/fuel"/>
+                    android:hint="@string/odo" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fuel"
+                    android:textSize="20sp" />
+
+            <Spinner
+                    android:id="@+id/shift_fuel_morning_spinner_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/fuel_8" />
+
+            <Spinner
+                    android:id="@+id/shift_fuel_morning_spinner_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/fuel_9" />
 
         </LinearLayout>
+
         <LinearLayout
-                style="@style/shiftLinearLayout"
                 android:id="@+id/shift_evening_divider"
+                style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_morning_data">
+
             <TextView
                     style="@style/shiftTextViewDividers"
-                    android:text="@string/evening"/>
+                    android:text="@string/evening" />
         </LinearLayout>
+
         <LinearLayout
-                style="@style/shiftLinearLayout"
                 android:id="@+id/shift_ODO_fuel_divider2"
+                style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_evening_divider"
                 android:visibility="gone">
+
             <TextView
                     style="@style/shiftEditTexts"
-                    android:hint="@string/odo"/>
+                    android:hint="@string/odo" />
+
             <TextView
                     style="@style/shiftEditTexts"
-                    android:hint="@string/fuel"/>
+                    android:hint="@string/fuel" />
 
         </LinearLayout>
+
         <LinearLayout
-                style="@style/shiftLinearLayout"
                 android:id="@+id/shift_evening_data"
+                style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_ODO_fuel_divider2">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/km"
+                    android:textSize="20sp" />
+
             <EditText
                     android:id="@+id/shift_odo_evening"
                     style="@style/shiftEditTexts"
-                    android:hint="@string/odo"/>
-            <EditText
-                    android:id="@+id/shift_fuel_evening"
-                    style="@style/shiftEditTexts"
-                    android:hint="@string/fuel"/>
-        </LinearLayout>
-        <LinearLayout
-                style="@style/shiftLinearLayout"
-                android:gravity="center_horizontal"
-                android:id="@+id/shift_button"
-                android:layout_below="@id/shift_evening_data">
-            <Button
-                    android:id="@+id/shift_write"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/writeTo"
+                    android:hint="@string/odo" />
+
+            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="?attr/actionBarSize"/>
+                    android:text="@string/fuel"
+                    android:textSize="20sp" />
+
+            <Spinner
+                    android:id="@+id/shift_fuel_evening_spinner_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/fuel_8" />
+
+            <Spinner
+                    android:id="@+id/shift_fuel_evening_spinner_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/fuel_9" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/shift_button"
+                style="@style/shiftLinearLayout"
+                android:layout_below="@id/shift_evening_data"
+                android:gravity="center_horizontal">
+
+            <Button
+                    android:id="@+id/shift_write"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="?attr/actionBarSize"
+                    android:text="@string/writeTo" />
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

@@ -14,6 +14,13 @@ const val MORNING_ODO = "morning_odo"
 const val MORNING_FUEL = "morning_fuel"
 const val EVENING_ODO = "evening_odo"
 const val EVENING_FUEL = "evening_fuel"
+const val LAST_ODO_LARGUS = "last_odo_largus"
+const val LAST_ODO_SANDERO = "last_odo_sandero"
+const val LAST_ODO_XRAY = "last_odo_xray"
+const val LAST_FUEL_LARGUS = "last_fuel_largus"
+const val LAST_FUEL_SANDERO = "last_fuel_sandero"
+const val LAST_FUEL_XRAY = "last_fuel_xray"
+
 
 class Preferences(context: Context) {
     private val prefs = context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
@@ -61,4 +68,28 @@ class Preferences(context: Context) {
     var eveningFuel: Int?
         get() = prefs.getInt(EVENING_FUEL, 0)
         set(value) = prefs.edit().putInt(EVENING_FUEL, value!!).apply()
+
+    var lastOdoLargus: Int?
+        get() = prefs.getInt(LAST_ODO_LARGUS, 0)
+        set(value) = prefs.edit().putInt(LAST_ODO_LARGUS, value!!).apply()
+
+    var lastOdoSandero: Int?
+        get() = prefs.getInt(LAST_ODO_SANDERO, 0)
+        set(value) = prefs.edit().putInt(LAST_ODO_SANDERO, value!!).apply()
+
+    var lastOdoXRay: Int?
+        get() = prefs.getInt(LAST_ODO_XRAY, 0)
+        set(value) = prefs.edit().putInt(LAST_ODO_XRAY, value!!).apply()
+
+    var lastFuelLargus: Int?
+        get() = prefs.getInt(LAST_FUEL_LARGUS, 0)
+        set(value) = prefs.edit().putInt(LAST_FUEL_LARGUS, value!!).apply()
+
+    var lastFuelSandero: Int?
+        get() = prefs.getInt(LAST_FUEL_SANDERO, 0)
+        set(value) = prefs.edit().putInt(LAST_FUEL_SANDERO, value!!).apply()
+
+    var lastFuelXRay: Int?
+        get() = prefs.getInt(LAST_FUEL_XRAY, 0)
+        set(value) = prefs.edit().putInt(LAST_FUEL_XRAY, value!!).apply()
 }
