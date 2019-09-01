@@ -82,7 +82,6 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         }
         month_write.setOnClickListener {
             saveData()
-            callBackActivity.fragmentPlace(TotalFragment())
         }
         month_share.setOnClickListener {
             shareDate()
@@ -353,6 +352,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.sanderoShifts = month_sandero_count_textView.text.toString().toInt()
             total.xrayShifts = month_xray_count_textView.text.toString().toInt()
             DB.getDao().addTotal(total)
+            callBackActivity.fragmentPlace(TotalFragment())
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.someError), Snackbar.LENGTH_SHORT).show()

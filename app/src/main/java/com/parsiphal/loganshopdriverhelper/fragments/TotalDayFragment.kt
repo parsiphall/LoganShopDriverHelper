@@ -114,7 +114,6 @@ class TotalDayFragment : MvpAppCompatFragment() {
         }
         day_write.setOnClickListener {
             saveData()
-            callBackActivity.fragmentPlace(TotalFragment())
         }
         day_share.setOnClickListener {
             shareData()
@@ -523,6 +522,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.vestaTaskToHimikov = vestaTaskToHimikov
             total.vestaTaskElse = vestaTaskElse
             DB.getDao().addTotal(total)
+            callBackActivity.fragmentPlace(TotalFragment())
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.someError), Snackbar.LENGTH_SHORT).show()
