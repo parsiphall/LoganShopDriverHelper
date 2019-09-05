@@ -132,19 +132,33 @@ class ShiftFragment : MvpAppCompatFragment() {
     }
 
     private fun getData() {
-        shift_family_editText.setText(prefs.family)
-        shift_bonus_checkbox.isChecked = prefs.bonus
-        shift_date.text = prefs.date
-        shift_region_spinner.setSelection(prefs.regionPosition!!)
-        shift_car_spinner.setSelection(prefs.carPosition!!)
-        shift_odo_morning.setText(prefs.morningODO!!.toString())
-        shift_odo_evening.setText(prefs.eveningODO!!.toString())
-        if (shift_car_spinner.selectedItemPosition == Cars.XRay.i) {
-            shift_fuel_morning_spinner_8.setSelection(prefs.morningFuel!!)
-            shift_fuel_evening_spinner_8.setSelection(prefs.eveningFuel!!)
-        } else {
-            shift_fuel_morning_spinner_9.setSelection(prefs.morningFuel!!)
-            shift_fuel_evening_spinner_9.setSelection(prefs.eveningFuel!!)
+        try {
+            shift_family_editText.setText(prefs.family)
+            shift_bonus_checkbox.isChecked = prefs.bonus
+            shift_date.text = prefs.date
+            shift_region_spinner.setSelection(prefs.regionPosition!!)
+            shift_car_spinner.setSelection(prefs.carPosition!!)
+            shift_odo_morning.setText(prefs.morningODO!!.toString())
+            shift_odo_evening.setText(prefs.eveningODO!!.toString())
+            if (shift_car_spinner.selectedItemPosition == Cars.XRay.i) {
+                shift_fuel_morning_spinner_8.setSelection(prefs.morningFuel!!)
+                shift_fuel_evening_spinner_8.setSelection(prefs.eveningFuel!!)
+            } else {
+                shift_fuel_morning_spinner_9.setSelection(prefs.morningFuel!!)
+                shift_fuel_evening_spinner_9.setSelection(prefs.eveningFuel!!)
+            }
+        } catch (e: Exception) {
+            shift_family_editText.setText("")
+            shift_bonus_checkbox.isChecked = false
+            shift_date.text = ""
+            shift_region_spinner.setSelection(0)
+            shift_car_spinner.setSelection(0)
+            shift_odo_morning.setText("")
+            shift_odo_evening.setText("")
+            shift_fuel_morning_spinner_8.setSelection(0)
+            shift_fuel_evening_spinner_8.setSelection(0)
+            shift_fuel_morning_spinner_9.setSelection(0)
+            shift_fuel_evening_spinner_9.setSelection(0)
         }
     }
 

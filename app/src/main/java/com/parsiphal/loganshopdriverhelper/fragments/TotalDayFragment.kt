@@ -108,6 +108,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             getData()
             setData()
             calculateSum()
+            day_share.visibility = View.GONE
         } else {
             day_write.visibility = View.GONE
             placeData()

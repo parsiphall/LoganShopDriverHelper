@@ -76,6 +76,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             calculateSum(search)
             setData()
             deltaODO(search)
+            month_share.visibility = View.GONE
         } else {
             month_write.visibility = View.GONE
             placeData()
@@ -335,11 +336,13 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.totalMoney = month_total_money_textView.text.toString().toInt()
             total.totalCash = month_total_cash_textView.text.toString().toInt()
             total.totalCard = month_total_card_textView.text.toString().toInt()
-            total.loganDeliveryValue = month_total_delivery_value_logan_textView.text.toString().toInt()
+            total.loganDeliveryValue =
+                month_total_delivery_value_logan_textView.text.toString().toInt()
             total.loganMoney = month_logan_money_textView.text.toString().toInt()
             total.loganCash = month_logan_cash_textView.text.toString().toInt()
             total.loganCard = month_logan_card_textView.text.toString().toInt()
-            total.vestaDeliveryValue = month_total_delivery_value_vesta_textView.text.toString().toInt()
+            total.vestaDeliveryValue =
+                month_total_delivery_value_vesta_textView.text.toString().toInt()
             total.vestaMoney = month_vesta_money_textView.text.toString().toInt()
             total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
             total.vestaCard = month_vesta_card_textView.text.toString().toInt()

@@ -15,6 +15,7 @@ import com.parsiphal.loganshopdriverhelper.DB_WAL
 
 import com.parsiphal.loganshopdriverhelper.R
 import kotlinx.android.synthetic.main.fragment_maintanance.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -24,11 +25,8 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.channels.FileChannel
 
+@ExperimentalCoroutinesApi
 class MaintananceFragment : MvpAppCompatFragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
