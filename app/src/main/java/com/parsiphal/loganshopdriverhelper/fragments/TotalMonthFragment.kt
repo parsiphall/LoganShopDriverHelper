@@ -43,6 +43,40 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var largusShifts = 0
     private var sanderoShifts = 0
     private var xrayShifts = 0
+    private var loganMoveFromZhukova = 0
+    private var loganMoveFromKulturi = 0
+    private var loganMoveFromSedova = 0
+    private var loganMoveFromHimikov = 0
+    private var loganMoveToZhukova = 0
+    private var loganMoveToKulturi = 0
+    private var loganMoveToSedova = 0
+    private var loganMoveToHimikov = 0
+    private var vestaMoveFromZhukova = 0
+    private var vestaMoveFromKulturi = 0
+    private var vestaMoveFromSedova = 0
+    private var vestaMoveFromHimikov = 0
+    private var vestaMoveToZhukova = 0
+    private var vestaMoveToKulturi = 0
+    private var vestaMoveToSedova = 0
+    private var vestaMoveToHimikov = 0
+    private var loganTaskFromZhukova = 0
+    private var loganTaskFromKulturi = 0
+    private var loganTaskFromSedova = 0
+    private var loganTaskFromHimikov = 0
+    private var loganTaskToZhukova = 0
+    private var loganTaskToKulturi = 0
+    private var loganTaskToSedova = 0
+    private var loganTaskToHimikov = 0
+    private var loganTaskElse = 0
+    private var vestaTaskFromZhukova = 0
+    private var vestaTaskFromKulturi = 0
+    private var vestaTaskFromSedova = 0
+    private var vestaTaskFromHimikov = 0
+    private var vestaTaskToZhukova = 0
+    private var vestaTaskToKulturi = 0
+    private var vestaTaskToSedova = 0
+    private var vestaTaskToHimikov = 0
+    private var vestaTaskElse = 0
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -297,16 +331,68 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             vestaTask += position.vestaTask
             totalTask += position.totalTask
             totalTaskWithSalary += position.tasksWithSalary
+            loganMoveFromZhukova += position.loganMoveFromZhukova
+            loganMoveFromKulturi += position.loganMoveFromKulturi
+            loganMoveFromSedova += position.loganMoveFromSedova
+            loganMoveFromHimikov += position.loganMoveFromHimikov
+            loganMoveToZhukova += position.loganMoveToZhukova
+            loganMoveToKulturi += position.loganMoveToKulturi
+            loganMoveToSedova += position.loganMoveToSedova
+            loganMoveToHimikov += position.loganMoveToHimikov
+            vestaMoveFromZhukova += position.vestaMoveFromZhukova
+            vestaMoveFromKulturi += position.vestaMoveFromKulturi
+            vestaMoveFromSedova += position.vestaMoveFromSedova
+            vestaMoveFromHimikov += position.vestaMoveFromHimikov
+            vestaMoveToZhukova += position.vestaMoveToZhukova
+            vestaMoveToKulturi += position.vestaMoveToKulturi
+            vestaMoveToSedova += position.vestaMoveToSedova
+            vestaMoveToHimikov += position.vestaMoveToHimikov
+            loganTaskFromZhukova += position.loganTaskFromZhukova
+            loganTaskFromKulturi += position.loganTaskFromKulturi
+            loganTaskFromSedova += position.loganTaskFromSedova
+            loganTaskFromHimikov += position.loganTaskFromHimikov
+            loganTaskToZhukova += position.loganTaskToZhukova
+            loganTaskToKulturi += position.loganTaskToKulturi
+            loganTaskToSedova += position.loganTaskToSedova
+            loganTaskToHimikov += position.loganTaskToHimikov
+            loganTaskElse += position.loganTaskElse
+            vestaTaskFromZhukova += position.vestaTaskFromZhukova
+            vestaTaskFromKulturi += position.vestaTaskFromKulturi
+            vestaTaskFromSedova += position.vestaTaskFromSedova
+            vestaTaskFromHimikov += position.vestaTaskFromHimikov
+            vestaTaskToZhukova += position.vestaTaskToZhukova
+            vestaTaskToKulturi += position.vestaTaskToKulturi
+            vestaTaskToSedova += position.vestaTaskToSedova
+            vestaTaskToHimikov += position.vestaTaskToHimikov
+            vestaTaskElse += position.vestaTaskElse
         }
         month_largus_count_textView.text = largusShifts.toString()
         month_sandero_count_textView.text = sanderoShifts.toString()
         month_xray_count_textView.text = xrayShifts.toString()
         month_total_delivery_value_textView.text = totalDeliveries.toString()
         month_logan_move_textView.text = loganMove.toString()
+        month_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
+        month_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
+        month_logan_sedova_move_textView.text = loganMoveToSedova.toString()
+        month_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
         month_vesta_move_textView.text = vestaMove.toString()
+        month_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
+        month_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
+        month_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
+        month_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
         month_total_move_textView.text = "${totalMoveWithSalary}(${totalMove})"
         month_logan_task_textView.text = loganTask.toString()
+        month_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
+        month_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
+        month_logan_sedova_task_textView.text = loganTaskToSedova.toString()
+        month_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
+        month_logan_else_task_textView.text = loganTaskElse.toString()
         month_vesta_task_textView.text = vestaTask.toString()
+        month_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
+        month_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
+        month_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
+        month_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
+        month_vesta_else_task_textView.text = vestaTaskElse.toString()
         month_total_task_textView.text = "${totalTaskWithSalary}(${totalTask})"
         month_salary_textView.text = salary.toString()
         month_tea_textView.text = teaMoney.toString()
@@ -354,6 +440,40 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.largusShifts = month_largus_count_textView.text.toString().toInt()
             total.sanderoShifts = month_sandero_count_textView.text.toString().toInt()
             total.xrayShifts = month_xray_count_textView.text.toString().toInt()
+            total.loganMoveFromZhukova = loganMoveFromZhukova
+            total.loganMoveFromKulturi = loganMoveFromKulturi
+            total.loganMoveFromSedova = loganMoveFromSedova
+            total.loganMoveFromHimikov = loganMoveFromHimikov
+            total.loganMoveToZhukova = loganMoveToZhukova
+            total.loganMoveToKulturi = loganMoveToKulturi
+            total.loganMoveToSedova = loganMoveToSedova
+            total.loganMoveToHimikov = loganMoveToHimikov
+            total.vestaMoveFromZhukova = vestaMoveFromZhukova
+            total.vestaMoveFromKulturi = vestaMoveFromKulturi
+            total.vestaMoveFromSedova = vestaMoveFromSedova
+            total.vestaMoveFromHimikov = vestaMoveFromHimikov
+            total.vestaMoveToZhukova = vestaMoveToZhukova
+            total.vestaMoveToKulturi = vestaMoveToKulturi
+            total.vestaMoveToSedova = vestaMoveToSedova
+            total.vestaMoveToHimikov = vestaMoveToHimikov
+            total.loganTaskFromZhukova = loganTaskFromZhukova
+            total.loganTaskFromKulturi = loganTaskFromKulturi
+            total.loganTaskFromSedova = loganTaskFromSedova
+            total.loganTaskFromHimikov = loganTaskFromHimikov
+            total.loganTaskToZhukova = loganTaskToZhukova
+            total.loganTaskToKulturi = loganTaskToKulturi
+            total.loganTaskToSedova = loganTaskToSedova
+            total.loganTaskToHimikov = loganTaskToHimikov
+            total.loganTaskElse = loganTaskElse
+            total.vestaTaskFromZhukova = vestaTaskFromZhukova
+            total.vestaTaskFromKulturi = vestaTaskFromKulturi
+            total.vestaTaskFromSedova = vestaTaskFromSedova
+            total.vestaTaskFromHimikov = vestaTaskFromHimikov
+            total.vestaTaskToZhukova = vestaTaskToZhukova
+            total.vestaTaskToKulturi = vestaTaskToKulturi
+            total.vestaTaskToSedova = vestaTaskToSedova
+            total.vestaTaskToHimikov = vestaTaskToHimikov
+            total.vestaTaskElse = vestaTaskElse
             DB.getDao().addTotal(total)
             callBackActivity.fragmentPlace(TotalFragment())
         } catch (e: Exception) {
@@ -369,10 +489,28 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_total_shifts_value_textView.text = total.totalShifts.toString()
         month_total_delivery_value_textView.text = total.totalDeliveries.toString()
         month_logan_move_textView.text = total.loganMove.toString()
+        month_logan_zhukova_move_textView.text = total.loganMoveToZhukova.toString()
+        month_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
+        month_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
+        month_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
         month_vesta_move_textView.text = total.vestaMove.toString()
+        month_vesta_zhukova_move_textView.text = total.vestaMoveToZhukova.toString()
+        month_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
+        month_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
+        month_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
         month_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
         month_logan_task_textView.text = total.loganTask.toString()
+        month_logan_zhukova_task_textView.text = total.loganTaskToZhukova.toString()
+        month_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
+        month_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
+        month_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
+        month_logan_else_task_textView.text = total.loganTaskElse.toString()
         month_vesta_task_textView.text = total.vestaTask.toString()
+        month_vesta_zhukova_task_textView.text = total.vestaTaskToZhukova.toString()
+        month_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
+        month_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
+        month_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
+        month_vesta_else_task_textView.text = total.vestaTaskElse.toString()
         month_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
         month_total_money_textView.text = total.totalMoney.toString()
         month_total_cash_textView.text = total.totalCash.toString()
@@ -422,14 +560,32 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.card)} ${month_vesta_card_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_moves)}\n" +
-                "${resources.getString(R.string.logan_divider)}: ${month_logan_move_textView.text}\n" +
-                "${resources.getString(R.string.vesta_divider)}: ${month_vesta_move_textView.text}\n" +
-                "${resources.getString(R.string.total_moves)} ${month_total_move_textView.text}\n" +
+                "   ${resources.getString(R.string.logan_divider)}: ${month_logan_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)} ${month_logan_zhukova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)} ${month_logan_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)} ${month_logan_sedova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)} ${month_logan_himikov_move_textView.text}\n" +
+                "   ${resources.getString(R.string.vesta_divider)}: ${month_vesta_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)} ${month_vesta_zhukova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)} ${month_vesta_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)} ${month_vesta_sedova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_move_textView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${month_total_move_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_tasks)}\n" +
-                "${resources.getString(R.string.logan_divider)}: ${month_logan_task_textView.text}\n" +
-                "${resources.getString(R.string.vesta_divider)}: ${month_vesta_task_textView.text}\n" +
-                "${resources.getString(R.string.total_tasks)} ${month_total_task_textView.text}\n" +
+                "   ${resources.getString(R.string.logan_divider)}: ${month_logan_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)} ${month_logan_zhukova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)} ${month_logan_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)} ${month_logan_sedova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)} ${month_logan_himikov_task_textView.text}\n" +
+                "${resources.getString(R.string.switch_else)}: ${month_logan_else_task_textView.text}\n" +
+                "   ${resources.getString(R.string.vesta_divider)}: ${month_vesta_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)} ${month_vesta_zhukova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)} ${month_vesta_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)} ${month_vesta_sedova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_task_textView.text}\n" +
+                "${resources.getString(R.string.switch_else)}: ${month_vesta_else_task_textView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${month_total_task_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
                 "${resources.getString(R.string.prepay)} ${month_prepay_textView.text}\n" +
