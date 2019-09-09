@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentTransaction
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.fragments.DeliveryFragment
-import com.parsiphal.loganshopdriverhelper.fragments.MaintananceFragment
 import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragment
 import com.parsiphal.loganshopdriverhelper.fragments.TotalFragment
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
@@ -78,6 +77,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 )
             }
         }
+        version_TextView.text = "v${BuildConfig.VERSION_NAME}\nb${BuildConfig.VERSION_CODE}"
         fragmentPlace(DeliveryFragment())
     }
 }
