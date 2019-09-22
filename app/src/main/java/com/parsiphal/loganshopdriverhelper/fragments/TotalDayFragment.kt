@@ -589,7 +589,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "\n" +
                 "${resources.getString(R.string.expenses)}\n" +
                 "${resources.getString(R.string.total_total)} ${day_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)}: ${day_expenses_fuel_textView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${day_expenses_fuel_textView.text}\n" +
                 "${resources.getString(R.string.wash)}: ${day_expenses_wash_textView.text}\n" +
                 "${resources.getString(R.string.other)}: ${day_expenses_other_textView.text}\n" +
                 "\n" +

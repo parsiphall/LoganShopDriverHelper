@@ -484,20 +484,20 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.car_sandero)}: ${month_sandero_count_textView.text}\n" +
                 "${resources.getString(R.string.car_x_ray)}: ${month_xray_count_textView.text}\n" +
                 "\n" +
-                "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_textView.text}\n" +
-                "${resources.getString(R.string.totalMoney)} ${month_total_money_textView.text}\n" +
+                "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_textView.text}\n" +
+                "${resources.getString(R.string.totalMoney)}: ${month_total_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${month_total_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${month_total_card_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.logan_divider)}\n" +
-                "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_logan_textView.text}\n" +
-                "${resources.getString(R.string.money)} ${month_logan_money_textView.text}\n" +
+                "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_logan_textView.text}\n" +
+                "${resources.getString(R.string.money)}: ${month_logan_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${month_logan_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${month_logan_card_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.vesta_divider)}\n" +
-                "${resources.getString(R.string.deliveryValue)} ${month_total_delivery_value_vesta_textView.text}\n" +
-                "${resources.getString(R.string.money)} ${month_vesta_money_textView.text}\n" +
+                "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_vesta_textView.text}\n" +
+                "${resources.getString(R.string.money)}: ${month_vesta_money_textView.text}\n" +
                 "${resources.getString(R.string.cash)} ${month_vesta_cash_textView.text}\n" +
                 "${resources.getString(R.string.card)} ${month_vesta_card_textView.text}\n" +
                 "\n" +
@@ -530,16 +530,16 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.total_total)} ${month_total_task_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.expenses)}\n" +
-                "   ${resources.getString(R.string.car_largus)} ${month_largus_total_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)}: ${month_largus_expenses_fuel_textView.text}\n" +
+                "   ${resources.getString(R.string.car_largus)}: ${month_largus_total_expenses_textView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${month_largus_expenses_fuel_textView.text}\n" +
                 "${resources.getString(R.string.wash)}: ${month_largus_expenses_wash_textView.text}\n" +
                 "${resources.getString(R.string.other)}: ${month_largus_expenses_other_textView.text}\n" +
-                "   ${resources.getString(R.string.car_sandero)} ${month_sandero_total_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)}: ${month_sandero_expenses_fuel_textView.text}\n" +
+                "   ${resources.getString(R.string.car_sandero)}: ${month_sandero_total_expenses_textView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${month_sandero_expenses_fuel_textView.text}\n" +
                 "${resources.getString(R.string.wash)}: ${month_sandero_expenses_wash_textView.text}\n" +
                 "${resources.getString(R.string.other)}: ${month_sandero_expenses_other_textView.text}\n" +
-                "   ${resources.getString(R.string.car_x_ray)} ${month_xray_total_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)}: ${month_xray_expenses_fuel_textView.text}\n" +
+                "   ${resources.getString(R.string.car_x_ray)}: ${month_xray_total_expenses_textView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${month_xray_expenses_fuel_textView.text}\n" +
                 "${resources.getString(R.string.wash)}: ${month_xray_expenses_wash_textView.text}\n" +
                 "${resources.getString(R.string.other)}: ${month_xray_expenses_other_textView.text}\n" +
                 "\n" +
