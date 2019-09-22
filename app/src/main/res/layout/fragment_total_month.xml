@@ -1,588 +1,948 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"
         tools:context=".fragments.TotalDayFragment">
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <LinearLayout
-                android:id="@+id/month_and_year"
-                style="@style/dayAndMonthLinearLayout">
-            <TextView
-                    android:id="@+id/month_month"
-                    style="@style/dayAndMonthTextView"/>
-            <TextView
-                    android:id="@+id/month_year"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_family"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_and_year">
-            <TextView
-                    android:id="@+id/month_family_textView"
-                    style="@style/dayAndMonthTextViewWide"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_shifts_value"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_family">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shiftsValue"/>
-            <TextView
-                    android:id="@+id/month_total_shifts_value_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_largus_count"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_shifts_value">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/car_largus"/>
-            <TextView
-                    android:id="@+id/month_largus_count_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_sandero_count"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_largus_count">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/car_sandero"/>
-            <TextView
-                    android:id="@+id/month_sandero_count_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_xray_count"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_sandero_count">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/car_x_ray"/>
-            <TextView
-                    android:id="@+id/month_xray_count_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_delivery_value"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_xray_count">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/deliveryValue"/>
-            <TextView
-                    android:id="@+id/month_total_delivery_value_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_money"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_delivery_value">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/totalMoney"/>
-            <TextView
-                    android:id="@+id/month_total_money_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_money_cash"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_money">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/totalMoneyCash"/>
-            <TextView
-                    android:id="@+id/month_total_cash_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_money_card"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_money_cash">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/totalMoneyCard"/>
-            <TextView
-                    android:id="@+id/month_total_card_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_divider"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_money_card">
-            <TextView
-                    style="@style/dayAndMonthTextViewWide"
-                    android:text="@string/logan_divider"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_delivery_value_logan"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_divider">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/deliveryValue"/>
-            <TextView
-                    android:id="@+id/month_total_delivery_value_logan_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_money"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_delivery_value_logan">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/money"/>
-            <TextView
-                    android:id="@+id/month_logan_money_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_cash"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_money">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/cash"/>
-            <TextView
-                    android:id="@+id/month_logan_cash_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_card"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_cash">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/card"/>
-            <TextView
-                    android:id="@+id/month_logan_card_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_divider"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_card">
-            <TextView
-                    style="@style/dayAndMonthTextViewWide"
-                    android:text="@string/vesta_divider"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_delivery_value_vesta"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_divider">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/deliveryValue"/>
-            <TextView
-                    android:id="@+id/month_total_delivery_value_vesta_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_money"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_delivery_value_vesta">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/money"/>
-            <TextView
-                    android:id="@+id/month_vesta_money_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_cash"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_money">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/cash"/>
-            <TextView
-                    android:id="@+id/month_vesta_cash_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_card"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_cash">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/card"/>
-            <TextView
-                    android:id="@+id/month_vesta_card_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_move_divider"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_card">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/total_moves"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_move_divider">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/logan_divider"/>
-            <TextView
-                    android:id="@+id/month_logan_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_zhukova_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_zhukova"/>
-            <TextView
-                    android:id="@+id/month_logan_zhukova_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_kulturi_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_zhukova_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_kulturi"/>
-            <TextView
-                    android:id="@+id/month_logan_kulturi_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_sedova_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_kulturi_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_sedova"/>
-            <TextView
-                    android:id="@+id/month_logan_sedova_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_himikov_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_sedova_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_himikov"/>
-            <TextView
-                    android:id="@+id/month_logan_himikov_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_himikov_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/vesta_divider"/>
-            <TextView
-                    android:id="@+id/month_vesta_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_zhukova_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_zhukova"/>
-            <TextView
-                    android:id="@+id/month_vesta_zhukova_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_kulturi_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_zhukova_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_kulturi"/>
-            <TextView
-                    android:id="@+id/month_vesta_kulturi_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_sedova_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_kulturi_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_sedova"/>
-            <TextView
-                    android:id="@+id/month_vesta_sedova_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_himikov_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_sedova_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_himikov"/>
-            <TextView
-                    android:id="@+id/month_vesta_himikov_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_move"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_himikov_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/total_total"/>
-            <TextView
-                    android:id="@+id/month_total_move_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_task_divider"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_move">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/total_tasks"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_task_divider">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/logan_divider"/>
-            <TextView
-                    android:id="@+id/month_logan_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_zhukova_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_zhukova"/>
-            <TextView
-                    android:id="@+id/month_logan_zhukova_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_kulturi_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_zhukova_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_kulturi"/>
-            <TextView
-                    android:id="@+id/month_logan_kulturi_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_sedova_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_kulturi_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_sedova"/>
-            <TextView
-                    android:id="@+id/month_logan_sedova_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_himikov_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_sedova_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_himikov"/>
-            <TextView
-                    android:id="@+id/month_logan_himikov_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_logan_else_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_himikov_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/switch_else"/>
-            <TextView
-                    android:id="@+id/month_logan_else_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_logan_else_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/vesta_divider"/>
-            <TextView
-                    android:id="@+id/month_vesta_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_zhukova_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_zhukova"/>
-            <TextView
-                    android:id="@+id/month_vesta_zhukova_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_kulturi_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_zhukova_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_kulturi"/>
-            <TextView
-                    android:id="@+id/month_vesta_kulturi_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_sedova_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_kulturi_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_sedova"/>
-            <TextView
-                    android:id="@+id/month_vesta_sedova_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_himikov_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_sedova_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/shop_himikov"/>
-            <TextView
-                    android:id="@+id/month_vesta_himikov_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_vesta_else_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_himikov_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/switch_else"/>
-            <TextView
-                    android:id="@+id/month_vesta_else_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_total_task"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_vesta_else_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/total_total"/>
-            <TextView
-                    android:id="@+id/month_total_task_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_salary"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_total_task">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/salary"/>
-            <TextView
-                    android:id="@+id/month_salary_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_mid_salary"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_salary">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/mid_salary"/>
-            <TextView
-                    android:id="@+id/month_mid_salary_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_tea"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_mid_salary">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/tea_money"/>
-            <TextView
-                    android:id="@+id/month_tea_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_prepay"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_tea">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/prepay"/>
-            <TextView
-                    android:id="@+id/month_prepay_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_holiday_pay"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_prepay">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/holiday_pay"/>
-            <TextView
-                    android:id="@+id/month_holiday_pay_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/month_to_recieve"
-                style="@style/dayAndMonthLinearLayout"
-                android:layout_below="@id/month_holiday_pay">
-            <TextView
-                    style="@style/dayAndMonthTextView"
-                    android:text="@string/money_to_recieve"/>
-            <TextView
-                    android:id="@+id/month_to_recieve_textView"
-                    style="@style/dayAndMonthTextView"/>
-        </LinearLayout>
-        <LinearLayout
-                style="@style/shiftLinearLayout"
-                android:gravity="center_horizontal"
-                android:id="@+id/shift_button"
-                android:layout_below="@id/month_to_recieve">
-            <Button
-                    android:id="@+id/month_write"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/writeTo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            <Button
-                    android:id="@+id/month_share"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </RelativeLayout>
 
+        <ProgressBar
+                android:id="@+id/month_progress"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:layout_marginTop="300sp"
+                android:visibility="visible"/>
+
+        <RelativeLayout
+                android:id="@+id/month_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+            <LinearLayout
+                    android:id="@+id/month_and_year"
+                    style="@style/dayAndMonthLinearLayout">
+
+                <TextView
+                        android:id="@+id/month_month"
+                        style="@style/dayAndMonthTextView" />
+
+                <TextView
+                        android:id="@+id/month_year"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_family"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_and_year">
+
+                <TextView
+                        android:id="@+id/month_family_textView"
+                        style="@style/dayAndMonthTextViewWide" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_shifts_value"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_family">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shiftsValue" />
+
+                <TextView
+                        android:id="@+id/month_total_shifts_value_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_largus_count"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_shifts_value">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/car_largus" />
+
+                <TextView
+                        android:id="@+id/month_largus_count_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_sandero_count"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largus_count">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/car_sandero" />
+
+                <TextView
+                        android:id="@+id/month_sandero_count_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_xray_count"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_sandero_count">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/car_x_ray" />
+
+                <TextView
+                        android:id="@+id/month_xray_count_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_delivery_value"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_xray_count">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/deliveryValue" />
+
+                <TextView
+                        android:id="@+id/month_total_delivery_value_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_money"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_delivery_value">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/totalMoney" />
+
+                <TextView
+                        android:id="@+id/month_total_money_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_money_cash"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_money">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/totalMoneyCash" />
+
+                <TextView
+                        android:id="@+id/month_total_cash_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_money_card"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_money_cash">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/totalMoneyCard" />
+
+                <TextView
+                        android:id="@+id/month_total_card_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_divider"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_money_card">
+
+                <TextView
+                        style="@style/dayAndMonthTextViewWide"
+                        android:text="@string/logan_divider" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_delivery_value_logan"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_divider">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/deliveryValue" />
+
+                <TextView
+                        android:id="@+id/month_total_delivery_value_logan_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_money"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_delivery_value_logan">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/money" />
+
+                <TextView
+                        android:id="@+id/month_logan_money_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_cash"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_money">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/cash" />
+
+                <TextView
+                        android:id="@+id/month_logan_cash_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_card"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_cash">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/card" />
+
+                <TextView
+                        android:id="@+id/month_logan_card_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_divider"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_card">
+
+                <TextView
+                        style="@style/dayAndMonthTextViewWide"
+                        android:text="@string/vesta_divider" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_delivery_value_vesta"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_divider">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/deliveryValue" />
+
+                <TextView
+                        android:id="@+id/month_total_delivery_value_vesta_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_money"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_delivery_value_vesta">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/money" />
+
+                <TextView
+                        android:id="@+id/month_vesta_money_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_cash"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_money">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/cash" />
+
+                <TextView
+                        android:id="@+id/month_vesta_cash_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_card"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_cash">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/card" />
+
+                <TextView
+                        android:id="@+id/month_vesta_card_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_move_divider"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_card">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/total_moves" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_move_divider">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:textStyle="bold"
+                        android:text="@string/logan_divider" />
+
+                <TextView
+                        android:id="@+id/month_logan_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_zhukova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_zhukova" />
+
+                <TextView
+                        android:id="@+id/month_logan_zhukova_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_kulturi_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_zhukova_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_kulturi" />
+
+                <TextView
+                        android:id="@+id/month_logan_kulturi_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_sedova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_kulturi_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_sedova" />
+
+                <TextView
+                        android:id="@+id/month_logan_sedova_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_himikov_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_sedova_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_himikov" />
+
+                <TextView
+                        android:id="@+id/month_logan_himikov_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_himikov_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:textStyle="bold"
+                        android:text="@string/vesta_divider" />
+
+                <TextView
+                        android:id="@+id/month_vesta_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_zhukova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_zhukova" />
+
+                <TextView
+                        android:id="@+id/month_vesta_zhukova_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_kulturi_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_zhukova_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_kulturi" />
+
+                <TextView
+                        android:id="@+id/month_vesta_kulturi_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_sedova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_kulturi_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_sedova" />
+
+                <TextView
+                        android:id="@+id/month_vesta_sedova_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_himikov_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_sedova_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_himikov" />
+
+                <TextView
+                        android:id="@+id/month_vesta_himikov_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_himikov_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/total_total" />
+
+                <TextView
+                        android:id="@+id/month_total_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_task_divider"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/total_tasks" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_task_divider">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:textStyle="bold"
+                        android:text="@string/logan_divider" />
+
+                <TextView
+                        android:id="@+id/month_logan_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_zhukova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_zhukova" />
+
+                <TextView
+                        android:id="@+id/month_logan_zhukova_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_kulturi_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_zhukova_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_kulturi" />
+
+                <TextView
+                        android:id="@+id/month_logan_kulturi_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_sedova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_kulturi_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_sedova" />
+
+                <TextView
+                        android:id="@+id/month_logan_sedova_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_himikov_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_sedova_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_himikov" />
+
+                <TextView
+                        android:id="@+id/month_logan_himikov_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_else_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_himikov_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/switch_else" />
+
+                <TextView
+                        android:id="@+id/month_logan_else_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_else_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:textStyle="bold"
+                        android:text="@string/vesta_divider" />
+
+                <TextView
+                        android:id="@+id/month_vesta_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_zhukova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_zhukova" />
+
+                <TextView
+                        android:id="@+id/month_vesta_zhukova_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_kulturi_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_zhukova_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_kulturi" />
+
+                <TextView
+                        android:id="@+id/month_vesta_kulturi_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_sedova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_kulturi_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_sedova" />
+
+                <TextView
+                        android:id="@+id/month_vesta_sedova_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_himikov_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_sedova_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_himikov" />
+
+                <TextView
+                        android:id="@+id/month_vesta_himikov_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_else_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_himikov_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/switch_else" />
+
+                <TextView
+                        android:id="@+id/month_vesta_else_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_else_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/total_total" />
+
+                <TextView
+                        android:id="@+id/month_total_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_expenses_divider"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_total_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/expenses" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_largus_total_expenses"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_expenses_divider">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:textStyle="bold"
+                        android:text="@string/car_largus" />
+
+                <TextView
+                        android:id="@+id/month_largus_total_expenses_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_largus_expenses_fuel"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largus_total_expenses">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/fuel" />
+
+                <TextView
+                        android:id="@+id/month_largus_expenses_fuel_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_largus_expenses_wash"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largus_expenses_fuel">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/wash" />
+
+                <TextView
+                        android:id="@+id/month_largus_expenses_wash_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_largus_expenses_other"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largus_expenses_wash">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/other" />
+
+                <TextView
+                        android:id="@+id/month_largus_expenses_other_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/month_sandero_total_expenses"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largus_expenses_other">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:textStyle="bold"
+                        android:text="@string/car_sandero" />
+
+                <TextView
+                        android:id="@+id/month_sandero_total_expenses_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_sandero_expenses_fuel"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_sandero_total_expenses">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/fuel" />
+
+                <TextView
+                        android:id="@+id/month_sandero_expenses_fuel_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_sandero_expenses_wash"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_sandero_expenses_fuel">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/wash" />
+
+                <TextView
+                        android:id="@+id/month_sandero_expenses_wash_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_sandero_expenses_other"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_sandero_expenses_wash">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/other" />
+
+                <TextView
+                        android:id="@+id/month_sandero_expenses_other_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_xray_total_expenses"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_sandero_expenses_other">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:textStyle="bold"
+                        android:text="@string/car_x_ray" />
+
+                <TextView
+                        android:id="@+id/month_xray_total_expenses_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_xray_expenses_fuel"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_xray_total_expenses">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/fuel" />
+
+                <TextView
+                        android:id="@+id/month_xray_expenses_fuel_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_xray_expenses_wash"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_xray_expenses_fuel">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/wash" />
+
+                <TextView
+                        android:id="@+id/month_xray_expenses_wash_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_xray_expenses_other"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_xray_expenses_wash">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/other" />
+
+                <TextView
+                        android:id="@+id/month_xray_expenses_other_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_money_divider"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_xray_expenses_other">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/total_money" />
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/month_salary"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_money_divider">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/salary" />
+
+                <TextView
+                        android:id="@+id/month_salary_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_mid_salary"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_salary">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/mid_salary" />
+
+                <TextView
+                        android:id="@+id/month_mid_salary_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_tea"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_mid_salary">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/tea_money" />
+
+                <TextView
+                        android:id="@+id/month_tea_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_prepay"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_tea">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/prepay" />
+
+                <TextView
+                        android:id="@+id/month_prepay_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_holiday_pay"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_prepay">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/holiday_pay" />
+
+                <TextView
+                        android:id="@+id/month_holiday_pay_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_to_recieve"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_holiday_pay">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/money_to_recieve" />
+
+                <TextView
+                        android:id="@+id/month_to_recieve_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/shift_button"
+                    style="@style/shiftLinearLayout"
+                    android:layout_below="@id/month_to_recieve"
+                    android:gravity="center_horizontal">
+
+                <Button
+                        android:id="@+id/month_write"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/writeTo" />
+
+                <Button
+                        android:id="@+id/month_share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/share" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 </ScrollView>

@@ -12,12 +12,13 @@ import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
+import com.parsiphal.loganshopdriverhelper.data.PayType
 import com.parsiphal.loganshopdriverhelper.data.Total
+import com.parsiphal.loganshopdriverhelper.data.WorkTypes
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_total_day.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class TotalDayFragment : MvpAppCompatFragment() {
 
@@ -25,6 +26,18 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private lateinit var total: Total
     private var newTotal = true
     private lateinit var callBackActivity: MainView
+    private var teaMoney = 0
+    private var totalMoney = 0
+    private var totalCash = 0
+    private var totalCard = 0
+    private var deliveryValueLogan = 0
+    private var loganMoney = 0
+    private var loganCash = 0
+    private var loganCard = 0
+    private var deliveryValueVesta = 0
+    private var vestaMoney = 0
+    private var vestaCash = 0
+    private var vestaCard = 0
     private var salary = 0
     private var totalDeliveries = 0
     private var totalMoveToPay = 0
@@ -105,13 +118,24 @@ class TotalDayFragment : MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (newTotal) {
-            getData()
-            setData()
-            calculateSum()
+            val data = GlobalScope.async { getData() }
+            MainScope().launch {
+                data.await()
+                setData()
+                delay(1000)
+//                day_progress.visibility = View.GONE
+//                day_data.visibility = View.VISIBLE
+                saveData()
+            }
             day_share.visibility = View.GONE
         } else {
+            val data = GlobalScope.async { placeData() }
+            MainScope().launch {
+                data.await()
+                day_progress.visibility = View.GONE
+                day_data.visibility = View.VISIBLE
+            }
             day_write.visibility = View.GONE
-            placeData()
         }
         day_write.setOnClickListener {
             saveData()
@@ -121,12 +145,12 @@ class TotalDayFragment : MvpAppCompatFragment() {
         }
     }
 
-    private fun getData() = GlobalScope.launch {
+    private fun getData() {
         items = DB.getDao().getDeliveriesByDate(prefs.date!!)
+        calculateSum()
     }
 
     private fun setData() {
-        Thread.sleep(1000)
         val car = "${prefs.region} - ${prefs.car}"
         day_car_textView.text = car
         day_date_textView.text = prefs.date
@@ -134,132 +158,93 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_evening_odo_textView.text = prefs.eveningODO.toString()
         day_morning_fuel_textView.text = (prefs.morningFuel?.plus(1)).toString()
         day_evening_fuel_textView.text = (prefs.eveningFuel?.plus(1)).toString()
-        day_total_money_textView.text = totalMoney()
-        day_total_money_cash_textView.text = totalCash()
-        day_total_money_card_textView.text = totalCard()
-        day_logan_delivery_value_textView.text = deliveryValueLogan()
-        day_logan_money_textView.text = loganMoney()
-        day_logan_cash_textView.text = loganCash()
-        day_logan_card_textView.text = loganCard()
-        day_vesta_delivery_value_textView.text = deliveryValueVesta()
-        day_vesta_money_textView.text = vestaMoney()
-        day_vesta_cash_textView.text = vestaCash()
-        day_vesta_card_textView.text = vestaCard()
-        day_tea_textVew.text = teaMoney()
-    }
+        day_total_money_textView.text = totalMoney.toString()
+        day_total_money_cash_textView.text = totalCash.toString()
+        day_total_money_card_textView.text = totalCard.toString()
+        day_logan_delivery_value_textView.text = deliveryValueLogan.toString()
+        day_logan_money_textView.text = loganMoney.toString()
+        day_logan_cash_textView.text = loganCash.toString()
+        day_logan_card_textView.text = loganCard.toString()
+        day_vesta_delivery_value_textView.text = deliveryValueVesta.toString()
+        day_vesta_money_textView.text = vestaMoney.toString()
+        day_vesta_cash_textView.text = vestaCash.toString()
+        day_vesta_card_textView.text = vestaCard.toString()
+        day_tea_textVew.text = teaMoney.toString()
 
-    private fun teaMoney(): String {
-        var teaMoney = 0
-        for (position in items) {
-            if (position.workType == 0) {
-                teaMoney += position.expense
-            }
-        }
-        return teaMoney.toString()
-    }
+        day_total_deliveries_textVew.text = totalDeliveries.toString()
+        day_logan_move_textView.text = (loganMoveWithSalary + loganMoveWithOutSalary).toString()
+        day_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
+        day_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
+        day_logan_sedova_move_textView.text = loganMoveToSedova.toString()
+        day_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
+        day_vesta_move_textView.text = (vestaMoveWithSalary + vestaMoveWithOutSalary).toString()
+        day_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
+        day_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
+        day_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
+        day_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
+        day_total_move_textView.text = "${totalMoveToPay}(${totalMove})"
+        day_logan_task_textView.text = (loganTaskWithSalary + loganTaskWithOutSalary).toString()
+        day_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
+        day_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
+        day_logan_sedova_task_textView.text = loganTaskToSedova.toString()
+        day_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
+        day_logan_else_task_textView.text = loganTaskElse.toString()
+        day_vesta_task_textView.text = (vestaTaskWithSalary + vestaTaskWithOutSalary).toString()
+        day_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
+        day_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
+        day_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
+        day_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
+        day_vesta_else_task_textView.text = vestaTaskElse.toString()
+        day_total_task_textView.text = "${totalTaskToPay}(${totalTask})"
 
-    private fun totalMoney(): String {
-        var totalMoney = 0
-        for (position in items) {
-            if (position.workType == 0) {
-                totalMoney += position.cost
-            }
-        }
-        return totalMoney.toString()
-    }
+        day_expenses_textView.text = (expenseFuel + expenseWash + expenseOther).toString()
+        day_expenses_fuel_textView.text = expenseFuel.toString()
+        day_expenses_wash_textView.text = expenseWash.toString()
+        day_expenses_other_textView.text = expenseOther.toString()
 
-    private fun totalCash(): String {
-        var totalCash = 0
-        for (position in items) {
-            if (position.workType == 0 && position.payType == 0)
-                totalCash += position.cost
-        }
-        return totalCash.toString()
-    }
-
-    private fun totalCard(): String {
-        var totalCard = 0
-        for (position in items) {
-            if (position.workType == 0 && position.payType == 1)
-                totalCard += position.cost
-        }
-        return totalCard.toString()
-    }
-
-    private fun deliveryValueLogan(): String {
-        var deliveryValueLogan = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 0)
-                deliveryValueLogan += 1
-        }
-        return deliveryValueLogan.toString()
-    }
-
-    private fun loganMoney(): String {
-        var loganMoney = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 0)
-                loganMoney += position.cost
-        }
-        return loganMoney.toString()
-    }
-
-    private fun loganCash(): String {
-        var loganCash = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 0 && position.payType == 0)
-                loganCash += position.cost
-        }
-        return loganCash.toString()
-    }
-
-    private fun loganCard(): String {
-        var loganCard = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 0 && position.payType == 1)
-                loganCard += position.cost
-        }
-        return loganCard.toString()
-    }
-
-    private fun deliveryValueVesta(): String {
-        var deliveryValueVesta = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 1)
-                deliveryValueVesta += 1
-        }
-        return deliveryValueVesta.toString()
-    }
-
-    private fun vestaMoney(): String {
-        var vestaMoney = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 1)
-                vestaMoney += position.cost
-        }
-        return vestaMoney.toString()
-    }
-
-    private fun vestaCash(): String {
-        var vestaCash = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 1 && position.payType == 0)
-                vestaCash += position.cost
-        }
-        return vestaCash.toString()
-    }
-
-    private fun vestaCard(): String {
-        var vestaCard = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 1 && position.payType == 1)
-                vestaCard += position.cost
-        }
-        return vestaCard.toString()
+        day_salary_textView.text = salary.toString()
+        day_prepay_textVew.text = prepay.toString()
+        day_holiday_textVew.text = holiday.toString()
     }
 
     private fun calculateSum() {
         for (position in items) {
+            if (position.workType == WorkTypes.Delivery.i) {
+                teaMoney += position.expense
+            }
+            if (position.workType == WorkTypes.Delivery.i) {
+                totalMoney += position.cost
+            }
+            if (position.workType == WorkTypes.Delivery.i && position.payType == PayType.Cash.i) {
+                totalCash += position.cost
+            }
+            if (position.workType == 0 && position.payType == 1) {
+                totalCard += position.cost
+            }
+            if (position.workType == 0 && position.deliveryType == 0) {
+                deliveryValueLogan += 1
+            }
+            if (position.workType == 0 && position.deliveryType == 0) {
+                loganMoney += position.cost
+            }
+            if (position.workType == 0 && position.deliveryType == 0 && position.payType == 0) {
+                loganCash += position.cost
+            }
+            if (position.workType == 0 && position.deliveryType == 0 && position.payType == 1) {
+                loganCard += position.cost
+            }
+            if (position.workType == 0 && position.deliveryType == 1) {
+                deliveryValueVesta += 1
+            }
+            if (position.workType == 0 && position.deliveryType == 1) {
+                vestaMoney += position.cost
+            }
+            if (position.workType == 0 && position.deliveryType == 1 && position.payType == 0) {
+                vestaCash += position.cost
+            }
+            if (position.workType == 0 && position.deliveryType == 1 && position.payType == 1) {
+                vestaCard += position.cost
+            }
             if (position.workType == 0) {
                 totalDeliveries++
             }
@@ -410,41 +395,6 @@ class TotalDayFragment : MvpAppCompatFragment() {
         totalMove = totalMoveToPay + loganMoveWithOutSalary + vestaMoveWithOutSalary
         totalTask = totalTaskToPay + loganTaskWithOutSalary + vestaTaskWithOutSalary
         salary = (1700 + totalDeliveries * 50 + totalMoveToPay * 50 + totalTaskToPay * 50)
-
-        day_total_deliveries_textVew.text = totalDeliveries.toString()
-        day_logan_move_textView.text = (loganMoveWithSalary + loganMoveWithOutSalary).toString()
-        day_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
-        day_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
-        day_logan_sedova_move_textView.text = loganMoveToSedova.toString()
-        day_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
-        day_vesta_move_textView.text = (vestaMoveWithSalary + vestaMoveWithOutSalary).toString()
-        day_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
-        day_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
-        day_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
-        day_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
-        day_total_move_textView.text = "${totalMoveToPay}(${totalMove})"
-        day_logan_task_textView.text = (loganTaskWithSalary + loganTaskWithOutSalary).toString()
-        day_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
-        day_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
-        day_logan_sedova_task_textView.text = loganTaskToSedova.toString()
-        day_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
-        day_logan_else_task_textView.text = loganTaskElse.toString()
-        day_vesta_task_textView.text = (vestaTaskWithSalary + vestaTaskWithOutSalary).toString()
-        day_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
-        day_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
-        day_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
-        day_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
-        day_vesta_else_task_textView.text = vestaTaskElse.toString()
-        day_total_task_textView.text = "${totalTaskToPay}(${totalTask})"
-
-        day_expenses_textView.text = (expenseFuel + expenseWash + expenseOther).toString()
-        day_expenses_fuel_textView.text = expenseFuel.toString()
-        day_expenses_wash_textView.text = expenseWash.toString()
-        day_expenses_other_textView.text = expenseOther.toString()
-
-        day_salary_textView.text = salary.toString()
-        day_prepay_textVew.text = prepay.toString()
-        day_holiday_textVew.text = holiday.toString()
     }
 
     private fun deltaODO(): Int = total.eveningODO - total.morningODO
@@ -524,6 +474,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.vestaTaskElse = vestaTaskElse
             DB.getDao().addTotal(total)
             callBackActivity.fragmentPlace(TotalFragment())
+            Snackbar.make(view!!, getString(R.string.total_calc_and_save), Snackbar.LENGTH_SHORT).show()
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.someError), Snackbar.LENGTH_SHORT).show()

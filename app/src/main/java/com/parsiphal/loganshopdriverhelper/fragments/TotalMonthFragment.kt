@@ -11,23 +11,34 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
-import com.parsiphal.loganshopdriverhelper.data.Delivery
+import com.parsiphal.loganshopdriverhelper.data.Cars
 import com.parsiphal.loganshopdriverhelper.data.Total
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_total_month.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.lang.Exception
-import java.util.*
-import kotlin.collections.ArrayList
 
 class TotalMonthFragment : MvpAppCompatFragment() {
 
-    private var items: List<Delivery> = ArrayList()
+    private var totals: List<Total> = ArrayList()
     private lateinit var total: Total
     private var newTotal = true
     private lateinit var callBackActivity: MainView
+    private var totalShifts = 0
+    private var totalMoney = 0
+    private var totalCash = 0
+    private var totalCard = 0
+    private var deliveryValueLogan = 0
+    private var loganMoney = 0
+    private var loganCash = 0
+    private var loganCard = 0
+    private var deliveryValueVesta = 0
+    private var vestaMoney = 0
+    private var vestaCash = 0
+    private var vestaCard = 0
+    private var prepay = 0
+    private var holiday = 0
     private var salary = 0
     private var teaMoney = 0
     private var deltaODO = 0
@@ -77,6 +88,18 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var vestaTaskToSedova = 0
     private var vestaTaskToHimikov = 0
     private var vestaTaskElse = 0
+    private var largusExpenseFuel = 0
+    private var largusExpenseWash = 0
+    private var largusExpenseOther = 0
+    private var largusExpenseTotal = 0
+    private var sanderoExpenseFuel = 0
+    private var sanderoExpenseWash = 0
+    private var sanderoExpenseOther = 0
+    private var sanderoExpenseTotal = 0
+    private var xRayExpenseFuel = 0
+    private var xRayExpenseWash = 0
+    private var xRayExpenseOther = 0
+    private var xRayExpenseTotal = 0
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -106,14 +129,35 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         if (newTotal) {
             val search =
                 "${prefs.date!![2]}${prefs.date!![3]}${prefs.date!![4]}${prefs.date!![5]}${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
-            getData(search)
-            calculateSum(search)
-            setData()
-            deltaODO(search)
+            val data = GlobalScope.async {
+                getData(search)
+                calculateSum()
+                calculateExpences()
+            }
+            MainScope().launch {
+                data.await()
+                setData()
+                placeExpenses()
+                delay(1000)
+//                month_progress.visibility = View.GONE
+//                month_data.visibility = View.VISIBLE
+                saveData()
+            }
             month_share.visibility = View.GONE
         } else {
+            val search = "${total.date[3]}${total.date[4]}"
+            val data = GlobalScope.async {
+                getData(search)
+                calculateExpences()
+            }
+            MainScope().launch {
+                data.await()
+                placeData()
+                placeExpenses()
+                month_progress.visibility = View.GONE
+                month_data.visibility = View.VISIBLE
+            }
             month_write.visibility = View.GONE
-            placeData()
         }
         month_write.setOnClickListener {
             saveData()
@@ -123,31 +167,64 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         }
     }
 
-    private fun getData(search: String) = GlobalScope.launch {
-        items = DB.getDao().getDeliveriesByMonth("%$search%")
+    private fun getData(search: String) {
+        totals = DB.getDao().getTotalsByMonth("%$search%")
     }
 
     private fun setData() {
-        Thread.sleep(1000)
         month_month.text = "${prefs.date!![3]}${prefs.date!![4]}"
         month_year.text = "${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
         month_family_textView.text = prefs.family
-        month_total_shifts_value_textView.text = totalShifts()
-        month_total_money_textView.text = totalMoney()
-        month_total_cash_textView.text = totalCash()
-        month_total_card_textView.text = totalCard()
-        month_total_delivery_value_logan_textView.text = totalDeliveryLogan()
-        month_logan_money_textView.text = loganMoney()
-        month_logan_cash_textView.text = loganCash()
-        month_logan_card_textView.text = loganCard()
-        month_total_delivery_value_vesta_textView.text = totalDeliveryVesta()
-        month_vesta_money_textView.text = vestaMoney()
-        month_vesta_cash_textView.text = vestaCash()
-        month_vesta_card_textView.text = vestaCard()
-        month_prepay_textView.text = prepay()
-        month_holiday_pay_textView.text = holiday()
+        month_total_shifts_value_textView.text = totalShifts.toString()
+        month_total_money_textView.text = totalMoney.toString()
+        month_total_cash_textView.text = totalCash.toString()
+        month_total_card_textView.text = totalCard.toString()
+        month_total_delivery_value_logan_textView.text = deliveryValueLogan.toString()
+        month_logan_money_textView.text = loganMoney.toString()
+        month_logan_cash_textView.text = loganCash.toString()
+        month_logan_card_textView.text = loganCard.toString()
+        month_total_delivery_value_vesta_textView.text = deliveryValueVesta.toString()
+        month_vesta_money_textView.text = vestaMoney.toString()
+        month_vesta_cash_textView.text = vestaCash.toString()
+        month_vesta_card_textView.text = vestaCard.toString()
+        month_prepay_textView.text = prepay.toString()
+        month_holiday_pay_textView.text = holiday.toString()
+
+        month_largus_count_textView.text = largusShifts.toString()
+        month_sandero_count_textView.text = sanderoShifts.toString()
+        month_xray_count_textView.text = xrayShifts.toString()
+        month_total_delivery_value_textView.text = totalDeliveries.toString()
+        month_logan_move_textView.text = loganMove.toString()
+        month_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
+        month_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
+        month_logan_sedova_move_textView.text = loganMoveToSedova.toString()
+        month_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
+        month_vesta_move_textView.text = vestaMove.toString()
+        month_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
+        month_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
+        month_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
+        month_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
+        month_total_move_textView.text = "${totalMoveWithSalary}(${totalMove})"
+        month_logan_task_textView.text = loganTask.toString()
+        month_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
+        month_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
+        month_logan_sedova_task_textView.text = loganTaskToSedova.toString()
+        month_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
+        month_logan_else_task_textView.text = loganTaskElse.toString()
+        month_vesta_task_textView.text = vestaTask.toString()
+        month_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
+        month_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
+        month_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
+        month_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
+        month_vesta_else_task_textView.text = vestaTaskElse.toString()
+        month_total_task_textView.text = "${totalTaskWithSalary}(${totalTask})"
+        month_salary_textView.text = salary.toString()
+        month_tea_textView.text = teaMoney.toString()
+
         try {
-            month_mid_salary_textView.text = "${salary / totalShifts().toInt()}"
+            month_mid_salary_textView.text = if (totalShifts != 0) {
+                "${salary / totalShifts}"
+            } else "0"
             month_to_recieve_textView.text =
                 "${salary - month_prepay_textView.text.toString().toInt() - month_holiday_pay_textView.text.toString().toInt()}"
         } catch (e: Exception) {
@@ -157,169 +234,28 @@ class TotalMonthFragment : MvpAppCompatFragment() {
 
     }
 
-    private fun totalShifts(): String {
-        val cal = Calendar.getInstance()
-        val year = cal.get(Calendar.YEAR)
-        val month = cal.get(Calendar.MONTH)
-        var dayOfMonth = 1
-        var myMonth = (month + 1).toString()
-        var myDay: String
-        if (month < 9) {
-            myMonth = "0$myMonth"
-        }
-        var totalShifts = 0
-        var dayCount = 0
-        do {
-            myDay = if (dayOfMonth < 10) {
-                "0$dayOfMonth"
-            } else {
-                dayOfMonth.toString()
-            }
-            val date = "$myDay/$myMonth/$year"
-            for (position in items) {
-                if (position.deliveryDate == date) {
-                    dayCount++
-                }
-            }
-            if (dayCount != 0) {
-                totalShifts++
-                dayCount = 0
-            }
-            dayOfMonth++
-        } while (dayOfMonth < 32)
-        return totalShifts.toString()
-    }
-
-    private fun totalMoney(): String {
-        var totalMoney = 0
-        for (position in items) {
-            if (position.workType == 0) {
-                totalMoney += position.cost
-            }
-        }
-        return totalMoney.toString()
-    }
-
-    private fun totalCash(): String {
-        var totalCash = 0
-        for (position in items) {
-            if (position.workType == 0 && position.payType == 0)
-                totalCash += position.cost
-        }
-        return totalCash.toString()
-    }
-
-    private fun totalCard(): String {
-        var totalCard = 0
-        for (position in items) {
-            if (position.workType == 0 && position.payType == 1)
-                totalCard += position.cost
-        }
-        return totalCard.toString()
-    }
-
-    private fun totalDeliveryLogan(): String {
-        var totalDeliveryLogan = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 0) {
-                totalDeliveryLogan += 1
-            }
-        }
-        return totalDeliveryLogan.toString()
-    }
-
-    private fun loganMoney(): String {
-        var loganMoney = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 0)
-                loganMoney += position.cost
-        }
-        return loganMoney.toString()
-    }
-
-    private fun loganCash(): String {
-        var loganCash = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 0 && position.payType == 0)
-                loganCash += position.cost
-        }
-        return loganCash.toString()
-    }
-
-    private fun loganCard(): String {
-        var loganCard = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 0 && position.payType == 1)
-                loganCard += position.cost
-        }
-        return loganCard.toString()
-    }
-
-    private fun totalDeliveryVesta(): String {
-        var totalDeliveryVesta = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 1) {
-                totalDeliveryVesta += 1
-            }
-        }
-        return totalDeliveryVesta.toString()
-    }
-
-    private fun vestaMoney(): String {
-        var vestaMoney = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 1)
-                vestaMoney += position.cost
-        }
-        return vestaMoney.toString()
-    }
-
-    private fun vestaCash(): String {
-        var vestaCash = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 1 && position.payType == 0)
-                vestaCash += position.cost
-        }
-        return vestaCash.toString()
-    }
-
-    private fun vestaCard(): String {
-        var vestaCard = 0
-        for (position in items) {
-            if (position.workType == 0 && position.deliveryType == 1 && position.payType == 1)
-                vestaCard += position.cost
-        }
-        return vestaCard.toString()
-    }
-
-    private fun prepay(): String {
-        var prepay = 0
-        for (position in items) {
-            if (position.workType == 5 && position.deliveryType == 0) {
-                prepay += position.cost
-            }
-        }
-        return prepay.toString()
-    }
-
-    private fun holiday(): String {
-        var holiday = 0
-        for (position in items) {
-            if (position.workType == 5 && position.deliveryType == 1) {
-                holiday += position.cost
-            }
-        }
-        return holiday.toString()
-    }
-
-    private fun calculateSum(search: String) = GlobalScope.launch {
-        val totals = DB.getDao().getTotalsByMonth("%$search%")
+    private fun calculateSum() {
+        totalShifts = totals.size
         for (position in totals) {
             when {
                 position.carIndex == 0 -> largusShifts++
                 position.carIndex == 1 -> sanderoShifts++
                 position.carIndex == 2 -> xrayShifts++
             }
+            totalMoney += position.totalMoney
+            totalCash += position.totalCash
+            totalCard += position.totalCard
+            deliveryValueLogan += position.loganDeliveryValue
+            loganMoney += position.loganMoney
+            loganCash += position.loganCash
+            loganCard += position.loganCard
+            deliveryValueVesta += position.vestaDeliveryValue
+            vestaMoney += position.vestaMoney
+            vestaCash += position.vestaCash
+            vestaCard += position.vestaCard
+            prepay += position.prepay
+            holiday += position.holidayPay
+            deltaODO += position.deltaODO
             salary += position.salary
             teaMoney += position.expenses
             totalDeliveries += position.totalDeliveries
@@ -366,43 +302,46 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             vestaTaskToHimikov += position.vestaTaskToHimikov
             vestaTaskElse += position.vestaTaskElse
         }
-        month_largus_count_textView.text = largusShifts.toString()
-        month_sandero_count_textView.text = sanderoShifts.toString()
-        month_xray_count_textView.text = xrayShifts.toString()
-        month_total_delivery_value_textView.text = totalDeliveries.toString()
-        month_logan_move_textView.text = loganMove.toString()
-        month_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
-        month_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
-        month_logan_sedova_move_textView.text = loganMoveToSedova.toString()
-        month_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
-        month_vesta_move_textView.text = vestaMove.toString()
-        month_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
-        month_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
-        month_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
-        month_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
-        month_total_move_textView.text = "${totalMoveWithSalary}(${totalMove})"
-        month_logan_task_textView.text = loganTask.toString()
-        month_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
-        month_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
-        month_logan_sedova_task_textView.text = loganTaskToSedova.toString()
-        month_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
-        month_logan_else_task_textView.text = loganTaskElse.toString()
-        month_vesta_task_textView.text = vestaTask.toString()
-        month_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
-        month_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
-        month_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
-        month_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
-        month_vesta_else_task_textView.text = vestaTaskElse.toString()
-        month_total_task_textView.text = "${totalTaskWithSalary}(${totalTask})"
-        month_salary_textView.text = salary.toString()
-        month_tea_textView.text = teaMoney.toString()
     }
 
-    private fun deltaODO(search: String) = GlobalScope.launch {
-        val totals = DB.getDao().getTotalsByMonth("%$search%")
+    private fun calculateExpences() {
         for (position in totals) {
-            deltaODO += position.deltaODO
+            when {
+                position.carIndex == Cars.Largus.i -> {
+                    largusExpenseFuel += position.expensesFuel
+                    largusExpenseWash += position.expensesWash
+                    largusExpenseOther += position.expensesOther
+                }
+                position.carIndex == Cars.Sandero.i -> {
+                    sanderoExpenseFuel += position.expensesFuel
+                    sanderoExpenseWash += position.expensesWash
+                    sanderoExpenseOther += position.expensesOther
+                }
+                position.carIndex == Cars.XRay.i -> {
+                    xRayExpenseFuel += position.expensesFuel
+                    xRayExpenseWash += position.expensesWash
+                    xRayExpenseOther += position.expensesOther
+                }
+            }
         }
+        largusExpenseTotal = largusExpenseFuel + largusExpenseWash + largusExpenseOther
+        sanderoExpenseTotal = sanderoExpenseFuel + sanderoExpenseWash + sanderoExpenseOther
+        xRayExpenseTotal = xRayExpenseFuel + xRayExpenseWash + xRayExpenseOther
+    }
+
+    private fun placeExpenses() {
+        month_largus_total_expenses_textView.text = largusExpenseTotal.toString()
+        month_largus_expenses_fuel_textView.text = largusExpenseFuel.toString()
+        month_largus_expenses_wash_textView.text = largusExpenseWash.toString()
+        month_largus_expenses_other_textView.text = largusExpenseOther.toString()
+        month_sandero_total_expenses_textView.text = sanderoExpenseTotal.toString()
+        month_sandero_expenses_fuel_textView.text = sanderoExpenseFuel.toString()
+        month_sandero_expenses_wash_textView.text = sanderoExpenseWash.toString()
+        month_sandero_expenses_other_textView.text = sanderoExpenseOther.toString()
+        month_xray_total_expenses_textView.text = xRayExpenseTotal.toString()
+        month_xray_expenses_fuel_textView.text = xRayExpenseFuel.toString()
+        month_xray_expenses_wash_textView.text = xRayExpenseWash.toString()
+        month_xray_expenses_other_textView.text = xRayExpenseOther.toString()
     }
 
     private fun saveData() = GlobalScope.launch {
@@ -476,6 +415,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.vestaTaskElse = vestaTaskElse
             DB.getDao().addTotal(total)
             callBackActivity.fragmentPlace(TotalFragment())
+            Snackbar.make(view!!, getString(R.string.total_calc_and_save), Snackbar.LENGTH_SHORT).show()
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.someError), Snackbar.LENGTH_SHORT).show()
@@ -524,7 +464,9 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_cash_textView.text = total.vestaCash.toString()
         month_vesta_card_textView.text = total.vestaCard.toString()
         month_salary_textView.text = total.salary.toString()
-        month_mid_salary_textView.text = "${total.salary / total.totalShifts}"
+        month_mid_salary_textView.text = if (total.totalShifts != 0) {
+            "${total.salary / total.totalShifts}"
+        } else "0"
         month_tea_textView.text = total.expenses.toString()
         month_prepay_textView.text = total.prepay.toString()
         month_holiday_pay_textView.text = total.holidayPay.toString()
@@ -586,6 +528,20 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${month_vesta_else_task_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${month_total_task_textView.text}\n" +
+                "\n" +
+                "${resources.getString(R.string.expenses)}\n" +
+                "   ${resources.getString(R.string.car_largus)} ${month_largus_total_expenses_textView.text}\n" +
+                "${resources.getString(R.string.fuel)}: ${month_largus_expenses_fuel_textView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${month_largus_expenses_wash_textView.text}\n" +
+                "${resources.getString(R.string.other)}: ${month_largus_expenses_other_textView.text}\n" +
+                "   ${resources.getString(R.string.car_sandero)} ${month_sandero_total_expenses_textView.text}\n" +
+                "${resources.getString(R.string.fuel)}: ${month_sandero_expenses_fuel_textView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${month_sandero_expenses_wash_textView.text}\n" +
+                "${resources.getString(R.string.other)}: ${month_sandero_expenses_other_textView.text}\n" +
+                "   ${resources.getString(R.string.car_x_ray)} ${month_xray_total_expenses_textView.text}\n" +
+                "${resources.getString(R.string.fuel)}: ${month_xray_expenses_fuel_textView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${month_xray_expenses_wash_textView.text}\n" +
+                "${resources.getString(R.string.other)}: ${month_xray_expenses_other_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
                 "${resources.getString(R.string.prepay)} ${month_prepay_textView.text}\n" +
