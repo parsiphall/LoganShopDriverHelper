@@ -12,7 +12,7 @@ import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
-import com.parsiphal.loganshopdriverhelper.data.WorkTypes
+import com.parsiphal.loganshopdriverhelper.data.WorkType
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_new_delivery.*
@@ -58,7 +58,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     id: Long
                 ) {
                     when (position) {
-                        WorkTypes.Delivery.i -> {
+                        WorkType.Delivery.i -> {
                             newDelivery_delivery_type.visibility = View.VISIBLE
                             newDelivery_salary_type.visibility = View.GONE
                             newDelivery_pay_type.visibility = View.VISIBLE
@@ -71,7 +71,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             newDelivery_move.visibility = View.GONE
                             newDelivery_isSalary.visibility = View.GONE
                         }
-                        WorkTypes.Move.i -> {
+                        WorkType.Move.i -> {
                             newDelivery_delivery_type.visibility = View.VISIBLE
                             newDelivery_salary_type.visibility = View.GONE
                             newDelivery_pay_type.visibility = View.GONE
@@ -84,7 +84,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             newDelivery_move.visibility = View.VISIBLE
                             newDelivery_isSalary.visibility = View.VISIBLE
                         }
-                        WorkTypes.Task.i -> {
+                        WorkType.Task.i -> {
                             newDelivery_delivery_type.visibility = View.VISIBLE
                             newDelivery_salary_type.visibility = View.GONE
                             newDelivery_pay_type.visibility = View.GONE
@@ -97,7 +97,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             newDelivery_move.visibility = View.VISIBLE
                             newDelivery_isSalary.visibility = View.VISIBLE
                         }
-                        WorkTypes.Expence.i -> {
+                        WorkType.Expense.i -> {
                             newDelivery_delivery_type.visibility = View.GONE
                             newDelivery_salary_type.visibility = View.GONE
                             newDelivery_pay_type.visibility = View.GONE
@@ -110,7 +110,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             newDelivery_move.visibility = View.GONE
                             newDelivery_isSalary.visibility = View.GONE
                         }
-                        WorkTypes.Other.i -> {
+                        WorkType.Other.i -> {
                             newDelivery_delivery_type.visibility = View.GONE
                             newDelivery_salary_type.visibility = View.GONE
                             newDelivery_pay_type.visibility = View.GONE
@@ -123,7 +123,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             newDelivery_move.visibility = View.GONE
                             newDelivery_isSalary.visibility = View.GONE
                         }
-                        WorkTypes.Salary.i -> {
+                        WorkType.Salary.i -> {
                             newDelivery_delivery_type.visibility = View.GONE
                             newDelivery_salary_type.visibility = View.VISIBLE
                             newDelivery_pay_type.visibility = View.GONE
@@ -142,7 +142,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
         newDelivery_write.setOnClickListener {
             try {
                 when (newDelivery_work_type_spinner.selectedItemPosition) {
-                    WorkTypes.Delivery.i -> {
+                    WorkType.Delivery.i -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType =
@@ -158,7 +158,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         }
                         delivery.comment = newDelivery_comment.text.toString()
                     }
-                    WorkTypes.Move.i -> {
+                    WorkType.Move.i -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType =
@@ -197,7 +197,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             }
                         }
                     }
-                    WorkTypes.Task.i -> {
+                    WorkType.Task.i -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType =
@@ -260,7 +260,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             }
                         }
                     }
-                    WorkTypes.Expence.i -> {
+                    WorkType.Expense.i -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.comment = newDelivery_comment.text.toString()
@@ -273,12 +273,12 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                                     "${newDelivery_comment.text}"
                         }
                     }
-                    WorkTypes.Other.i -> {
+                    WorkType.Other.i -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.comment = newDelivery_comment.text.toString()
                     }
-                    WorkTypes.Salary.i -> {
+                    WorkType.Salary.i -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType = newDelivery_salary_type_spinner.selectedItemPosition

@@ -11,10 +11,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
-import com.parsiphal.loganshopdriverhelper.data.Delivery
-import com.parsiphal.loganshopdriverhelper.data.PayType
-import com.parsiphal.loganshopdriverhelper.data.Total
-import com.parsiphal.loganshopdriverhelper.data.WorkTypes
+import com.parsiphal.loganshopdriverhelper.data.*
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_total_day.*
@@ -123,8 +120,6 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 data.await()
                 setData()
                 delay(1000)
-//                day_progress.visibility = View.GONE
-//                day_data.visibility = View.VISIBLE
                 saveData()
             }
             day_share.visibility = View.GONE
@@ -209,184 +204,176 @@ class TotalDayFragment : MvpAppCompatFragment() {
 
     private fun calculateSum() {
         for (position in items) {
-            if (position.workType == WorkTypes.Delivery.i) {
+            if (position.workType == WorkType.Delivery.i) {
+                totalDeliveries++
                 teaMoney += position.expense
-            }
-            if (position.workType == WorkTypes.Delivery.i) {
                 totalMoney += position.cost
             }
-            if (position.workType == WorkTypes.Delivery.i && position.payType == PayType.Cash.i) {
+            if (position.workType == WorkType.Delivery.i && position.payType == PayType.Cash.i) {
                 totalCash += position.cost
             }
-            if (position.workType == 0 && position.payType == 1) {
+            if (position.workType == WorkType.Delivery.i && position.payType == PayType.Card.i) {
                 totalCard += position.cost
             }
-            if (position.workType == 0 && position.deliveryType == 0) {
+            if (position.workType == WorkType.Delivery.i && position.deliveryType == DeliveryType.Logan.i) {
                 deliveryValueLogan += 1
-            }
-            if (position.workType == 0 && position.deliveryType == 0) {
                 loganMoney += position.cost
             }
-            if (position.workType == 0 && position.deliveryType == 0 && position.payType == 0) {
+            if (position.workType == WorkType.Delivery.i && position.deliveryType == DeliveryType.Logan.i && position.payType == PayType.Cash.i) {
                 loganCash += position.cost
             }
-            if (position.workType == 0 && position.deliveryType == 0 && position.payType == 1) {
+            if (position.workType == WorkType.Delivery.i && position.deliveryType == DeliveryType.Logan.i && position.payType == PayType.Card.i) {
                 loganCard += position.cost
             }
-            if (position.workType == 0 && position.deliveryType == 1) {
+            if (position.workType == WorkType.Delivery.i && position.deliveryType == DeliveryType.Vesta.i) {
                 deliveryValueVesta += 1
-            }
-            if (position.workType == 0 && position.deliveryType == 1) {
                 vestaMoney += position.cost
             }
-            if (position.workType == 0 && position.deliveryType == 1 && position.payType == 0) {
+            if (position.workType == WorkType.Delivery.i && position.deliveryType == DeliveryType.Vesta.i && position.payType == PayType.Cash.i) {
                 vestaCash += position.cost
             }
-            if (position.workType == 0 && position.deliveryType == 1 && position.payType == 1) {
+            if (position.workType == WorkType.Delivery.i && position.deliveryType == DeliveryType.Vesta.i && position.payType == PayType.Card.i) {
                 vestaCard += position.cost
             }
-            if (position.workType == 0) {
-                totalDeliveries++
-            }
-            if (position.workType == 1 && position.deliveryType == 0 && position.ifSalary == 1) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.ifSalary == 1) {
                 loganMoveWithSalary++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.ifSalary == 1) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.ifSalary == 1) {
                 vestaMoveWithSalary++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.ifSalary == 1) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.ifSalary == 1) {
                 loganTaskWithSalary++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.ifSalary == 1) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.ifSalary == 1) {
                 vestaTaskWithSalary++
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.ifSalary == 0) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.ifSalary == 0) {
                 loganMoveWithOutSalary++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.ifSalary == 0) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.ifSalary == 0) {
                 vestaMoveWithOutSalary++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.ifSalary == 0) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.ifSalary == 0) {
                 loganTaskWithOutSalary++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.ifSalary == 0) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.ifSalary == 0) {
                 vestaTaskWithOutSalary++
             }
-            if (position.workType == 3 && position.expenseType == 0) {
+            if (position.workType == WorkType.Expense.i && position.expenseType == Expenses.Fuel.i) {
                 expenseFuel += position.cost
             }
-            if (position.workType == 3 && position.expenseType == 1) {
+            if (position.workType == WorkType.Expense.i && position.expenseType == Expenses.Wash.i) {
                 expenseWash += position.cost
             }
-            if (position.workType == 3 && position.expenseType == 2) {
+            if (position.workType == WorkType.Expense.i && position.expenseType == Expenses.Other.i) {
                 expenseOther += position.cost
             }
-            if (position.workType == 5 && position.deliveryType == 0) {
+            if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Prepay.i) {
                 prepay += position.cost
             }
-            if (position.workType == 5 && position.deliveryType == 1) {
+            if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Holiday.i) {
                 holiday += position.cost
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.moveFrom == 0) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Zhukova.i) {
                 loganMoveFromZhukova++
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.moveFrom == 1) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Kulturi.i) {
                 loganMoveFromKulturi++
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.moveFrom == 2) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Sedova.i) {
                 loganMoveFromSedova++
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.moveFrom == 3) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Himikov.i) {
                 loganMoveFromHimikov++
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.moveTo == 0) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Zhukova.i) {
                 loganMoveToZhukova++
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.moveTo == 1) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Kulturi.i) {
                 loganMoveToKulturi++
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.moveTo == 2) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Sedova.i) {
                 loganMoveToSedova++
             }
-            if (position.workType == 1 && position.deliveryType == 0 && position.moveTo == 3) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Himikov.i) {
                 loganMoveToHimikov++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.moveFrom == 0) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Zhukova.i) {
                 vestaMoveFromZhukova++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.moveFrom == 1) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Kulturi.i) {
                 vestaMoveFromKulturi++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.moveFrom == 2) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Sedova.i) {
                 vestaMoveFromSedova++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.moveFrom == 3) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Himikov.i) {
                 vestaMoveFromHimikov++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.moveTo == 0) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Zhukova.i) {
                 vestaMoveToZhukova++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.moveTo == 1) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Kulturi.i) {
                 vestaMoveToKulturi++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.moveTo == 2) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Sedova.i) {
                 vestaMoveToSedova++
             }
-            if (position.workType == 1 && position.deliveryType == 1 && position.moveTo == 3) {
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Himikov.i) {
                 vestaMoveToHimikov++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveFrom == 0) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Zhukova.i) {
                 loganTaskFromZhukova++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveFrom == 1) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Kulturi.i) {
                 loganTaskFromKulturi++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveFrom == 2) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Sedova.i) {
                 loganTaskFromSedova++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveFrom == 3) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Himikov.i) {
                 loganTaskFromHimikov++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveTo == 0) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Zhukova.i) {
                 loganTaskToZhukova++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveTo == 1) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Kulturi.i) {
                 loganTaskToKulturi++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveTo == 2) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Sedova.i) {
                 loganTaskToSedova++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveTo == 3) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Himikov.i) {
                 loganTaskToHimikov++
             }
-            if (position.workType == 2 && position.deliveryType == 0 && position.moveTo == 4) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Other.i) {
                 loganTaskElse++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveFrom == 0) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Zhukova.i) {
                 vestaTaskFromZhukova++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveFrom == 1) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Kulturi.i) {
                 vestaTaskFromKulturi++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveFrom == 2) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Sedova.i) {
                 vestaTaskFromSedova++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveFrom == 3) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Himikov.i) {
                 vestaTaskFromHimikov++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveTo == 0) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Zhukova.i) {
                 vestaTaskToZhukova++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveTo == 1) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Kulturi.i) {
                 vestaTaskToKulturi++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveTo == 2) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Sedova.i) {
                 vestaTaskToSedova++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveTo == 3) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Himikov.i) {
                 vestaTaskToHimikov++
             }
-            if (position.workType == 2 && position.deliveryType == 1 && position.moveTo == 4) {
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Other.i) {
                 vestaTaskElse++
             }
         }
@@ -474,7 +461,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.vestaTaskElse = vestaTaskElse
             DB.getDao().addTotal(total)
             callBackActivity.fragmentPlace(TotalFragment())
-            Snackbar.make(view!!, getString(R.string.total_calc_and_save), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view!!, getString(R.string.total_calc_and_save), Snackbar.LENGTH_SHORT)
+                .show()
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.someError), Snackbar.LENGTH_SHORT).show()

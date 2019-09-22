@@ -15,10 +15,7 @@ import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapter
 import kotlinx.android.synthetic.main.fragment_delivery.*
 import kotlinx.android.synthetic.main.fragment_delivery.view.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -47,21 +44,20 @@ class DeliveryFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getData()
+        val data = GlobalScope.async {
+            items = DB.getDao().getAllDeliveries()
+            Collections.reverse(items)
+        }
+        MainScope().launch {
+            data.await()
+            adapter.dataChanged(items)
+        }
         delivery_fab.setOnClickListener {
             callBackActivity.fragmentPlace(NewDeliveryFragment())
         }
         delivery_fab.setOnLongClickListener {
             callBackActivity.fragmentPlace(MaintananceFragment())
             return@setOnLongClickListener true
-        }
-    }
-
-    private fun getData() = GlobalScope.launch {
-        items = DB.getDao().getAllDeliveries()
-        Collections.reverse(items)
-        MainScope().launch {
-            adapter.dataChanged(items)
         }
     }
 

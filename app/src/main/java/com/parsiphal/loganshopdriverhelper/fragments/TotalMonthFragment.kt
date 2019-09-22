@@ -139,8 +139,6 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 setData()
                 placeExpenses()
                 delay(1000)
-//                month_progress.visibility = View.GONE
-//                month_data.visibility = View.VISIBLE
                 saveData()
             }
             month_share.visibility = View.GONE
@@ -238,9 +236,9 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         totalShifts = totals.size
         for (position in totals) {
             when {
-                position.carIndex == 0 -> largusShifts++
-                position.carIndex == 1 -> sanderoShifts++
-                position.carIndex == 2 -> xrayShifts++
+                position.carIndex == Cars.Largus.i -> largusShifts++
+                position.carIndex == Cars.Sandero.i -> sanderoShifts++
+                position.carIndex == Cars.XRay.i -> xrayShifts++
             }
             totalMoney += position.totalMoney
             totalCash += position.totalCash

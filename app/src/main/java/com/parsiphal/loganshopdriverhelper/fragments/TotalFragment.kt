@@ -17,10 +17,7 @@ import com.parsiphal.loganshopdriverhelper.recycler.TotalViewAdapter
 import com.parsiphal.loganshopdriverhelper.recycler.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_total.*
 import kotlinx.android.synthetic.main.fragment_total.view.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -49,7 +46,14 @@ class TotalFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getData()
+        val data = GlobalScope.async {
+            items = DB.getDao().getAllTotals()
+            Collections.reverse(items)
+        }
+        MainScope().launch {
+            data.await()
+            adapter.dataChanged(items)
+        }
         total_recycler.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
                 val bundle = Bundle()
@@ -68,14 +72,6 @@ class TotalFragment : MvpAppCompatFragment() {
         }
         total_month_button.setOnClickListener {
             callBackActivity.fragmentPlace(TotalMonthFragment())
-        }
-    }
-
-    private fun getData() = GlobalScope.launch {
-        items = DB.getDao().getAllTotals()
-        Collections.reverse(items)
-        MainScope().launch {
-            adapter.dataChanged(items)
         }
     }
 }
