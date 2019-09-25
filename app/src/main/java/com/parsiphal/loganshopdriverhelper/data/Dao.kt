@@ -27,6 +27,9 @@ interface Dao {
     @Query("SELECT * FROM Total WHERE date LIKE :month AND dayOrMonth LIKE 0")
     fun getTotalsByMonth(month: String): List<Total>
 
+    @Query("SELECT * FROM Total WHERE date LIKE :year AND dayOrMonth LIKE 1")
+    fun getMonthTotals(year: String): List<Total>
+
     @Delete
     fun deleteDelivery(delivery: Delivery)
 

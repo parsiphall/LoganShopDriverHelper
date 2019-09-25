@@ -59,10 +59,10 @@ class TotalFragment : MvpAppCompatFragment() {
                 val bundle = Bundle()
                 bundle.putSerializable("ITEM", items[position])
                 callBackActivity.fragmentPlaceWithArgs(
-                    if (items[position].dayOrMonth == 0) {
-                        TotalDayFragment()
-                    } else {
-                        TotalMonthFragment()
+                    when {
+                        items[position].dayOrMonth == 0 -> TotalDayFragment()
+                        items[position].dayOrMonth == 1 -> TotalMonthFragment()
+                        else -> TotalYearFragment()
                     }, bundle
                 )
             }
@@ -72,6 +72,10 @@ class TotalFragment : MvpAppCompatFragment() {
         }
         total_month_button.setOnClickListener {
             callBackActivity.fragmentPlace(TotalMonthFragment())
+        }
+        total_month_button.setOnLongClickListener {
+            callBackActivity.fragmentPlace((TotalYearFragment()))
+            return@setOnLongClickListener true
         }
     }
 }

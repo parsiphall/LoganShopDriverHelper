@@ -32,22 +32,22 @@ class TotalViewAdapter(
 
     override fun onBindViewHolder(holder: TotalViewHolder, position: Int) {
         holder.dayOrMonth.text =
-            if (items[position].dayOrMonth == 0) {
-                "D"
-            } else {
-                "M"
+            when {
+                items[position].dayOrMonth == 0 -> "D"
+                items[position].dayOrMonth == 1 -> "M"
+                else -> "Y"
             }
         holder.dayOrMonth.setBackgroundColor(
-            if (items[position].dayOrMonth == 0) {
-                Color.GREEN
-            } else {
-                Color.CYAN
+            when {
+                items[position].dayOrMonth == 0 -> Color.GREEN
+                items[position].dayOrMonth == 1 -> Color.CYAN
+                else -> Color.RED
             }
         )
-        holder.date.text = if (items[position].dayOrMonth == 0) {
-            items[position].date
-        } else {
-            "${items[position].date[3]}${items[position].date[4]}"
+        holder.date.text = when {
+            items[position].dayOrMonth == 0 -> items[position].date
+            items[position].dayOrMonth == 1 -> "${items[position].date[3]}${items[position].date[4]}${items[position].date[5]}${items[position].date[6]}${items[position].date[7]}${items[position].date[8]}${items[position].date[9]}"
+            else -> "${items[position].date[6]}${items[position].date[7]}${items[position].date[8]}${items[position].date[9]}"
         }
         holder.salary.text = items[position].salary.toString()
         holder.distance.text = items[position].deltaODO.toString()
