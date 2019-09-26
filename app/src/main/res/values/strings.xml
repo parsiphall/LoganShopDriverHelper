@@ -83,6 +83,7 @@
     <string name="shop_himikov">Химиков:</string>
     <string name="shop_zhukova">Жукова:</string>
     <string name="total_calc_and_save">Отчёт сформирован и записан</string>
+    <string name="no_data">Нет записей</string>
 
     <string-array name="region">
         <item>Север</item>
