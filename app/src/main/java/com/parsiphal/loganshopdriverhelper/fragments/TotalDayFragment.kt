@@ -120,7 +120,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 data.await()
                 setData()
                 delay(1000)
-                saveData()
+//                saveData()
+                day_progress.visibility = View.GONE
+                day_data.visibility = View.VISIBLE
             }
             day_share.visibility = View.GONE
         } else {

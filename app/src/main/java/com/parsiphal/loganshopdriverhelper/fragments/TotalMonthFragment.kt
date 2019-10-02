@@ -139,7 +139,9 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 setData()
                 placeExpenses()
                 delay(1000)
-                saveData()
+//                saveData()
+                month_progress.visibility = View.GONE
+                month_data.visibility = View.VISIBLE
             }
             month_share.visibility = View.GONE
         } else {

@@ -139,6 +139,8 @@ class TotalYearFragment : MvpAppCompatFragment() {
                 placeExpenses()
                 delay(1000)
                 saveData()
+                year_progress.visibility = View.GONE
+                year_data.visibility = View.VISIBLE
             }
         } else {
             val search = "${total.date[3]}${total.date[4]}"
