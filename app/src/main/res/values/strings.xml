@@ -107,6 +107,7 @@
     <string-array name="salary_type">
         <item>Аванс</item>
         <item>Отпускные</item>
+        <item>Штраф</item>
     </string-array>
     <string-array name="delivery_type">
         <item>Logan</item>

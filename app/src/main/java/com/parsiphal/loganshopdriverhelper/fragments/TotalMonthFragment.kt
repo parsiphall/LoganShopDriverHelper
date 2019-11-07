@@ -189,7 +189,6 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_card_textView.text = vestaCard.toString()
         month_prepay_textView.text = prepay.toString()
         month_holiday_pay_textView.text = holiday.toString()
-
         month_largus_count_textView.text = largusShifts.toString()
         month_sandero_count_textView.text = sanderoShifts.toString()
         month_xray_count_textView.text = xrayShifts.toString()
@@ -226,7 +225,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${salary / totalShifts}"
             } else "0"
             month_to_recieve_textView.text =
-                "${salary - month_prepay_textView.text.toString().toInt() - month_holiday_pay_textView.text.toString().toInt()}"
+                "${salary - month_prepay_textView.text.toString().toInt()}"
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.error), Snackbar.LENGTH_SHORT).show()
@@ -470,7 +469,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_tea_textView.text = total.expenses.toString()
         month_prepay_textView.text = total.prepay.toString()
         month_holiday_pay_textView.text = total.holidayPay.toString()
-        month_to_recieve_textView.text = "${total.salary - total.prepay - total.holidayPay}"
+        month_to_recieve_textView.text = "${total.salary - total.prepay}"
         month_largus_count_textView.text = total.largusShifts.toString()
         month_sandero_count_textView.text = total.sanderoShifts.toString()
         month_xray_count_textView.text = total.xrayShifts.toString()

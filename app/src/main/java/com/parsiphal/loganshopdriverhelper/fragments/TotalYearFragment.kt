@@ -126,10 +126,9 @@ class TotalYearFragment : MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (newTotal) {
-            val search =
-                "${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
+//            val search = "${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
             val data = GlobalScope.async {
-                getData(search)
+                getData()
                 calculateSum()
                 calculateExpences()
             }
@@ -143,9 +142,9 @@ class TotalYearFragment : MvpAppCompatFragment() {
                 year_data.visibility = View.VISIBLE
             }
         } else {
-            val search = "${total.date[3]}${total.date[4]}"
+//            val search = "${total.date[3]}${total.date[4]}"
             val data = GlobalScope.async {
-                getData(search)
+                getData()
                 calculateExpences()
             }
             MainScope().launch {
@@ -158,9 +157,9 @@ class TotalYearFragment : MvpAppCompatFragment() {
         }
     }
 
-    private fun getData(search: String) {
-        totalsMonth = DB.getDao().getMonthTotals("%$search%")
-        totalsDays = DB.getDao().getTotalsByMonth("%$search%")
+    private fun getData() {
+        totalsMonth = DB.getDao().getAllMonthlyTotals()
+        totalsDays = DB.getDao().getAllDailyTotals()
     }
 
     private fun setData() {

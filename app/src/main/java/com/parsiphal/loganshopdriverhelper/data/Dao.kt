@@ -18,6 +18,12 @@ interface Dao {
     @Query("SELECT * FROM Total")
     fun getAllTotals(): List<Total>
 
+    @Query("SELECT * FROM Total WHERE dayOrMonth LIKE 0")
+    fun getAllDailyTotals(): List<Total>
+
+    @Query("SELECT * FROM Total WHERE dayOrMonth LIKE 1")
+    fun getAllMonthlyTotals(): List<Total>
+
     @Query("SELECT * FROM Delivery WHERE deliveryDate LIKE :date")
     fun getDeliveriesByDate(date: String): List<Delivery>
 
