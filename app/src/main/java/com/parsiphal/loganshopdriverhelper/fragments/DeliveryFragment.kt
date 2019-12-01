@@ -3,12 +3,10 @@ package com.parsiphal.loganshopdriverhelper.fragments
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
@@ -18,7 +16,9 @@ import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapter
 import kotlinx.android.synthetic.main.fragment_delivery.*
 import kotlinx.android.synthetic.main.fragment_delivery.view.*
 import kotlinx.coroutines.*
+import moxy.MvpAppCompatFragment
 import java.util.*
+import java.util.Collections.reverse
 import kotlin.collections.ArrayList
 
 @ExperimentalCoroutinesApi
@@ -29,7 +29,7 @@ class DeliveryFragment : MvpAppCompatFragment() {
     private lateinit var adapter: DeliveryViewAdapter
     private var searchDate: String = ""
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         callBackActivity = context as MainView
     }
@@ -41,7 +41,8 @@ class DeliveryFragment : MvpAppCompatFragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_delivery, container, false)
         adapter = DeliveryViewAdapter(items, context!!)
-        root.delivery_recycler.layoutManager = LinearLayoutManager(context)
+        root.delivery_recycler.layoutManager =
+            LinearLayoutManager(context)
         root.delivery_recycler.adapter = adapter
         return root
     }
@@ -64,7 +65,7 @@ class DeliveryFragment : MvpAppCompatFragment() {
     private fun getData(search: String) {
         val data = GlobalScope.async {
             items = DB.getDao().getDeliveriesByDate(search)
-            Collections.reverse(items)
+            reverse(items)
         }
         MainScope().launch {
             data.await()

@@ -3,12 +3,10 @@ package com.parsiphal.loganshopdriverhelper.fragments
 
 import android.os.Bundle
 import android.os.Environment
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.DB_NAME
 import com.parsiphal.loganshopdriverhelper.DB_SHM
 import com.parsiphal.loganshopdriverhelper.DB_WAL
@@ -19,6 +17,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import moxy.MvpAppCompatFragment
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

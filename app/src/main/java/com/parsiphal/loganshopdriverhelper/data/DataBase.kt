@@ -1,7 +1,7 @@
 package com.parsiphal.loganshopdriverhelper.data
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 
 @Database(entities = [Delivery::class, Total::class], version = 10)
 abstract class DataBase : RoomDatabase() {

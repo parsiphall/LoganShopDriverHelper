@@ -2,8 +2,8 @@ package com.parsiphal.loganshopdriverhelper.recycler
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
@@ -13,7 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Collections.reverse
 
 @ExperimentalCoroutinesApi
 class TotalViewAdapter(
@@ -46,8 +46,11 @@ class TotalViewAdapter(
         )
         holder.date.text = when {
             items[position].dayOrMonth == 0 -> items[position].date
-            items[position].dayOrMonth == 1 -> "${items[position].date[3]}${items[position].date[4]}${items[position].date[5]}${items[position].date[6]}${items[position].date[7]}${items[position].date[8]}${items[position].date[9]}"
-            else -> "${items[position].date[6]}${items[position].date[7]}${items[position].date[8]}${items[position].date[9]}"
+            items[position].dayOrMonth == 1 -> "${items[position].date[3]}${items[position].date[4]}" +
+                    "${items[position].date[5]}${items[position].date[6]}${items[position].date[7]}" +
+                    "${items[position].date[8]}${items[position].date[9]}"
+            else -> "${items[position].date[6]}${items[position].date[7]}" +
+                    "${items[position].date[8]}${items[position].date[9]}"
         }
         holder.salary.text = items[position].salary.toString()
         holder.distance.text = items[position].deltaODO.toString()
@@ -74,7 +77,7 @@ class TotalViewAdapter(
     private fun delete(position: Int) = GlobalScope.launch {
         DB.getDao().deleteTotal(items[position])
         items = DB.getDao().getAllTotals()
-        Collections.reverse(items)
+        reverse(items)
         MainScope().launch {
             notifyDataSetChanged()
         }

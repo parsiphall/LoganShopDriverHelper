@@ -2,18 +2,18 @@ package com.parsiphal.loganshopdriverhelper.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
-import com.arellomobile.mvp.MvpAppCompatFragment
 
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Cars
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_shift.*
+import moxy.MvpAppCompatFragment
 import java.lang.Exception
 import java.util.*
 

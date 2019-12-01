@@ -2,12 +2,11 @@ package com.parsiphal.loganshopdriverhelper.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
@@ -19,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_new_delivery.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import moxy.MvpAppCompatFragment
 
 @ExperimentalCoroutinesApi
 class NewDeliveryFragment : MvpAppCompatFragment() {
@@ -26,7 +26,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
     private lateinit var delivery: Delivery
     private lateinit var callBackActivity: MainView
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         callBackActivity = context as MainView
     }

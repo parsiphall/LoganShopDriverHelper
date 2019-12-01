@@ -2,11 +2,10 @@ package com.parsiphal.loganshopdriverhelper.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
@@ -18,7 +17,8 @@ import com.parsiphal.loganshopdriverhelper.recycler.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_total.*
 import kotlinx.android.synthetic.main.fragment_total.view.*
 import kotlinx.coroutines.*
-import java.util.*
+import moxy.MvpAppCompatFragment
+import java.util.Collections.reverse
 import kotlin.collections.ArrayList
 
 @ExperimentalCoroutinesApi
@@ -28,7 +28,7 @@ class TotalFragment : MvpAppCompatFragment() {
     private var items: List<Total> = ArrayList()
     private lateinit var adapter: TotalViewAdapter
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         callBackActivity = context as MainView
     }
@@ -39,7 +39,8 @@ class TotalFragment : MvpAppCompatFragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_total, container, false)
         adapter = TotalViewAdapter(items, context!!)
-        root.total_recycler.layoutManager = LinearLayoutManager(context)
+        root.total_recycler.layoutManager =
+            LinearLayoutManager(context)
         root.total_recycler.adapter = adapter
         return root
     }
@@ -48,7 +49,7 @@ class TotalFragment : MvpAppCompatFragment() {
         super.onViewCreated(view, savedInstanceState)
         val data = GlobalScope.async {
             items = DB.getDao().getAllTotals()
-            Collections.reverse(items)
+            reverse(items)
         }
         MainScope().launch {
             data.await()
@@ -59,22 +60,28 @@ class TotalFragment : MvpAppCompatFragment() {
                 val bundle = Bundle()
                 bundle.putSerializable("ITEM", items[position])
                 callBackActivity.fragmentPlaceWithArgs(
-                    when {
-                        items[position].dayOrMonth == 0 -> TotalDayFragment()
-                        items[position].dayOrMonth == 1 -> TotalMonthFragment()
+                    when (items[position].dayOrMonth) {
+                        0 -> TotalDayFragment()
+                        1 -> TotalMonthFragment()
                         else -> TotalYearFragment()
                     }, bundle
                 )
             }
         })
         total_day_button.setOnClickListener {
+            callBackActivity.showAd()
             callBackActivity.fragmentPlace(TotalDayFragment())
+            callBackActivity.prepareAd()
         }
         total_month_button.setOnClickListener {
+            callBackActivity.showAd()
             callBackActivity.fragmentPlace(TotalMonthFragment())
+            callBackActivity.prepareAd()
         }
         total_month_button.setOnLongClickListener {
+            callBackActivity.showAd()
             callBackActivity.fragmentPlace((TotalYearFragment()))
+            callBackActivity.prepareAd()
             return@setOnLongClickListener true
         }
     }

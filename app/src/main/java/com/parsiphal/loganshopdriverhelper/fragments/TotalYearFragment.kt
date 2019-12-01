@@ -2,11 +2,10 @@ package com.parsiphal.loganshopdriverhelper.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Cars
@@ -15,6 +14,7 @@ import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_total_year.*
 import kotlinx.coroutines.*
+import moxy.MvpAppCompatFragment
 
 
 class TotalYearFragment : MvpAppCompatFragment() {
@@ -100,7 +100,7 @@ class TotalYearFragment : MvpAppCompatFragment() {
     private var xRayExpenseOther = 0
     private var xRayExpenseTotal = 0
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         callBackActivity = context as MainView
     }

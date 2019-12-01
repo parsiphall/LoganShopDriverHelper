@@ -1,6 +1,6 @@
 package com.parsiphal.loganshopdriverhelper.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.total_item.view.*
 
