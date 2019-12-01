@@ -98,8 +98,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun prepareAd() {
         mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = "ca-app-pub-1794452166316673/5993649829"
-//        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+//        mInterstitialAd.adUnitId = "ca-app-pub-1794452166316673/5993649829"
+        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
         mInterstitialAd.loadAd(AdRequest.Builder().build())
     }
 }
