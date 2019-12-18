@@ -3,6 +3,7 @@ package com.parsiphal.loganshopdriverhelper.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class Delivery(
@@ -18,5 +19,6 @@ data class Delivery(
     @ColumnInfo var expenseType: Int = 0,
     @ColumnInfo var ifSalary: Int = 0,
     @ColumnInfo var moveFrom: Int = 0,
-    @ColumnInfo var moveTo: Int = 0
-)
+    @ColumnInfo var moveTo: Int = 0,
+    @ColumnInfo var commentSimple: String = ""
+) : Serializable

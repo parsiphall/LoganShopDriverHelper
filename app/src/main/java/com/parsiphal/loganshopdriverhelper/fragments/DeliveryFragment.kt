@@ -15,6 +15,8 @@ import com.parsiphal.loganshopdriverhelper.data.PayType
 import com.parsiphal.loganshopdriverhelper.data.WorkType
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapter
+import com.parsiphal.loganshopdriverhelper.recycler.OnItemClickListener
+import com.parsiphal.loganshopdriverhelper.recycler.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_delivery.*
 import kotlinx.android.synthetic.main.fragment_delivery.view.*
 import kotlinx.coroutines.*
@@ -63,6 +65,13 @@ class DeliveryFragment : MvpAppCompatFragment() {
         calendar_fab.setOnClickListener {
             datePickerDialog()
         }
+        delivery_recycler.addOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClicked(position: Int, view: View) {
+                val bundle = Bundle()
+                bundle.putSerializable("ITEM", items[position])
+                callBackActivity.fragmentPlaceWithArgs(NewDeliveryFragment(), bundle)
+            }
+        })
     }
 
     private fun placeData(date: String) {

@@ -25,6 +25,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
 
     private lateinit var delivery: Delivery
     private lateinit var callBackActivity: MainView
+    private var newDelivery = true
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,7 +34,13 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        delivery = Delivery()
+        val bundle = this.arguments
+        if (bundle != null) {
+            delivery = bundle.getSerializable("ITEM") as Delivery
+            newDelivery = false
+        } else {
+            delivery = Delivery()
+        }
     }
 
     override fun onCreateView(
@@ -45,6 +52,43 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!newDelivery) {
+            when (delivery.workType) {
+                WorkType.Delivery.i -> {
+                    layoutDelivery()
+                    newDelivery_cost_cash_editText.setText((delivery.expense + delivery.cost).toString())
+                }
+                WorkType.Move.i -> {
+                    layoutMove()
+                }
+                WorkType.Task.i -> {
+                    layoutTask()
+                }
+                WorkType.Expense.i -> {
+                    layoutExpence()
+                }
+                WorkType.Other.i -> {
+                    layoutOther()
+                }
+                WorkType.Salary.i -> {
+                    layoutSalary()
+                }
+            }
+            newDelivery_work_type_spinner.setSelection(delivery.workType)
+            newDelivery_delivery_type_spinner.setSelection(delivery.deliveryType)
+            newDelivery_pay_type_spinner.setSelection(delivery.payType)
+            newDelivery_address.setText(delivery.address)
+            newDelivery_cost_editText.setText(delivery.cost.toString())
+            newDelivery_comment.setText(delivery.commentSimple)
+            newDelivery_expense_spinner.setSelection(delivery.expenseType)
+            newDelivery_isSalary_CheckBox.isChecked = delivery.ifSalary != 1
+            if (delivery.moveFrom != 4) {
+                newDelivery_move_from_spinner.setSelection(delivery.moveFrom)
+            }
+            if (delivery.moveTo != 4) {
+                newDelivery_move_to_spinner.setSelection(delivery.moveTo)
+            }
+        }
         newDelivery_work_type_spinner.onItemSelectedListener =
             (object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -59,82 +103,22 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                 ) {
                     when (position) {
                         WorkType.Delivery.i -> {
-                            newDelivery_delivery_type.visibility = View.VISIBLE
-                            newDelivery_salary_type.visibility = View.GONE
-                            newDelivery_pay_type.visibility = View.VISIBLE
-                            newDelivery_expense.visibility = View.GONE
-                            newDelivery_move_task.visibility = View.GONE
-                            newDelivery_move_task_switch.isChecked = false
-                            newDelivery_address.visibility = View.VISIBLE
-                            newDelivery_cost.visibility = View.VISIBLE
-                            newDelivery_cost_cash.visibility = View.VISIBLE
-                            newDelivery_move.visibility = View.GONE
-                            newDelivery_isSalary.visibility = View.GONE
+                            layoutDelivery()
                         }
                         WorkType.Move.i -> {
-                            newDelivery_delivery_type.visibility = View.VISIBLE
-                            newDelivery_salary_type.visibility = View.GONE
-                            newDelivery_pay_type.visibility = View.GONE
-                            newDelivery_expense.visibility = View.GONE
-                            newDelivery_move_task.visibility = View.GONE
-                            newDelivery_move_task_switch.isChecked = false
-                            newDelivery_address.visibility = View.GONE
-                            newDelivery_cost.visibility = View.GONE
-                            newDelivery_cost_cash.visibility = View.GONE
-                            newDelivery_move.visibility = View.VISIBLE
-                            newDelivery_isSalary.visibility = View.VISIBLE
+                            layoutMove()
                         }
                         WorkType.Task.i -> {
-                            newDelivery_delivery_type.visibility = View.VISIBLE
-                            newDelivery_salary_type.visibility = View.GONE
-                            newDelivery_pay_type.visibility = View.GONE
-                            newDelivery_expense.visibility = View.GONE
-                            newDelivery_move_task.visibility = View.VISIBLE
-                            newDelivery_move_task_switch.isChecked = false
-                            newDelivery_address.visibility = View.GONE
-                            newDelivery_cost.visibility = View.GONE
-                            newDelivery_cost_cash.visibility = View.GONE
-                            newDelivery_move.visibility = View.VISIBLE
-                            newDelivery_isSalary.visibility = View.VISIBLE
+                            layoutTask()
                         }
                         WorkType.Expense.i -> {
-                            newDelivery_delivery_type.visibility = View.GONE
-                            newDelivery_salary_type.visibility = View.GONE
-                            newDelivery_pay_type.visibility = View.GONE
-                            newDelivery_expense.visibility = View.VISIBLE
-                            newDelivery_move_task.visibility = View.GONE
-                            newDelivery_move_task_switch.isChecked = false
-                            newDelivery_address.visibility = View.GONE
-                            newDelivery_cost.visibility = View.VISIBLE
-                            newDelivery_cost_cash.visibility = View.GONE
-                            newDelivery_move.visibility = View.GONE
-                            newDelivery_isSalary.visibility = View.GONE
+                            layoutExpence()
                         }
                         WorkType.Other.i -> {
-                            newDelivery_delivery_type.visibility = View.GONE
-                            newDelivery_salary_type.visibility = View.GONE
-                            newDelivery_pay_type.visibility = View.GONE
-                            newDelivery_expense.visibility = View.GONE
-                            newDelivery_move_task.visibility = View.GONE
-                            newDelivery_move_task_switch.isChecked = false
-                            newDelivery_address.visibility = View.GONE
-                            newDelivery_cost.visibility = View.GONE
-                            newDelivery_cost_cash.visibility = View.GONE
-                            newDelivery_move.visibility = View.GONE
-                            newDelivery_isSalary.visibility = View.GONE
+                            layoutOther()
                         }
                         WorkType.Salary.i -> {
-                            newDelivery_delivery_type.visibility = View.GONE
-                            newDelivery_salary_type.visibility = View.VISIBLE
-                            newDelivery_pay_type.visibility = View.GONE
-                            newDelivery_expense.visibility = View.GONE
-                            newDelivery_move_task.visibility = View.GONE
-                            newDelivery_move_task_switch.isChecked = false
-                            newDelivery_address.visibility = View.GONE
-                            newDelivery_cost.visibility = View.VISIBLE
-                            newDelivery_cost_cash.visibility = View.GONE
-                            newDelivery_move.visibility = View.GONE
-                            newDelivery_isSalary.visibility = View.GONE
+                            layoutSalary()
                         }
                     }
                 }
@@ -156,7 +140,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             delivery.expense =
                                 (newDelivery_cost_cash_editText.text.toString().toInt() - newDelivery_cost_editText.text.toString().toInt())
                         }
-                        delivery.comment = newDelivery_comment.text.toString()
+                        delivery.commentSimple = newDelivery_comment.text.toString()
                     }
                     WorkType.Move.i -> {
                         delivery.deliveryDate = prefs.date!!
@@ -165,6 +149,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             newDelivery_delivery_type_spinner.selectedItemPosition
                         delivery.moveFrom = newDelivery_move_from_spinner.selectedItemPosition
                         delivery.moveTo = newDelivery_move_to_spinner.selectedItemPosition
+                        delivery.commentSimple = newDelivery_comment.text.toString()
                         if (newDelivery_isSalary_CheckBox.isChecked) {
                             delivery.ifSalary = 0
                             if (newDelivery_comment.text.toString() == "") {
@@ -209,6 +194,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             delivery.moveFrom = newDelivery_move_from_spinner.selectedItemPosition
                             delivery.moveTo = newDelivery_move_to_spinner.selectedItemPosition
                         }
+                        delivery.commentSimple = newDelivery_comment.text.toString()
                         if (newDelivery_isSalary_CheckBox.isChecked && !newDelivery_move_task_switch.isChecked) {
                             delivery.ifSalary = 0
                             if (newDelivery_comment.text.toString() == "") {
@@ -266,6 +252,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         delivery.comment = newDelivery_comment.text.toString()
                         delivery.cost = newDelivery_cost_editText.text.toString().toInt()
                         delivery.expenseType = newDelivery_expense_spinner.selectedItemPosition
+                        delivery.commentSimple = newDelivery_comment.text.toString()
                         if (newDelivery_comment.text.toString() == "") {
                             delivery.comment = newDelivery_expense_spinner.selectedItem.toString()
                         } else {
@@ -276,12 +263,13 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     WorkType.Other.i -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
-                        delivery.comment = newDelivery_comment.text.toString()
+                        delivery.commentSimple = newDelivery_comment.text.toString()
                     }
                     WorkType.Salary.i -> {
                         delivery.deliveryDate = prefs.date!!
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType = newDelivery_salary_type_spinner.selectedItemPosition
+                        delivery.commentSimple = newDelivery_comment.text.toString()
                         delivery.comment = "${newDelivery_salary_type_spinner.selectedItem}\n" +
                                 "${newDelivery_comment.text}"
                         delivery.cost = newDelivery_cost_editText.text.toString().toInt()
@@ -306,7 +294,96 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
         }
     }
 
+    private fun layoutSalary() {
+        newDelivery_delivery_type.visibility = View.GONE
+        newDelivery_salary_type.visibility = View.VISIBLE
+        newDelivery_pay_type.visibility = View.GONE
+        newDelivery_expense.visibility = View.GONE
+        newDelivery_move_task.visibility = View.GONE
+        newDelivery_move_task_switch.isChecked = false
+        newDelivery_address.visibility = View.GONE
+        newDelivery_cost.visibility = View.VISIBLE
+        newDelivery_cost_cash.visibility = View.GONE
+        newDelivery_move.visibility = View.GONE
+        newDelivery_isSalary.visibility = View.GONE
+    }
+
+    private fun layoutOther() {
+        newDelivery_delivery_type.visibility = View.GONE
+        newDelivery_salary_type.visibility = View.GONE
+        newDelivery_pay_type.visibility = View.GONE
+        newDelivery_expense.visibility = View.GONE
+        newDelivery_move_task.visibility = View.GONE
+        newDelivery_move_task_switch.isChecked = false
+        newDelivery_address.visibility = View.GONE
+        newDelivery_cost.visibility = View.GONE
+        newDelivery_cost_cash.visibility = View.GONE
+        newDelivery_move.visibility = View.GONE
+        newDelivery_isSalary.visibility = View.GONE
+    }
+
+    private fun layoutExpence() {
+        newDelivery_delivery_type.visibility = View.GONE
+        newDelivery_salary_type.visibility = View.GONE
+        newDelivery_pay_type.visibility = View.GONE
+        newDelivery_expense.visibility = View.VISIBLE
+        newDelivery_move_task.visibility = View.GONE
+        newDelivery_move_task_switch.isChecked = false
+        newDelivery_address.visibility = View.GONE
+        newDelivery_cost.visibility = View.VISIBLE
+        newDelivery_cost_cash.visibility = View.GONE
+        newDelivery_move.visibility = View.GONE
+        newDelivery_isSalary.visibility = View.GONE
+    }
+
+    private fun layoutTask() {
+        newDelivery_delivery_type.visibility = View.VISIBLE
+        newDelivery_salary_type.visibility = View.GONE
+        newDelivery_pay_type.visibility = View.GONE
+        newDelivery_expense.visibility = View.GONE
+        newDelivery_move_task.visibility = View.VISIBLE
+        newDelivery_move_task_switch.isChecked = false
+        newDelivery_address.visibility = View.GONE
+        newDelivery_cost.visibility = View.GONE
+        newDelivery_cost_cash.visibility = View.GONE
+        newDelivery_move.visibility = View.VISIBLE
+        newDelivery_isSalary.visibility = View.VISIBLE
+    }
+
+    private fun layoutMove() {
+        newDelivery_delivery_type.visibility = View.VISIBLE
+        newDelivery_salary_type.visibility = View.GONE
+        newDelivery_pay_type.visibility = View.GONE
+        newDelivery_expense.visibility = View.GONE
+        newDelivery_move_task.visibility = View.GONE
+        newDelivery_move_task_switch.isChecked = false
+        newDelivery_address.visibility = View.GONE
+        newDelivery_cost.visibility = View.GONE
+        newDelivery_cost_cash.visibility = View.GONE
+        newDelivery_move.visibility = View.VISIBLE
+        newDelivery_isSalary.visibility = View.VISIBLE
+    }
+
+    private fun layoutDelivery() {
+        newDelivery_delivery_type.visibility = View.VISIBLE
+        newDelivery_salary_type.visibility = View.GONE
+        newDelivery_pay_type.visibility = View.VISIBLE
+        newDelivery_expense.visibility = View.GONE
+        newDelivery_move_task.visibility = View.GONE
+        newDelivery_move_task_switch.isChecked = false
+        newDelivery_address.visibility = View.VISIBLE
+        newDelivery_cost.visibility = View.VISIBLE
+        newDelivery_cost_cash.visibility = View.VISIBLE
+        newDelivery_move.visibility = View.GONE
+        newDelivery_isSalary.visibility = View.GONE
+    }
+
     private fun saveToBase() = GlobalScope.launch {
-        DB.getDao().addDelivery(delivery)
+        if (newDelivery) {
+            DB.getDao().addDelivery(delivery)
+        } else {
+            DB.getDao().updateDelivery(delivery)
+        }
+
     }
 }

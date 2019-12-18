@@ -132,6 +132,12 @@ class MainApp : Application() {
             }
         }
 
+        val mig10to11 = object : Migration(10, 11) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Delivery ADD COLUMN commentSimple TEXT DEFAULT '' NOT NULL")
+            }
+        }
+
         prefs = Preferences(applicationContext)
         mDataBase = Room
             .databaseBuilder(applicationContext, DataBase::class.java, DB_NAME)
@@ -144,7 +150,8 @@ class MainApp : Application() {
                 mig6to7,
                 mig7to8,
                 mig8to9,
-                mig9to10
+                mig9to10,
+                mig10to11
             )
             .build()
     }
