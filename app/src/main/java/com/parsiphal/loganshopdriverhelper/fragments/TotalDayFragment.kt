@@ -559,7 +559,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.shop_zhukova)} ${day_vesta_zhukova_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)} ${day_vesta_kulturi_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)} ${day_vesta_sedova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)} ${day_vesta_himikov_move_textView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)} ${day_vesta_himikov_move_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${day_total_move_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_tasks)}\n" +
@@ -573,7 +573,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.shop_zhukova)} ${day_vesta_zhukova_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)} ${day_vesta_kulturi_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)} ${day_vesta_sedova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)} ${day_vesta_himikov_task_textView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)} ${day_vesta_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${day_vesta_else_task_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${day_total_task_textView.text}\n" +
                 "\n" +

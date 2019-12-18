@@ -431,7 +431,8 @@
             <LinearLayout
                     android:id="@+id/month_vesta_himikov_move"
                     style="@style/dayAndMonthLinearLayout"
-                    android:layout_below="@id/month_vesta_sedova_move">
+                    android:layout_below="@id/month_vesta_sedova_move"
+                    android:visibility="gone">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -611,7 +612,8 @@
             <LinearLayout
                     android:id="@+id/month_vesta_himikov_task"
                     style="@style/dayAndMonthLinearLayout"
-                    android:layout_below="@id/month_vesta_sedova_task">
+                    android:layout_below="@id/month_vesta_sedova_task"
+                    android:visibility="gone">
 
                 <TextView
                         style="@style/dayAndMonthTextView"

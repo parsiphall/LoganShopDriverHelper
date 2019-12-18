@@ -11,6 +11,8 @@ import com.parsiphal.loganshopdriverhelper.DB
 
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
+import com.parsiphal.loganshopdriverhelper.data.PayType
+import com.parsiphal.loganshopdriverhelper.data.WorkType
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapter
 import kotlinx.android.synthetic.main.fragment_delivery.*
@@ -28,6 +30,7 @@ class DeliveryFragment : MvpAppCompatFragment() {
     private var items: List<Delivery> = ArrayList()
     private lateinit var adapter: DeliveryViewAdapter
     private var searchDate: String = ""
+    private var cashSum = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,15 +44,15 @@ class DeliveryFragment : MvpAppCompatFragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_delivery, container, false)
         adapter = DeliveryViewAdapter(items, context!!)
-        root.delivery_recycler.layoutManager =
-            LinearLayoutManager(context)
+        root.delivery_recycler.layoutManager = LinearLayoutManager(context)
         root.delivery_recycler.adapter = adapter
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setDate()
+        getDate()
+        placeData(searchDate)
         delivery_fab.setOnClickListener {
             callBackActivity.fragmentPlace(NewDeliveryFragment())
         }
@@ -62,18 +65,31 @@ class DeliveryFragment : MvpAppCompatFragment() {
         }
     }
 
-    private fun getData(search: String) {
-        val data = GlobalScope.async {
-            items = DB.getDao().getDeliveriesByDate(search)
-            reverse(items)
-        }
+    private fun placeData(date: String) {
+        val data = GlobalScope.async { getData(date) }
         MainScope().launch {
             data.await()
+            if (items.isEmpty()) {
+                no_data_textView?.visibility = View.VISIBLE
+                cashSum = 0
+            }
+            delivery_cashSum?.text = cashSum.toString()
             adapter.dataChanged(items)
         }
     }
 
-    private fun setDate() {
+    private fun getData(search: String) {
+        cashSum = 0
+        items = DB.getDao().getDeliveriesByDate(search)
+        for (position in items) {
+            if (position.workType == WorkType.Delivery.i && position.payType == PayType.Cash.i) {
+                cashSum += position.cost
+            }
+        }
+        reverse(items)
+    }
+
+    private fun getDate() {
         val cal = Calendar.getInstance()
         val year = cal.get(Calendar.YEAR)
         val month = cal.get(Calendar.MONTH)
@@ -88,7 +104,6 @@ class DeliveryFragment : MvpAppCompatFragment() {
         }
         searchDate = "$myDay/$myMonth/$year"
         date_textView.text = searchDate
-        getData(searchDate)
     }
 
     override fun onResume() {
@@ -108,7 +123,7 @@ class DeliveryFragment : MvpAppCompatFragment() {
             }
             searchDate = "$myDay/$myMonth/$year"
             date_textView.text = searchDate
-            getData(searchDate)
+            placeData(searchDate)
         }
 
     private fun datePickerDialog() {

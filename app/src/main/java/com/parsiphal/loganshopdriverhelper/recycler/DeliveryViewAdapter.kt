@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
+import com.parsiphal.loganshopdriverhelper.fragments.DeliveryFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
@@ -58,8 +59,9 @@ class DeliveryViewAdapter(
     }
 
     private fun delete(position: Int) = GlobalScope.launch {
+        val date = items[position].deliveryDate
         DB.getDao().deleteDelivery(items[position])
-        items = DB.getDao().getAllDeliveries()
+        items = DB.getDao().getDeliveriesByDate(date)
         reverse(items)
         MainScope().launch {
             notifyDataSetChanged()

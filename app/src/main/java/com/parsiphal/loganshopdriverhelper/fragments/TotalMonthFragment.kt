@@ -510,7 +510,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.shop_zhukova)} ${month_vesta_zhukova_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)} ${month_vesta_kulturi_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)} ${month_vesta_sedova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_move_textView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_move_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${month_total_move_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_tasks)}\n" +
@@ -524,7 +524,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.shop_zhukova)} ${month_vesta_zhukova_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)} ${month_vesta_kulturi_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)} ${month_vesta_sedova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_task_textView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${month_vesta_else_task_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${month_total_task_textView.text}\n" +
                 "\n" +

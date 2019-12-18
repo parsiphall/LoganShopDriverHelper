@@ -59,6 +59,7 @@ class TotalFragment : MvpAppCompatFragment() {
             override fun onItemClicked(position: Int, view: View) {
                 val bundle = Bundle()
                 bundle.putSerializable("ITEM", items[position])
+                callBackActivity.showAd()
                 callBackActivity.fragmentPlaceWithArgs(
                     when (items[position].dayOrMonth) {
                         0 -> TotalDayFragment()
@@ -66,6 +67,7 @@ class TotalFragment : MvpAppCompatFragment() {
                         else -> TotalYearFragment()
                     }, bundle
                 )
+                callBackActivity.prepareAd()
             }
         })
         total_day_button.setOnClickListener {
