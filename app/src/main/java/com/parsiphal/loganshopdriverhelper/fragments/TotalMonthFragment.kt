@@ -41,6 +41,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var holiday = 0
     private var salary = 0
     private var extraPay = 0
+    private var penalty=0
     private var teaMoney = 0
     private var deltaODO = 0
     private var totalDeliveries = 0
@@ -221,6 +222,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_salary_textView.text = salary.toString()
         month_tea_textView.text = teaMoney.toString()
         month_extraPay_textView.text = extraPay.toString()
+        month_penalty_textView.text=penalty.toString()
 
         try {
             month_mid_salary_textView.text = if (totalShifts != 0) {
@@ -257,6 +259,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             prepay += position.prepay
             holiday += position.holidayPay
             extraPay += position.extraPay
+            penalty+=position.penalty
             deltaODO += position.deltaODO
             salary += position.salary
             teaMoney += position.expenses
@@ -376,6 +379,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.salary = month_salary_textView.text.toString().toInt()
             total.expenses = month_tea_textView.text.toString().toInt()
             total.extraPay = month_extraPay_textView.text.toString().toInt()
+            total.penalty=month_penalty_textView.text.toString().toInt()
             total.deltaODO = deltaODO
             total.prepay = month_prepay_textView.text.toString().toInt()
             total.holidayPay = month_holiday_pay_textView.text.toString().toInt()
@@ -475,6 +479,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_prepay_textView.text = total.prepay.toString()
         month_holiday_pay_textView.text = total.holidayPay.toString()
         month_extraPay_textView.text = total.extraPay.toString()
+        month_penalty_textView.text=total.penalty.toString()
         month_to_recieve_textView.text = "${total.salary - total.prepay}"
         month_largus_count_textView.text = total.largusShifts.toString()
         month_sandero_count_textView.text = total.sanderoShifts.toString()
@@ -552,6 +557,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.prepay)} ${month_prepay_textView.text}\n" +
                 "${resources.getString(R.string.holiday_pay)} ${month_holiday_pay_textView.text}\n" +
                 "${resources.getString(R.string.extraPay)} ${month_extraPay_textView.text}\n" +
+                "${resources.getString(R.string.penalty)} ${month_penalty_textView.text}\n" +
                 "${resources.getString(R.string.money_to_recieve)} ${month_to_recieve_textView.text}"
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

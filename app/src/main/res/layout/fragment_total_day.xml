@@ -823,9 +823,23 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/day_penalty"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_extraPay">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/penalty" />
+
+                <TextView
+                        android:id="@+id/day_penalty_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
                     android:id="@+id/shift_button"
                     style="@style/shiftLinearLayout"
-                    android:layout_below="@id/day_extraPay"
+                    android:layout_below="@id/day_penalty"
                     android:gravity="center_horizontal">
 
                 <Button

@@ -55,6 +55,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var prepay = 0
     private var holiday = 0
     private var extraPay = 0
+    private var penalty = 0
     private var loganMoveFromZhukova = 0
     private var loganMoveFromKulturi = 0
     private var loganMoveFromSedova = 0
@@ -201,6 +202,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_prepay_textVew.text = prepay.toString()
         day_holiday_textVew.text = holiday.toString()
         day_extraPay_textView.text = extraPay.toString()
+        day_penalty_textView.text = penalty.toString()
     }
 
     private fun calculateSum() {
@@ -277,6 +279,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             }
             if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Extra.i) {
                 extraPay += position.cost
+            }
+            if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Penalty.i) {
+                penalty += position.cost
             }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Zhukova.i) {
                 loganMoveFromZhukova++
@@ -385,7 +390,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         totalTaskToPay = loganTaskWithSalary + vestaTaskWithSalary
         totalMove = totalMoveToPay + loganMoveWithOutSalary + vestaMoveWithOutSalary
         totalTask = totalTaskToPay + loganTaskWithOutSalary + vestaTaskWithOutSalary
-        salary = (1700 + totalDeliveries * 50 + totalMoveToPay * 50 + totalTaskToPay * 50)
+        salary = (1700 + totalDeliveries * 50 + totalMoveToPay * 50 + totalTaskToPay * 50 - penalty)
     }
 
     private fun deltaODO(): Int = total.eveningODO - total.morningODO
@@ -427,6 +432,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.prepay = prepay
             total.holidayPay = holiday
             total.extraPay = extraPay
+            total.penalty = penalty
             total.expenses = day_tea_textVew.text.toString().toInt()
             total.deltaODO = deltaODO()
             total.carIndex = prefs.carPosition!!
@@ -527,6 +533,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_prepay_textVew.text = total.prepay.toString()
         day_holiday_textVew.text = total.holidayPay.toString()
         day_extraPay_textView.text = total.extraPay.toString()
+        day_penalty_textView.text = total.penalty.toString()
     }
 
     private fun shareData() = GlobalScope.launch {
@@ -599,6 +606,10 @@ class TotalDayFragment : MvpAppCompatFragment() {
         if (day_extraPay_textView.text.toString().toInt() != 0) {
             textToSend += "\n" +
                     "${resources.getText(R.string.extraPay)} ${day_extraPay_textView.text}"
+        }
+        if (day_penalty_textView.text.toString().toInt() != 0) {
+            textToSend += "\n" +
+                    "${resources.getText(R.string.penalty)} ${day_penalty_textView.text}"
         }
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

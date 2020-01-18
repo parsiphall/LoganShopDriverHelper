@@ -926,9 +926,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_to_recieve"
+                    android:id="@+id/month_penalty"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/month_extraPay">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/penalty" />
+
+                <TextView
+                        android:id="@+id/month_penalty_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_to_recieve"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_penalty">
 
                 <TextView
                         style="@style/dayAndMonthTextView"

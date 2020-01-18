@@ -77,6 +77,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
             newDelivery_work_type_spinner.setSelection(delivery.workType)
             newDelivery_delivery_type_spinner.setSelection(delivery.deliveryType)
             newDelivery_pay_type_spinner.setSelection(delivery.payType)
+            newDelivery_salary_type_spinner.setSelection(delivery.deliveryType)
             newDelivery_address.setText(delivery.address)
             newDelivery_cost_editText.setText(delivery.cost.toString())
             newDelivery_comment.setText(delivery.commentSimple)
@@ -270,8 +271,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
                         delivery.deliveryType = newDelivery_salary_type_spinner.selectedItemPosition
                         delivery.commentSimple = newDelivery_comment.text.toString()
-                        delivery.comment = "${newDelivery_salary_type_spinner.selectedItem}\n" +
-                                "${newDelivery_comment.text}"
+                        delivery.comment = newDelivery_comment.text.toString()
                         delivery.cost = newDelivery_cost_editText.text.toString().toInt()
                     }
                 }

@@ -86,6 +86,7 @@
     <string name="no_data">Нет записей</string>
     <string name="cashSum">Касса:</string>
     <string name="extraPay">Премия:</string>
+    <string name="penalty">Штраф:</string>
 
     <string-array name="region">
         <item>Север</item>
