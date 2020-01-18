@@ -138,6 +138,12 @@ class MainApp : Application() {
             }
         }
 
+        val mig11to12 = object : Migration(11,12){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Total ADD COLUMN extraPay INTEGER DEFAULT 0 NOT NULL")
+            }
+        }
+
         prefs = Preferences(applicationContext)
         mDataBase = Room
             .databaseBuilder(applicationContext, DataBase::class.java, DB_NAME)
@@ -151,7 +157,8 @@ class MainApp : Application() {
                 mig7to8,
                 mig8to9,
                 mig9to10,
-                mig10to11
+                mig10to11,
+                mig11to12
             )
             .build()
     }

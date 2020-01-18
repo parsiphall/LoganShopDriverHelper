@@ -32,9 +32,15 @@ class DeliveryViewAdapter(
 
     override fun onBindViewHolder(holder: DeliveryViewHolder, position: Int) {
         holder.deliveryDate.text = items[position].deliveryDate
-        holder.workType.text = context.resources.getStringArray(R.array.work_type)[items[position].workType]
-        holder.deliveryType.text = context.resources.getStringArray(R.array.delivery_type)[items[position].deliveryType]
-        holder.payType.text = context.resources.getStringArray(R.array.payType)[items[position].payType]
+        holder.workType.text =
+            context.resources.getStringArray(R.array.work_type)[items[position].workType]
+        holder.deliveryType.text = if (items[position].workType == 5) {
+            context.resources.getStringArray(R.array.salary_type)[items[position].deliveryType]
+        } else {
+            context.resources.getStringArray(R.array.delivery_type)[items[position].deliveryType]
+        }
+        holder.payType.text =
+            context.resources.getStringArray(R.array.payType)[items[position].payType]
         holder.address.text = items[position].address
         holder.cost.text = items[position].cost.toString()
         holder.comment.text = items[position].comment

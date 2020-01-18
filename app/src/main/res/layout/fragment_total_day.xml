@@ -809,9 +809,23 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/day_extraPay"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_holiday">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/extraPay" />
+
+                <TextView
+                        android:id="@+id/day_extraPay_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
                     android:id="@+id/shift_button"
                     style="@style/shiftLinearLayout"
-                    android:layout_below="@id/day_holiday"
+                    android:layout_below="@id/day_extraPay"
                     android:gravity="center_horizontal">
 
                 <Button

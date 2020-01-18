@@ -40,6 +40,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var prepay = 0
     private var holiday = 0
     private var salary = 0
+    private var extraPay = 0
     private var teaMoney = 0
     private var deltaODO = 0
     private var totalDeliveries = 0
@@ -219,6 +220,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_total_task_textView.text = "${totalTaskWithSalary}(${totalTask})"
         month_salary_textView.text = salary.toString()
         month_tea_textView.text = teaMoney.toString()
+        month_extraPay_textView.text = extraPay.toString()
 
         try {
             month_mid_salary_textView.text = if (totalShifts != 0) {
@@ -254,6 +256,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             vestaCard += position.vestaCard
             prepay += position.prepay
             holiday += position.holidayPay
+            extraPay += position.extraPay
             deltaODO += position.deltaODO
             salary += position.salary
             teaMoney += position.expenses
@@ -305,18 +308,18 @@ class TotalMonthFragment : MvpAppCompatFragment() {
 
     private fun calculateExpences() {
         for (position in totals) {
-            when {
-                position.carIndex == Cars.Largus.i -> {
+            when (position.carIndex) {
+                Cars.Largus.i -> {
                     largusExpenseFuel += position.expensesFuel
                     largusExpenseWash += position.expensesWash
                     largusExpenseOther += position.expensesOther
                 }
-                position.carIndex == Cars.Sandero.i -> {
+                Cars.Sandero.i -> {
                     sanderoExpenseFuel += position.expensesFuel
                     sanderoExpenseWash += position.expensesWash
                     sanderoExpenseOther += position.expensesOther
                 }
-                position.carIndex == Cars.XRay.i -> {
+                Cars.XRay.i -> {
                     xRayExpenseFuel += position.expensesFuel
                     xRayExpenseWash += position.expensesWash
                     xRayExpenseOther += position.expensesOther
@@ -372,6 +375,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.vestaCard = month_vesta_card_textView.text.toString().toInt()
             total.salary = month_salary_textView.text.toString().toInt()
             total.expenses = month_tea_textView.text.toString().toInt()
+            total.extraPay = month_extraPay_textView.text.toString().toInt()
             total.deltaODO = deltaODO
             total.prepay = month_prepay_textView.text.toString().toInt()
             total.holidayPay = month_holiday_pay_textView.text.toString().toInt()
@@ -414,7 +418,8 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.vestaTaskElse = vestaTaskElse
             DB.getDao().addTotal(total)
             callBackActivity.fragmentPlace(TotalFragment())
-            Snackbar.make(view!!, getString(R.string.total_calc_and_save), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view!!, getString(R.string.total_calc_and_save), Snackbar.LENGTH_SHORT)
+                .show()
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.someError), Snackbar.LENGTH_SHORT).show()
@@ -469,6 +474,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_tea_textView.text = total.expenses.toString()
         month_prepay_textView.text = total.prepay.toString()
         month_holiday_pay_textView.text = total.holidayPay.toString()
+        month_extraPay_textView.text = total.extraPay.toString()
         month_to_recieve_textView.text = "${total.salary - total.prepay}"
         month_largus_count_textView.text = total.largusShifts.toString()
         month_sandero_count_textView.text = total.sanderoShifts.toString()
@@ -545,6 +551,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
                 "${resources.getString(R.string.prepay)} ${month_prepay_textView.text}\n" +
                 "${resources.getString(R.string.holiday_pay)} ${month_holiday_pay_textView.text}\n" +
+                "${resources.getString(R.string.extraPay)} ${month_extraPay_textView.text}\n" +
                 "${resources.getString(R.string.money_to_recieve)} ${month_to_recieve_textView.text}"
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

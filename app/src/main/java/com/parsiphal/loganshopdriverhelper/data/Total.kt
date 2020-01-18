@@ -82,5 +82,6 @@ data class Total(
     @ColumnInfo var vestaTaskToKulturi: Int = 0,
     @ColumnInfo var vestaTaskToSedova: Int = 0,
     @ColumnInfo var vestaTaskToHimikov: Int = 0,
-    @ColumnInfo var vestaTaskElse: Int = 0
+    @ColumnInfo var vestaTaskElse: Int = 0,
+    @ColumnInfo var extraPay: Int = 0
 ) : Serializable

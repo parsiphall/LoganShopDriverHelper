@@ -54,6 +54,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var expenseOther = 0
     private var prepay = 0
     private var holiday = 0
+    private var extraPay = 0
     private var loganMoveFromZhukova = 0
     private var loganMoveFromKulturi = 0
     private var loganMoveFromSedova = 0
@@ -167,7 +168,6 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_cash_textView.text = vestaCash.toString()
         day_vesta_card_textView.text = vestaCard.toString()
         day_tea_textVew.text = teaMoney.toString()
-
         day_total_deliveries_textVew.text = totalDeliveries.toString()
         day_logan_move_textView.text = (loganMoveWithSalary + loganMoveWithOutSalary).toString()
         day_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
@@ -193,15 +193,14 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
         day_vesta_else_task_textView.text = vestaTaskElse.toString()
         day_total_task_textView.text = "${totalTaskToPay}(${totalTask})"
-
         day_expenses_textView.text = (expenseFuel + expenseWash + expenseOther).toString()
         day_expenses_fuel_textView.text = expenseFuel.toString()
         day_expenses_wash_textView.text = expenseWash.toString()
         day_expenses_other_textView.text = expenseOther.toString()
-
         day_salary_textView.text = salary.toString()
         day_prepay_textVew.text = prepay.toString()
         day_holiday_textVew.text = holiday.toString()
+        day_extraPay_textView.text = extraPay.toString()
     }
 
     private fun calculateSum() {
@@ -275,6 +274,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             }
             if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Holiday.i) {
                 holiday += position.cost
+            }
+            if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Extra.i) {
+                extraPay += position.cost
             }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Zhukova.i) {
                 loganMoveFromZhukova++
@@ -424,6 +426,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.salary = day_salary_textView.text.toString().toInt()
             total.prepay = prepay
             total.holidayPay = holiday
+            total.extraPay = extraPay
             total.expenses = day_tea_textVew.text.toString().toInt()
             total.deltaODO = deltaODO()
             total.carIndex = prefs.carPosition!!
@@ -523,6 +526,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_salary_textView.text = total.salary.toString()
         day_prepay_textVew.text = total.prepay.toString()
         day_holiday_textVew.text = total.holidayPay.toString()
+        day_extraPay_textView.text = total.extraPay.toString()
     }
 
     private fun shareData() = GlobalScope.launch {
@@ -591,6 +595,10 @@ class TotalDayFragment : MvpAppCompatFragment() {
         if (day_holiday_textVew.text.toString().toInt() != 0) {
             textToSend += "\n" +
                     "${resources.getString(R.string.holiday_pay)} ${day_holiday_textVew.text}"
+        }
+        if (day_extraPay_textView.text.toString().toInt() != 0) {
+            textToSend += "\n" +
+                    "${resources.getText(R.string.extraPay)} ${day_extraPay_textView.text}"
         }
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

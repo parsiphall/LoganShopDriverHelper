@@ -912,9 +912,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_to_recieve"
+                    android:id="@+id/month_extraPay"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/month_holiday_pay">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/extraPay" />
+
+                <TextView
+                        android:id="@+id/month_extraPay_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_to_recieve"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_extraPay">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
