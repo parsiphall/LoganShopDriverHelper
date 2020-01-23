@@ -15,9 +15,11 @@ import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragment
 import com.parsiphal.loganshopdriverhelper.fragments.TotalFragment
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import moxy.MvpAppCompatActivity
 import moxy.MvpAppCompatFragment
 
+@ExperimentalCoroutinesApi
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     private lateinit var mInterstitialAd: InterstitialAd

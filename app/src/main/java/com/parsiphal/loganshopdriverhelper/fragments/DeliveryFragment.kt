@@ -14,6 +14,7 @@ import com.parsiphal.loganshopdriverhelper.data.Delivery
 import com.parsiphal.loganshopdriverhelper.data.PayType
 import com.parsiphal.loganshopdriverhelper.data.WorkType
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
+import com.parsiphal.loganshopdriverhelper.prefs
 import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapter
 import com.parsiphal.loganshopdriverhelper.recycler.OnItemClickListener
 import com.parsiphal.loganshopdriverhelper.recycler.addOnItemClickListener
@@ -56,7 +57,11 @@ class DeliveryFragment : MvpAppCompatFragment() {
         getDate()
         placeData(searchDate)
         delivery_fab.setOnClickListener {
-            callBackActivity.fragmentPlace(NewDeliveryFragment())
+            if (prefs.addSystem == 0) {
+                callBackActivity.fragmentPlace(NewDeliveryFragment())
+            } else {
+                callBackActivity.fragmentPlace(NewDeliveryAddFragment())
+            }
         }
         delivery_fab.setOnLongClickListener {
             callBackActivity.fragmentPlace(MaintananceFragment())

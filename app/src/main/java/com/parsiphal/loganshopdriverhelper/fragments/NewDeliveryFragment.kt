@@ -142,6 +142,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                                 (newDelivery_cost_cash_editText.text.toString().toInt() - newDelivery_cost_editText.text.toString().toInt())
                         }
                         delivery.commentSimple = newDelivery_comment.text.toString()
+                        delivery.comment = newDelivery_comment.text.toString()
                     }
                     WorkType.Move.i -> {
                         delivery.deliveryDate = prefs.date!!

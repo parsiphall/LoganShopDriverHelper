@@ -20,6 +20,7 @@ const val LAST_ODO_XRAY = "last_odo_xray"
 const val LAST_FUEL_LARGUS = "last_fuel_largus"
 const val LAST_FUEL_SANDERO = "last_fuel_sandero"
 const val LAST_FUEL_XRAY = "last_fuel_xray"
+const val ADD_SYSTEM = "add_system"
 
 
 class Preferences(context: Context) {
@@ -92,4 +93,8 @@ class Preferences(context: Context) {
     var lastFuelXRay: Int?
         get() = prefs.getInt(LAST_FUEL_XRAY, 0)
         set(value) = prefs.edit().putInt(LAST_FUEL_XRAY, value!!).apply()
+
+    var addSystem: Int?
+        get() = prefs.getInt(ADD_SYSTEM, 0)
+        set(value) = prefs.edit().putInt(ADD_SYSTEM, value!!).apply()
 }

@@ -1,0 +1,598 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.parsiphal.loganshopdriverhelper.fragments.NewDeliveryAddFragment">
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_workType"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/type"
+                android:textSize="30sp" />
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_workType_deliveryButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/delivery" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_workType_moveButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/move" />
+        </LinearLayout>
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_workType_taskButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/task" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_workType_expenseButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/expense" />
+        </LinearLayout>
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_workType_payButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/pay" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_workType_otherButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/other" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_deliveryType"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_deliveryType_logan"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/logan_divider" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_deliveryType_vesta"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/vesta_divider" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_payType"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_payType_cash"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/cash" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_payType_card"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/card" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_paying"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_paying_cost"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/cost"
+                android:inputType="numberDecimal"
+                android:textAlignment="center" />
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_paying_moneyTake"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/money_take"
+                android:inputType="numberDecimal"
+                android:textAlignment="center" />
+
+        <Button
+                android:id="@+id/newDeliveryAdd_paying_next"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="100sp"
+                android:text="@string/next" />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_address"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_address_address"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/address"
+                android:inputType="text"
+                android:textAlignment="center" />
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_address_comment"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/comment"
+                android:inputType="text"
+                android:textAlignment="center" />
+
+        <Button
+                android:id="@+id/newDeliveryAdd_address_save"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="100sp"
+                android:text="@string/writeTo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_moveFrom"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/from"
+                android:textSize="30sp" />
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveFrom_Zhukova"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_zhukova" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveFrom_Kulturi"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_kulturi" />
+        </LinearLayout>
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveFrom_Sedova"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_sedova" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveFrom_Himikov"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_himikov" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_moveTo"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/to"
+                android:textSize="30sp" />
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveTo_Zhukova"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_zhukova" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveTo_Kulturi"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_kulturi" />
+        </LinearLayout>
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveTo_Sedova"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_sedova" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveTo_Himikov"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_himikov" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_comment_and_pay"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_comment_and_pay_comment"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/comment"
+                android:inputType="text"
+                android:textAlignment="center" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/isPayed"
+                android:textSize="30sp" />
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_comment_and_pay_yes"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/yes" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_comment_and_pay_no"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/no" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_taskType"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/isBetweenShops"
+                android:textSize="30sp" />
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveTaskType_yes"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/yes" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveTaskType_no"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/no" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_expense"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_expense_cost"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/cost"
+                android:inputType="numberDecimal"
+                android:textAlignment="center" />
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_expense_comment"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/comment"
+                android:inputType="text"
+                android:textAlignment="center" />
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_expense_fuel"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/fuel" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_expense_wash"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/wash" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_expense_other"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/other" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_other"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_other_comment"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/comment"
+                android:inputType="text"
+                android:textAlignment="center" />
+
+        <Button
+                android:id="@+id/newDeliveryAdd_other_save"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:text="@string/writeTo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/newDeliveryAdd_pay"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_pay_cost"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/cost"
+                android:inputType="numberDecimal"
+                android:textAlignment="center" />
+
+        <EditText
+                android:id="@+id/newDeliveryAdd_pay_comment"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:hint="@string/comment"
+                android:inputType="text"
+                android:textAlignment="center" />
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_pay_prePay"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/prepay" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_pay_holidayPay"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/holiday_pay" />
+
+        </LinearLayout>
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_pay_extraPay"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/extraPay" />
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_pay_penalty"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/penalty" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

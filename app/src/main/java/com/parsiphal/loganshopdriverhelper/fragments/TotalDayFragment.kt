@@ -552,64 +552,64 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "   ${resources.getString(R.string.logan_divider)}\n" +
                 "${resources.getString(R.string.money)}/${resources.getString(R.string.deliveryValue)}: " +
                 "${day_logan_money_textView.text}/${day_logan_delivery_value_textView.text}\n" +
-                "${resources.getString(R.string.cash)} ${day_logan_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)} ${day_logan_card_textView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${day_logan_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)}: ${day_logan_card_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}\n" +
                 "${resources.getString(R.string.money)}/${resources.getString(R.string.deliveryValue)}: " +
                 "${day_vesta_money_textView.text}/${day_vesta_delivery_value_textView.text}\n" +
-                "${resources.getString(R.string.cash)} ${day_vesta_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)} ${day_vesta_card_textView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${day_vesta_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)}: ${day_vesta_card_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_moves)}\n" +
                 "   ${resources.getString(R.string.logan_divider)}: ${day_logan_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)} ${day_logan_zhukova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} ${day_logan_kulturi_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)} ${day_logan_sedova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)} ${day_logan_himikov_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${day_logan_zhukova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${day_logan_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${day_logan_sedova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)}: ${day_logan_himikov_move_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}: ${day_vesta_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)} ${day_vesta_zhukova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} ${day_vesta_kulturi_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)} ${day_vesta_sedova_move_textView.text}\n" +
-//                "${resources.getString(R.string.shop_himikov)} ${day_vesta_himikov_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${day_vesta_zhukova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${day_vesta_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${day_vesta_sedova_move_textView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)}: ${day_vesta_himikov_move_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${day_total_move_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_tasks)}\n" +
                 "   ${resources.getString(R.string.logan_divider)}: ${day_logan_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)} ${day_logan_zhukova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} ${day_logan_kulturi_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)} ${day_logan_sedova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)} ${day_logan_himikov_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${day_logan_zhukova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${day_logan_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${day_logan_sedova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)}: ${day_logan_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${day_logan_else_task_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}: ${day_vesta_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)} ${day_vesta_zhukova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} ${day_vesta_kulturi_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)} ${day_vesta_sedova_task_textView.text}\n" +
-//                "${resources.getString(R.string.shop_himikov)} ${day_vesta_himikov_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${day_vesta_zhukova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${day_vesta_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${day_vesta_sedova_task_textView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)}: ${day_vesta_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${day_vesta_else_task_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${day_total_task_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.expenses)}\n" +
                 "${resources.getString(R.string.total_total)} ${day_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)} ${day_expenses_fuel_textView.text}\n" +
+                "${resources.getString(R.string.fuel)}: ${day_expenses_fuel_textView.text}\n" +
                 "${resources.getString(R.string.wash)}: ${day_expenses_wash_textView.text}\n" +
                 "${resources.getString(R.string.other)}: ${day_expenses_other_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.salary)} ${prefs.family} ${day_salary_textView.text}"
         if (day_prepay_textVew.text.toString().toInt() != 0) {
             textToSend += "\n" +
-                    "${resources.getString(R.string.prepay)} ${day_prepay_textVew.text}"
+                    "${resources.getString(R.string.prepay)}: ${day_prepay_textVew.text}"
         }
         if (day_holiday_textVew.text.toString().toInt() != 0) {
             textToSend += "\n" +
-                    "${resources.getString(R.string.holiday_pay)} ${day_holiday_textVew.text}"
+                    "${resources.getString(R.string.holiday_pay)}: ${day_holiday_textVew.text}"
         }
         if (day_extraPay_textView.text.toString().toInt() != 0) {
             textToSend += "\n" +
-                    "${resources.getText(R.string.extraPay)} ${day_extraPay_textView.text}"
+                    "${resources.getText(R.string.extraPay)}: ${day_extraPay_textView.text}"
         }
         if (day_penalty_textView.text.toString().toInt() != 0) {
             textToSend += "\n" +
-                    "${resources.getText(R.string.penalty)} ${day_penalty_textView.text}"
+                    "${resources.getText(R.string.penalty)}: ${day_penalty_textView.text}"
         }
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

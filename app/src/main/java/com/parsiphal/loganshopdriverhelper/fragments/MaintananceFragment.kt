@@ -7,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.parsiphal.loganshopdriverhelper.DB_NAME
-import com.parsiphal.loganshopdriverhelper.DB_SHM
-import com.parsiphal.loganshopdriverhelper.DB_WAL
+import com.parsiphal.loganshopdriverhelper.*
 
-import com.parsiphal.loganshopdriverhelper.R
 import kotlinx.android.synthetic.main.fragment_maintanance.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -41,6 +38,12 @@ class MaintananceFragment : MvpAppCompatFragment() {
         }
         maint_import.setOnClickListener {
             import()
+        }
+        maint_old_add_system.setOnClickListener {
+            prefs.addSystem = 0
+        }
+        maint_new_add_system.setOnClickListener {
+            prefs.addSystem = 1
         }
     }
 

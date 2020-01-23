@@ -496,46 +496,46 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "\n" +
                 "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_textView.text}\n" +
                 "${resources.getString(R.string.totalMoney)}: ${month_total_money_textView.text}\n" +
-                "${resources.getString(R.string.cash)} ${month_total_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)} ${month_total_card_textView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${month_total_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)}: ${month_total_card_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.logan_divider)}\n" +
                 "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_logan_textView.text}\n" +
                 "${resources.getString(R.string.money)}: ${month_logan_money_textView.text}\n" +
-                "${resources.getString(R.string.cash)} ${month_logan_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)} ${month_logan_card_textView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${month_logan_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)}: ${month_logan_card_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.vesta_divider)}\n" +
                 "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_vesta_textView.text}\n" +
                 "${resources.getString(R.string.money)}: ${month_vesta_money_textView.text}\n" +
-                "${resources.getString(R.string.cash)} ${month_vesta_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)} ${month_vesta_card_textView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${month_vesta_cash_textView.text}\n" +
+                "${resources.getString(R.string.card)}: ${month_vesta_card_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_moves)}\n" +
                 "   ${resources.getString(R.string.logan_divider)}: ${month_logan_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)} ${month_logan_zhukova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} ${month_logan_kulturi_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)} ${month_logan_sedova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)} ${month_logan_himikov_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${month_logan_zhukova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${month_logan_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${month_logan_sedova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)}: ${month_logan_himikov_move_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}: ${month_vesta_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)} ${month_vesta_zhukova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} ${month_vesta_kulturi_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)} ${month_vesta_sedova_move_textView.text}\n" +
-//                "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${month_vesta_zhukova_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${month_vesta_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${month_vesta_sedova_move_textView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)}: ${month_vesta_himikov_move_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${month_total_move_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_tasks)}\n" +
                 "   ${resources.getString(R.string.logan_divider)}: ${month_logan_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)} ${month_logan_zhukova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} ${month_logan_kulturi_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)} ${month_logan_sedova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)} ${month_logan_himikov_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${month_logan_zhukova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)} :${month_logan_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${month_logan_sedova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)}: ${month_logan_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${month_logan_else_task_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}: ${month_vesta_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)} ${month_vesta_zhukova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} ${month_vesta_kulturi_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)} ${month_vesta_sedova_task_textView.text}\n" +
-//                "${resources.getString(R.string.shop_himikov)} ${month_vesta_himikov_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${month_vesta_zhukova_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${month_vesta_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${month_vesta_sedova_task_textView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)}: ${month_vesta_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${month_vesta_else_task_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${month_total_task_textView.text}\n" +
                 "\n" +
@@ -554,10 +554,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.other)}: ${month_xray_expenses_other_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
-                "${resources.getString(R.string.prepay)} ${month_prepay_textView.text}\n" +
-                "${resources.getString(R.string.holiday_pay)} ${month_holiday_pay_textView.text}\n" +
-                "${resources.getString(R.string.extraPay)} ${month_extraPay_textView.text}\n" +
-                "${resources.getString(R.string.penalty)} ${month_penalty_textView.text}\n" +
+                "${resources.getString(R.string.prepay)}: ${month_prepay_textView.text}\n" +
+                "${resources.getString(R.string.holiday_pay)}: ${month_holiday_pay_textView.text}\n" +
+                "${resources.getString(R.string.extraPay)}: ${month_extraPay_textView.text}\n" +
+                "${resources.getString(R.string.penalty)}: ${month_penalty_textView.text}\n" +
                 "${resources.getString(R.string.money_to_recieve)} ${month_to_recieve_textView.text}"
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
