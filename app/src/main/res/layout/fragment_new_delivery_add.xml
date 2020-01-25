@@ -200,6 +200,13 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+        <Button
+                android:id="@+id/newDeliveryAdd_address_save"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="100sp"
+                android:text="@string/writeTo" />
+
         <EditText
                 android:id="@+id/newDeliveryAdd_address_address"
                 android:layout_width="match_parent"
@@ -215,13 +222,6 @@
                 android:hint="@string/comment"
                 android:inputType="text"
                 android:textAlignment="center" />
-
-        <Button
-                android:id="@+id/newDeliveryAdd_address_save"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="100sp"
-                android:text="@string/writeTo" />
 
     </LinearLayout>
 
