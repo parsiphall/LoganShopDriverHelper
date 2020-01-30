@@ -138,12 +138,12 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         newDeliveryAdd_payType_cash.setOnClickListener {
             delivery.payType = 0
             newDeliveryAdd_payType.visibility = View.GONE
-            newDeliveryAdd_paying.visibility = View.VISIBLE
+            newDeliveryAdd_address.visibility = View.VISIBLE
         }
         newDeliveryAdd_payType_card.setOnClickListener {
             delivery.payType = 1
             newDeliveryAdd_payType.visibility = View.GONE
-            newDeliveryAdd_paying.visibility = View.VISIBLE
+            newDeliveryAdd_address.visibility = View.VISIBLE
         }
     }
 
@@ -157,8 +157,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
                     delivery.expense =
                         (newDeliveryAdd_paying_moneyTake.text.toString().toInt() - newDeliveryAdd_paying_cost.text.toString().toInt())
                 }
-                newDeliveryAdd_paying.visibility = View.GONE
-                newDeliveryAdd_address.visibility = View.VISIBLE
+                save()
             } catch (e: Exception) {
                 e.printStackTrace()
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
@@ -172,7 +171,8 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
                 delivery.address = newDeliveryAdd_address_address.text.toString()
                 delivery.comment = newDeliveryAdd_address_comment.text.toString()
                 delivery.commentSimple = newDeliveryAdd_address_comment.text.toString()
-                save()
+                newDeliveryAdd_address.visibility = View.GONE
+                newDeliveryAdd_paying.visibility = View.VISIBLE
             } else {
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }

@@ -187,7 +187,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="100sp"
-                android:text="@string/next" />
+                android:text="@string/writeTo" />
 
     </LinearLayout>
 
@@ -205,7 +205,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="100sp"
-                android:text="@string/writeTo" />
+                android:text="@string/next" />
 
         <EditText
                 android:id="@+id/newDeliveryAdd_address_address"

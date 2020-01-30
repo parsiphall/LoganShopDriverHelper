@@ -147,7 +147,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             }
             month_share.visibility = View.GONE
         } else {
-            val search = "${total.date[3]}${total.date[4]}"
+            val search = "${total.date[3]}${total.date[4]}${total.date[5]}${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
             val data = GlobalScope.async {
                 getData(search)
                 calculateExpences()

@@ -45,7 +45,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun showAd() {
         if (mInterstitialAd.isLoaded) {
-            mInterstitialAd.show()
+//            mInterstitialAd.show()
         }
     }
 
