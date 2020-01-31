@@ -162,7 +162,6 @@
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -185,6 +184,7 @@
         <Button
                 android:id="@+id/newDeliveryAdd_paying_next"
                 style="?android:attr/buttonBarButtonStyle"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="100sp"
                 android:text="@string/writeTo" />
@@ -196,16 +196,8 @@
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
-
-        <Button
-                android:id="@+id/newDeliveryAdd_address_save"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="100sp"
-                android:text="@string/next" />
 
         <EditText
                 android:id="@+id/newDeliveryAdd_address_address"
@@ -222,6 +214,14 @@
                 android:hint="@string/comment"
                 android:inputType="text"
                 android:textAlignment="center" />
+
+        <Button
+                android:id="@+id/newDeliveryAdd_address_save"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="100sp"
+                android:text="@string/next" />
 
     </LinearLayout>
 
@@ -356,7 +356,6 @@
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -444,7 +443,6 @@
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -501,7 +499,6 @@
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -527,7 +524,6 @@
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
 

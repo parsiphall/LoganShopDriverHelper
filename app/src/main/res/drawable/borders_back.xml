@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/colorPrimaryDark"/>
     <!--    for release-->
-<!--        <stroke android:width="1dip" android:color="#0085e5"/>-->
+        <stroke android:width="1dip" android:color="#0085e5"/>
     <!--    for alpha-->
-    <stroke android:width="1dip" android:color="#aaaaaa"/>
+<!--    <stroke android:width="1dip" android:color="#aaaaaa"/>-->
 </shape>

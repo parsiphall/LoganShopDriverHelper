@@ -12,8 +12,8 @@ android {
         applicationId "com.parsiphal.loganshopdriverhelper2"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 202001302
-        versionName "0.3.21a"
+        versionCode 202001311
+        versionName "0.3.22"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -41,8 +41,8 @@ dependencies {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Room
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    implementation 'androidx.room:room-runtime:2.2.2'
-    kapt 'androidx.room:room-compiler:2.2.2'
+    implementation 'androidx.room:room-runtime:2.2.3'
+    kapt 'androidx.room:room-compiler:2.2.3'
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Coroutines
     ////////////////////////////////////////////////////////////////////////////////////////////////
