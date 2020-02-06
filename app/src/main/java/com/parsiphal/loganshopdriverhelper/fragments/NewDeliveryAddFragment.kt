@@ -205,6 +205,11 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
             newDeliveryAdd_moveFrom.visibility = View.GONE
             newDeliveryAdd_moveTo.visibility = View.VISIBLE
         }
+        newDeliveryAdd_moveFrom_Planernaya.setOnClickListener {
+            delivery.moveFrom = 4
+            newDeliveryAdd_moveFrom.visibility = View.GONE
+            newDeliveryAdd_moveTo.visibility = View.VISIBLE
+        }
     }
 
     private fun moveToListeners() {
@@ -225,6 +230,11 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         }
         newDeliveryAdd_moveTo_Himikov.setOnClickListener {
             delivery.moveTo = 3
+            newDeliveryAdd_moveTo.visibility = View.GONE
+            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+        }
+        newDeliveryAdd_moveTo_Planernaya.setOnClickListener {
+            delivery.moveTo = 4
             newDeliveryAdd_moveTo.visibility = View.GONE
             newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
         }

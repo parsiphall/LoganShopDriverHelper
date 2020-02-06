@@ -60,35 +60,43 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var loganMoveFromKulturi = 0
     private var loganMoveFromSedova = 0
     private var loganMoveFromHimikov = 0
+    private var loganMoveFromPlanernaya = 0
     private var loganMoveToZhukova = 0
     private var loganMoveToKulturi = 0
     private var loganMoveToSedova = 0
     private var loganMoveToHimikov = 0
+    private var loganMoveToPlanernya = 0
     private var vestaMoveFromZhukova = 0
     private var vestaMoveFromKulturi = 0
     private var vestaMoveFromSedova = 0
     private var vestaMoveFromHimikov = 0
+    private var vestaMoveFromPlanernaya = 0
     private var vestaMoveToZhukova = 0
     private var vestaMoveToKulturi = 0
     private var vestaMoveToSedova = 0
     private var vestaMoveToHimikov = 0
+    private var vestaMoveToPlanernaya = 0
     private var loganTaskFromZhukova = 0
     private var loganTaskFromKulturi = 0
     private var loganTaskFromSedova = 0
     private var loganTaskFromHimikov = 0
+    private var loganTaskFromPlanenaya = 0
     private var loganTaskToZhukova = 0
     private var loganTaskToKulturi = 0
     private var loganTaskToSedova = 0
     private var loganTaskToHimikov = 0
+    private var loganTaskToPlanernaya = 0
     private var loganTaskElse = 0
     private var vestaTaskFromZhukova = 0
     private var vestaTaskFromKulturi = 0
     private var vestaTaskFromSedova = 0
     private var vestaTaskFromHimikov = 0
+    private var vestaTaskFromPlanernaya = 0
     private var vestaTaskToZhukova = 0
     private var vestaTaskToKulturi = 0
     private var vestaTaskToSedova = 0
     private var vestaTaskToHimikov = 0
+    private var vestaTaskToPlanernaya = 0
     private var vestaTaskElse = 0
 
     override fun onAttach(context: Context) {
@@ -175,23 +183,27 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
         day_logan_sedova_move_textView.text = loganMoveToSedova.toString()
         day_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
+        day_logan_planernaya_move_textView.text = loganMoveToPlanernya.toString()
         day_vesta_move_textView.text = (vestaMoveWithSalary + vestaMoveWithOutSalary).toString()
         day_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
         day_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
         day_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
         day_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
+        day_vesta_planernaya_move_textView.text = vestaMoveToPlanernaya.toString()
         day_total_move_textView.text = "${totalMoveToPay}(${totalMove})"
         day_logan_task_textView.text = (loganTaskWithSalary + loganTaskWithOutSalary).toString()
         day_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
         day_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
         day_logan_sedova_task_textView.text = loganTaskToSedova.toString()
         day_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
+        day_logan_planernaya_task_textView.text = loganTaskToPlanernaya.toString()
         day_logan_else_task_textView.text = loganTaskElse.toString()
         day_vesta_task_textView.text = (vestaTaskWithSalary + vestaTaskWithOutSalary).toString()
         day_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
         day_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
         day_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
         day_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
+        day_vesta_planernaya_task_textView.text = vestaTaskToPlanernaya.toString()
         day_vesta_else_task_textView.text = vestaTaskElse.toString()
         day_total_task_textView.text = "${totalTaskToPay}(${totalTask})"
         day_expenses_textView.text = (expenseFuel + expenseWash + expenseOther).toString()
@@ -295,6 +307,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Himikov.i) {
                 loganMoveFromHimikov++
             }
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Planernaya.i) {
+                loganMoveFromPlanernaya++
+            }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Zhukova.i) {
                 loganMoveToZhukova++
             }
@@ -306,6 +321,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Himikov.i) {
                 loganMoveToHimikov++
+            }
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Planernaya.i) {
+                loganMoveToPlanernya++
             }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Zhukova.i) {
                 vestaMoveFromZhukova++
@@ -319,6 +337,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Himikov.i) {
                 vestaMoveFromHimikov++
             }
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Planernaya.i) {
+                vestaMoveFromPlanernaya++
+            }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Zhukova.i) {
                 vestaMoveToZhukova++
             }
@@ -330,6 +351,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Himikov.i) {
                 vestaMoveToHimikov++
+            }
+            if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Planernaya.i) {
+                vestaMoveToPlanernaya++
             }
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Zhukova.i) {
                 loganTaskFromZhukova++
@@ -343,6 +367,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Himikov.i) {
                 loganTaskFromHimikov++
             }
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveFrom == Shops.Planernaya.i) {
+                loganTaskFromPlanenaya++
+            }
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Zhukova.i) {
                 loganTaskToZhukova++
             }
@@ -354,6 +381,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             }
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Himikov.i) {
                 loganTaskToHimikov++
+            }
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Planernaya.i) {
+                loganTaskToPlanernaya++
             }
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Other.i) {
                 loganTaskElse++
@@ -370,6 +400,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Himikov.i) {
                 vestaTaskFromHimikov++
             }
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Planernaya.i) {
+                vestaTaskFromPlanernaya++
+            }
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Zhukova.i) {
                 vestaTaskToZhukova++
             }
@@ -381,6 +414,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             }
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Himikov.i) {
                 vestaTaskToHimikov++
+            }
+            if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Planernaya.i) {
+                vestaTaskToPlanernaya++
             }
             if (position.workType == WorkType.Task.i && position.deliveryType == DeliveryType.Vesta.i && position.moveTo == Shops.Other.i) {
                 vestaTaskElse++
@@ -436,39 +472,56 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.expenses = day_tea_textVew.text.toString().toInt()
             total.deltaODO = deltaODO()
             total.carIndex = prefs.carPosition!!
+
             total.loganMoveFromZhukova = loganMoveFromZhukova
             total.loganMoveFromKulturi = loganMoveFromKulturi
             total.loganMoveFromSedova = loganMoveFromSedova
             total.loganMoveFromHimikov = loganMoveFromHimikov
+            total.loganMoveFromPlanernaya = loganMoveFromPlanernaya
+
             total.loganMoveToZhukova = loganMoveToZhukova
             total.loganMoveToKulturi = loganMoveToKulturi
             total.loganMoveToSedova = loganMoveToSedova
             total.loganMoveToHimikov = loganMoveToHimikov
+            total.loganMoveToPlanernaya = loganTaskToPlanernaya
+
             total.vestaMoveFromZhukova = vestaMoveFromZhukova
             total.vestaMoveFromKulturi = vestaMoveFromKulturi
             total.vestaMoveFromSedova = vestaMoveFromSedova
             total.vestaMoveFromHimikov = vestaMoveFromHimikov
+            total.vestaMoveFromPlanernaya = vestaMoveFromPlanernaya
+
             total.vestaMoveToZhukova = vestaMoveToZhukova
             total.vestaMoveToKulturi = vestaMoveToKulturi
             total.vestaMoveToSedova = vestaMoveToSedova
             total.vestaMoveToHimikov = vestaMoveToHimikov
+            total.vestaMoveToPlanernaya = vestaMoveToPlanernaya
+
             total.loganTaskFromZhukova = loganTaskFromZhukova
             total.loganTaskFromKulturi = loganTaskFromKulturi
             total.loganTaskFromSedova = loganTaskFromSedova
             total.loganTaskFromHimikov = loganTaskFromHimikov
+            total.loganTaskFromPlanernaya = loganTaskFromPlanenaya
+
             total.loganTaskToZhukova = loganTaskToZhukova
             total.loganTaskToKulturi = loganTaskToKulturi
             total.loganTaskToSedova = loganTaskToSedova
             total.loganTaskToHimikov = loganTaskToHimikov
+            total.loganTaskToPlanernaya = loganTaskToPlanernaya
+
             total.loganTaskElse = loganTaskElse
             total.vestaTaskFromZhukova = vestaTaskFromZhukova
             total.vestaTaskFromKulturi = vestaTaskFromKulturi
             total.vestaTaskFromSedova = vestaTaskFromSedova
             total.vestaTaskFromHimikov = vestaTaskFromHimikov
+            total.vestaTaskFromPlanernaya = vestaTaskFromPlanernaya
+
             total.vestaTaskToZhukova = vestaTaskToZhukova
             total.vestaTaskToKulturi = vestaTaskToKulturi
             total.vestaTaskToSedova = vestaTaskToSedova
             total.vestaTaskToHimikov = vestaTaskToHimikov
+            total.vestaTaskToPlanernaya = vestaTaskToPlanernaya
+
             total.vestaTaskElse = vestaTaskElse
             DB.getDao().addTotal(total)
             callBackActivity.fragmentPlace(TotalFragment())
@@ -509,23 +562,27 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
         day_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
         day_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
+        day_logan_planernaya_move_textView.text=total.loganMoveToPlanernaya.toString()
         day_vesta_move_textView.text = total.vestaMove.toString()
         day_vesta_zhukova_move_textView.text = total.vestaMoveToZhukova.toString()
         day_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
         day_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
         day_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
+        day_vesta_planernaya_move_textView.text=total.vestaMoveToPlanernaya.toString()
         day_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
         day_logan_task_textView.text = total.loganTask.toString()
         day_logan_zhukova_task_textView.text = total.loganTaskToZhukova.toString()
         day_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
         day_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
         day_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
+        day_logan_planernaya_task_textView.text=total.loganTaskToPlanernaya.toString()
         day_logan_else_task_textView.text = total.loganTaskElse.toString()
         day_vesta_task_textView.text = total.vestaTask.toString()
         day_vesta_zhukova_task_textView.text = total.vestaTaskToZhukova.toString()
         day_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
         day_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
         day_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
+        day_vesta_planernaya_task_textView.text=total.vestaTaskToPlanernaya.toString()
         day_vesta_else_task_textView.text = total.vestaTaskElse.toString()
         day_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
         day_tea_textVew.text = total.expenses.toString()
@@ -564,11 +621,13 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "   ${resources.getString(R.string.logan_divider)}: ${day_logan_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_zhukova)}: ${day_logan_zhukova_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)}: ${day_logan_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${day_logan_planernaya_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)}: ${day_logan_sedova_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_himikov)}: ${day_logan_himikov_move_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}: ${day_vesta_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_zhukova)}: ${day_vesta_zhukova_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)}: ${day_vesta_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${day_vesta_planernaya_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)}: ${day_vesta_sedova_move_textView.text}\n" +
 //                "${resources.getString(R.string.shop_himikov)}: ${day_vesta_himikov_move_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${day_total_move_textView.text}\n" +
@@ -577,12 +636,14 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 "   ${resources.getString(R.string.logan_divider)}: ${day_logan_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_zhukova)}: ${day_logan_zhukova_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)}: ${day_logan_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${day_logan_planernaya_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)}: ${day_logan_sedova_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_himikov)}: ${day_logan_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${day_logan_else_task_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}: ${day_vesta_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_zhukova)}: ${day_vesta_zhukova_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)}: ${day_vesta_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${day_vesta_planernaya_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)}: ${day_vesta_sedova_task_textView.text}\n" +
 //                "${resources.getString(R.string.shop_himikov)}: ${day_vesta_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${day_vesta_else_task_textView.text}\n" +

@@ -184,9 +184,9 @@
         <Button
                 android:id="@+id/newDeliveryAdd_paying_next"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="100sp"
+                android:layout_gravity="center"
                 android:text="@string/writeTo" />
 
     </LinearLayout>
@@ -218,9 +218,9 @@
         <Button
                 android:id="@+id/newDeliveryAdd_address_save"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="100sp"
+                android:layout_gravity="center"
                 android:text="@string/next" />
 
     </LinearLayout>
@@ -248,12 +248,12 @@
                 android:orientation="horizontal">
 
             <Button
-                    android:id="@+id/newDeliveryAdd_moveFrom_Zhukova"
+                    android:id="@+id/newDeliveryAdd_moveFrom_Planernaya"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="100sp"
                     android:layout_weight="1"
-                    android:text="@string/shop_zhukova" />
+                    android:text="@string/shop_planernaya" />
 
             <Button
                     android:id="@+id/newDeliveryAdd_moveFrom_Kulturi"
@@ -277,6 +277,24 @@
                     android:layout_height="100sp"
                     android:layout_weight="1"
                     android:text="@string/shop_sedova" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveFrom_Zhukova"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_zhukova" />
+
 
             <Button
                     android:id="@+id/newDeliveryAdd_moveFrom_Himikov"
@@ -311,12 +329,12 @@
                 android:orientation="horizontal">
 
             <Button
-                    android:id="@+id/newDeliveryAdd_moveTo_Zhukova"
+                    android:id="@+id/newDeliveryAdd_moveTo_Planernaya"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="100sp"
                     android:layout_weight="1"
-                    android:text="@string/shop_zhukova" />
+                    android:text="@string/shop_planernaya" />
 
             <Button
                     android:id="@+id/newDeliveryAdd_moveTo_Kulturi"
@@ -340,6 +358,23 @@
                     android:layout_height="100sp"
                     android:layout_weight="1"
                     android:text="@string/shop_sedova" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveTo_Zhukova"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_zhukova" />
+
 
             <Button
                     android:id="@+id/newDeliveryAdd_moveTo_Himikov"
@@ -566,6 +601,7 @@
                     android:text="@string/holiday_pay" />
 
         </LinearLayout>
+
         <LinearLayout
                 style="?android:attr/buttonBarStyle"
                 android:layout_width="match_parent"

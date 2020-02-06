@@ -41,7 +41,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var holiday = 0
     private var salary = 0
     private var extraPay = 0
-    private var penalty=0
+    private var penalty = 0
     private var teaMoney = 0
     private var deltaODO = 0
     private var totalDeliveries = 0
@@ -60,35 +60,43 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var loganMoveFromKulturi = 0
     private var loganMoveFromSedova = 0
     private var loganMoveFromHimikov = 0
+    private var loganMoveFromPlanernaya = 0
     private var loganMoveToZhukova = 0
     private var loganMoveToKulturi = 0
     private var loganMoveToSedova = 0
     private var loganMoveToHimikov = 0
+    private var loganMoveToPlanernya = 0
     private var vestaMoveFromZhukova = 0
     private var vestaMoveFromKulturi = 0
     private var vestaMoveFromSedova = 0
     private var vestaMoveFromHimikov = 0
+    private var vestaMoveFromPlanernaya = 0
     private var vestaMoveToZhukova = 0
     private var vestaMoveToKulturi = 0
     private var vestaMoveToSedova = 0
     private var vestaMoveToHimikov = 0
+    private var vestaMoveToPlanernaya = 0
     private var loganTaskFromZhukova = 0
     private var loganTaskFromKulturi = 0
     private var loganTaskFromSedova = 0
     private var loganTaskFromHimikov = 0
+    private var loganTaskFromPlanenaya = 0
     private var loganTaskToZhukova = 0
     private var loganTaskToKulturi = 0
     private var loganTaskToSedova = 0
     private var loganTaskToHimikov = 0
+    private var loganTaskToPlanernaya = 0
     private var loganTaskElse = 0
     private var vestaTaskFromZhukova = 0
     private var vestaTaskFromKulturi = 0
     private var vestaTaskFromSedova = 0
     private var vestaTaskFromHimikov = 0
+    private var vestaTaskFromPlanernaya = 0
     private var vestaTaskToZhukova = 0
     private var vestaTaskToKulturi = 0
     private var vestaTaskToSedova = 0
     private var vestaTaskToHimikov = 0
+    private var vestaTaskToPlanernaya = 0
     private var vestaTaskElse = 0
     private var largusExpenseFuel = 0
     private var largusExpenseWash = 0
@@ -147,7 +155,8 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             }
             month_share.visibility = View.GONE
         } else {
-            val search = "${total.date[3]}${total.date[4]}${total.date[5]}${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
+            val search =
+                "${total.date[3]}${total.date[4]}${total.date[5]}${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
             val data = GlobalScope.async {
                 getData(search)
                 calculateExpences()
@@ -200,29 +209,33 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
         month_logan_sedova_move_textView.text = loganMoveToSedova.toString()
         month_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
+        month_logan_planernaya_move_textView.text = loganMoveToPlanernya.toString()
         month_vesta_move_textView.text = vestaMove.toString()
         month_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
         month_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
         month_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
         month_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
+        month_vesta_planernaya_move_textView.text = vestaMoveToPlanernaya.toString()
         month_total_move_textView.text = "${totalMoveWithSalary}(${totalMove})"
         month_logan_task_textView.text = loganTask.toString()
         month_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
         month_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
         month_logan_sedova_task_textView.text = loganTaskToSedova.toString()
         month_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
+        month_logan_planernaya_task_textView.text = loganTaskToPlanernaya.toString()
         month_logan_else_task_textView.text = loganTaskElse.toString()
         month_vesta_task_textView.text = vestaTask.toString()
         month_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
         month_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
         month_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
         month_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
+        month_vesta_planernaya_task_textView.text = vestaTaskToPlanernaya.toString()
         month_vesta_else_task_textView.text = vestaTaskElse.toString()
         month_total_task_textView.text = "${totalTaskWithSalary}(${totalTask})"
         month_salary_textView.text = salary.toString()
         month_tea_textView.text = teaMoney.toString()
         month_extraPay_textView.text = extraPay.toString()
-        month_penalty_textView.text=penalty.toString()
+        month_penalty_textView.text = penalty.toString()
 
         try {
             month_mid_salary_textView.text = if (totalShifts != 0) {
@@ -259,7 +272,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             prepay += position.prepay
             holiday += position.holidayPay
             extraPay += position.extraPay
-            penalty+=position.penalty
+            penalty += position.penalty
             deltaODO += position.deltaODO
             salary += position.salary
             teaMoney += position.expenses
@@ -276,35 +289,43 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             loganMoveFromKulturi += position.loganMoveFromKulturi
             loganMoveFromSedova += position.loganMoveFromSedova
             loganMoveFromHimikov += position.loganMoveFromHimikov
+            loganMoveFromPlanernaya += position.loganMoveFromPlanernaya
             loganMoveToZhukova += position.loganMoveToZhukova
             loganMoveToKulturi += position.loganMoveToKulturi
             loganMoveToSedova += position.loganMoveToSedova
             loganMoveToHimikov += position.loganMoveToHimikov
+            loganMoveToPlanernya += position.loganMoveToPlanernaya
             vestaMoveFromZhukova += position.vestaMoveFromZhukova
             vestaMoveFromKulturi += position.vestaMoveFromKulturi
             vestaMoveFromSedova += position.vestaMoveFromSedova
             vestaMoveFromHimikov += position.vestaMoveFromHimikov
+            vestaMoveFromPlanernaya += position.vestaMoveFromPlanernaya
             vestaMoveToZhukova += position.vestaMoveToZhukova
             vestaMoveToKulturi += position.vestaMoveToKulturi
             vestaMoveToSedova += position.vestaMoveToSedova
             vestaMoveToHimikov += position.vestaMoveToHimikov
+            vestaMoveToPlanernaya += position.vestaMoveToPlanernaya
             loganTaskFromZhukova += position.loganTaskFromZhukova
             loganTaskFromKulturi += position.loganTaskFromKulturi
             loganTaskFromSedova += position.loganTaskFromSedova
             loganTaskFromHimikov += position.loganTaskFromHimikov
+            loganTaskFromPlanenaya += position.loganTaskFromPlanernaya
             loganTaskToZhukova += position.loganTaskToZhukova
             loganTaskToKulturi += position.loganTaskToKulturi
             loganTaskToSedova += position.loganTaskToSedova
             loganTaskToHimikov += position.loganTaskToHimikov
+            loganTaskToPlanernaya += position.loganTaskToPlanernaya
             loganTaskElse += position.loganTaskElse
             vestaTaskFromZhukova += position.vestaTaskFromZhukova
             vestaTaskFromKulturi += position.vestaTaskFromKulturi
             vestaTaskFromSedova += position.vestaTaskFromSedova
             vestaTaskFromHimikov += position.vestaTaskFromHimikov
+            vestaTaskFromPlanernaya += position.vestaTaskFromPlanernaya
             vestaTaskToZhukova += position.vestaTaskToZhukova
             vestaTaskToKulturi += position.vestaTaskToKulturi
             vestaTaskToSedova += position.vestaTaskToSedova
             vestaTaskToHimikov += position.vestaTaskToHimikov
+            vestaTaskToPlanernaya += position.vestaTaskToPlanernaya
             vestaTaskElse += position.vestaTaskElse
         }
     }
@@ -379,47 +400,66 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.salary = month_salary_textView.text.toString().toInt()
             total.expenses = month_tea_textView.text.toString().toInt()
             total.extraPay = month_extraPay_textView.text.toString().toInt()
-            total.penalty=month_penalty_textView.text.toString().toInt()
+            total.penalty = month_penalty_textView.text.toString().toInt()
             total.deltaODO = deltaODO
             total.prepay = month_prepay_textView.text.toString().toInt()
             total.holidayPay = month_holiday_pay_textView.text.toString().toInt()
             total.largusShifts = month_largus_count_textView.text.toString().toInt()
             total.sanderoShifts = month_sandero_count_textView.text.toString().toInt()
             total.xrayShifts = month_xray_count_textView.text.toString().toInt()
+
             total.loganMoveFromZhukova = loganMoveFromZhukova
             total.loganMoveFromKulturi = loganMoveFromKulturi
             total.loganMoveFromSedova = loganMoveFromSedova
             total.loganMoveFromHimikov = loganMoveFromHimikov
+            total.loganMoveFromPlanernaya=loganMoveFromPlanernaya
+
             total.loganMoveToZhukova = loganMoveToZhukova
             total.loganMoveToKulturi = loganMoveToKulturi
             total.loganMoveToSedova = loganMoveToSedova
             total.loganMoveToHimikov = loganMoveToHimikov
+            total.loganMoveToPlanernaya=loganMoveToPlanernya
+
             total.vestaMoveFromZhukova = vestaMoveFromZhukova
             total.vestaMoveFromKulturi = vestaMoveFromKulturi
             total.vestaMoveFromSedova = vestaMoveFromSedova
             total.vestaMoveFromHimikov = vestaMoveFromHimikov
+            total.vestaMoveFromPlanernaya=vestaMoveFromPlanernaya
+
             total.vestaMoveToZhukova = vestaMoveToZhukova
             total.vestaMoveToKulturi = vestaMoveToKulturi
             total.vestaMoveToSedova = vestaMoveToSedova
             total.vestaMoveToHimikov = vestaMoveToHimikov
+            total.vestaMoveToPlanernaya=vestaMoveToPlanernaya
+
             total.loganTaskFromZhukova = loganTaskFromZhukova
             total.loganTaskFromKulturi = loganTaskFromKulturi
             total.loganTaskFromSedova = loganTaskFromSedova
             total.loganTaskFromHimikov = loganTaskFromHimikov
+            total.loganTaskFromPlanernaya=loganTaskFromPlanenaya
+
             total.loganTaskToZhukova = loganTaskToZhukova
             total.loganTaskToKulturi = loganTaskToKulturi
             total.loganTaskToSedova = loganTaskToSedova
             total.loganTaskToHimikov = loganTaskToHimikov
+            total.loganTaskToPlanernaya=loganTaskToPlanernaya
+
             total.loganTaskElse = loganTaskElse
+
             total.vestaTaskFromZhukova = vestaTaskFromZhukova
             total.vestaTaskFromKulturi = vestaTaskFromKulturi
             total.vestaTaskFromSedova = vestaTaskFromSedova
             total.vestaTaskFromHimikov = vestaTaskFromHimikov
+            total.vestaTaskFromPlanernaya=vestaTaskFromPlanernaya
+
             total.vestaTaskToZhukova = vestaTaskToZhukova
             total.vestaTaskToKulturi = vestaTaskToKulturi
             total.vestaTaskToSedova = vestaTaskToSedova
             total.vestaTaskToHimikov = vestaTaskToHimikov
+            total.vestaTaskToPlanernaya=vestaTaskToPlanernaya
+
             total.vestaTaskElse = vestaTaskElse
+
             DB.getDao().addTotal(total)
             callBackActivity.fragmentPlace(TotalFragment())
             Snackbar.make(view!!, getString(R.string.total_calc_and_save), Snackbar.LENGTH_SHORT)
@@ -436,29 +476,41 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_family_textView.text = prefs.family
         month_total_shifts_value_textView.text = total.totalShifts.toString()
         month_total_delivery_value_textView.text = total.totalDeliveries.toString()
+
         month_logan_move_textView.text = total.loganMove.toString()
         month_logan_zhukova_move_textView.text = total.loganMoveToZhukova.toString()
         month_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
         month_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
         month_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
+        month_logan_planernaya_move_textView.text=total.loganMoveToPlanernaya.toString()
+
         month_vesta_move_textView.text = total.vestaMove.toString()
         month_vesta_zhukova_move_textView.text = total.vestaMoveToZhukova.toString()
         month_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
         month_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
         month_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
+        month_vesta_planernaya_move_textView.text=total.vestaMoveToPlanernaya.toString()
+
         month_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
+
         month_logan_task_textView.text = total.loganTask.toString()
         month_logan_zhukova_task_textView.text = total.loganTaskToZhukova.toString()
         month_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
         month_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
         month_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
+        month_logan_planernaya_task_textView.text=total.loganTaskToPlanernaya.toString()
+
         month_logan_else_task_textView.text = total.loganTaskElse.toString()
+
         month_vesta_task_textView.text = total.vestaTask.toString()
         month_vesta_zhukova_task_textView.text = total.vestaTaskToZhukova.toString()
         month_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
         month_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
         month_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
+        month_vesta_planernaya_task_textView.text=total.vestaTaskToPlanernaya.toString()
+
         month_vesta_else_task_textView.text = total.vestaTaskElse.toString()
+
         month_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
         month_total_money_textView.text = total.totalMoney.toString()
         month_total_cash_textView.text = total.totalCash.toString()
@@ -479,7 +531,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_prepay_textView.text = total.prepay.toString()
         month_holiday_pay_textView.text = total.holidayPay.toString()
         month_extraPay_textView.text = total.extraPay.toString()
-        month_penalty_textView.text=total.penalty.toString()
+        month_penalty_textView.text = total.penalty.toString()
         month_to_recieve_textView.text = "${total.salary - total.prepay}"
         month_largus_count_textView.text = total.largusShifts.toString()
         month_sandero_count_textView.text = total.sanderoShifts.toString()
@@ -515,11 +567,13 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "   ${resources.getString(R.string.logan_divider)}: ${month_logan_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_zhukova)}: ${month_logan_zhukova_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)}: ${month_logan_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${month_logan_planernaya_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)}: ${month_logan_sedova_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_himikov)}: ${month_logan_himikov_move_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}: ${month_vesta_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_zhukova)}: ${month_vesta_zhukova_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)}: ${month_vesta_kulturi_move_textView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${month_vesta_planernaya_move_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)}: ${month_vesta_sedova_move_textView.text}\n" +
 //                "${resources.getString(R.string.shop_himikov)}: ${month_vesta_himikov_move_textView.text}\n" +
                 "${resources.getString(R.string.total_total)} ${month_total_move_textView.text}\n" +
@@ -528,12 +582,14 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "   ${resources.getString(R.string.logan_divider)}: ${month_logan_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_zhukova)}: ${month_logan_zhukova_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)} :${month_logan_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${month_logan_planernaya_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)}: ${month_logan_sedova_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_himikov)}: ${month_logan_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${month_logan_else_task_textView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}: ${month_vesta_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_zhukova)}: ${month_vesta_zhukova_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_kulturi)}: ${month_vesta_kulturi_task_textView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${month_vesta_planernaya_task_textView.text}\n" +
                 "${resources.getString(R.string.shop_sedova)}: ${month_vesta_sedova_task_textView.text}\n" +
 //                "${resources.getString(R.string.shop_himikov)}: ${month_vesta_himikov_task_textView.text}\n" +
                 "${resources.getString(R.string.switch_else)}: ${month_vesta_else_task_textView.text}\n" +

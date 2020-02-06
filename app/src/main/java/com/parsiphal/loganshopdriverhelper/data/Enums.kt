@@ -10,7 +10,7 @@ enum class DeliveryType(val i: Int) { Logan(0), Vesta(1) }
 
 enum class PayType(val i: Int) { Cash(0), Card(1) }
 
-enum class Shops(val i: Int) { Zhukova(0), Kulturi(1), Sedova(2), Himikov(3), Other(4) }
+enum class Shops(val i: Int) { Other(-1), Zhukova(0), Kulturi(1), Sedova(2), Himikov(3), Planernaya(4) }
 
 enum class Expenses(val i: Int) { Fuel(0), Wash(1), Other(2) }
 

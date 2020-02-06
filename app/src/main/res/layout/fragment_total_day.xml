@@ -368,9 +368,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_logan_sedova_move"
+                    android:id="@+id/day_logan_planernaya_move"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_logan_kulturi_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_planernaya" />
+
+                <TextView
+                        android:id="@+id/day_logan_planernaya_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_logan_sedova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_logan_planernaya_move">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -439,9 +453,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_vesta_sedova_move"
+                    android:id="@+id/day_vesta_planernaya_move"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_vesta_kulturi_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_planernaya" />
+
+                <TextView
+                        android:id="@+id/day_vesta_planernaya_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_vesta_sedova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_vesta_planernaya_move">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -535,9 +563,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_logan_sedova_task"
+                    android:id="@+id/day_logan_planernaya_task"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_logan_kulturi_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_planernaya" />
+
+                <TextView
+                        android:id="@+id/day_logan_planernaya_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_logan_sedova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_logan_planernaya_task">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -620,9 +662,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_vesta_sedova_task"
+                    android:id="@+id/day_vesta_planernaya_task"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_vesta_kulturi_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_planernaya" />
+
+                <TextView
+                        android:id="@+id/day_vesta_planernaya_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_vesta_sedova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_vesta_planernaya_task">
 
                 <TextView
                         style="@style/dayAndMonthTextView"

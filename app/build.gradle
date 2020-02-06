@@ -12,8 +12,8 @@ android {
         applicationId "com.parsiphal.loganshopdriverhelper2"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 202001311
-        versionName "0.3.22"
+        versionCode 202002061
+        versionName "0.3.23"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

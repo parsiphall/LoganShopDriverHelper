@@ -83,10 +83,10 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
             newDelivery_comment.setText(delivery.commentSimple)
             newDelivery_expense_spinner.setSelection(delivery.expenseType)
             newDelivery_isSalary_CheckBox.isChecked = delivery.ifSalary != 1
-            if (delivery.moveFrom != 4) {
+            if (delivery.moveFrom != -1) {
                 newDelivery_move_from_spinner.setSelection(delivery.moveFrom)
             }
-            if (delivery.moveTo != 4) {
+            if (delivery.moveTo != -1) {
                 newDelivery_move_to_spinner.setSelection(delivery.moveTo)
             }
         }
@@ -190,8 +190,8 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                         delivery.deliveryType =
                             newDelivery_delivery_type_spinner.selectedItemPosition
                         if (newDelivery_move_task_switch.isChecked) {
-                            delivery.moveFrom = 4
-                            delivery.moveTo = 4
+                            delivery.moveFrom = -1
+                            delivery.moveTo = -1
                         } else {
                             delivery.moveFrom = newDelivery_move_from_spinner.selectedItemPosition
                             delivery.moveTo = newDelivery_move_to_spinner.selectedItemPosition

@@ -103,6 +103,7 @@
     <string name="addingNotes">Добавление записей</string>
     <string name="oldSystem">Старая</string>
     <string name="newSystem">Новая</string>
+    <string name="shop_planernaya">Планерная</string>
 
     <string-array name="region">
         <item>Север</item>
@@ -163,6 +164,7 @@
         <item>Культуры</item>
         <item>Седова</item>
         <item>Химиков</item>
+        <item>Планерная</item>
     </string-array>
     <string-array name="expenses">
         <item>Бензин</item>
