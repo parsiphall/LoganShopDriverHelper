@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
 import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
-import com.parsiphal.loganshopdriverhelper.data.Delivery
+import com.parsiphal.loganshopdriverhelper.data.*
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import kotlinx.android.synthetic.main.fragment_new_delivery_add.*
@@ -66,32 +66,32 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
 
     private fun workTypeListeners() {
         newDeliveryAdd_workType_deliveryButton.setOnClickListener {
-            delivery.workType = 0
+            delivery.workType = WorkType.Delivery.i
             newDeliveryAdd_workType.visibility = View.GONE
             newDeliveryAdd_deliveryType.visibility = View.VISIBLE
         }
         newDeliveryAdd_workType_moveButton.setOnClickListener {
-            delivery.workType = 1
+            delivery.workType = WorkType.Move.i
             newDeliveryAdd_workType.visibility = View.GONE
             newDeliveryAdd_deliveryType.visibility = View.VISIBLE
         }
         newDeliveryAdd_workType_taskButton.setOnClickListener {
-            delivery.workType = 2
+            delivery.workType = WorkType.Task.i
             newDeliveryAdd_workType.visibility = View.GONE
             newDeliveryAdd_deliveryType.visibility = View.VISIBLE
         }
         newDeliveryAdd_workType_expenseButton.setOnClickListener {
-            delivery.workType = 3
+            delivery.workType = WorkType.Expense.i
             newDeliveryAdd_workType.visibility = View.GONE
             newDeliveryAdd_expense.visibility = View.VISIBLE
         }
         newDeliveryAdd_workType_payButton.setOnClickListener {
-            delivery.workType = 5
+            delivery.workType = WorkType.Salary.i
             newDeliveryAdd_workType.visibility = View.GONE
             newDeliveryAdd_pay.visibility = View.VISIBLE
         }
         newDeliveryAdd_workType_otherButton.setOnClickListener {
-            delivery.workType = 4
+            delivery.workType = WorkType.Other.i
             newDeliveryAdd_workType.visibility = View.GONE
             newDeliveryAdd_other.visibility = View.VISIBLE
         }
@@ -102,10 +102,10 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
             delivery.deliveryType = 0
             newDeliveryAdd_deliveryType.visibility = View.GONE
             when (delivery.workType) {
-                0 -> {
+                WorkType.Delivery.i -> {
                     newDeliveryAdd_payType.visibility = View.VISIBLE
                 }
-                1 -> {
+                WorkType.Move.i -> {
                     newDeliveryAdd_moveFrom.visibility = View.VISIBLE
                 }
                 else -> {
@@ -117,10 +117,10 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
             delivery.deliveryType = 1
             newDeliveryAdd_deliveryType.visibility = View.GONE
             when (delivery.workType) {
-                0 -> {
+                WorkType.Delivery.i -> {
                     newDeliveryAdd_payType.visibility = View.VISIBLE
                 }
-                1 -> {
+                WorkType.Move.i -> {
                     newDeliveryAdd_moveFrom.visibility = View.VISIBLE
                     newDeliveryAdd_moveFrom_Himikov.visibility = View.GONE
                     newDeliveryAdd_moveTo_Himikov.visibility = View.GONE
@@ -136,12 +136,12 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
 
     private fun payTypeListeners() {
         newDeliveryAdd_payType_cash.setOnClickListener {
-            delivery.payType = 0
+            delivery.payType = PayType.Cash.i
             newDeliveryAdd_payType.visibility = View.GONE
             newDeliveryAdd_address.visibility = View.VISIBLE
         }
         newDeliveryAdd_payType_card.setOnClickListener {
-            delivery.payType = 1
+            delivery.payType = PayType.Card.i
             newDeliveryAdd_payType.visibility = View.GONE
             newDeliveryAdd_address.visibility = View.VISIBLE
         }
@@ -186,27 +186,27 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
 
     private fun moveFromListeners() {
         newDeliveryAdd_moveFrom_Zhukova.setOnClickListener {
-            delivery.moveFrom = 0
+            delivery.moveFrom = Shops.Zhukova.i
             newDeliveryAdd_moveFrom.visibility = View.GONE
             newDeliveryAdd_moveTo.visibility = View.VISIBLE
         }
         newDeliveryAdd_moveFrom_Kulturi.setOnClickListener {
-            delivery.moveFrom = 1
+            delivery.moveFrom = Shops.Kulturi.i
             newDeliveryAdd_moveFrom.visibility = View.GONE
             newDeliveryAdd_moveTo.visibility = View.VISIBLE
         }
         newDeliveryAdd_moveFrom_Sedova.setOnClickListener {
-            delivery.moveFrom = 2
+            delivery.moveFrom = Shops.Sedova.i
             newDeliveryAdd_moveFrom.visibility = View.GONE
             newDeliveryAdd_moveTo.visibility = View.VISIBLE
         }
         newDeliveryAdd_moveFrom_Himikov.setOnClickListener {
-            delivery.moveFrom = 3
+            delivery.moveFrom = Shops.Himikov.i
             newDeliveryAdd_moveFrom.visibility = View.GONE
             newDeliveryAdd_moveTo.visibility = View.VISIBLE
         }
         newDeliveryAdd_moveFrom_Planernaya.setOnClickListener {
-            delivery.moveFrom = 4
+            delivery.moveFrom = Shops.Planernaya.i
             newDeliveryAdd_moveFrom.visibility = View.GONE
             newDeliveryAdd_moveTo.visibility = View.VISIBLE
         }
@@ -214,27 +214,27 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
 
     private fun moveToListeners() {
         newDeliveryAdd_moveTo_Zhukova.setOnClickListener {
-            delivery.moveTo = 0
+            delivery.moveTo = Shops.Zhukova.i
             newDeliveryAdd_moveTo.visibility = View.GONE
             newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
         }
         newDeliveryAdd_moveTo_Kulturi.setOnClickListener {
-            delivery.moveTo = 1
+            delivery.moveTo = Shops.Kulturi.i
             newDeliveryAdd_moveTo.visibility = View.GONE
             newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
         }
         newDeliveryAdd_moveTo_Sedova.setOnClickListener {
-            delivery.moveTo = 2
+            delivery.moveTo = Shops.Sedova.i
             newDeliveryAdd_moveTo.visibility = View.GONE
             newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
         }
         newDeliveryAdd_moveTo_Himikov.setOnClickListener {
-            delivery.moveTo = 3
+            delivery.moveTo = Shops.Himikov.i
             newDeliveryAdd_moveTo.visibility = View.GONE
             newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
         }
         newDeliveryAdd_moveTo_Planernaya.setOnClickListener {
-            delivery.moveTo = 4
+            delivery.moveTo = Shops.Planernaya.i
             newDeliveryAdd_moveTo.visibility = View.GONE
             newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
         }
@@ -307,8 +307,8 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         }
         newDeliveryAdd_moveTaskType_no.setOnClickListener {
             isBetweenShops = false
-            delivery.moveFrom = 4
-            delivery.moveTo = 4
+            delivery.moveFrom = Shops.Other.i
+            delivery.moveTo = Shops.Other.i
             newDeliveryAdd_taskType.visibility = View.GONE
             newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
         }
@@ -319,7 +319,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
             try {
                 delivery.commentSimple = newDeliveryAdd_expense_comment.text.toString()
                 delivery.cost = newDeliveryAdd_expense_cost.text.toString().toInt()
-                delivery.expenseType = 0
+                delivery.expenseType = Expenses.Fuel.i
                 if (newDeliveryAdd_expense_comment.text.toString() == "") {
                     delivery.comment = resources.getStringArray(R.array.expenses)[0]
                 } else {
@@ -336,7 +336,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
             try {
                 delivery.commentSimple = newDeliveryAdd_expense_comment.text.toString()
                 delivery.cost = newDeliveryAdd_expense_cost.text.toString().toInt()
-                delivery.expenseType = 1
+                delivery.expenseType = Expenses.Wash.i
                 if (newDeliveryAdd_expense_comment.text.toString() == "") {
                     delivery.comment = resources.getStringArray(R.array.expenses)[1]
                 } else {
@@ -353,7 +353,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
             try {
                 delivery.commentSimple = newDeliveryAdd_expense_comment.text.toString()
                 delivery.cost = newDeliveryAdd_expense_cost.text.toString().toInt()
-                delivery.expenseType = 2
+                delivery.expenseType = Expenses.Other.i
                 if (newDeliveryAdd_expense_comment.text.toString() == "") {
                     delivery.comment = resources.getStringArray(R.array.expenses)[2]
                 } else {
@@ -371,7 +371,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
     private fun payListeners() {
         newDeliveryAdd_pay_prePay.setOnClickListener {
             try {
-                delivery.deliveryType = 0
+                delivery.deliveryType = SalaryType.Prepay.i
                 delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
                 delivery.comment = newDeliveryAdd_pay_comment.text.toString()
                 delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
@@ -383,7 +383,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         }
         newDeliveryAdd_pay_holidayPay.setOnClickListener {
             try {
-                delivery.deliveryType = 1
+                delivery.deliveryType = SalaryType.Holiday.i
                 delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
                 delivery.comment = newDeliveryAdd_pay_comment.text.toString()
                 delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
@@ -395,7 +395,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         }
         newDeliveryAdd_pay_extraPay.setOnClickListener {
             try {
-                delivery.deliveryType = 2
+                delivery.deliveryType = SalaryType.Extra.i
                 delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
                 delivery.comment = newDeliveryAdd_pay_comment.text.toString()
                 delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
@@ -407,7 +407,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         }
         newDeliveryAdd_pay_penalty.setOnClickListener {
             try {
-                delivery.deliveryType = 3
+                delivery.deliveryType = SalaryType.Penalty.i
                 delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
                 delivery.comment = newDeliveryAdd_pay_comment.text.toString()
                 delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
