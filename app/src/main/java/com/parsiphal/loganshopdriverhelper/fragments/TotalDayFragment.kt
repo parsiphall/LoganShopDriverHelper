@@ -65,7 +65,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var loganMoveToKulturi = 0
     private var loganMoveToSedova = 0
     private var loganMoveToHimikov = 0
-    private var loganMoveToPlanernya = 0
+    private var loganMoveToPlanernaya = 0
     private var vestaMoveFromZhukova = 0
     private var vestaMoveFromKulturi = 0
     private var vestaMoveFromSedova = 0
@@ -183,7 +183,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
         day_logan_sedova_move_textView.text = loganMoveToSedova.toString()
         day_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
-        day_logan_planernaya_move_textView.text = loganMoveToPlanernya.toString()
+        day_logan_planernaya_move_textView.text = loganMoveToPlanernaya.toString()
         day_vesta_move_textView.text = (vestaMoveWithSalary + vestaMoveWithOutSalary).toString()
         day_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
         day_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
@@ -323,7 +323,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
                 loganMoveToHimikov++
             }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Logan.i && position.moveTo == Shops.Planernaya.i) {
-                loganMoveToPlanernya++
+                loganMoveToPlanernaya++
             }
             if (position.workType == WorkType.Move.i && position.deliveryType == DeliveryType.Vesta.i && position.moveFrom == Shops.Zhukova.i) {
                 vestaMoveFromZhukova++
@@ -483,7 +483,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.loganMoveToKulturi = loganMoveToKulturi
             total.loganMoveToSedova = loganMoveToSedova
             total.loganMoveToHimikov = loganMoveToHimikov
-            total.loganMoveToPlanernaya = loganTaskToPlanernaya
+            total.loganMoveToPlanernaya = loganMoveToPlanernaya
 
             total.vestaMoveFromZhukova = vestaMoveFromZhukova
             total.vestaMoveFromKulturi = vestaMoveFromKulturi
@@ -557,33 +557,42 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_expenses_wash_textView.text = total.expensesWash.toString()
         day_expenses_other_textView.text = total.expensesOther.toString()
         day_total_deliveries_textVew.text = total.totalDeliveries.toString()
+
         day_logan_move_textView.text = total.loganMove.toString()
+
         day_logan_zhukova_move_textView.text = total.loganMoveToZhukova.toString()
         day_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
         day_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
         day_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
         day_logan_planernaya_move_textView.text=total.loganMoveToPlanernaya.toString()
+
         day_vesta_move_textView.text = total.vestaMove.toString()
+
         day_vesta_zhukova_move_textView.text = total.vestaMoveToZhukova.toString()
         day_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
         day_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
         day_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
         day_vesta_planernaya_move_textView.text=total.vestaMoveToPlanernaya.toString()
+
         day_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
         day_logan_task_textView.text = total.loganTask.toString()
+
         day_logan_zhukova_task_textView.text = total.loganTaskToZhukova.toString()
         day_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
         day_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
         day_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
         day_logan_planernaya_task_textView.text=total.loganTaskToPlanernaya.toString()
         day_logan_else_task_textView.text = total.loganTaskElse.toString()
+
         day_vesta_task_textView.text = total.vestaTask.toString()
+
         day_vesta_zhukova_task_textView.text = total.vestaTaskToZhukova.toString()
         day_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
         day_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
         day_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
         day_vesta_planernaya_task_textView.text=total.vestaTaskToPlanernaya.toString()
         day_vesta_else_task_textView.text = total.vestaTaskElse.toString()
+
         day_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
         day_tea_textVew.text = total.expenses.toString()
         day_salary_textView.text = total.salary.toString()
