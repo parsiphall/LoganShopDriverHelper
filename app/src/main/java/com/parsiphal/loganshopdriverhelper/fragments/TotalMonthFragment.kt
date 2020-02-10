@@ -412,37 +412,37 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.loganMoveFromKulturi = loganMoveFromKulturi
             total.loganMoveFromSedova = loganMoveFromSedova
             total.loganMoveFromHimikov = loganMoveFromHimikov
-            total.loganMoveFromPlanernaya=loganMoveFromPlanernaya
+            total.loganMoveFromPlanernaya = loganMoveFromPlanernaya
 
             total.loganMoveToZhukova = loganMoveToZhukova
             total.loganMoveToKulturi = loganMoveToKulturi
             total.loganMoveToSedova = loganMoveToSedova
             total.loganMoveToHimikov = loganMoveToHimikov
-            total.loganMoveToPlanernaya=loganMoveToPlanernya
+            total.loganMoveToPlanernaya = loganMoveToPlanernya
 
             total.vestaMoveFromZhukova = vestaMoveFromZhukova
             total.vestaMoveFromKulturi = vestaMoveFromKulturi
             total.vestaMoveFromSedova = vestaMoveFromSedova
             total.vestaMoveFromHimikov = vestaMoveFromHimikov
-            total.vestaMoveFromPlanernaya=vestaMoveFromPlanernaya
+            total.vestaMoveFromPlanernaya = vestaMoveFromPlanernaya
 
             total.vestaMoveToZhukova = vestaMoveToZhukova
             total.vestaMoveToKulturi = vestaMoveToKulturi
             total.vestaMoveToSedova = vestaMoveToSedova
             total.vestaMoveToHimikov = vestaMoveToHimikov
-            total.vestaMoveToPlanernaya=vestaMoveToPlanernaya
+            total.vestaMoveToPlanernaya = vestaMoveToPlanernaya
 
             total.loganTaskFromZhukova = loganTaskFromZhukova
             total.loganTaskFromKulturi = loganTaskFromKulturi
             total.loganTaskFromSedova = loganTaskFromSedova
             total.loganTaskFromHimikov = loganTaskFromHimikov
-            total.loganTaskFromPlanernaya=loganTaskFromPlanenaya
+            total.loganTaskFromPlanernaya = loganTaskFromPlanenaya
 
             total.loganTaskToZhukova = loganTaskToZhukova
             total.loganTaskToKulturi = loganTaskToKulturi
             total.loganTaskToSedova = loganTaskToSedova
             total.loganTaskToHimikov = loganTaskToHimikov
-            total.loganTaskToPlanernaya=loganTaskToPlanernaya
+            total.loganTaskToPlanernaya = loganTaskToPlanernaya
 
             total.loganTaskElse = loganTaskElse
 
@@ -450,13 +450,13 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.vestaTaskFromKulturi = vestaTaskFromKulturi
             total.vestaTaskFromSedova = vestaTaskFromSedova
             total.vestaTaskFromHimikov = vestaTaskFromHimikov
-            total.vestaTaskFromPlanernaya=vestaTaskFromPlanernaya
+            total.vestaTaskFromPlanernaya = vestaTaskFromPlanernaya
 
             total.vestaTaskToZhukova = vestaTaskToZhukova
             total.vestaTaskToKulturi = vestaTaskToKulturi
             total.vestaTaskToSedova = vestaTaskToSedova
             total.vestaTaskToHimikov = vestaTaskToHimikov
-            total.vestaTaskToPlanernaya=vestaTaskToPlanernaya
+            total.vestaTaskToPlanernaya = vestaTaskToPlanernaya
 
             total.vestaTaskElse = vestaTaskElse
 
@@ -482,14 +482,14 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
         month_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
         month_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
-        month_logan_planernaya_move_textView.text=total.loganMoveToPlanernaya.toString()
+        month_logan_planernaya_move_textView.text = total.loganMoveToPlanernaya.toString()
 
         month_vesta_move_textView.text = total.vestaMove.toString()
         month_vesta_zhukova_move_textView.text = total.vestaMoveToZhukova.toString()
         month_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
         month_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
         month_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
-        month_vesta_planernaya_move_textView.text=total.vestaMoveToPlanernaya.toString()
+        month_vesta_planernaya_move_textView.text = total.vestaMoveToPlanernaya.toString()
 
         month_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
 
@@ -498,7 +498,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
         month_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
         month_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
-        month_logan_planernaya_task_textView.text=total.loganTaskToPlanernaya.toString()
+        month_logan_planernaya_task_textView.text = total.loganTaskToPlanernaya.toString()
 
         month_logan_else_task_textView.text = total.loganTaskElse.toString()
 
@@ -507,7 +507,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
         month_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
         month_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
-        month_vesta_planernaya_task_textView.text=total.vestaTaskToPlanernaya.toString()
+        month_vesta_planernaya_task_textView.text = total.vestaTaskToPlanernaya.toString()
 
         month_vesta_else_task_textView.text = total.vestaTaskElse.toString()
 
@@ -612,7 +612,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
                 "${resources.getString(R.string.prepay)}: ${month_prepay_textView.text}\n" +
                 "${resources.getString(R.string.holiday_pay)}: ${month_holiday_pay_textView.text}\n" +
-                "${resources.getString(R.string.extraPay)}: ${month_extraPay_textView.text}\n" +
+//                "${resources.getString(R.string.extraPay)}: ${month_extraPay_textView.text}\n" +
                 "${resources.getString(R.string.penalty)}: ${month_penalty_textView.text}\n" +
                 "${resources.getString(R.string.money_to_recieve)} ${month_to_recieve_textView.text}"
         val sendIntent = Intent()

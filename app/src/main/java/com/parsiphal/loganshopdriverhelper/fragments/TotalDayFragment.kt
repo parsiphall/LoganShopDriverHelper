@@ -673,10 +673,10 @@ class TotalDayFragment : MvpAppCompatFragment() {
             textToSend += "\n" +
                     "${resources.getString(R.string.holiday_pay)}: ${day_holiday_textVew.text}"
         }
-        if (day_extraPay_textView.text.toString().toInt() != 0) {
-            textToSend += "\n" +
-                    "${resources.getText(R.string.extraPay)}: ${day_extraPay_textView.text}"
-        }
+//        if (day_extraPay_textView.text.toString().toInt() != 0) {
+//            textToSend += "\n" +
+//                    "${resources.getText(R.string.extraPay)}: ${day_extraPay_textView.text}"
+//        }
         if (day_penalty_textView.text.toString().toInt() != 0) {
             textToSend += "\n" +
                     "${resources.getText(R.string.penalty)}: ${day_penalty_textView.text}"
