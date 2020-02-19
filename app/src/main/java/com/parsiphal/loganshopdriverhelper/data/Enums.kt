@@ -4,7 +4,7 @@ enum class Cars(val i: Int) { Largus(0), Sandero(1), XRay(2) }
 
 enum class WorkType(val i: Int) { Delivery(0), Move(1), Task(2), Expense(3), Other(4), Salary(5) }
 
-enum class SalaryType(val i: Int) { Prepay(0), Holiday(1), Extra(2), Penalty(3) }
+enum class SalaryType(val i: Int) { Prepay(0), Holiday(1), Extra(2), Penalty(3), Quality(4) }
 
 enum class DeliveryType(val i: Int) { Logan(0), Vesta(1) }
 

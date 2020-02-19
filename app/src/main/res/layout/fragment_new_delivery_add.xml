@@ -617,6 +617,14 @@
                     android:text="@string/extraPay" />
 
             <Button
+                    android:id="@+id/newDeliveryAdd_pay_qualityPay"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/qualityPay" />
+
+            <Button
                     android:id="@+id/newDeliveryAdd_pay_penalty"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"

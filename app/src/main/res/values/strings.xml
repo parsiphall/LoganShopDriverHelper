@@ -104,6 +104,7 @@
     <string name="oldSystem">Старая</string>
     <string name="newSystem">Новая</string>
     <string name="shop_planernaya">Планерная</string>
+    <string name="qualityPay">Качество</string>
 
     <string-array name="region">
         <item>Север</item>
@@ -129,6 +130,7 @@
         <item>Отпускные</item>
         <item>Премия</item>
         <item>Штраф</item>
+        <item>Качество</item>
     </string-array>
     <string-array name="delivery_type">
         <item>Logan</item>

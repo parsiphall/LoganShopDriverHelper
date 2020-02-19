@@ -417,6 +417,18 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
         }
+        newDeliveryAdd_pay_qualityPay.setOnClickListener {
+            try {
+                delivery.deliveryType = SalaryType.Quality.i
+                delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
+                delivery.comment = newDeliveryAdd_pay_comment.text.toString()
+                delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
+                save()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun otherListeners() {

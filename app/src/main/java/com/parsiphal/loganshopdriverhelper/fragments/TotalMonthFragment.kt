@@ -41,6 +41,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var holiday = 0
     private var salary = 0
     private var extraPay = 0
+    private var qualityPay=0
     private var penalty = 0
     private var teaMoney = 0
     private var deltaODO = 0
@@ -235,6 +236,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_salary_textView.text = salary.toString()
         month_tea_textView.text = teaMoney.toString()
         month_extraPay_textView.text = extraPay.toString()
+        month_qualityPay_textView.text=qualityPay.toString()
         month_penalty_textView.text = penalty.toString()
 
         try {
@@ -253,10 +255,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private fun calculateSum() {
         totalShifts = totals.size
         for (position in totals) {
-            when {
-                position.carIndex == Cars.Largus.i -> largusShifts++
-                position.carIndex == Cars.Sandero.i -> sanderoShifts++
-                position.carIndex == Cars.XRay.i -> xrayShifts++
+            when (position.carIndex) {
+                Cars.Largus.i -> largusShifts++
+                Cars.Sandero.i -> sanderoShifts++
+                Cars.XRay.i -> xrayShifts++
             }
             totalMoney += position.totalMoney
             totalCash += position.totalCash
@@ -272,6 +274,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             prepay += position.prepay
             holiday += position.holidayPay
             extraPay += position.extraPay
+            qualityPay+=position.qualityPay
             penalty += position.penalty
             deltaODO += position.deltaODO
             salary += position.salary
@@ -400,6 +403,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.salary = month_salary_textView.text.toString().toInt()
             total.expenses = month_tea_textView.text.toString().toInt()
             total.extraPay = month_extraPay_textView.text.toString().toInt()
+            total.qualityPay=month_qualityPay_textView.text.toString().toInt()
             total.penalty = month_penalty_textView.text.toString().toInt()
             total.deltaODO = deltaODO
             total.prepay = month_prepay_textView.text.toString().toInt()
@@ -531,6 +535,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_prepay_textView.text = total.prepay.toString()
         month_holiday_pay_textView.text = total.holidayPay.toString()
         month_extraPay_textView.text = total.extraPay.toString()
+        month_qualityPay_textView.text=total.qualityPay.toString()
         month_penalty_textView.text = total.penalty.toString()
         month_to_recieve_textView.text = "${total.salary - total.prepay}"
         month_largus_count_textView.text = total.largusShifts.toString()
@@ -612,7 +617,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
                 "${resources.getString(R.string.prepay)}: ${month_prepay_textView.text}\n" +
                 "${resources.getString(R.string.holiday_pay)}: ${month_holiday_pay_textView.text}\n" +
-//                "${resources.getString(R.string.extraPay)}: ${month_extraPay_textView.text}\n" +
+                "${resources.getString(R.string.qualityPay)}: ${month_qualityPay_textView.text}\n" +
                 "${resources.getString(R.string.penalty)}: ${month_penalty_textView.text}\n" +
                 "${resources.getString(R.string.money_to_recieve)} ${month_to_recieve_textView.text}"
         val sendIntent = Intent()

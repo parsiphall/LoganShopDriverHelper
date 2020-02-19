@@ -92,5 +92,6 @@ data class Total(
     @ColumnInfo var loganTaskFromPlanernaya: Int = 0,
     @ColumnInfo var loganTaskToPlanernaya: Int = 0,
     @ColumnInfo var vestaTaskFromPlanernaya: Int = 0,
-    @ColumnInfo var vestaTaskToPlanernaya: Int = 0
+    @ColumnInfo var vestaTaskToPlanernaya: Int = 0,
+    @ColumnInfo var qualityPay: Int = 0
 ) : Serializable

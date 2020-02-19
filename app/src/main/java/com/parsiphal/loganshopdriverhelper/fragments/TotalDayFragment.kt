@@ -55,6 +55,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var prepay = 0
     private var holiday = 0
     private var extraPay = 0
+    private var qualityPay=0
     private var penalty = 0
     private var loganMoveFromZhukova = 0
     private var loganMoveFromKulturi = 0
@@ -214,6 +215,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_prepay_textVew.text = prepay.toString()
         day_holiday_textVew.text = holiday.toString()
         day_extraPay_textView.text = extraPay.toString()
+        day_qualityPay_textView.text=qualityPay.toString()
         day_penalty_textView.text = penalty.toString()
     }
 
@@ -291,6 +293,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
             }
             if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Extra.i) {
                 extraPay += position.cost
+            }
+            if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Quality.i) {
+                qualityPay += position.cost
             }
             if (position.workType == WorkType.Salary.i && position.deliveryType == SalaryType.Penalty.i) {
                 penalty += position.cost
@@ -468,6 +473,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.prepay = prepay
             total.holidayPay = holiday
             total.extraPay = extraPay
+            total.qualityPay=qualityPay
             total.penalty = penalty
             total.expenses = day_tea_textVew.text.toString().toInt()
             total.deltaODO = deltaODO()
@@ -599,6 +605,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_prepay_textVew.text = total.prepay.toString()
         day_holiday_textVew.text = total.holidayPay.toString()
         day_extraPay_textView.text = total.extraPay.toString()
+        day_qualityPay_textView.text=total.qualityPay.toString()
         day_penalty_textView.text = total.penalty.toString()
     }
 
@@ -673,10 +680,10 @@ class TotalDayFragment : MvpAppCompatFragment() {
             textToSend += "\n" +
                     "${resources.getString(R.string.holiday_pay)}: ${day_holiday_textVew.text}"
         }
-//        if (day_extraPay_textView.text.toString().toInt() != 0) {
-//            textToSend += "\n" +
-//                    "${resources.getText(R.string.extraPay)}: ${day_extraPay_textView.text}"
-//        }
+        if (day_qualityPay_textView.text.toString().toInt() != 0) {
+            textToSend += "\n" +
+                    "${resources.getText(R.string.qualityPay)}: ${day_qualityPay_textView.text}"
+        }
         if (day_penalty_textView.text.toString().toInt() != 0) {
             textToSend += "\n" +
                     "${resources.getText(R.string.penalty)}: ${day_penalty_textView.text}"

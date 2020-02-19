@@ -879,9 +879,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_penalty"
+                    android:id="@+id/day_qualityPay"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_extraPay">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/qualityPay" />
+
+                <TextView
+                        android:id="@+id/day_qualityPay_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_penalty"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_qualityPay">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
