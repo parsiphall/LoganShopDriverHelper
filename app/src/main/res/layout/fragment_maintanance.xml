@@ -67,5 +67,34 @@
                     android:layout_weight="1"
                     android:text="@string/newSystem" />
         </LinearLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:textSize="30sp"
+                android:gravity="center"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+
+            <Button
+                    android:id="@+id/maint_driver"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/driver" />
+
+            <Button
+                    android:id="@+id/maint_newbie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/newbie" />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

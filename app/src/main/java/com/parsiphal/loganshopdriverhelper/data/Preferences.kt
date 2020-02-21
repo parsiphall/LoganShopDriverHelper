@@ -21,6 +21,7 @@ const val LAST_FUEL_LARGUS = "last_fuel_largus"
 const val LAST_FUEL_SANDERO = "last_fuel_sandero"
 const val LAST_FUEL_XRAY = "last_fuel_xray"
 const val ADD_SYSTEM = "add_system"
+const val STATUS = "status"
 
 
 class Preferences(context: Context) {
@@ -97,4 +98,8 @@ class Preferences(context: Context) {
     var addSystem: Int?
         get() = prefs.getInt(ADD_SYSTEM, 0)
         set(value) = prefs.edit().putInt(ADD_SYSTEM, value!!).apply()
+
+    var status: Int?
+        get() = prefs.getInt(STATUS, 0)
+        set(value) = prefs.edit().putInt(STATUS, value!!).apply()
 }

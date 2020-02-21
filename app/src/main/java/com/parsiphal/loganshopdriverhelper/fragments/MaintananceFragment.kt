@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import com.parsiphal.loganshopdriverhelper.*
 
 import kotlinx.android.synthetic.main.fragment_maintanance.*
@@ -41,9 +42,19 @@ class MaintananceFragment : MvpAppCompatFragment() {
         }
         maint_old_add_system.setOnClickListener {
             prefs.addSystem = 0
+            Snackbar.make(view, getString(R.string.oldSystemChosen), Snackbar.LENGTH_SHORT).show()
         }
         maint_new_add_system.setOnClickListener {
             prefs.addSystem = 1
+            Snackbar.make(view, getString(R.string.newSystemChosen), Snackbar.LENGTH_SHORT).show()
+        }
+        maint_driver.setOnClickListener {
+            prefs.status = 0
+            Snackbar.make(view, getString(R.string.driverStatusChosen), Snackbar.LENGTH_SHORT).show()
+        }
+        maint_newbie.setOnClickListener {
+            prefs.status = 1
+            Snackbar.make(view, getString(R.string.newbieStatusChosen), Snackbar.LENGTH_SHORT).show()
         }
     }
 

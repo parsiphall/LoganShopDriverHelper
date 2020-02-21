@@ -55,7 +55,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var prepay = 0
     private var holiday = 0
     private var extraPay = 0
-    private var qualityPay=0
+    private var qualityPay = 0
     private var penalty = 0
     private var loganMoveFromZhukova = 0
     private var loganMoveFromKulturi = 0
@@ -215,7 +215,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_prepay_textVew.text = prepay.toString()
         day_holiday_textVew.text = holiday.toString()
         day_extraPay_textView.text = extraPay.toString()
-        day_qualityPay_textView.text=qualityPay.toString()
+        day_qualityPay_textView.text = qualityPay.toString()
         day_penalty_textView.text = penalty.toString()
     }
 
@@ -431,7 +431,11 @@ class TotalDayFragment : MvpAppCompatFragment() {
         totalTaskToPay = loganTaskWithSalary + vestaTaskWithSalary
         totalMove = totalMoveToPay + loganMoveWithOutSalary + vestaMoveWithOutSalary
         totalTask = totalTaskToPay + loganTaskWithOutSalary + vestaTaskWithOutSalary
-        salary = (1700 + totalDeliveries * 50 + totalMoveToPay * 50 + totalTaskToPay * 50 - penalty)
+        salary = if (prefs.status == 0) {
+            (1700 + totalDeliveries * 50 + totalMoveToPay * 50 + totalTaskToPay * 50 - penalty)
+        } else {
+            1500
+        }
     }
 
     private fun deltaODO(): Int = total.eveningODO - total.morningODO
@@ -473,7 +477,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.prepay = prepay
             total.holidayPay = holiday
             total.extraPay = extraPay
-            total.qualityPay=qualityPay
+            total.qualityPay = qualityPay
             total.penalty = penalty
             total.expenses = day_tea_textVew.text.toString().toInt()
             total.deltaODO = deltaODO()
@@ -570,7 +574,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
         day_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
         day_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
-        day_logan_planernaya_move_textView.text=total.loganMoveToPlanernaya.toString()
+        day_logan_planernaya_move_textView.text = total.loganMoveToPlanernaya.toString()
 
         day_vesta_move_textView.text = total.vestaMove.toString()
 
@@ -578,7 +582,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
         day_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
         day_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
-        day_vesta_planernaya_move_textView.text=total.vestaMoveToPlanernaya.toString()
+        day_vesta_planernaya_move_textView.text = total.vestaMoveToPlanernaya.toString()
 
         day_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
         day_logan_task_textView.text = total.loganTask.toString()
@@ -587,7 +591,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
         day_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
         day_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
-        day_logan_planernaya_task_textView.text=total.loganTaskToPlanernaya.toString()
+        day_logan_planernaya_task_textView.text = total.loganTaskToPlanernaya.toString()
         day_logan_else_task_textView.text = total.loganTaskElse.toString()
 
         day_vesta_task_textView.text = total.vestaTask.toString()
@@ -596,7 +600,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
         day_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
         day_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
-        day_vesta_planernaya_task_textView.text=total.vestaTaskToPlanernaya.toString()
+        day_vesta_planernaya_task_textView.text = total.vestaTaskToPlanernaya.toString()
         day_vesta_else_task_textView.text = total.vestaTaskElse.toString()
 
         day_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
@@ -605,7 +609,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_prepay_textVew.text = total.prepay.toString()
         day_holiday_textVew.text = total.holidayPay.toString()
         day_extraPay_textView.text = total.extraPay.toString()
-        day_qualityPay_textView.text=total.qualityPay.toString()
+        day_qualityPay_textView.text = total.qualityPay.toString()
         day_penalty_textView.text = total.penalty.toString()
     }
 

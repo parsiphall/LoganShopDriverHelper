@@ -105,6 +105,13 @@
     <string name="newSystem">Новая</string>
     <string name="shop_planernaya">Планерная</string>
     <string name="qualityPay">Качество</string>
+    <string name="status">Статус</string>
+    <string name="driver">Водитель</string>
+    <string name="newbie">Стажёр</string>
+    <string name="oldSystemChosen">Выбрана старая система</string>
+    <string name="newSystemChosen">Выбрана новая система</string>
+    <string name="driverStatusChosen">Выбран режим водителя</string>
+    <string name="newbieStatusChosen">Выбран режим стажёра</string>
 
     <string-array name="region">
         <item>Север</item>

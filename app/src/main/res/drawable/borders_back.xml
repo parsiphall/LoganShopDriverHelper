@@ -4,5 +4,5 @@
     <!--    for release-->
         <stroke android:width="0.3dip" android:color="#0085e5"/>
     <!--    for alpha-->
-<!--    <stroke android:width="0.3dip" android:color="#aaaaaa"/>-->
+<!--        <stroke android:width="0.3dip" android:color="#aaaaaa"/>-->
 </shape>

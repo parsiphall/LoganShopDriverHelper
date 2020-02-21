@@ -21,6 +21,10 @@
                 style="@style/shiftLinearLayout"
                 android:layout_below="@id/shift_new_button">
 
+            <TextView
+                    android:id="@+id/shift_status_textView"
+                    style="@style/shiftTextViews" />
+
             <EditText
                     android:id="@+id/shift_family_editText"
                     style="@style/shiftEditTexts"
