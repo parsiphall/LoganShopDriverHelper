@@ -16,6 +16,7 @@ import com.parsiphal.loganshopdriverhelper.data.WorkType
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapter
+import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapterNew
 import com.parsiphal.loganshopdriverhelper.recycler.OnItemClickListener
 import com.parsiphal.loganshopdriverhelper.recycler.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_delivery.*
@@ -32,6 +33,7 @@ class DeliveryFragment : MvpAppCompatFragment() {
     private lateinit var callBackActivity: MainView
     private var items: List<Delivery> = ArrayList()
     private lateinit var adapter: DeliveryViewAdapter
+    private lateinit var adapterNew: DeliveryViewAdapterNew
     private var searchDate: String = ""
     private var cashSum = 0
 
@@ -47,8 +49,13 @@ class DeliveryFragment : MvpAppCompatFragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_delivery, container, false)
         adapter = DeliveryViewAdapter(items, context!!)
+        adapterNew = DeliveryViewAdapterNew(items, context!!)
         root.delivery_recycler.layoutManager = LinearLayoutManager(context)
-        root.delivery_recycler.adapter = adapter
+        root.delivery_recycler.adapter = if (prefs.deliveryView == 0) {
+            adapter
+        } else {
+            adapterNew
+        }
         return root
     }
 
@@ -88,7 +95,11 @@ class DeliveryFragment : MvpAppCompatFragment() {
                 cashSum = 0
             }
             delivery_cashSum?.text = cashSum.toString()
-            adapter.dataChanged(items)
+            if (prefs.deliveryView == 0) {
+                adapter.dataChanged(items)
+            } else {
+                adapterNew.dataChanged(items)
+            }
         }
     }
 

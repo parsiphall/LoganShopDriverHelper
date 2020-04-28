@@ -50,11 +50,23 @@ class MaintananceFragment : MvpAppCompatFragment() {
         }
         maint_driver.setOnClickListener {
             prefs.status = 0
-            Snackbar.make(view, getString(R.string.driverStatusChosen), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view, getString(R.string.driverStatusChosen), Snackbar.LENGTH_SHORT)
+                .show()
         }
         maint_newbie.setOnClickListener {
             prefs.status = 1
-            Snackbar.make(view, getString(R.string.newbieStatusChosen), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view, getString(R.string.newbieStatusChosen), Snackbar.LENGTH_SHORT)
+                .show()
+        }
+        maint_deliveryOld.setOnClickListener {
+            prefs.deliveryView = 0
+            Snackbar.make(view, getString(R.string.oldDeliveryListChosen), Snackbar.LENGTH_SHORT)
+                .show()
+        }
+        maint_deliveryNew.setOnClickListener {
+            prefs.deliveryView = 1
+            Snackbar.make(view, getString(R.string.newDeliveryListChosen), Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
 

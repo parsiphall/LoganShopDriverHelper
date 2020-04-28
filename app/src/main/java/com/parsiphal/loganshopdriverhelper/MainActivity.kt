@@ -12,6 +12,7 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.parsiphal.loganshopdriverhelper.fragments.DeliveryFragment
 import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragment
+import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragmentNew
 import com.parsiphal.loganshopdriverhelper.fragments.TotalFragment
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -53,7 +54,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_shift -> {
-                    fragmentPlace(ShiftFragment())
+                    fragmentPlace(ShiftFragmentNew())
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_delivery -> {

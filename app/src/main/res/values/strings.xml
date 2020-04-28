@@ -46,6 +46,7 @@
     <string name="wrongData">Не верные данные</string>
     <string name="error">Ошибка</string>
     <string name="someError">Неизвестная ошибка. Повторите ещё раз</string>
+    <string name="shiftError">Ошибка при загрузке данных. Используются значения по умолчанию</string>
     <string name="adMessage">Удалить?</string>
     <string name="adBtn1">Да</string>
     <string name="adBtn2">Нет</string>
@@ -101,17 +102,28 @@
     <string name="isBetweenShops">Между магазинами?</string>
     <string name="dataBase">База данных</string>
     <string name="addingNotes">Добавление записей</string>
-    <string name="oldSystem">Старая</string>
-    <string name="newSystem">Новая</string>
+    <string name="oldSystem">Old</string>
+    <string name="newSystem">New</string>
     <string name="shop_planernaya">Планерная</string>
     <string name="qualityPay">Качество</string>
     <string name="status">Статус</string>
-    <string name="driver">Водитель</string>
-    <string name="newbie">Стажёр</string>
+    <string name="driver">Driver</string>
+    <string name="newbie">Newbie</string>
     <string name="oldSystemChosen">Выбрана старая система</string>
     <string name="newSystemChosen">Выбрана новая система</string>
     <string name="driverStatusChosen">Выбран режим водителя</string>
     <string name="newbieStatusChosen">Выбран режим стажёра</string>
+    <string name="recordsList">Список записей</string>
+    <string name="oldDeliveryListChosen">Выбран старый вид списка записей</string>
+    <string name="newDeliveryListChosen">Выбран новый вид списка записей</string>
+    <string name="somethingWrong">Упс… Что-то пошло не так…</string>
+    <string name="district">Район</string>
+    <string name="open_shift">Открыть смену</string>
+    <string name="close_shift">Закрыть смену</string>
+    <string name="district_north">Север</string>
+    <string name="district_center">Центр</string>
+    <string name="district_south">Юг</string>
+    <string name="_0">0</string>
 
     <string-array name="region">
         <item>Север</item>

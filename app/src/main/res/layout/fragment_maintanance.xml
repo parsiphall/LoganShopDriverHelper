@@ -96,5 +96,36 @@
                     android:layout_weight="1"
                     android:text="@string/newbie" />
         </LinearLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/recordsList"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:visibility="invisible"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+
+
+            <Button
+                    android:id="@+id/maint_deliveryOld"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/oldSystem" />
+
+            <Button
+                    android:id="@+id/maint_deliveryNew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/newSystem" />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

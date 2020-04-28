@@ -28,10 +28,9 @@ class ShiftFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        shift_status_textView.text = if (prefs.status == 0) {
-            resources.getString(R.string.driver)
-        } else {
-            resources.getString(R.string.newbie)
+        shift_status_textView.text = when (prefs.status) {
+            0 -> resources.getString(R.string.driver)
+            else -> resources.getString(R.string.newbie)
         }
         getData()
         shift_car_spinner.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
