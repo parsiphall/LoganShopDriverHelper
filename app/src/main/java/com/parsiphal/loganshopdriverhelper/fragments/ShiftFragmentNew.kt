@@ -18,7 +18,6 @@ import java.lang.Exception
 
 class ShiftFragmentNew : MvpAppCompatFragment() {
 
-    var ifXRay = true
     var ifMorning = true
 
     override fun onCreateView(
@@ -85,23 +84,20 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
 
     private fun enterCarListener() {
         shiftN_enter_car_largus_button.setOnClickListener {
-            prefs.car = Cars.Largus.name
+            prefs.car = Cars.Largus.id
             shiftN_car_textView.text = Cars.Largus.name
-            ifXRay = false
             shiftN_enter_car.visibility = View.GONE
             shiftN_enter_district.visibility = View.VISIBLE
         }
         shiftN_enter_car_sandero_button.setOnClickListener {
-            prefs.car = Cars.Sandero.name
+            prefs.car = Cars.Sandero.id
             shiftN_car_textView.text = Cars.Sandero.name
-            ifXRay = false
             shiftN_enter_car.visibility = View.GONE
             shiftN_enter_district.visibility = View.VISIBLE
         }
         shiftN_enter_car_xray_button.setOnClickListener {
             prefs.car = Cars.XRay.id
             shiftN_car_textView.text = Cars.XRay.id
-            ifXRay = true
             shiftN_enter_car.visibility = View.GONE
             shiftN_enter_district.visibility = View.VISIBLE
         }
@@ -130,7 +126,7 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
 
     private fun odoAndFuelListener() {
         shiftN_enter_odo_and_fuel.visibility = View.VISIBLE
-        if (ifXRay) {
+        if (shiftN_car_textView.text == Cars.XRay.id) {
             shiftN_fuel_seekbar_9.visibility = View.GONE
         } else {
             shiftN_fuel_seekbar_8.visibility = View.GONE
@@ -155,7 +151,7 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
             if (ifMorning) {
                 prefs.morningODO = shiftN_odo_editText.text.toString().toInt()
                 shiftN_odo_morning_textView.text = shiftN_odo_editText.text.toString()
-                if (ifXRay) {
+                if (shiftN_car_textView.text == Cars.XRay.id) {
                     prefs.morningFuel = shiftN_fuel_seekbar_8.progress
                     shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_8.progress.toString()
                 } else {
@@ -165,7 +161,7 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
             } else {
                 prefs.eveningODO = shiftN_odo_editText.text.toString().toInt()
                 shiftN_odo_evening_textView.text = shiftN_odo_editText.text.toString()
-                if (ifXRay) {
+                if (shiftN_car_textView.text == Cars.XRay.id) {
                     prefs.eveningFuel = shiftN_fuel_seekbar_8.progress
                     shiftN_fuel_evening_textView.text = shiftN_fuel_seekbar_8.progress.toString()
                 } else {

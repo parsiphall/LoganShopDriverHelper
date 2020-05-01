@@ -38,11 +38,6 @@
                     android:layout_weight="1"
                     android:text="@string/maint_import" />
         </LinearLayout>
-        <Button
-                android:id="@+id/maint_repair"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/repair" />
 
         <TextView
                 android:layout_width="match_parent"

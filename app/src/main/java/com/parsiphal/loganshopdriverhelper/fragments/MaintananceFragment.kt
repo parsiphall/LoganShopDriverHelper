@@ -77,20 +77,6 @@ class MaintananceFragment : MvpAppCompatFragment() {
             prefs.shiftSystem = 1
             Snackbar.make(view, getString(R.string.newShiftSystemChosen), Snackbar.LENGTH_SHORT).show()
         }
-        maint_repair.setOnClickListener {
-            repairDB()
-            Snackbar.make(view, getString(R.string.repaired), Snackbar.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun repairDB() = GlobalScope.launch {
-        val db = DB.getDao().getAllDeliveries()
-        for (delivery in db) {
-            if (delivery.deliveryDate.length < 10) {
-                delivery.deliveryDate = "0${delivery.deliveryDate}"
-                DB.getDao().updateDelivery(delivery)
-            }
-        }
     }
 
     private fun import() = GlobalScope.launch {
