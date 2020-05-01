@@ -140,6 +140,7 @@
     <LinearLayout
             android:id="@+id/shiftN_enter_family"
             style="@style/shiftLinearLayout"
+            android:paddingTop="50dp"
             android:orientation="vertical"
             android:layout_below="@id/shiftN_buttons"
             android:visibility="gone">
@@ -159,6 +160,7 @@
     <LinearLayout
             android:id="@+id/shiftN_enter_date"
             style="@style/shiftLinearLayout"
+            android:paddingTop="50dp"
             android:orientation="vertical"
             android:layout_below="@id/shiftN_enter_family"
             android:visibility="gone">
@@ -178,6 +180,7 @@
     <LinearLayout
             android:id="@+id/shiftN_enter_car"
             style="@style/shiftLinearLayout"
+            android:paddingTop="50dp"
             android:orientation="vertical"
             android:layout_below="@id/shiftN_enter_date"
             android:visibility="gone">
@@ -215,6 +218,7 @@
     <LinearLayout
             android:id="@+id/shiftN_enter_district"
             style="@style/shiftLinearLayout"
+            android:paddingTop="50dp"
             android:orientation="vertical"
             android:layout_below="@id/shiftN_enter_car"
             android:visibility="gone">
@@ -252,6 +256,7 @@
     <LinearLayout
             android:id="@+id/shiftN_enter_odo_and_fuel"
             style="@style/shiftLinearLayout"
+            android:paddingTop="50dp"
             android:orientation="vertical"
             android:layout_below="@id/shiftN_enter_district"
             android:visibility="gone">
@@ -273,12 +278,14 @@
         </LinearLayout>
         <SeekBar
                 android:id="@+id/shiftN_fuel_seekbar_8"
+                android:paddingTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:progress="0"
                 android:max="8"/>
         <SeekBar
                 android:id="@+id/shiftN_fuel_seekbar_9"
+                android:paddingTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:progress="0"

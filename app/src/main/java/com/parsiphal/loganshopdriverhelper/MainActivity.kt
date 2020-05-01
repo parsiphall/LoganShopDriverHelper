@@ -54,7 +54,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_shift -> {
-                    fragmentPlace(ShiftFragmentNew())
+                    if (prefs.shiftSystem == 0) {
+                        fragmentPlace(ShiftFragment())
+                    } else {
+                        fragmentPlace(ShiftFragmentNew())
+                    }
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_delivery -> {

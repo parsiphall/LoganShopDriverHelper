@@ -1,9 +1,11 @@
 package com.parsiphal.loganshopdriverhelper.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.SeekBar
 import com.google.android.material.snackbar.Snackbar
 import com.parsiphal.loganshopdriverhelper.R
@@ -46,6 +48,8 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
                 shiftN_family_textView.text = shiftN_enter_family_editText.text.toString()
                 shiftN_enter_family.visibility = View.GONE
                 showMainViews()
+                val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view?.windowToken, 0)
             }
         }
     }
@@ -60,7 +64,11 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
 
     private fun enterDateListener() {
         shiftN_enter_date_next_button.setOnClickListener {
-            val day = shiftN_enter_date_datePicker.dayOfMonth.toString()
+            val day = if (shiftN_enter_date_datePicker.dayOfMonth < 10) {
+                "0${shiftN_enter_date_datePicker.dayOfMonth}"
+            } else {
+                "${shiftN_enter_date_datePicker.dayOfMonth}"
+            }
             val month = if (shiftN_enter_date_datePicker.month + 1 < 10) {
                 "0${shiftN_enter_date_datePicker.month + 1}"
             } else {
@@ -166,6 +174,8 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
                 }
             }
             shiftN_enter_odo_and_fuel.visibility = View.GONE
+            val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view?.windowToken, 0)
             showMainViews()
         }
     }
@@ -173,6 +183,9 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
     private fun closeShiftListener() {
         shiftN_finish_shift_button.setOnClickListener {
             ifMorning = false
+            shiftN_fuel_seekbar_8.progress = 0
+            shiftN_fuel_seekbar_9.progress = 0
+            shiftN_odo_editText.setText("")
             hideMainViews()
             odoAndFuelListener()
         }

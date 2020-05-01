@@ -164,8 +164,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
         day_date_textView.text = prefs.date
         day_morning_odo_textView.text = prefs.morningODO.toString()
         day_evening_odo_textView.text = prefs.eveningODO.toString()
-        day_morning_fuel_textView.text = (prefs.morningFuel?.plus(1)).toString()
-        day_evening_fuel_textView.text = (prefs.eveningFuel?.plus(1)).toString()
+        day_morning_fuel_textView.text = prefs.morningFuel?.toString()
+        day_evening_fuel_textView.text = prefs.eveningFuel?.toString()
         day_total_money_textView.text = totalMoney.toString()
         day_total_money_cash_textView.text = totalCash.toString()
         day_total_money_card_textView.text = totalCard.toString()
@@ -448,8 +448,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.date = prefs.date!!
             total.morningODO = prefs.morningODO!!
             total.eveningODO = prefs.eveningODO!!
-            total.morningFuel = prefs.morningFuel!! + 1
-            total.eveningFuel = prefs.eveningFuel!! + 1
+            total.morningFuel = prefs.morningFuel!!
+            total.eveningFuel = prefs.eveningFuel!!
             total.totalMoney = day_total_money_textView.text.toString().toInt()
             total.totalCash = day_total_money_cash_textView.text.toString().toInt()
             total.totalCard = day_total_money_card_textView.text.toString().toInt()

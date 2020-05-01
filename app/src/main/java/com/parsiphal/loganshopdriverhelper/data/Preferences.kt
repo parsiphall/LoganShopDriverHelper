@@ -22,7 +22,8 @@ const val LAST_FUEL_SANDERO = "last_fuel_sandero"
 const val LAST_FUEL_XRAY = "last_fuel_xray"
 const val ADD_SYSTEM = "add_system"
 const val STATUS = "status"
-const val DELIVERY_VIEW= "delivery_view"
+const val DELIVERY_VIEW = "delivery_view"
+const val SHIFT_SYSTEM = "shift_system"
 
 
 class Preferences(context: Context) {
@@ -97,7 +98,7 @@ class Preferences(context: Context) {
         set(value) = prefs.edit().putInt(LAST_FUEL_XRAY, value!!).apply()
 
     var addSystem: Int?
-        get() = prefs.getInt(ADD_SYSTEM, 0)
+        get() = prefs.getInt(ADD_SYSTEM, 1)
         set(value) = prefs.edit().putInt(ADD_SYSTEM, value!!).apply()
 
     var status: Int?
@@ -107,4 +108,8 @@ class Preferences(context: Context) {
     var deliveryView: Int?
         get() = prefs.getInt(DELIVERY_VIEW, 0)
         set(value) = prefs.edit().putInt(DELIVERY_VIEW, value!!).apply()
+
+    var shiftSystem: Int?
+        get() = prefs.getInt(SHIFT_SYSTEM, 1)
+        set(value) = prefs.edit().putInt(SHIFT_SYSTEM, value!!).apply()
 }

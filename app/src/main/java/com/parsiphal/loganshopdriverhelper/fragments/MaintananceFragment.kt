@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.parsiphal.loganshopdriverhelper.*
+import com.parsiphal.loganshopdriverhelper.data.Dao
 
 import kotlinx.android.synthetic.main.fragment_maintanance.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -42,11 +43,11 @@ class MaintananceFragment : MvpAppCompatFragment() {
         }
         maint_old_add_system.setOnClickListener {
             prefs.addSystem = 0
-            Snackbar.make(view, getString(R.string.oldSystemChosen), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view, getString(R.string.oldAddSystemChosen), Snackbar.LENGTH_SHORT).show()
         }
         maint_new_add_system.setOnClickListener {
             prefs.addSystem = 1
-            Snackbar.make(view, getString(R.string.newSystemChosen), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view, getString(R.string.newAddSystemChosen), Snackbar.LENGTH_SHORT).show()
         }
         maint_driver.setOnClickListener {
             prefs.status = 0
@@ -68,11 +69,36 @@ class MaintananceFragment : MvpAppCompatFragment() {
             Snackbar.make(view, getString(R.string.newDeliveryListChosen), Snackbar.LENGTH_SHORT)
                 .show()
         }
+        maint_old_shift_system.setOnClickListener {
+            prefs.shiftSystem = 0
+            Snackbar.make(view, getString(R.string.oldShiftSystemChosen), Snackbar.LENGTH_SHORT).show()
+        }
+        maint_new_shift_system.setOnClickListener {
+            prefs.shiftSystem = 1
+            Snackbar.make(view, getString(R.string.newShiftSystemChosen), Snackbar.LENGTH_SHORT).show()
+        }
+        maint_repair.setOnClickListener {
+            repairDB()
+            Snackbar.make(view, getString(R.string.repaired), Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun repairDB() = GlobalScope.launch {
+        val db = DB.getDao().getAllDeliveries()
+        for (delivery in db) {
+            if (delivery.deliveryDate.length < 10) {
+                delivery.deliveryDate = "0${delivery.deliveryDate}"
+                DB.getDao().updateDelivery(delivery)
+            }
+        }
     }
 
     private fun import() = GlobalScope.launch {
         val sd =
-            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/LSDH/Export")
+            File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                    .toString() + "/LSDH/Export"
+            )
         var source: FileChannel? = null
         var destination: FileChannel? = null
         val newDB = File(sd, "/backupDB")
@@ -113,7 +139,10 @@ class MaintananceFragment : MvpAppCompatFragment() {
 
     private fun export() = GlobalScope.launch {
         val sd =
-            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/LSDH/Export")
+            File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                    .toString() + "/LSDH/Export"
+            )
         var source: FileChannel? = null
         var destination: FileChannel? = null
         val currentDB = File(context?.getDatabasePath(DB_NAME).toString())

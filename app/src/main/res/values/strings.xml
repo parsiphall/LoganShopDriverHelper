@@ -109,8 +109,10 @@
     <string name="status">Статус</string>
     <string name="driver">Driver</string>
     <string name="newbie">Newbie</string>
-    <string name="oldSystemChosen">Выбрана старая система</string>
-    <string name="newSystemChosen">Выбрана новая система</string>
+    <string name="oldAddSystemChosen">Выбрана старая система добавления</string>
+    <string name="newAddSystemChosen">Выбрана новая система добавления</string>
+    <string name="oldShiftSystemChosen">Выбран старый экран смены</string>
+    <string name="newShiftSystemChosen">Выбран новый экран смены</string>
     <string name="driverStatusChosen">Выбран режим водителя</string>
     <string name="newbieStatusChosen">Выбран режим стажёра</string>
     <string name="recordsList">Список записей</string>
@@ -124,6 +126,8 @@
     <string name="district_center">Центр</string>
     <string name="district_south">Юг</string>
     <string name="_0">0</string>
+    <string name="repair">Repair</string>
+    <string name="repaired">Данные исправлены</string>
 
     <string-array name="region">
         <item>Север</item>
