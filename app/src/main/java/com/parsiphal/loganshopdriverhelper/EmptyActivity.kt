@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_empty.*
 
-const val DEADLINE = 1590973200
+const val DEADLINE = 1593576000
 const val DEADLINE_TEST = 1588104600
 
 class EmptyActivity : AppCompatActivity() {

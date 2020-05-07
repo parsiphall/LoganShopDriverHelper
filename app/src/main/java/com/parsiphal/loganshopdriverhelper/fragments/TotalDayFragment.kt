@@ -125,26 +125,7 @@ class TotalDayFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (newTotal) {
-            val data = GlobalScope.async { getData() }
-            MainScope().launch {
-                data.await()
-                setData()
-                delay(1000)
-//                saveData()
-                day_progress.visibility = View.GONE
-                day_data.visibility = View.VISIBLE
-            }
-            day_share.visibility = View.GONE
-        } else {
-            val data = GlobalScope.async { placeData() }
-            MainScope().launch {
-                data.await()
-                day_progress.visibility = View.GONE
-                day_data.visibility = View.VISIBLE
-            }
-            day_write.visibility = View.GONE
-        }
+        getOrPlace(newTotal)
         day_write.setOnClickListener {
             saveData()
         }
@@ -153,9 +134,27 @@ class TotalDayFragment : MvpAppCompatFragment() {
         }
     }
 
+    private fun getOrPlace(newTotal: Boolean) {
+        val data = GlobalScope.async {
+            if (newTotal) {
+                getData()
+                day_share.visibility = View.GONE
+            } else {
+                placeData()
+                day_write.visibility = View.GONE
+            }
+        }
+        MainScope().launch {
+            data.await()
+            day_progress.visibility = View.GONE
+            day_data.visibility = View.VISIBLE
+        }
+    }
+
     private fun getData() {
         items = DB.getDao().getDeliveriesByDate(prefs.date!!)
         calculateSum()
+        MainScope().launch { setData() }
     }
 
     private fun setData() {

@@ -78,23 +78,23 @@ class ShiftFragment : MvpAppCompatFragment() {
                 prefs.morningODO = shift_odo_morning.text.toString().toInt()
                 prefs.eveningODO = shift_odo_evening.text.toString().toInt()
                 if (shift_car_spinner.selectedItemPosition == Cars.XRay.i) {
-                    prefs.morningFuel = shift_fuel_morning_spinner_8.selectedItemPosition
-                    prefs.eveningFuel = shift_fuel_evening_spinner_8.selectedItemPosition
+                    prefs.morningFuel = (shift_fuel_morning_spinner_8.selectedItemPosition + 1)
+                    prefs.eveningFuel = (shift_fuel_evening_spinner_8.selectedItemPosition + 1)
                 } else {
-                    prefs.morningFuel = shift_fuel_morning_spinner_9.selectedItemPosition
-                    prefs.eveningFuel = shift_fuel_evening_spinner_9.selectedItemPosition
+                    prefs.morningFuel = (shift_fuel_morning_spinner_9.selectedItemPosition + 1)
+                    prefs.eveningFuel = (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
                 }
                 when (shift_car_spinner.selectedItemPosition) {
                     Cars.Largus.i -> {
-                        prefs.lastFuelLargus = shift_fuel_evening_spinner_9.selectedItemPosition
+                        prefs.lastFuelLargus = (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
                         prefs.lastOdoLargus = shift_odo_evening.text.toString().toInt()
                     }
                     Cars.Sandero.i -> {
-                        prefs.lastFuelSandero = shift_fuel_evening_spinner_9.selectedItemPosition
+                        prefs.lastFuelSandero = (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
                         prefs.lastOdoSandero = shift_odo_evening.text.toString().toInt()
                     }
                     Cars.XRay.i -> {
-                        prefs.lastFuelXRay = shift_fuel_evening_spinner_8.selectedItemPosition
+                        prefs.lastFuelXRay = (shift_fuel_evening_spinner_8.selectedItemPosition + 1)
                         prefs.lastOdoXRay = shift_odo_evening.text.toString().toInt()
                     }
                 }
@@ -113,17 +113,17 @@ class ShiftFragment : MvpAppCompatFragment() {
                     Cars.Largus.i -> {
                         shift_odo_morning.setText(prefs.lastOdoLargus!!.toString())
                         shift_odo_evening.setText("0")
-                        shift_fuel_morning_spinner_9.setSelection(prefs.lastFuelLargus!!)
+                        shift_fuel_morning_spinner_9.setSelection(prefs.lastFuelLargus!!.minus(1))
                     }
                     Cars.Sandero.i -> {
                         shift_odo_morning.setText(prefs.lastOdoSandero!!.toString())
                         shift_odo_evening.setText("0")
-                        shift_fuel_morning_spinner_9.setSelection(prefs.lastFuelSandero!!)
+                        shift_fuel_morning_spinner_9.setSelection(prefs.lastFuelSandero!!.minus(1))
                     }
                     Cars.XRay.i -> {
                         shift_odo_morning.setText(prefs.lastOdoXRay!!.toString())
                         shift_odo_evening.setText("0")
-                        shift_fuel_morning_spinner_8.setSelection(prefs.lastFuelXRay!!)
+                        shift_fuel_morning_spinner_8.setSelection(prefs.lastFuelXRay!!.minus(1))
                     }
                 }
 
@@ -145,11 +145,11 @@ class ShiftFragment : MvpAppCompatFragment() {
             shift_odo_morning.setText(prefs.morningODO!!.toString())
             shift_odo_evening.setText(prefs.eveningODO!!.toString())
             if (shift_car_spinner.selectedItemPosition == Cars.XRay.i) {
-                shift_fuel_morning_spinner_8.setSelection(prefs.morningFuel!!)
-                shift_fuel_evening_spinner_8.setSelection(prefs.eveningFuel!!)
+                shift_fuel_morning_spinner_8.setSelection(prefs.morningFuel!!.minus(1))
+                shift_fuel_evening_spinner_8.setSelection(prefs.eveningFuel!!.minus(1))
             } else {
-                shift_fuel_morning_spinner_9.setSelection(prefs.morningFuel!!)
-                shift_fuel_evening_spinner_9.setSelection(prefs.eveningFuel!!)
+                shift_fuel_morning_spinner_9.setSelection(prefs.morningFuel!!.minus(1))
+                shift_fuel_evening_spinner_9.setSelection(prefs.eveningFuel!!.minus(1))
             }
         } catch (e: Exception) {
             shift_family_editText.setText("")
