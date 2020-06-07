@@ -278,6 +278,14 @@
                     android:layout_weight="1"
                     android:text="@string/shop_sedova" />
 
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveFrom_Himikov"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_himikov" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -288,6 +296,14 @@
 
 
             <Button
+                    android:id="@+id/newDeliveryAdd_moveFrom_Veteranov"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_veteranov" />
+
+            <Button
                     android:id="@+id/newDeliveryAdd_moveFrom_Zhukova"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
@@ -295,14 +311,6 @@
                     android:layout_weight="1"
                     android:text="@string/shop_zhukova" />
 
-
-            <Button
-                    android:id="@+id/newDeliveryAdd_moveFrom_Himikov"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="100sp"
-                    android:layout_weight="1"
-                    android:text="@string/shop_himikov" />
         </LinearLayout>
     </LinearLayout>
 
@@ -359,6 +367,14 @@
                     android:layout_weight="1"
                     android:text="@string/shop_sedova" />
 
+            <Button
+                    android:id="@+id/newDeliveryAdd_moveTo_Himikov"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_himikov" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -368,6 +384,14 @@
                 android:orientation="horizontal">
 
             <Button
+                    android:id="@+id/newDeliveryAdd_moveTo_Veteranov"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="@string/shop_veteranov" />
+
+            <Button
                     android:id="@+id/newDeliveryAdd_moveTo_Zhukova"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
@@ -375,14 +399,6 @@
                     android:layout_weight="1"
                     android:text="@string/shop_zhukova" />
 
-
-            <Button
-                    android:id="@+id/newDeliveryAdd_moveTo_Himikov"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="100sp"
-                    android:layout_weight="1"
-                    android:text="@string/shop_himikov" />
         </LinearLayout>
     </LinearLayout>
 

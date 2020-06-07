@@ -155,7 +155,8 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
                     delivery.expense = 0
                 } else {
                     delivery.expense =
-                        (newDeliveryAdd_paying_moneyTake.text.toString().toInt() - newDeliveryAdd_paying_cost.text.toString().toInt())
+                        (newDeliveryAdd_paying_moneyTake.text.toString()
+                            .toInt() - newDeliveryAdd_paying_cost.text.toString().toInt())
                 }
                 save()
             } catch (e: Exception) {
@@ -210,6 +211,11 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
             newDeliveryAdd_moveFrom.visibility = View.GONE
             newDeliveryAdd_moveTo.visibility = View.VISIBLE
         }
+        newDeliveryAdd_moveFrom_Veteranov.setOnClickListener {
+            delivery.moveFrom = Shops.Veteranov.i
+            newDeliveryAdd_moveFrom.visibility = View.GONE
+            newDeliveryAdd_moveTo.visibility = View.VISIBLE
+        }
     }
 
     private fun moveToListeners() {
@@ -235,6 +241,11 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         }
         newDeliveryAdd_moveTo_Planernaya.setOnClickListener {
             delivery.moveTo = Shops.Planernaya.i
+            newDeliveryAdd_moveTo.visibility = View.GONE
+            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+        }
+        newDeliveryAdd_moveTo_Veteranov.setOnClickListener {
+            delivery.moveTo = Shops.Veteranov.i
             newDeliveryAdd_moveTo.visibility = View.GONE
             newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
         }

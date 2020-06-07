@@ -80,11 +80,11 @@ class TotalFragment : MvpAppCompatFragment() {
             callBackActivity.fragmentPlace(TotalMonthFragment())
             callBackActivity.prepareAd()
         }
-        total_month_button.setOnLongClickListener {
-            callBackActivity.showAd()
-            callBackActivity.fragmentPlace((TotalYearFragment()))
-            callBackActivity.prepareAd()
-            return@setOnLongClickListener true
-        }
+//        total_month_button.setOnLongClickListener {
+//            callBackActivity.showAd()
+//            callBackActivity.fragmentPlace((TotalYearFragment()))
+//            callBackActivity.prepareAd()
+//            return@setOnLongClickListener true
+//        }
     }
 }

@@ -340,9 +340,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_logan_zhukova_move"
+                    android:id="@+id/day_logan_veteranov_move"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_logan_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_veteranov" />
+
+                <TextView
+                        android:id="@+id/day_logan_veteranov_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_logan_zhukova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_logan_veteranov_move">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -425,9 +439,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_vesta_zhukova_move"
+                    android:id="@+id/day_vesta_veteranov_move"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_vesta_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_veteranov" />
+
+                <TextView
+                        android:id="@+id/day_vesta_veteranov_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_vesta_zhukova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_vesta_veteranov_move">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -535,9 +563,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_logan_zhukova_task"
+                    android:id="@+id/day_logan_veteranov_task"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_logan_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_veteranov" />
+
+                <TextView
+                        android:id="@+id/day_logan_veteranov_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_logan_zhukova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_logan_veteranov_task">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -634,9 +676,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/day_vesta_zhukova_task"
+                    android:id="@+id/day_vesta_veteranov_task"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/day_vesta_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_veteranov" />
+
+                <TextView
+                        android:id="@+id/day_vesta_veteranov_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/day_vesta_zhukova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/day_vesta_veteranov_task">
 
                 <TextView
                         style="@style/dayAndMonthTextView"

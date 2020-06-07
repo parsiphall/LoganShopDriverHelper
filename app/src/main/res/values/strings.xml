@@ -83,6 +83,7 @@
     <string name="shop_kulturi">Культуры</string>
     <string name="shop_himikov">Химиков</string>
     <string name="shop_zhukova">Жукова</string>
+    <string name="shop_veteranov">Ветеранов</string>
     <string name="total_calc_and_save">Отчёт сформирован и записан</string>
     <string name="no_data">Нет записей</string>
     <string name="cashSum">Касса:</string>
@@ -190,6 +191,7 @@
         <item>Седова</item>
         <item>Химиков</item>
         <item>Планерная</item>
+        <item>Ветеранов</item>
     </string-array>
     <string-array name="expenses">
         <item>Бензин</item>

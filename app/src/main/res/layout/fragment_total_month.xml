@@ -37,19 +37,9 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_family"
-                    style="@style/dayAndMonthLinearLayout"
-                    android:layout_below="@id/month_and_year">
-
-                <TextView
-                        android:id="@+id/month_family_textView"
-                        style="@style/dayAndMonthTextViewWide" />
-            </LinearLayout>
-
-            <LinearLayout
                     android:id="@+id/month_total_shifts_value"
                     style="@style/dayAndMonthLinearLayout"
-                    android:layout_below="@id/month_family">
+                    android:layout_below="@id/month_and_year">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -316,9 +306,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_logan_zhukova_move"
+                    android:id="@+id/month_logan_veteranov_move"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/month_logan_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_veteranov" />
+
+                <TextView
+                        android:id="@+id/month_logan_veteranov_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_zhukova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_veteranov_move">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -401,9 +405,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_vesta_zhukova_move"
+                    android:id="@+id/month_vesta_veteranov_move"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/month_vesta_move">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_veteranov" />
+
+                <TextView
+                        android:id="@+id/month_vesta_veteranov_move_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_zhukova_move"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_veteranov_move">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -511,9 +529,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_logan_zhukova_task"
+                    android:id="@+id/month_logan_veteranov_task"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/month_logan_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_veteranov" />
+
+                <TextView
+                        android:id="@+id/month_logan_veteranov_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_logan_zhukova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_logan_veteranov_task">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -610,9 +642,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_vesta_zhukova_task"
+                    android:id="@+id/month_vesta_veteranov_task"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/month_vesta_task">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/shop_veteranov" />
+
+                <TextView
+                        android:id="@+id/month_vesta_veteranov_task_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_vesta_zhukova_task"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_vesta_veteranov_task">
 
                 <TextView
                         style="@style/dayAndMonthTextView"

@@ -93,5 +93,13 @@ data class Total(
     @ColumnInfo var loganTaskToPlanernaya: Int = 0,
     @ColumnInfo var vestaTaskFromPlanernaya: Int = 0,
     @ColumnInfo var vestaTaskToPlanernaya: Int = 0,
-    @ColumnInfo var qualityPay: Int = 0
+    @ColumnInfo var qualityPay: Int = 0,
+    @ColumnInfo var loganMoveFromVeteranov: Int = 0,
+    @ColumnInfo var loganMoveToVeteranov: Int = 0,
+    @ColumnInfo var vestaMoveFromVeteranov: Int = 0,
+    @ColumnInfo var vestaMoveToVeteranov: Int = 0,
+    @ColumnInfo var loganTaskFromVeteranov: Int = 0,
+    @ColumnInfo var loganTaskToVeteranov: Int = 0,
+    @ColumnInfo var vestaTaskFromVeteranov: Int = 0,
+    @ColumnInfo var vestaTaskToVeteranov: Int = 0
 ) : Serializable

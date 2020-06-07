@@ -169,6 +169,19 @@ class MainApp : Application() {
             }
         }
 
+        val mig15to16 = object : Migration(15,16){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveFromVeteranov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveToVeteranov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveFromVeteranov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaMoveToVeteranov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskFromVeteranov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskToVeteranov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskFromVeteranov INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskToVeteranov INTEGER DEFAULT 0 NOT NULL")
+            }
+        }
+
         prefs = Preferences(applicationContext)
         mDataBase = Room
             .databaseBuilder(applicationContext, DataBase::class.java, DB_NAME)
@@ -186,7 +199,8 @@ class MainApp : Application() {
                 mig11to12,
                 mig12to13,
                 mig13to14,
-                mig14to15
+                mig14to15,
+                mig15to16
             )
             .build()
     }
