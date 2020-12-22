@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "com.parsiphal.loganshopdriverhelper2"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 202012221
         versionName "0.3.35b"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -46,7 +46,7 @@ dependencies {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Coroutines
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3'
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Moxy
