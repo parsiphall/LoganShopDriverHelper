@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
-import com.parsiphal.loganshopdriverhelper.fragments.DeliveryFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
