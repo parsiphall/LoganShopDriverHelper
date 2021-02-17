@@ -63,6 +63,12 @@ class ShiftFragment : MvpAppCompatFragment() {
                         shift_fuel_morning_spinner_9.visibility = View.GONE
                         shift_fuel_evening_spinner_9.visibility = View.GONE
                     }
+                    Cars.LargusNew.i -> {
+                        shift_fuel_morning_spinner_8.visibility = View.GONE
+                        shift_fuel_evening_spinner_8.visibility = View.GONE
+                        shift_fuel_morning_spinner_9.visibility = View.VISIBLE
+                        shift_fuel_evening_spinner_9.visibility = View.VISIBLE
+                    }
                 }
             }
         })
@@ -86,16 +92,23 @@ class ShiftFragment : MvpAppCompatFragment() {
                 }
                 when (shift_car_spinner.selectedItemPosition) {
                     Cars.Largus.i -> {
-                        prefs.lastFuelLargus = (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
+                        prefs.lastFuelLargus =
+                            (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
                         prefs.lastOdoLargus = shift_odo_evening.text.toString().toInt()
                     }
                     Cars.Sandero.i -> {
-                        prefs.lastFuelSandero = (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
+                        prefs.lastFuelSandero =
+                            (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
                         prefs.lastOdoSandero = shift_odo_evening.text.toString().toInt()
                     }
                     Cars.XRay.i -> {
                         prefs.lastFuelXRay = (shift_fuel_evening_spinner_8.selectedItemPosition + 1)
                         prefs.lastOdoXRay = shift_odo_evening.text.toString().toInt()
+                    }
+                    Cars.LargusNew.i -> {
+                        prefs.lastFuelLargusNew =
+                            (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
+                        prefs.lastOdoLargusNew = shift_odo_evening.text.toString().toInt()
                     }
                 }
                 Snackbar.make(view, getString(R.string.recorded), Snackbar.LENGTH_SHORT).show()
@@ -124,6 +137,11 @@ class ShiftFragment : MvpAppCompatFragment() {
                         shift_odo_morning.setText(prefs.lastOdoXRay!!.toString())
                         shift_odo_evening.setText("0")
                         shift_fuel_morning_spinner_8.setSelection(prefs.lastFuelXRay!!.minus(1))
+                    }
+                    Cars.LargusNew.i -> {
+                        shift_odo_morning.setText(prefs.lastOdoLargusNew!!.toString())
+                        shift_odo_evening.setText("0")
+                        shift_fuel_morning_spinner_9.setSelection(prefs.lastFuelLargusNew!!.minus(1))
                     }
                 }
 

@@ -93,9 +93,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_total_delivery_value"
+                    android:id="@+id/month_largusNew_count"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/month_xray_count">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/car_largusNew" />
+
+                <TextView
+                        android:id="@+id/month_largusNew_count_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_total_delivery_value"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largusNew_count">
 
                 <TextView
                         style="@style/dayAndMonthTextView"
@@ -935,9 +949,66 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/month_money_divider"
+                    android:id="@+id/month_largusNew_total_expenses"
                     style="@style/dayAndMonthLinearLayout"
                     android:layout_below="@id/month_xray_expenses_other">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:textStyle="bold"
+                        android:text="@string/car_largusNew" />
+
+                <TextView
+                        android:id="@+id/month_largusNew_total_expenses_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_largusNew_expenses_fuel"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largusNew_total_expenses">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/fuel" />
+
+                <TextView
+                        android:id="@+id/month_largusNew_expenses_fuel_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_largusNew_expenses_wash"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largusNew_expenses_fuel">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/wash" />
+
+                <TextView
+                        android:id="@+id/month_largusNew_expenses_wash_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_largusNew_expenses_other"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largusNew_expenses_wash">
+
+                <TextView
+                        style="@style/dayAndMonthTextView"
+                        android:text="@string/other" />
+
+                <TextView
+                        android:id="@+id/month_largusNew_expenses_other_textView"
+                        style="@style/dayAndMonthTextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/month_money_divider"
+                    style="@style/dayAndMonthLinearLayout"
+                    android:layout_below="@id/month_largusNew_expenses_other">
 
                 <TextView
                         style="@style/dayAndMonthTextView"

@@ -1,6 +1,6 @@
 package com.parsiphal.loganshopdriverhelper.data
 
-enum class Cars(val i: Int, val id: String) { Largus(0,"Largus"), Sandero(1,"Sandero"), XRay(2,"X-Ray") }
+enum class Cars(val i: Int, val id: String) { Largus(0,"Largus"), Sandero(1,"Sandero"), XRay(-2,"X-Ray"), LargusNew(2, "Largus(new)") }
 
 enum class WorkType(val i: Int) { Delivery(0), Move(1), Task(2), Expense(3), Other(4), Salary(5) }
 

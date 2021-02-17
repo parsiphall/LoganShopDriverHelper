@@ -24,6 +24,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var totals: List<Total> = ArrayList()
     private lateinit var total: Total
     private var newTotal = true
+    private var xRayDB = false
     private lateinit var callBackActivity: MainView
     private var totalShifts = 0
     private var totalMoney = 0
@@ -57,6 +58,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var largusShifts = 0
     private var sanderoShifts = 0
     private var xrayShifts = 0
+    private var largusNewShifts = 0
     private var loganMoveFromZhukova = 0
     private var loganMoveFromKulturi = 0
     private var loganMoveFromSedova = 0
@@ -119,6 +121,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var xRayExpenseWash = 0
     private var xRayExpenseOther = 0
     private var xRayExpenseTotal = 0
+    private var largusNewExpenseFuel = 0
+    private var largusNewExpenseWash = 0
+    private var largusNewExpenseOther = 0
+    private var largusNewExpenseTotal = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -146,6 +152,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (newTotal) {
+            val time = System.currentTimeMillis() / 1000L
+            if (time > 1614556800) {
+                hideXRay()
+            }
             val search =
                 "${prefs.date!![2]}${prefs.date!![3]}${prefs.date!![4]}${prefs.date!![5]}${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
             val data = GlobalScope.async {
@@ -164,6 +174,9 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             }
             month_share.visibility = View.GONE
         } else {
+            if (total.xRayDB == 1) {
+                hideXRay()
+            }
             val search =
                 "${total.date[3]}${total.date[4]}${total.date[5]}${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
             val data = GlobalScope.async {
@@ -185,6 +198,15 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_share.setOnClickListener {
             shareDate()
         }
+    }
+
+    private fun hideXRay() {
+        xRayDB = true
+        month_xray_count.visibility = View.GONE
+        month_xray_total_expenses.visibility = View.GONE
+        month_xray_expenses_fuel.visibility = View.GONE
+        month_xray_expenses_wash.visibility = View.GONE
+        month_xray_expenses_other.visibility = View.GONE
     }
 
     private fun getData(search: String) {
@@ -211,6 +233,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_largus_count_textView.text = largusShifts.toString()
         month_sandero_count_textView.text = sanderoShifts.toString()
         month_xray_count_textView.text = xrayShifts.toString()
+        month_largusNew_count_textView.text = largusNewShifts.toString()
         month_total_delivery_value_textView.text = totalDeliveries.toString()
         month_logan_move_textView.text = loganMove.toString()
         month_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
@@ -270,6 +293,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 Cars.Largus.i -> largusShifts++
                 Cars.Sandero.i -> sanderoShifts++
                 Cars.XRay.i -> xrayShifts++
+                Cars.LargusNew.i -> largusNewShifts++
             }
             totalMoney += position.totalMoney
             totalCash += position.totalCash
@@ -370,11 +394,17 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                     xRayExpenseWash += position.expensesWash
                     xRayExpenseOther += position.expensesOther
                 }
+                Cars.LargusNew.i -> {
+                    largusNewExpenseFuel += position.expensesFuel
+                    largusNewExpenseWash += position.expensesWash
+                    largusNewExpenseOther += position.expensesOther
+                }
             }
         }
         largusExpenseTotal = largusExpenseFuel + largusExpenseWash + largusExpenseOther
         sanderoExpenseTotal = sanderoExpenseFuel + sanderoExpenseWash + sanderoExpenseOther
         xRayExpenseTotal = xRayExpenseFuel + xRayExpenseWash + xRayExpenseOther
+        largusNewExpenseTotal = largusNewExpenseFuel + largusNewExpenseWash + largusNewExpenseOther
     }
 
     private fun placeExpenses() {
@@ -390,6 +420,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_xray_expenses_fuel_textView.text = xRayExpenseFuel.toString()
         month_xray_expenses_wash_textView.text = xRayExpenseWash.toString()
         month_xray_expenses_other_textView.text = xRayExpenseOther.toString()
+        month_largusNew_total_expenses_textView.text = largusNewExpenseTotal.toString()
+        month_largusNew_expenses_fuel_textView.text = largusNewExpenseFuel.toString()
+        month_largusNew_expenses_wash_textView.text = largusNewExpenseWash.toString()
+        month_largusNew_expenses_other_textView.text = largusNewExpenseOther.toString()
     }
 
     private fun saveData() = GlobalScope.launch {
@@ -430,6 +464,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.largusShifts = month_largus_count_textView.text.toString().toInt()
             total.sanderoShifts = month_sandero_count_textView.text.toString().toInt()
             total.xrayShifts = month_xray_count_textView.text.toString().toInt()
+            total.largusNewShifts = month_largusNew_count_textView.text.toString().toInt()
 
             total.loganMoveFromZhukova = loganMoveFromZhukova
             total.loganMoveFromKulturi = loganMoveFromKulturi
@@ -490,6 +525,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.vestaTaskToVeteranov = vestaTaskToVeteranov
 
             total.vestaTaskElse = vestaTaskElse
+
+            if (xRayDB) {
+                total.xRayDB = 1
+            }
 
             DB.getDao().addTotal(total)
             callBackActivity.fragmentPlace(TotalFragment())
@@ -571,15 +610,19 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_largus_count_textView.text = total.largusShifts.toString()
         month_sandero_count_textView.text = total.sanderoShifts.toString()
         month_xray_count_textView.text = total.xrayShifts.toString()
+        month_largusNew_count_textView.text = total.largusNewShifts.toString()
     }
 
     private fun shareDate() = GlobalScope.launch {
-        val textToSend = "${month_month.text} / ${month_year.text}\n" +
+        var textToSend = "${month_month.text} / ${month_year.text}\n" +
                 "${prefs.family}\n" +
                 "${resources.getString(R.string.shiftsValue)} ${month_total_shifts_value_textView.text}\n" +
                 "${resources.getString(R.string.car_largus)}: ${month_largus_count_textView.text}\n" +
-                "${resources.getString(R.string.car_sandero)}: ${month_sandero_count_textView.text}\n" +
-                "${resources.getString(R.string.car_x_ray)}: ${month_xray_count_textView.text}\n" +
+                "${resources.getString(R.string.car_sandero)}: ${month_sandero_count_textView.text}\n"
+        if (!xRayDB) {
+            textToSend += "${resources.getString(R.string.car_x_ray)}: ${month_xray_count_textView.text}\n"
+        }
+        textToSend += "${resources.getString(R.string.car_largusNew)}: ${month_largusNew_count_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_textView.text}\n" +
                 "${resources.getString(R.string.totalMoney)}: ${month_total_money_textView.text}\n" +
@@ -642,11 +685,17 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "   ${resources.getString(R.string.car_sandero)}: ${month_sandero_total_expenses_textView.text}\n" +
                 "${resources.getString(R.string.fuel)} ${month_sandero_expenses_fuel_textView.text}\n" +
                 "${resources.getString(R.string.wash)}: ${month_sandero_expenses_wash_textView.text}\n" +
-                "${resources.getString(R.string.other)}: ${month_sandero_expenses_other_textView.text}\n" +
-                "   ${resources.getString(R.string.car_x_ray)}: ${month_xray_total_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)} ${month_xray_expenses_fuel_textView.text}\n" +
-                "${resources.getString(R.string.wash)}: ${month_xray_expenses_wash_textView.text}\n" +
-                "${resources.getString(R.string.other)}: ${month_xray_expenses_other_textView.text}\n" +
+                "${resources.getString(R.string.other)}: ${month_sandero_expenses_other_textView.text}\n"
+        if (!xRayDB) {
+            textToSend += "   ${resources.getString(R.string.car_x_ray)}: ${month_xray_total_expenses_textView.text}\n" +
+                    "${resources.getString(R.string.fuel)} ${month_xray_expenses_fuel_textView.text}\n" +
+                    "${resources.getString(R.string.wash)}: ${month_xray_expenses_wash_textView.text}\n" +
+                    "${resources.getString(R.string.other)}: ${month_xray_expenses_other_textView.text}\n"
+        }
+        textToSend += "   ${resources.getString(R.string.car_largusNew)}: ${month_largusNew_total_expenses_textView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${month_largusNew_expenses_fuel_textView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${month_largusNew_expenses_wash_textView.text}\n" +
+                "${resources.getString(R.string.other)}: ${month_largusNew_expenses_other_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
                 "${resources.getString(R.string.prepay)}: ${month_prepay_textView.text}\n" +

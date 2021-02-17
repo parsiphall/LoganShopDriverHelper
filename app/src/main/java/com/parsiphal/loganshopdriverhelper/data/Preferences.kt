@@ -17,13 +17,16 @@ const val EVENING_FUEL = "evening_fuel"
 const val LAST_ODO_LARGUS = "last_odo_largus"
 const val LAST_ODO_SANDERO = "last_odo_sandero"
 const val LAST_ODO_XRAY = "last_odo_xray"
+const val LAST_ODO_LARGUS_NEW = "last_odo_largus_new"
 const val LAST_FUEL_LARGUS = "last_fuel_largus"
 const val LAST_FUEL_SANDERO = "last_fuel_sandero"
 const val LAST_FUEL_XRAY = "last_fuel_xray"
+const val LAST_FUEL_LARGUS_NEW = "last_fuel_largus_new"
 const val ADD_SYSTEM = "add_system"
 const val STATUS = "status"
 const val DELIVERY_VIEW = "delivery_view"
 const val SHIFT_SYSTEM = "shift_system"
+const val XRAY_DB = "xray_db"
 
 
 class Preferences(context: Context) {
@@ -85,6 +88,10 @@ class Preferences(context: Context) {
         get() = prefs.getInt(LAST_ODO_XRAY, 0)
         set(value) = prefs.edit().putInt(LAST_ODO_XRAY, value!!).apply()
 
+    var lastOdoLargusNew: Int?
+        get() = prefs.getInt(LAST_ODO_LARGUS_NEW, 0)
+        set(value) = prefs.edit().putInt(LAST_ODO_LARGUS_NEW, value!!).apply()
+
     var lastFuelLargus: Int?
         get() = prefs.getInt(LAST_FUEL_LARGUS, 0)
         set(value) = prefs.edit().putInt(LAST_FUEL_LARGUS, value!!).apply()
@@ -96,6 +103,10 @@ class Preferences(context: Context) {
     var lastFuelXRay: Int?
         get() = prefs.getInt(LAST_FUEL_XRAY, 0)
         set(value) = prefs.edit().putInt(LAST_FUEL_XRAY, value!!).apply()
+
+    var lastFuelLargusNew: Int?
+        get() = prefs.getInt(LAST_FUEL_LARGUS_NEW, 0)
+        set(value) = prefs.edit().putInt(LAST_FUEL_LARGUS_NEW, value!!).apply()
 
     var addSystem: Int?
         get() = prefs.getInt(ADD_SYSTEM, 1)
@@ -112,4 +123,8 @@ class Preferences(context: Context) {
     var shiftSystem: Int?
         get() = prefs.getInt(SHIFT_SYSTEM, 1)
         set(value) = prefs.edit().putInt(SHIFT_SYSTEM, value!!).apply()
+
+    var xRayDB: Boolean
+        get() = prefs.getBoolean(XRAY_DB, false)
+        set(value) = prefs.edit().putBoolean(XRAY_DB, value).apply()
 }

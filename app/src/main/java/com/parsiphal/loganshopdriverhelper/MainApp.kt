@@ -3,11 +3,12 @@ package com.parsiphal.loganshopdriverhelper
 import android.app.Application
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import com.parsiphal.loganshopdriverhelper.data.DataBase
 import com.parsiphal.loganshopdriverhelper.data.Preferences
 
-const val DB_NAME = "helper_DB"
+const val DB_NAME = "LSDH_DB"
 const val DB_SHM = "helper_DB-shm"
 const val DB_WAL = "helper_DB-wal"
 
@@ -138,19 +139,19 @@ class MainApp : Application() {
             }
         }
 
-        val mig11to12 = object : Migration(11,12){
+        val mig11to12 = object : Migration(11, 12) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE Total ADD COLUMN extraPay INTEGER DEFAULT 0 NOT NULL")
             }
         }
 
-        val mig12to13 = object : Migration(12,13){
+        val mig12to13 = object : Migration(12, 13) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE Total ADD COLUMN penalty INTEGER DEFAULT 0 NOT NULL")
             }
         }
 
-        val mig13to14 = object : Migration(13,14){
+        val mig13to14 = object : Migration(13, 14) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveFromPlanernaya INTEGER DEFAULT 0 NOT NULL")
                 database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveToPlanernaya INTEGER DEFAULT 0 NOT NULL")
@@ -163,13 +164,13 @@ class MainApp : Application() {
             }
         }
 
-        val mig14to15 = object : Migration(14,15){
+        val mig14to15 = object : Migration(14, 15) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE Total ADD COLUMN qualityPay INTEGER DEFAULT 0 NOT NULL")
             }
         }
 
-        val mig15to16 = object : Migration(15,16){
+        val mig15to16 = object : Migration(15, 16) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveFromVeteranov INTEGER DEFAULT 0 NOT NULL")
                 database.execSQL("ALTER TABLE Total ADD COLUMN loganMoveToVeteranov INTEGER DEFAULT 0 NOT NULL")
@@ -179,6 +180,13 @@ class MainApp : Application() {
                 database.execSQL("ALTER TABLE Total ADD COLUMN loganTaskToVeteranov INTEGER DEFAULT 0 NOT NULL")
                 database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskFromVeteranov INTEGER DEFAULT 0 NOT NULL")
                 database.execSQL("ALTER TABLE Total ADD COLUMN vestaTaskToVeteranov INTEGER DEFAULT 0 NOT NULL")
+            }
+        }
+
+        val mig16to17 = object : Migration(16, 17) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Total ADD COLUMN largusNewShifts INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE Total ADD COLUMN xRayDB INTEGER DEFAULT 0 NOT NULL")
             }
         }
 
@@ -200,8 +208,10 @@ class MainApp : Application() {
                 mig12to13,
                 mig13to14,
                 mig14to15,
-                mig15to16
+                mig15to16,
+                mig16to17
             )
+            .setJournalMode(RoomDatabase.JournalMode.TRUNCATE)
             .build()
     }
 }

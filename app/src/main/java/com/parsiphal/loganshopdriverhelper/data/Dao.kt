@@ -39,6 +39,9 @@ interface Dao {
     @Update
     fun updateDelivery(delivery: Delivery)
 
+    @Update
+    fun updateTotal(total: Total)
+
     @Delete
     fun deleteDelivery(delivery: Delivery)
 

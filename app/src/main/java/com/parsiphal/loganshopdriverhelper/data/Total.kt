@@ -49,6 +49,7 @@ data class Total(
     @ColumnInfo var largusShifts: Int = 0,
     @ColumnInfo var sanderoShifts: Int = 0,
     @ColumnInfo var xrayShifts: Int = 0,
+    @ColumnInfo var largusNewShifts: Int = 0,
     @ColumnInfo var loganMoveFromZhukova: Int = 0,
     @ColumnInfo var loganMoveFromKulturi: Int = 0,
     @ColumnInfo var loganMoveFromSedova: Int = 0,
@@ -101,5 +102,6 @@ data class Total(
     @ColumnInfo var loganTaskFromVeteranov: Int = 0,
     @ColumnInfo var loganTaskToVeteranov: Int = 0,
     @ColumnInfo var vestaTaskFromVeteranov: Int = 0,
-    @ColumnInfo var vestaTaskToVeteranov: Int = 0
+    @ColumnInfo var vestaTaskToVeteranov: Int = 0,
+    @ColumnInfo var xRayDB: Int = 0
 ) : Serializable

@@ -47,7 +47,8 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
                 shiftN_family_textView.text = shiftN_enter_family_editText.text.toString()
                 shiftN_enter_family.visibility = View.GONE
                 showMainViews()
-                val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm =
+                    context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view?.windowToken, 0)
             }
         }
@@ -85,19 +86,29 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
     private fun enterCarListener() {
         shiftN_enter_car_largus_button.setOnClickListener {
             prefs.car = Cars.Largus.id
+            prefs.carPosition = Cars.Largus.i
             shiftN_car_textView.text = Cars.Largus.name
             shiftN_enter_car.visibility = View.GONE
             shiftN_enter_district.visibility = View.VISIBLE
         }
         shiftN_enter_car_sandero_button.setOnClickListener {
             prefs.car = Cars.Sandero.id
+            prefs.carPosition = Cars.Sandero.i
             shiftN_car_textView.text = Cars.Sandero.name
             shiftN_enter_car.visibility = View.GONE
             shiftN_enter_district.visibility = View.VISIBLE
         }
         shiftN_enter_car_xray_button.setOnClickListener {
             prefs.car = Cars.XRay.id
+            prefs.carPosition = Cars.XRay.i
             shiftN_car_textView.text = Cars.XRay.id
+            shiftN_enter_car.visibility = View.GONE
+            shiftN_enter_district.visibility = View.VISIBLE
+        }
+        shiftN_enter_car_largusNew_button.setOnClickListener {
+            prefs.car = Cars.LargusNew.id
+            prefs.carPosition = Cars.LargusNew.i
+            shiftN_car_textView.text = Cars.LargusNew.name
             shiftN_enter_car.visibility = View.GONE
             shiftN_enter_district.visibility = View.VISIBLE
         }
