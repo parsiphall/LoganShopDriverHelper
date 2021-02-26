@@ -8,7 +8,7 @@ import androidx.room.migration.Migration
 import com.parsiphal.loganshopdriverhelper.data.DataBase
 import com.parsiphal.loganshopdriverhelper.data.Preferences
 
-const val DB_NAME = "LSDH_DB"
+const val DB_NAME = "helper_DB"
 const val DB_SHM = "helper_DB-shm"
 const val DB_WAL = "helper_DB-wal"
 
