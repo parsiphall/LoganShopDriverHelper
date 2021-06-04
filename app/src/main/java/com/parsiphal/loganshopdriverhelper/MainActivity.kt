@@ -8,8 +8,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.parsiphal.loganshopdriverhelper.fragments.DeliveryFragment
 import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragment
 import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragmentNew
@@ -45,9 +45,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun showAd() {
-        if (mInterstitialAd.isLoaded) {
-            mInterstitialAd.show()
-        }
+//        if (mInterstitialAd.isLoaded) {
+//            mInterstitialAd.show()
+//        }
     }
 
     private val onNavigationItemMainSelectedListener =
@@ -97,16 +97,16 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 )
             }
         }
-        MobileAds.initialize(this) {}
-        prepareAd()
+//        MobileAds.initialize(this) {}
+//        prepareAd()
         version_TextView.text = "v${BuildConfig.VERSION_NAME}\nb${BuildConfig.VERSION_CODE}"
         fragmentPlace(DeliveryFragment())
     }
 
     override fun prepareAd() {
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = "ca-app-pub-1794452166316673/5993649829"
-//        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
+//        mInterstitialAd = InterstitialAd(this)
+//        mInterstitialAd.adUnitId = "ca-app-pub-1794452166316673/5993649829"
+////        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+//        mInterstitialAd.loadAd(AdRequest.Builder().build())
     }
 }
