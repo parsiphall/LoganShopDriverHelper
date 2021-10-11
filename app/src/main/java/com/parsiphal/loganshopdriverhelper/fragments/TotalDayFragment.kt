@@ -468,9 +468,9 @@ class TotalDayFragment : MvpAppCompatFragment() {
         totalMove = totalMoveToPay + loganMoveWithOutSalary + vestaMoveWithOutSalary
         totalTask = totalTaskToPay + loganTaskWithOutSalary + vestaTaskWithOutSalary
         salary = if (prefs.status == 0) {
-            (1800 + totalDeliveries * 60 + totalMoveToPay * 60 + totalTaskToPay * 60 - penalty)
+            (Salary.Employee.i + totalDeliveries * Salary.Delivery.i + totalMoveToPay * Salary.Move.i + totalTaskToPay * Salary.Task.i - penalty)
         } else {
-            1500
+            Salary.Newbie.i
         }
     }
 

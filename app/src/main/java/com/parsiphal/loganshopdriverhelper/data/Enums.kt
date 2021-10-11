@@ -16,3 +16,5 @@ enum class Expenses(val i: Int) { Fuel(0), Wash(1), Other(2) }
 
 enum class Districts(val ruName: String) {North("Север"), Center("Центр"), South("Юг")}
 
+enum class Salary(val i: Int) { Employee(1800), Newbie(1600), Delivery(80), Move(80), Task(80)}
+
