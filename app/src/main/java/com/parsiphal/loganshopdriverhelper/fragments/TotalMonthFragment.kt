@@ -642,6 +642,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             textToSend += "${resources.getString(R.string.car_x_ray)}: ${month_xray_count_textView.text}\n"
         }
         textToSend += "${resources.getString(R.string.car_largusNew)}: ${month_largusNew_count_textView.text}\n" +
+                "${resources.getString(R.string.car_vestaSW)}: ${month_vestaSW_count_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_textView.text}\n" +
                 "${resources.getString(R.string.totalMoney)}: ${month_total_money_textView.text}\n" +
@@ -715,6 +716,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 "${resources.getString(R.string.fuel)} ${month_largusNew_expenses_fuel_textView.text}\n" +
                 "${resources.getString(R.string.wash)}: ${month_largusNew_expenses_wash_textView.text}\n" +
                 "${resources.getString(R.string.other)}: ${month_largusNew_expenses_other_textView.text}\n" +
+                "   ${resources.getString(R.string.car_vestaSW)}: ${month_vestaSW_total_expenses_textView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${month_vestaSW_expenses_fuel_textView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${month_vestaSW_expenses_wash_textView.text}\n" +
+                "${resources.getString(R.string.other)}: ${month_vestaSW_expenses_other_textView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
                 "${resources.getString(R.string.prepay)}: ${month_prepay_textView.text}\n" +
