@@ -214,6 +214,10 @@
                     android:layout_weight="1"
                     android:text="@string/car_x_ray"
                     android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+                style="@style/shiftLinearLayout"
+                android:orientation="horizontal">
             <Button
                     android:id="@+id/shiftN_enter_car_largusNew_button"
                     style="?android:attr/buttonBarButtonStyle"
@@ -221,6 +225,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/car_largusNew"/>
+            <Button
+                    android:id="@+id/shiftN_enter_car_vestaSW_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/car_vestaSW"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -284,6 +295,13 @@
                     style="@style/shiftTextViews"
                     android:text="@string/_0"/>
         </LinearLayout>
+        <SeekBar
+                android:id="@+id/shiftN_fuel_seekbar_6"
+                android:paddingTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progress="0"
+                android:max="6"/>
         <SeekBar
                 android:id="@+id/shiftN_fuel_seekbar_8"
                 android:paddingTop="30dp"

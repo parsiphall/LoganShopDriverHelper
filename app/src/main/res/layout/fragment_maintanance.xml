@@ -71,7 +71,7 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Экран смены"
+                android:text="@string/shiftScreen"
                 android:textSize="30sp"
                 android:gravity="center"/>
 
@@ -87,14 +87,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/oldSystem" />
+                    android:text="@string/oldShiftScreen" />
 
             <Button
                     android:id="@+id/maint_new_shift_system"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/newSystem" />
+                    android:text="@string/newShiftScreen" />
         </LinearLayout>
 
         <TextView

@@ -11,7 +11,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-const val DEADLINE = 1640984399
+const val DEADLINE = 1671364628
 const val DEADLINE_TEST = 1588104600
 
 class EmptyActivity : AppCompatActivity() {

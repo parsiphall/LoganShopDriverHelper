@@ -50,6 +50,7 @@ data class Total(
     @ColumnInfo var sanderoShifts: Int = 0,
     @ColumnInfo var xrayShifts: Int = 0,
     @ColumnInfo var largusNewShifts: Int = 0,
+    @ColumnInfo var vestaSWShifts: Int = 0,
     @ColumnInfo var loganMoveFromZhukova: Int = 0,
     @ColumnInfo var loganMoveFromKulturi: Int = 0,
     @ColumnInfo var loganMoveFromSedova: Int = 0,

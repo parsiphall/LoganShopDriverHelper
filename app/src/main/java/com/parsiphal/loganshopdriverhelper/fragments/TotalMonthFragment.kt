@@ -59,6 +59,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var sanderoShifts = 0
     private var xrayShifts = 0
     private var largusNewShifts = 0
+    private var vestaSWShifts = 0
     private var loganMoveFromZhukova = 0
     private var loganMoveFromKulturi = 0
     private var loganMoveFromSedova = 0
@@ -125,6 +126,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var largusNewExpenseWash = 0
     private var largusNewExpenseOther = 0
     private var largusNewExpenseTotal = 0
+    private var vestaSWExpenseFuel = 0
+    private var vestaSWExpenseWash = 0
+    private var vestaSWExpenseOther = 0
+    private var vestaSWExpenseTotal = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -234,6 +239,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_sandero_count_textView.text = sanderoShifts.toString()
         month_xray_count_textView.text = xrayShifts.toString()
         month_largusNew_count_textView.text = largusNewShifts.toString()
+        month_vestaSW_count_textView.text = vestaSWShifts.toString()
         month_total_delivery_value_textView.text = totalDeliveries.toString()
         month_logan_move_textView.text = loganMove.toString()
         month_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
@@ -294,6 +300,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 Cars.Sandero.i -> sanderoShifts++
                 Cars.XRay.i -> xrayShifts++
                 Cars.LargusNew.i -> largusNewShifts++
+                Cars.VestaSW.i -> vestaSWShifts++
             }
             totalMoney += position.totalMoney
             totalCash += position.totalCash
@@ -399,12 +406,18 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                     largusNewExpenseWash += position.expensesWash
                     largusNewExpenseOther += position.expensesOther
                 }
+                Cars.VestaSW.i -> {
+                    vestaSWExpenseFuel += position.expensesFuel
+                    vestaSWExpenseWash += position.expensesWash
+                    vestaSWExpenseOther += position.expensesOther
+                }
             }
         }
         largusExpenseTotal = largusExpenseFuel + largusExpenseWash + largusExpenseOther
         sanderoExpenseTotal = sanderoExpenseFuel + sanderoExpenseWash + sanderoExpenseOther
         xRayExpenseTotal = xRayExpenseFuel + xRayExpenseWash + xRayExpenseOther
         largusNewExpenseTotal = largusNewExpenseFuel + largusNewExpenseWash + largusNewExpenseOther
+        vestaSWExpenseTotal = vestaSWExpenseFuel + vestaSWExpenseWash + vestaSWExpenseOther
     }
 
     private fun placeExpenses() {
@@ -424,6 +437,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_largusNew_expenses_fuel_textView.text = largusNewExpenseFuel.toString()
         month_largusNew_expenses_wash_textView.text = largusNewExpenseWash.toString()
         month_largusNew_expenses_other_textView.text = largusNewExpenseOther.toString()
+        month_vestaSW_total_expenses_textView.text = vestaSWExpenseTotal.toString()
+        month_vestaSW_expenses_fuel_textView.text = vestaSWExpenseFuel.toString()
+        month_vestaSW_expenses_wash_textView.text = vestaSWExpenseWash.toString()
+        month_vestaSW_expenses_other_textView.text = vestaSWExpenseOther.toString()
     }
 
     private fun saveData() = GlobalScope.launch {
@@ -465,6 +482,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.sanderoShifts = month_sandero_count_textView.text.toString().toInt()
             total.xrayShifts = month_xray_count_textView.text.toString().toInt()
             total.largusNewShifts = month_largusNew_count_textView.text.toString().toInt()
+            total.vestaSWShifts = month_vestaSW_count_textView.text.toString().toInt()
 
             total.loganMoveFromZhukova = loganMoveFromZhukova
             total.loganMoveFromKulturi = loganMoveFromKulturi
@@ -611,6 +629,7 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         month_sandero_count_textView.text = total.sanderoShifts.toString()
         month_xray_count_textView.text = total.xrayShifts.toString()
         month_largusNew_count_textView.text = total.largusNewShifts.toString()
+        month_vestaSW_count_textView.text = total.vestaSWShifts.toString()
     }
 
     private fun shareDate() = GlobalScope.launch {

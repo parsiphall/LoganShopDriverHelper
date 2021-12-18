@@ -112,6 +112,13 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
             shiftN_enter_car.visibility = View.GONE
             shiftN_enter_district.visibility = View.VISIBLE
         }
+        shiftN_enter_car_vestaSW_button.setOnClickListener {
+            prefs.car = Cars.VestaSW.id
+            prefs.carPosition = Cars.VestaSW.i
+            shiftN_car_textView.text = Cars.VestaSW.name
+            shiftN_enter_car.visibility = View.GONE
+            shiftN_enter_district.visibility = View.VISIBLE
+        }
     }
 
     private fun enterDistrictListener() {
@@ -137,11 +144,28 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
 
     private fun odoAndFuelListener() {
         shiftN_enter_odo_and_fuel.visibility = View.VISIBLE
-        if (shiftN_car_textView.text == Cars.XRay.id) {
-            shiftN_fuel_seekbar_9.visibility = View.GONE
-        } else {
-            shiftN_fuel_seekbar_8.visibility = View.GONE
+        when (shiftN_car_textView.text) {
+            Cars.XRay.id -> {
+                shiftN_fuel_seekbar_6.visibility = View.GONE
+                shiftN_fuel_seekbar_9.visibility = View.GONE
+            }
+            Cars.VestaSW.id -> {
+                shiftN_fuel_seekbar_8.visibility = View.GONE
+                shiftN_fuel_seekbar_9.visibility = View.GONE
+            }
+            else -> {
+                shiftN_fuel_seekbar_6.visibility = View.GONE
+                shiftN_fuel_seekbar_8.visibility = View.GONE
+            }
         }
+        shiftN_fuel_seekbar_6.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                shiftN_fuel_textView.text = shiftN_fuel_seekbar_6.progress.toString()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
         shiftN_fuel_seekbar_8.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 shiftN_fuel_textView.text = shiftN_fuel_seekbar_8.progress.toString()
@@ -162,22 +186,36 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
             if (ifMorning) {
                 prefs.morningODO = shiftN_odo_editText.text.toString().toInt()
                 shiftN_odo_morning_textView.text = shiftN_odo_editText.text.toString()
-                if (shiftN_car_textView.text == Cars.XRay.id) {
-                    prefs.morningFuel = shiftN_fuel_seekbar_8.progress
-                    shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_8.progress.toString()
-                } else {
-                    prefs.morningFuel = shiftN_fuel_seekbar_9.progress
-                    shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_9.progress.toString()
+                when (shiftN_car_textView.text) {
+                    Cars.XRay.id -> {
+                        prefs.morningFuel = shiftN_fuel_seekbar_8.progress
+                        shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_8.progress.toString()
+                    }
+                    Cars.VestaSW.id -> {
+                        prefs.morningFuel = shiftN_fuel_seekbar_6.progress
+                        shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_6.progress.toString()
+                    }
+                    else -> {
+                        prefs.morningFuel = shiftN_fuel_seekbar_9.progress
+                        shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_9.progress.toString()
+                    }
                 }
             } else {
                 prefs.eveningODO = shiftN_odo_editText.text.toString().toInt()
                 shiftN_odo_evening_textView.text = shiftN_odo_editText.text.toString()
-                if (shiftN_car_textView.text == Cars.XRay.id) {
-                    prefs.eveningFuel = shiftN_fuel_seekbar_8.progress
-                    shiftN_fuel_evening_textView.text = shiftN_fuel_seekbar_8.progress.toString()
-                } else {
-                    prefs.eveningFuel = shiftN_fuel_seekbar_9.progress
-                    shiftN_fuel_evening_textView.text = shiftN_fuel_seekbar_9.progress.toString()
+                when (shiftN_car_textView.text) {
+                    Cars.XRay.id -> {
+                        prefs.eveningFuel = shiftN_fuel_seekbar_8.progress
+                        shiftN_fuel_evening_textView.text = shiftN_fuel_seekbar_8.progress.toString()
+                    }
+                    Cars.VestaSW.id -> {
+                        prefs.morningFuel = shiftN_fuel_seekbar_6.progress
+                        shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_6.progress.toString()
+                    }
+                    else -> {
+                        prefs.eveningFuel = shiftN_fuel_seekbar_9.progress
+                        shiftN_fuel_evening_textView.text = shiftN_fuel_seekbar_9.progress.toString()
+                    }
                 }
             }
             shiftN_enter_odo_and_fuel.visibility = View.GONE
@@ -190,6 +228,7 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
     private fun closeShiftListener() {
         shiftN_finish_shift_button.setOnClickListener {
             ifMorning = false
+            shiftN_fuel_seekbar_6.progress = 0
             shiftN_fuel_seekbar_8.progress = 0
             shiftN_fuel_seekbar_9.progress = 0
             shiftN_odo_editText.setText("")

@@ -5,7 +5,6 @@
     <string name="title_total">Отчёт</string>
     <string name="version">v0.3.5.1</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="date">Дата</string>
     <string name="morning">Утро</string>
@@ -73,11 +72,12 @@
     <string name="car_sandero">Sandero</string>
     <string name="car_x_ray">X-Ray</string>
     <string name="car_largusNew">Largus(new)</string>
+    <string name="car_vestaSW">VestaSW</string>
     <string name="holiday_pay">Отпускные</string>
     <string name="money_to_recieve">К выплате:</string>
     <string name="pays">Выплаты:</string>
-    <string name="maint_export">Export</string>
-    <string name="maint_import">Import</string>
+    <string name="maint_export">Экспорт</string>
+    <string name="maint_import">Импорт</string>
     <string name="switch_between_shops">Между магазинами</string>
     <string name="switch_else">Прочее</string>
     <string name="shop_sedova">Седова</string>
@@ -104,13 +104,13 @@
     <string name="isBetweenShops">Между магазинами?</string>
     <string name="dataBase">База данных</string>
     <string name="addingNotes">Добавление записей</string>
-    <string name="oldSystem">Old</string>
-    <string name="newSystem">New</string>
+    <string name="oldSystem">Старое</string>
+    <string name="newSystem">Новое</string>
     <string name="shop_planernaya">Планерная</string>
     <string name="qualityPay">Качество</string>
     <string name="status">Статус</string>
-    <string name="driver">Driver</string>
-    <string name="newbie">Newbie</string>
+    <string name="driver">Водитель</string>
+    <string name="newbie">Стажёр</string>
     <string name="oldAddSystemChosen">Выбрана старая система добавления</string>
     <string name="newAddSystemChosen">Выбрана новая система добавления</string>
     <string name="oldShiftSystemChosen">Выбран старый экран смены</string>
@@ -130,6 +130,9 @@
     <string name="_0">0</string>
     <string name="repair">Repair</string>
     <string name="repaired">Данные исправлены</string>
+    <string name="shiftScreen">Экран смены</string>
+    <string name="oldShiftScreen">Старый</string>
+    <string name="newShiftScreen">Новый</string>
 
     <string-array name="region">
         <item>Север</item>
@@ -141,6 +144,7 @@
         <item>Largus</item>
         <item>Sandero</item>
         <item>LargusN</item>
+        <item>VestaSW</item>
     </string-array>
     <string-array name="work_type">
         <item>Доставка</item>
@@ -164,6 +168,14 @@
     <string-array name="payType">
         <item>Наличные</item>
         <item>Карта</item>
+    </string-array>
+    <string-array name="fuel_6">
+        <item>1/6</item>
+        <item>2/6</item>
+        <item>3/6</item>
+        <item>4/6</item>
+        <item>5/6</item>
+        <item>6/6</item>
     </string-array>
     <string-array name="fuel_8">
         <item>1/8</item>

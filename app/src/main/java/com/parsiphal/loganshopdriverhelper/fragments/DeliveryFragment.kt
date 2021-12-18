@@ -70,10 +70,10 @@ class DeliveryFragment : MvpAppCompatFragment() {
                 callBackActivity.fragmentPlace(NewDeliveryAddFragment())
             }
         }
-        delivery_fab.setOnLongClickListener {
-            callBackActivity.fragmentPlace(MaintananceFragment())
-            return@setOnLongClickListener true
-        }
+//        delivery_fab.setOnLongClickListener {
+//            callBackActivity.fragmentPlace(MaintananceFragment())
+//            return@setOnLongClickListener true
+//        }
         calendar_fab.setOnClickListener {
             datePickerDialog()
         }

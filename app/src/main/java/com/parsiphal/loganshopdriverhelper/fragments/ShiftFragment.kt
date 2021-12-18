@@ -46,28 +46,44 @@ class ShiftFragment : MvpAppCompatFragment() {
             ) {
                 when (position) {
                     Cars.Largus.i -> {
+                        shift_fuel_morning_spinner_6.visibility = View.GONE
+                        shift_fuel_evening_spinner_6.visibility = View.GONE
                         shift_fuel_morning_spinner_8.visibility = View.GONE
                         shift_fuel_evening_spinner_8.visibility = View.GONE
                         shift_fuel_morning_spinner_9.visibility = View.VISIBLE
                         shift_fuel_evening_spinner_9.visibility = View.VISIBLE
                     }
                     Cars.Sandero.i -> {
+                        shift_fuel_morning_spinner_6.visibility = View.GONE
+                        shift_fuel_evening_spinner_6.visibility = View.GONE
                         shift_fuel_morning_spinner_8.visibility = View.GONE
                         shift_fuel_evening_spinner_8.visibility = View.GONE
                         shift_fuel_morning_spinner_9.visibility = View.VISIBLE
                         shift_fuel_evening_spinner_9.visibility = View.VISIBLE
                     }
                     Cars.XRay.i -> {
+                        shift_fuel_morning_spinner_6.visibility = View.GONE
+                        shift_fuel_evening_spinner_6.visibility = View.GONE
                         shift_fuel_morning_spinner_8.visibility = View.VISIBLE
                         shift_fuel_evening_spinner_8.visibility = View.VISIBLE
                         shift_fuel_morning_spinner_9.visibility = View.GONE
                         shift_fuel_evening_spinner_9.visibility = View.GONE
                     }
                     Cars.LargusNew.i -> {
+                        shift_fuel_morning_spinner_6.visibility = View.GONE
+                        shift_fuel_evening_spinner_6.visibility = View.GONE
                         shift_fuel_morning_spinner_8.visibility = View.GONE
                         shift_fuel_evening_spinner_8.visibility = View.GONE
                         shift_fuel_morning_spinner_9.visibility = View.VISIBLE
                         shift_fuel_evening_spinner_9.visibility = View.VISIBLE
+                    }
+                    Cars.VestaSW.i -> {
+                        shift_fuel_morning_spinner_6.visibility = View.VISIBLE
+                        shift_fuel_evening_spinner_6.visibility = View.VISIBLE
+                        shift_fuel_morning_spinner_8.visibility = View.GONE
+                        shift_fuel_evening_spinner_8.visibility = View.GONE
+                        shift_fuel_morning_spinner_9.visibility = View.GONE
+                        shift_fuel_evening_spinner_9.visibility = View.GONE
                     }
                 }
             }
@@ -83,12 +99,19 @@ class ShiftFragment : MvpAppCompatFragment() {
                 prefs.carPosition = shift_car_spinner.selectedItemPosition
                 prefs.morningODO = shift_odo_morning.text.toString().toInt()
                 prefs.eveningODO = shift_odo_evening.text.toString().toInt()
-                if (shift_car_spinner.selectedItemPosition == Cars.XRay.i) {
-                    prefs.morningFuel = (shift_fuel_morning_spinner_8.selectedItemPosition + 1)
-                    prefs.eveningFuel = (shift_fuel_evening_spinner_8.selectedItemPosition + 1)
-                } else {
-                    prefs.morningFuel = (shift_fuel_morning_spinner_9.selectedItemPosition + 1)
-                    prefs.eveningFuel = (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
+                when (shift_car_spinner.selectedItemPosition) {
+                    Cars.XRay.i -> {
+                        prefs.morningFuel = (shift_fuel_morning_spinner_8.selectedItemPosition + 1)
+                        prefs.eveningFuel = (shift_fuel_evening_spinner_8.selectedItemPosition + 1)
+                    }
+                    Cars.VestaSW.i -> {
+                        prefs.morningFuel = (shift_fuel_morning_spinner_6.selectedItemPosition + 1)
+                        prefs.eveningFuel = (shift_fuel_evening_spinner_6.selectedItemPosition + 1)
+                    }
+                    else -> {
+                        prefs.morningFuel = (shift_fuel_morning_spinner_9.selectedItemPosition + 1)
+                        prefs.eveningFuel = (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
+                    }
                 }
                 when (shift_car_spinner.selectedItemPosition) {
                     Cars.Largus.i -> {
@@ -109,6 +132,11 @@ class ShiftFragment : MvpAppCompatFragment() {
                         prefs.lastFuelLargusNew =
                             (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
                         prefs.lastOdoLargusNew = shift_odo_evening.text.toString().toInt()
+                    }
+                    Cars.VestaSW.i -> {
+                        prefs.lastFuelVestaSW =
+                            (shift_fuel_evening_spinner_9.selectedItemPosition + 1)
+                        prefs.lastOdoVestaSW = shift_odo_evening.text.toString().toInt()
                     }
                 }
                 Snackbar.make(view, getString(R.string.recorded), Snackbar.LENGTH_SHORT).show()
@@ -143,6 +171,11 @@ class ShiftFragment : MvpAppCompatFragment() {
                         shift_odo_evening.setText("0")
                         shift_fuel_morning_spinner_9.setSelection(prefs.lastFuelLargusNew!!.minus(1))
                     }
+                    Cars.VestaSW.i -> {
+                        shift_odo_morning.setText(prefs.lastOdoVestaSW!!.toString())
+                        shift_odo_evening.setText("0")
+                        shift_fuel_morning_spinner_9.setSelection(prefs.lastFuelVestaSW!!.minus(1))
+                    }
                 }
 
                 Snackbar.make(view, getString(R.string.dontForgetDate), Snackbar.LENGTH_LONG).show()
@@ -162,12 +195,19 @@ class ShiftFragment : MvpAppCompatFragment() {
             shift_car_spinner.setSelection(prefs.carPosition!!)
             shift_odo_morning.setText(prefs.morningODO!!.toString())
             shift_odo_evening.setText(prefs.eveningODO!!.toString())
-            if (shift_car_spinner.selectedItemPosition == Cars.XRay.i) {
-                shift_fuel_morning_spinner_8.setSelection(prefs.morningFuel!!.minus(1))
-                shift_fuel_evening_spinner_8.setSelection(prefs.eveningFuel!!.minus(1))
-            } else {
-                shift_fuel_morning_spinner_9.setSelection(prefs.morningFuel!!.minus(1))
-                shift_fuel_evening_spinner_9.setSelection(prefs.eveningFuel!!.minus(1))
+            when (shift_car_spinner.selectedItemPosition) {
+                Cars.XRay.i -> {
+                    shift_fuel_morning_spinner_8.setSelection(prefs.morningFuel!!.minus(1))
+                    shift_fuel_evening_spinner_8.setSelection(prefs.eveningFuel!!.minus(1))
+                }
+                Cars.VestaSW.i -> {
+                    shift_fuel_morning_spinner_6.setSelection(prefs.morningFuel!!.minus(1))
+                    shift_fuel_evening_spinner_6.setSelection(prefs.eveningFuel!!.minus(1))
+                }
+                else -> {
+                    shift_fuel_morning_spinner_9.setSelection(prefs.morningFuel!!.minus(1))
+                    shift_fuel_evening_spinner_9.setSelection(prefs.eveningFuel!!.minus(1))
+                }
             }
         } catch (e: Exception) {
             shift_family_editText.setText("")
@@ -200,12 +240,9 @@ class ShiftFragment : MvpAppCompatFragment() {
 
     private fun datePickerDialog(v: View) {
         val cal = Calendar.getInstance()
-        val year: Int
-        val month: Int
-        val dayOfMonth: Int
-        year = cal.get(Calendar.YEAR)
-        month = cal.get(Calendar.MONTH)
-        dayOfMonth = cal.get(Calendar.DAY_OF_MONTH)
+        val year: Int = cal.get(Calendar.YEAR)
+        val month: Int = cal.get(Calendar.MONTH)
+        val dayOfMonth: Int = cal.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(
             context!!,
             dateListener(v),

@@ -4,16 +4,14 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.parsiphal.loganshopdriverhelper.fragments.DeliveryFragment
-import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragment
-import com.parsiphal.loganshopdriverhelper.fragments.ShiftFragmentNew
-import com.parsiphal.loganshopdriverhelper.fragments.TotalFragment
+import com.parsiphal.loganshopdriverhelper.fragments.*
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -59,14 +57,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                     } else {
                         fragmentPlace(ShiftFragmentNew())
                     }
+                    settings_fab.visibility = View.VISIBLE
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_delivery -> {
                     fragmentPlace(DeliveryFragment())
+                    settings_fab.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_total -> {
                     fragmentPlace(TotalFragment())
+                    settings_fab.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -78,6 +79,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
         nav_view.setOnNavigationItemSelectedListener(onNavigationItemMainSelectedListener)
         nav_view.selectedItemId = R.id.navigation_delivery
+        settings_fab.setOnClickListener {
+            fragmentPlace(MaintananceFragment())
+            settings_fab.visibility = View.GONE
+        }
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
