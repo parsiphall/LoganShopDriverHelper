@@ -9,9 +9,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.*
+import com.parsiphal.loganshopdriverhelper.databinding.FragmentNewDeliveryAddBinding
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
-import kotlinx.android.synthetic.main.fragment_new_delivery_add.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -24,6 +24,8 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
     private lateinit var delivery: Delivery
     private lateinit var callBackActivity: MainView
     private var isBetweenShops = true
+    private var _binding: FragmentNewDeliveryAddBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,8 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_new_delivery_add, container, false)
+        _binding = FragmentNewDeliveryAddBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onAttach(context: Context) {
@@ -45,7 +48,7 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         delivery.deliveryDate = prefs.date!!
-        newDeliveryAdd_workType.visibility = View.VISIBLE
+        binding.newDeliveryAddWorkType.visibility = View.VISIBLE
         workTypeListeners()
         deliveryTypeListeners()
         payTypeListeners()
@@ -60,103 +63,108 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
         otherListeners()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun saveToBase() = GlobalScope.launch {
         DB.getDao().addDelivery(delivery)
     }
 
     private fun workTypeListeners() {
-        newDeliveryAdd_workType_deliveryButton.setOnClickListener {
+        binding.newDeliveryAddWorkTypeDeliveryButton.setOnClickListener {
             delivery.workType = WorkType.Delivery.i
-            newDeliveryAdd_workType.visibility = View.GONE
-            newDeliveryAdd_deliveryType.visibility = View.VISIBLE
+            binding.newDeliveryAddWorkType.visibility = View.GONE
+            binding.newDeliveryAddDeliveryType.visibility = View.VISIBLE
         }
-        newDeliveryAdd_workType_moveButton.setOnClickListener {
+        binding.newDeliveryAddWorkTypeMoveButton.setOnClickListener {
             delivery.workType = WorkType.Move.i
-            newDeliveryAdd_workType.visibility = View.GONE
-            newDeliveryAdd_deliveryType.visibility = View.VISIBLE
+            binding.newDeliveryAddWorkType.visibility = View.GONE
+            binding.newDeliveryAddDeliveryType.visibility = View.VISIBLE
         }
-        newDeliveryAdd_workType_taskButton.setOnClickListener {
+        binding.newDeliveryAddWorkTypeTaskButton.setOnClickListener {
             delivery.workType = WorkType.Task.i
-            newDeliveryAdd_workType.visibility = View.GONE
-            newDeliveryAdd_deliveryType.visibility = View.VISIBLE
+            binding.newDeliveryAddWorkType.visibility = View.GONE
+            binding.newDeliveryAddDeliveryType.visibility = View.VISIBLE
         }
-        newDeliveryAdd_workType_expenseButton.setOnClickListener {
+        binding.newDeliveryAddWorkTypeExpenseButton.setOnClickListener {
             delivery.workType = WorkType.Expense.i
-            newDeliveryAdd_workType.visibility = View.GONE
-            newDeliveryAdd_expense.visibility = View.VISIBLE
+            binding.newDeliveryAddWorkType.visibility = View.GONE
+            binding.newDeliveryAddExpense.visibility = View.VISIBLE
         }
-        newDeliveryAdd_workType_payButton.setOnClickListener {
+        binding.newDeliveryAddWorkTypePayButton.setOnClickListener {
             delivery.workType = WorkType.Salary.i
-            newDeliveryAdd_workType.visibility = View.GONE
-            newDeliveryAdd_pay.visibility = View.VISIBLE
+            binding.newDeliveryAddWorkType.visibility = View.GONE
+            binding.newDeliveryAddPay.visibility = View.VISIBLE
         }
-        newDeliveryAdd_workType_otherButton.setOnClickListener {
+        binding.newDeliveryAddWorkTypeOtherButton.setOnClickListener {
             delivery.workType = WorkType.Other.i
-            newDeliveryAdd_workType.visibility = View.GONE
-            newDeliveryAdd_other.visibility = View.VISIBLE
+            binding.newDeliveryAddWorkType.visibility = View.GONE
+            binding.newDeliveryAddOther.visibility = View.VISIBLE
         }
     }
 
     private fun deliveryTypeListeners() {
-        newDeliveryAdd_deliveryType_logan.setOnClickListener {
+        binding.newDeliveryAddDeliveryTypeLogan.setOnClickListener {
             delivery.deliveryType = 0
-            newDeliveryAdd_deliveryType.visibility = View.GONE
+            binding.newDeliveryAddDeliveryType.visibility = View.GONE
             when (delivery.workType) {
                 WorkType.Delivery.i -> {
-                    newDeliveryAdd_payType.visibility = View.VISIBLE
+                    binding.newDeliveryAddPayType.visibility = View.VISIBLE
                 }
                 WorkType.Move.i -> {
-                    newDeliveryAdd_moveFrom.visibility = View.VISIBLE
+                    binding.newDeliveryAddMoveFrom.visibility = View.VISIBLE
                 }
                 else -> {
-                    newDeliveryAdd_taskType.visibility = View.VISIBLE
+                    binding.newDeliveryAddTaskType.visibility = View.VISIBLE
                 }
             }
         }
-        newDeliveryAdd_deliveryType_vesta.setOnClickListener {
+        binding.newDeliveryAddDeliveryTypeVesta.setOnClickListener {
             delivery.deliveryType = 1
-            newDeliveryAdd_deliveryType.visibility = View.GONE
+            binding.newDeliveryAddDeliveryType.visibility = View.GONE
             when (delivery.workType) {
                 WorkType.Delivery.i -> {
-                    newDeliveryAdd_payType.visibility = View.VISIBLE
+                    binding.newDeliveryAddPayType.visibility = View.VISIBLE
                 }
                 WorkType.Move.i -> {
-                    newDeliveryAdd_moveFrom.visibility = View.VISIBLE
-                    newDeliveryAdd_moveFrom_Himikov.visibility = View.GONE
-                    newDeliveryAdd_moveTo_Himikov.visibility = View.GONE
+                    binding.newDeliveryAddMoveFrom.visibility = View.VISIBLE
+                    binding.newDeliveryAddMoveFromHimikov.visibility = View.GONE
+                    binding.newDeliveryAddMoveToHimikov.visibility = View.GONE
                 }
                 else -> {
-                    newDeliveryAdd_taskType.visibility = View.VISIBLE
-                    newDeliveryAdd_moveFrom_Himikov.visibility = View.GONE
-                    newDeliveryAdd_moveTo_Himikov.visibility = View.GONE
+                    binding.newDeliveryAddTaskType.visibility = View.VISIBLE
+                    binding.newDeliveryAddMoveFromHimikov.visibility = View.GONE
+                    binding.newDeliveryAddMoveToHimikov.visibility = View.GONE
                 }
             }
         }
     }
 
     private fun payTypeListeners() {
-        newDeliveryAdd_payType_cash.setOnClickListener {
+        binding.newDeliveryAddPayTypeCash.setOnClickListener {
             delivery.payType = PayType.Cash.i
-            newDeliveryAdd_payType.visibility = View.GONE
-            newDeliveryAdd_address.visibility = View.VISIBLE
+            binding.newDeliveryAddPayType.visibility = View.GONE
+            binding.newDeliveryAddAddress.visibility = View.VISIBLE
         }
-        newDeliveryAdd_payType_card.setOnClickListener {
+        binding.newDeliveryAddPayTypeCard.setOnClickListener {
             delivery.payType = PayType.Card.i
-            newDeliveryAdd_payType.visibility = View.GONE
-            newDeliveryAdd_address.visibility = View.VISIBLE
+            binding.newDeliveryAddPayType.visibility = View.GONE
+            binding.newDeliveryAddAddress.visibility = View.VISIBLE
         }
     }
 
     private fun payingListeners() {
-        newDeliveryAdd_paying_next.setOnClickListener {
+        binding.newDeliveryAddPayingNext.setOnClickListener {
             try {
-                delivery.cost = newDeliveryAdd_paying_cost.text.toString().toInt()
-                if (newDeliveryAdd_paying_moneyTake.text.toString() == "") {
+                delivery.cost = binding.newDeliveryAddPayingCost.text.toString().toInt()
+                if (binding.newDeliveryAddPayingMoneyTake.text.toString() == "") {
                     delivery.expense = 0
                 } else {
                     delivery.expense =
-                        (newDeliveryAdd_paying_moneyTake.text.toString()
-                            .toInt() - newDeliveryAdd_paying_cost.text.toString().toInt())
+                        (binding.newDeliveryAddPayingMoneyTake.text.toString()
+                            .toInt() - binding.newDeliveryAddPayingCost.text.toString().toInt())
                 }
                 save()
             } catch (e: Exception) {
@@ -167,13 +175,13 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
     }
 
     private fun addressListeners() {
-        newDeliveryAdd_address_save.setOnClickListener {
-            if (newDeliveryAdd_address_address.text.toString() != "") {
-                delivery.address = newDeliveryAdd_address_address.text.toString()
-                delivery.comment = newDeliveryAdd_address_comment.text.toString()
-                delivery.commentSimple = newDeliveryAdd_address_comment.text.toString()
-                newDeliveryAdd_address.visibility = View.GONE
-                newDeliveryAdd_paying.visibility = View.VISIBLE
+        binding.newDeliveryAddAddressSave.setOnClickListener {
+            if (binding.newDeliveryAddAddressAddress.text.toString() != "") {
+                delivery.address = binding.newDeliveryAddAddressAddress.text.toString()
+                delivery.comment = binding.newDeliveryAddAddressComment.text.toString()
+                delivery.commentSimple = binding.newDeliveryAddAddressComment.text.toString()
+                binding.newDeliveryAddAddress.visibility = View.GONE
+                binding.newDeliveryAddPaying.visibility = View.VISIBLE
             } else {
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
@@ -186,77 +194,77 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
     }
 
     private fun moveFromListeners() {
-        newDeliveryAdd_moveFrom_Zhukova.setOnClickListener {
+        binding.newDeliveryAddMoveFromZhukova.setOnClickListener {
             delivery.moveFrom = Shops.Zhukova.i
-            newDeliveryAdd_moveFrom.visibility = View.GONE
-            newDeliveryAdd_moveTo.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveFrom.visibility = View.GONE
+            binding.newDeliveryAddMoveTo.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveFrom_Kulturi.setOnClickListener {
+        binding.newDeliveryAddMoveFromKulturi.setOnClickListener {
             delivery.moveFrom = Shops.Kulturi.i
-            newDeliveryAdd_moveFrom.visibility = View.GONE
-            newDeliveryAdd_moveTo.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveFrom.visibility = View.GONE
+            binding.newDeliveryAddMoveTo.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveFrom_Sedova.setOnClickListener {
+        binding.newDeliveryAddMoveFromSedova.setOnClickListener {
             delivery.moveFrom = Shops.Sedova.i
-            newDeliveryAdd_moveFrom.visibility = View.GONE
-            newDeliveryAdd_moveTo.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveFrom.visibility = View.GONE
+            binding.newDeliveryAddMoveTo.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveFrom_Himikov.setOnClickListener {
+        binding.newDeliveryAddMoveFromHimikov.setOnClickListener {
             delivery.moveFrom = Shops.Himikov.i
-            newDeliveryAdd_moveFrom.visibility = View.GONE
-            newDeliveryAdd_moveTo.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveFrom.visibility = View.GONE
+            binding.newDeliveryAddMoveTo.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveFrom_Planernaya.setOnClickListener {
+        binding.newDeliveryAddMoveFromPlanernaya.setOnClickListener {
             delivery.moveFrom = Shops.Planernaya.i
-            newDeliveryAdd_moveFrom.visibility = View.GONE
-            newDeliveryAdd_moveTo.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveFrom.visibility = View.GONE
+            binding.newDeliveryAddMoveTo.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveFrom_Veteranov.setOnClickListener {
+        binding.newDeliveryAddMoveFromVeteranov.setOnClickListener {
             delivery.moveFrom = Shops.Veteranov.i
-            newDeliveryAdd_moveFrom.visibility = View.GONE
-            newDeliveryAdd_moveTo.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveFrom.visibility = View.GONE
+            binding.newDeliveryAddMoveTo.visibility = View.VISIBLE
         }
     }
 
     private fun moveToListeners() {
-        newDeliveryAdd_moveTo_Zhukova.setOnClickListener {
+        binding.newDeliveryAddMoveToZhukova.setOnClickListener {
             delivery.moveTo = Shops.Zhukova.i
-            newDeliveryAdd_moveTo.visibility = View.GONE
-            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveTo.visibility = View.GONE
+            binding.newDeliveryAddCommentAndPay.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveTo_Kulturi.setOnClickListener {
+        binding.newDeliveryAddMoveToKulturi.setOnClickListener {
             delivery.moveTo = Shops.Kulturi.i
-            newDeliveryAdd_moveTo.visibility = View.GONE
-            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveTo.visibility = View.GONE
+            binding.newDeliveryAddCommentAndPay.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveTo_Sedova.setOnClickListener {
+        binding.newDeliveryAddMoveToSedova.setOnClickListener {
             delivery.moveTo = Shops.Sedova.i
-            newDeliveryAdd_moveTo.visibility = View.GONE
-            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveTo.visibility = View.GONE
+            binding.newDeliveryAddCommentAndPay.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveTo_Himikov.setOnClickListener {
+        binding.newDeliveryAddMoveToHimikov.setOnClickListener {
             delivery.moveTo = Shops.Himikov.i
-            newDeliveryAdd_moveTo.visibility = View.GONE
-            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveTo.visibility = View.GONE
+            binding.newDeliveryAddCommentAndPay.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveTo_Planernaya.setOnClickListener {
+        binding.newDeliveryAddMoveToPlanernaya.setOnClickListener {
             delivery.moveTo = Shops.Planernaya.i
-            newDeliveryAdd_moveTo.visibility = View.GONE
-            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveTo.visibility = View.GONE
+            binding.newDeliveryAddCommentAndPay.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveTo_Veteranov.setOnClickListener {
+        binding.newDeliveryAddMoveToVeteranov.setOnClickListener {
             delivery.moveTo = Shops.Veteranov.i
-            newDeliveryAdd_moveTo.visibility = View.GONE
-            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+            binding.newDeliveryAddMoveTo.visibility = View.GONE
+            binding.newDeliveryAddCommentAndPay.visibility = View.VISIBLE
         }
     }
 
     private fun commentAndPayListeners() {
-        newDeliveryAdd_comment_and_pay_yes.setOnClickListener {
+        binding.newDeliveryAddCommentAndPayYes.setOnClickListener {
             delivery.ifSalary = 1
-            delivery.commentSimple = newDeliveryAdd_comment_and_pay_comment.text.toString()
+            delivery.commentSimple = binding.newDeliveryAddCommentAndPayComment.text.toString()
             if (isBetweenShops) {
-                if (newDeliveryAdd_comment_and_pay_comment.text.toString() == "") {
+                if (binding.newDeliveryAddCommentAndPayComment.text.toString() == "") {
                     delivery.comment = "${resources.getString(R.string.move_from)} " +
                             "${resources.getStringArray(R.array.shops)[delivery.moveFrom]} " +
                             "${resources.getString(R.string.move_to)} " +
@@ -266,23 +274,23 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
                             "${resources.getStringArray(R.array.shops)[delivery.moveFrom]} " +
                             "${resources.getString(R.string.move_to)} " +
                             "${resources.getStringArray(R.array.shops)[delivery.moveTo]}\n" +
-                            "${newDeliveryAdd_comment_and_pay_comment.text}"
+                            "${binding.newDeliveryAddCommentAndPayComment.text}"
                 }
             } else {
-                if (newDeliveryAdd_comment_and_pay_comment.text.toString() == "") {
+                if (binding.newDeliveryAddCommentAndPayComment.text.toString() == "") {
                     delivery.comment = resources.getString(R.string.switch_else)
                 } else {
                     delivery.comment = "${resources.getString(R.string.switch_else)} \n" +
-                            "${newDeliveryAdd_comment_and_pay_comment.text}"
+                            "${binding.newDeliveryAddCommentAndPayComment.text}"
                 }
             }
             save()
         }
-        newDeliveryAdd_comment_and_pay_no.setOnClickListener {
+        binding.newDeliveryAddCommentAndPayNo.setOnClickListener {
             delivery.ifSalary = 0
-            delivery.commentSimple = newDeliveryAdd_comment_and_pay_comment.text.toString()
+            delivery.commentSimple = binding.newDeliveryAddCommentAndPayComment.text.toString()
             if (isBetweenShops) {
-                if (newDeliveryAdd_comment_and_pay_comment.text.toString() == "") {
+                if (binding.newDeliveryAddCommentAndPayComment.text.toString() == "") {
                     delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                             "${resources.getString(R.string.move_from)} " +
                             "${resources.getStringArray(R.array.shops)[delivery.moveFrom]} " +
@@ -294,16 +302,16 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
                             "${resources.getStringArray(R.array.shops)[delivery.moveFrom]} " +
                             "${resources.getString(R.string.move_to)} " +
                             "${resources.getStringArray(R.array.shops)[delivery.moveTo]}\n" +
-                            "${newDeliveryAdd_comment_and_pay_comment.text}"
+                            "${binding.newDeliveryAddCommentAndPayComment.text}"
                 }
             } else {
-                if (newDeliveryAdd_comment_and_pay_comment.text.toString() == "") {
+                if (binding.newDeliveryAddCommentAndPayComment.text.toString() == "") {
                     delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                             "${resources.getString(R.string.switch_else)}"
                 } else {
                     delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                             "${resources.getString(R.string.switch_else)} \n" +
-                            "${newDeliveryAdd_comment_and_pay_comment.text}"
+                            "${binding.newDeliveryAddCommentAndPayComment.text}"
                 }
             }
             save()
@@ -311,31 +319,31 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
     }
 
     private fun taskTypeListeners() {
-        newDeliveryAdd_moveTaskType_yes.setOnClickListener {
+        binding.newDeliveryAddMoveTaskTypeYes.setOnClickListener {
             isBetweenShops = true
-            newDeliveryAdd_taskType.visibility = View.GONE
-            newDeliveryAdd_moveFrom.visibility = View.VISIBLE
+            binding.newDeliveryAddTaskType.visibility = View.GONE
+            binding.newDeliveryAddMoveFrom.visibility = View.VISIBLE
         }
-        newDeliveryAdd_moveTaskType_no.setOnClickListener {
+        binding.newDeliveryAddMoveTaskTypeNo.setOnClickListener {
             isBetweenShops = false
             delivery.moveFrom = Shops.Other.i
             delivery.moveTo = Shops.Other.i
-            newDeliveryAdd_taskType.visibility = View.GONE
-            newDeliveryAdd_comment_and_pay.visibility = View.VISIBLE
+            binding.newDeliveryAddTaskType.visibility = View.GONE
+            binding.newDeliveryAddCommentAndPay.visibility = View.VISIBLE
         }
     }
 
     private fun expenseListeners() {
-        newDeliveryAdd_expense_fuel.setOnClickListener {
+        binding.newDeliveryAddExpenseFuel.setOnClickListener {
             try {
-                delivery.commentSimple = newDeliveryAdd_expense_comment.text.toString()
-                delivery.cost = newDeliveryAdd_expense_cost.text.toString().toInt()
+                delivery.commentSimple = binding.newDeliveryAddExpenseComment.text.toString()
+                delivery.cost = binding.newDeliveryAddExpenseCost.text.toString().toInt()
                 delivery.expenseType = Expenses.Fuel.i
-                if (newDeliveryAdd_expense_comment.text.toString() == "") {
+                if (binding.newDeliveryAddExpenseComment.text.toString() == "") {
                     delivery.comment = resources.getStringArray(R.array.expenses)[0]
                 } else {
                     delivery.comment = "${resources.getStringArray(R.array.expenses)[0]} \n" +
-                            "${newDeliveryAdd_expense_comment.text}"
+                            "${binding.newDeliveryAddExpenseComment.text}"
                 }
                 save()
             } catch (e: Exception) {
@@ -343,16 +351,16 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
         }
-        newDeliveryAdd_expense_wash.setOnClickListener {
+        binding.newDeliveryAddExpenseWash.setOnClickListener {
             try {
-                delivery.commentSimple = newDeliveryAdd_expense_comment.text.toString()
-                delivery.cost = newDeliveryAdd_expense_cost.text.toString().toInt()
+                delivery.commentSimple = binding.newDeliveryAddExpenseComment.text.toString()
+                delivery.cost = binding.newDeliveryAddExpenseCost.text.toString().toInt()
                 delivery.expenseType = Expenses.Wash.i
-                if (newDeliveryAdd_expense_comment.text.toString() == "") {
+                if (binding.newDeliveryAddExpenseComment.text.toString() == "") {
                     delivery.comment = resources.getStringArray(R.array.expenses)[1]
                 } else {
                     delivery.comment = "${resources.getStringArray(R.array.expenses)[1]} \n" +
-                            "${newDeliveryAdd_expense_comment.text}"
+                            "${binding.newDeliveryAddExpenseComment.text}"
                 }
                 save()
             } catch (e: Exception) {
@@ -360,16 +368,16 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
         }
-        newDeliveryAdd_expense_other.setOnClickListener {
+        binding.newDeliveryAddExpenseOther.setOnClickListener {
             try {
-                delivery.commentSimple = newDeliveryAdd_expense_comment.text.toString()
-                delivery.cost = newDeliveryAdd_expense_cost.text.toString().toInt()
+                delivery.commentSimple = binding.newDeliveryAddExpenseComment.text.toString()
+                delivery.cost = binding.newDeliveryAddExpenseCost.text.toString().toInt()
                 delivery.expenseType = Expenses.Other.i
-                if (newDeliveryAdd_expense_comment.text.toString() == "") {
+                if (binding.newDeliveryAddExpenseComment.text.toString() == "") {
                     delivery.comment = resources.getStringArray(R.array.expenses)[2]
                 } else {
                     delivery.comment = "${resources.getStringArray(R.array.expenses)[2]} \n" +
-                            "${newDeliveryAdd_expense_comment.text}"
+                            "${binding.newDeliveryAddExpenseComment.text}"
                 }
                 save()
             } catch (e: Exception) {
@@ -380,60 +388,60 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
     }
 
     private fun payListeners() {
-        newDeliveryAdd_pay_prePay.setOnClickListener {
+        binding.newDeliveryAddPayPrePay.setOnClickListener {
             try {
                 delivery.deliveryType = SalaryType.Prepay.i
-                delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
-                delivery.comment = newDeliveryAdd_pay_comment.text.toString()
-                delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
+                delivery.cost = binding.newDeliveryAddPayCost.text.toString().toInt()
+                delivery.comment = binding.newDeliveryAddPayComment.text.toString()
+                delivery.commentSimple = binding.newDeliveryAddPayComment.text.toString()
                 save()
             } catch (e: Exception) {
                 e.printStackTrace()
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
         }
-        newDeliveryAdd_pay_holidayPay.setOnClickListener {
+        binding.newDeliveryAddPayHolidayPay.setOnClickListener {
             try {
                 delivery.deliveryType = SalaryType.Holiday.i
-                delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
-                delivery.comment = newDeliveryAdd_pay_comment.text.toString()
-                delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
+                delivery.cost = binding.newDeliveryAddPayCost.text.toString().toInt()
+                delivery.comment = binding.newDeliveryAddPayComment.text.toString()
+                delivery.commentSimple = binding.newDeliveryAddPayComment.text.toString()
                 save()
             } catch (e: Exception) {
                 e.printStackTrace()
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
         }
-        newDeliveryAdd_pay_extraPay.setOnClickListener {
+        binding.newDeliveryAddPayExtraPay.setOnClickListener {
             try {
                 delivery.deliveryType = SalaryType.Extra.i
-                delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
-                delivery.comment = newDeliveryAdd_pay_comment.text.toString()
-                delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
+                delivery.cost = binding.newDeliveryAddPayCost.text.toString().toInt()
+                delivery.comment = binding.newDeliveryAddPayComment.text.toString()
+                delivery.commentSimple = binding.newDeliveryAddPayComment.text.toString()
                 save()
             } catch (e: Exception) {
                 e.printStackTrace()
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
         }
-        newDeliveryAdd_pay_penalty.setOnClickListener {
+        binding.newDeliveryAddPayPenalty.setOnClickListener {
             try {
                 delivery.deliveryType = SalaryType.Penalty.i
-                delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
-                delivery.comment = newDeliveryAdd_pay_comment.text.toString()
-                delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
+                delivery.cost = binding.newDeliveryAddPayCost.text.toString().toInt()
+                delivery.comment = binding.newDeliveryAddPayComment.text.toString()
+                delivery.commentSimple = binding.newDeliveryAddPayComment.text.toString()
                 save()
             } catch (e: Exception) {
                 e.printStackTrace()
                 Snackbar.make(view!!, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
         }
-        newDeliveryAdd_pay_qualityPay.setOnClickListener {
+        binding.newDeliveryAddPayQualityPay.setOnClickListener {
             try {
                 delivery.deliveryType = SalaryType.Quality.i
-                delivery.cost = newDeliveryAdd_pay_cost.text.toString().toInt()
-                delivery.comment = newDeliveryAdd_pay_comment.text.toString()
-                delivery.commentSimple = newDeliveryAdd_pay_comment.text.toString()
+                delivery.cost = binding.newDeliveryAddPayCost.text.toString().toInt()
+                delivery.comment = binding.newDeliveryAddPayComment.text.toString()
+                delivery.commentSimple = binding.newDeliveryAddPayComment.text.toString()
                 save()
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -443,9 +451,9 @@ class NewDeliveryAddFragment : MvpAppCompatFragment() {
     }
 
     private fun otherListeners() {
-        newDeliveryAdd_other_save.setOnClickListener {
-            delivery.comment = newDeliveryAdd_other_comment.text.toString()
-            delivery.commentSimple = newDeliveryAdd_other_comment.text.toString()
+        binding.newDeliveryAddOtherSave.setOnClickListener {
+            delivery.comment = binding.newDeliveryAddOtherComment.text.toString()
+            delivery.commentSimple = binding.newDeliveryAddOtherComment.text.toString()
             save()
         }
     }

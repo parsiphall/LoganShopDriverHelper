@@ -8,12 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
-
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.*
+import com.parsiphal.loganshopdriverhelper.databinding.FragmentTotalDayBinding
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
-import kotlinx.android.synthetic.main.fragment_total_day.*
 import kotlinx.coroutines.*
 import moxy.MvpAppCompatFragment
 
@@ -107,6 +106,8 @@ class TotalDayFragment : MvpAppCompatFragment() {
     private var vestaTaskToPlanernaya = 0
     private var vestaTaskToVeteranov = 0
     private var vestaTaskElse = 0
+    private var _binding: FragmentTotalDayBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onAttach(context: Context) {
@@ -129,34 +130,40 @@ class TotalDayFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_total_day, container, false)
+        _binding = FragmentTotalDayBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getOrPlace(newTotal)
-        day_write.setOnClickListener {
+        binding.dayWrite.setOnClickListener {
             saveData()
         }
-        day_share.setOnClickListener {
+        binding.dayShare.setOnClickListener {
             shareData()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun getOrPlace(newTotal: Boolean) {
         val data = GlobalScope.async {
             if (newTotal) {
                 getData()
-                day_share.visibility = View.GONE
+                binding.dayShare.visibility = View.GONE
             } else {
                 placeData()
-                day_write.visibility = View.GONE
+                binding.dayWrite.visibility = View.GONE
             }
         }
         MainScope().launch {
             data.await()
-            day_progress.visibility = View.GONE
-            day_data.visibility = View.VISIBLE
+            binding.dayProgress.visibility = View.GONE
+            binding.dayData.visibility = View.VISIBLE
         }
     }
 
@@ -168,67 +175,67 @@ class TotalDayFragment : MvpAppCompatFragment() {
 
     private fun setData() {
         val car = "${prefs.region} - ${prefs.car}"
-        day_car_textView.text = car
-        day_date_textView.text = prefs.date
-        day_morning_odo_textView.text = prefs.morningODO.toString()
-        day_evening_odo_textView.text = prefs.eveningODO.toString()
-        day_morning_fuel_textView.text = prefs.morningFuel?.toString()
-        day_evening_fuel_textView.text = prefs.eveningFuel?.toString()
-        day_total_money_textView.text = totalMoney.toString()
-        day_total_money_cash_textView.text = totalCash.toString()
-        day_total_money_card_textView.text = totalCard.toString()
-        day_logan_delivery_value_textView.text = deliveryValueLogan.toString()
-        day_logan_money_textView.text = loganMoney.toString()
-        day_logan_cash_textView.text = loganCash.toString()
-        day_logan_card_textView.text = loganCard.toString()
-        day_vesta_delivery_value_textView.text = deliveryValueVesta.toString()
-        day_vesta_money_textView.text = vestaMoney.toString()
-        day_vesta_cash_textView.text = vestaCash.toString()
-        day_vesta_card_textView.text = vestaCard.toString()
-        day_tea_textVew.text = teaMoney.toString()
-        day_total_deliveries_textVew.text = totalDeliveries.toString()
-        day_logan_move_textView.text = (loganMoveWithSalary + loganMoveWithOutSalary).toString()
-        day_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
-        day_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
-        day_logan_sedova_move_textView.text = loganMoveToSedova.toString()
-        day_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
-        day_logan_planernaya_move_textView.text = loganMoveToPlanernaya.toString()
-        day_logan_veteranov_move_textView.text = loganMoveToVeteranov.toString()
-        day_vesta_move_textView.text = (vestaMoveWithSalary + vestaMoveWithOutSalary).toString()
-        day_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
-        day_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
-        day_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
-        day_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
-        day_vesta_planernaya_move_textView.text = vestaMoveToPlanernaya.toString()
-        day_vesta_veteranov_move_textView.text = vestaMoveToVeteranov.toString()
-        day_total_move_textView.text = "${totalMoveToPay}(${totalMove})"
-        day_logan_task_textView.text = (loganTaskWithSalary + loganTaskWithOutSalary).toString()
-        day_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
-        day_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
-        day_logan_sedova_task_textView.text = loganTaskToSedova.toString()
-        day_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
-        day_logan_planernaya_task_textView.text = loganTaskToPlanernaya.toString()
-        day_logan_veteranov_task_textView.text = loganTaskToVeteranov.toString()
-        day_logan_else_task_textView.text = loganTaskElse.toString()
-        day_vesta_task_textView.text = (vestaTaskWithSalary + vestaTaskWithOutSalary).toString()
-        day_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
-        day_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
-        day_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
-        day_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
-        day_vesta_planernaya_task_textView.text = vestaTaskToPlanernaya.toString()
-        day_vesta_veteranov_task_textView.text = vestaTaskToVeteranov.toString()
-        day_vesta_else_task_textView.text = vestaTaskElse.toString()
-        day_total_task_textView.text = "${totalTaskToPay}(${totalTask})"
-        day_expenses_textView.text = (expenseFuel + expenseWash + expenseOther).toString()
-        day_expenses_fuel_textView.text = expenseFuel.toString()
-        day_expenses_wash_textView.text = expenseWash.toString()
-        day_expenses_other_textView.text = expenseOther.toString()
-        day_salary_textView.text = salary.toString()
-        day_prepay_textVew.text = prepay.toString()
-        day_holiday_textVew.text = holiday.toString()
-        day_extraPay_textView.text = extraPay.toString()
-        day_qualityPay_textView.text = qualityPay.toString()
-        day_penalty_textView.text = penalty.toString()
+        binding.dayCarTextView.text = car
+        binding.dayDateTextView.text = prefs.date
+        binding.dayMorningOdoTextView.text = prefs.morningODO.toString()
+        binding.dayEveningOdoTextView.text = prefs.eveningODO.toString()
+        binding.dayMorningFuelTextView.text = prefs.morningFuel?.toString()
+        binding.dayEveningFuelTextView.text = prefs.eveningFuel?.toString()
+        binding.dayTotalMoneyTextView.text = totalMoney.toString()
+        binding.dayTotalMoneyCashTextView.text = totalCash.toString()
+        binding.dayTotalMoneyCardTextView.text = totalCard.toString()
+        binding.dayLoganDeliveryValueTextView.text = deliveryValueLogan.toString()
+        binding.dayLoganMoneyTextView.text = loganMoney.toString()
+        binding.dayLoganCashTextView.text = loganCash.toString()
+        binding.dayLoganCardTextView.text = loganCard.toString()
+        binding.dayVestaDeliveryValueTextView.text = deliveryValueVesta.toString()
+        binding.dayVestaMoneyTextView.text = vestaMoney.toString()
+        binding.dayVestaCashTextView.text = vestaCash.toString()
+        binding.dayVestaCardTextView.text = vestaCard.toString()
+        binding.dayTeaTextVew.text = teaMoney.toString()
+        binding.dayTotalDeliveriesTextVew.text = totalDeliveries.toString()
+        binding.dayLoganMoveTextView.text = (loganMoveWithSalary + loganMoveWithOutSalary).toString()
+        binding.dayLoganZhukovaMoveTextView.text = loganMoveToZhukova.toString()
+        binding.dayLoganKulturiMoveTextView.text = loganMoveToKulturi.toString()
+        binding.dayLoganSedovaMoveTextView.text = loganMoveToSedova.toString()
+        binding.dayLoganHimikovMoveTextView.text = loganMoveToHimikov.toString()
+        binding.dayLoganPlanernayaMoveTextView.text = loganMoveToPlanernaya.toString()
+        binding.dayLoganVeteranovMoveTextView.text = loganMoveToVeteranov.toString()
+        binding.dayVestaMoveTextView.text = (vestaMoveWithSalary + vestaMoveWithOutSalary).toString()
+        binding.dayVestaZhukovaMoveTextView.text = vestaMoveToZhukova.toString()
+        binding.dayVestaKulturiMoveTextView.text = vestaMoveToKulturi.toString()
+        binding.dayVestaSedovaMoveTextView.text = vestaMoveToSedova.toString()
+        binding.dayVestaHimikovMoveTextView.text = vestaMoveToHimikov.toString()
+        binding.dayVestaPlanernayaMoveTextView.text = vestaMoveToPlanernaya.toString()
+        binding.dayVestaVeteranovMoveTextView.text = vestaMoveToVeteranov.toString()
+        binding.dayTotalMoveTextView.text = "${totalMoveToPay}(${totalMove})"
+        binding.dayLoganTaskTextView.text = (loganTaskWithSalary + loganTaskWithOutSalary).toString()
+        binding.dayLoganZhukovaTaskTextView.text = loganTaskToZhukova.toString()
+        binding.dayLoganKulturiTaskTextView.text = loganTaskToKulturi.toString()
+        binding.dayLoganSedovaTaskTextView.text = loganTaskToSedova.toString()
+        binding.dayLoganHimikovTaskTextView.text = loganTaskToHimikov.toString()
+        binding.dayLoganPlanernayaTaskTextView.text = loganTaskToPlanernaya.toString()
+        binding.dayLoganVeteranovTaskTextView.text = loganTaskToVeteranov.toString()
+        binding.dayLoganElseTaskTextView.text = loganTaskElse.toString()
+        binding.dayVestaTaskTextView.text = (vestaTaskWithSalary + vestaTaskWithOutSalary).toString()
+        binding.dayVestaZhukovaTaskTextView.text = vestaTaskToZhukova.toString()
+        binding.dayVestaKulturiTaskTextView.text = vestaTaskToKulturi.toString()
+        binding.dayVestaSedovaTaskTextView.text = vestaTaskToSedova.toString()
+        binding.dayVestaHimikovTaskTextView.text = vestaTaskToHimikov.toString()
+        binding.dayVestaPlanernayaTaskTextView.text = vestaTaskToPlanernaya.toString()
+        binding.dayVestaVeteranovTaskTextView.text = vestaTaskToVeteranov.toString()
+        binding.dayVestaElseTaskTextView.text = vestaTaskElse.toString()
+        binding.dayTotalTaskTextView.text = "${totalTaskToPay}(${totalTask})"
+        binding.dayExpensesTextView.text = (expenseFuel + expenseWash + expenseOther).toString()
+        binding.dayExpensesFuelTextView.text = expenseFuel.toString()
+        binding.dayExpensesWashTextView.text = expenseWash.toString()
+        binding.dayExpensesOtherTextView.text = expenseOther.toString()
+        binding.daySalaryTextView.text = salary.toString()
+        binding.dayPrepayTextVew.text = prepay.toString()
+        binding.dayHolidayTextVew.text = holiday.toString()
+        binding.dayExtraPayTextView.text = extraPay.toString()
+        binding.dayQualityPayTextView.text = qualityPay.toString()
+        binding.dayPenaltyTextView.text = penalty.toString()
     }
 
     private fun calculateSum() {
@@ -486,17 +493,17 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.eveningODO = prefs.eveningODO!!
             total.morningFuel = prefs.morningFuel!!
             total.eveningFuel = prefs.eveningFuel!!
-            total.totalMoney = day_total_money_textView.text.toString().toInt()
-            total.totalCash = day_total_money_cash_textView.text.toString().toInt()
-            total.totalCard = day_total_money_card_textView.text.toString().toInt()
-            total.loganDeliveryValue = day_logan_delivery_value_textView.text.toString().toInt()
-            total.loganMoney = day_logan_money_textView.text.toString().toInt()
-            total.loganCash = day_logan_cash_textView.text.toString().toInt()
-            total.loganCard = day_logan_card_textView.text.toString().toInt()
-            total.vestaDeliveryValue = day_vesta_delivery_value_textView.text.toString().toInt()
-            total.vestaMoney = day_vesta_money_textView.text.toString().toInt()
-            total.vestaCash = day_vesta_cash_textView.text.toString().toInt()
-            total.vestaCard = day_vesta_card_textView.text.toString().toInt()
+            total.totalMoney = binding.dayTotalMoneyTextView.text.toString().toInt()
+            total.totalCash = binding.dayTotalMoneyCashTextView.text.toString().toInt()
+            total.totalCard = binding.dayTotalMoneyCardTextView.text.toString().toInt()
+            total.loganDeliveryValue = binding.dayLoganDeliveryValueTextView.text.toString().toInt()
+            total.loganMoney = binding.dayLoganMoneyTextView.text.toString().toInt()
+            total.loganCash = binding.dayLoganCashTextView.text.toString().toInt()
+            total.loganCard = binding.dayLoganCardTextView.text.toString().toInt()
+            total.vestaDeliveryValue = binding.dayVestaDeliveryValueTextView.text.toString().toInt()
+            total.vestaMoney = binding.dayVestaMoneyTextView.text.toString().toInt()
+            total.vestaCash = binding.dayVestaCashTextView.text.toString().toInt()
+            total.vestaCard = binding.dayVestaCardTextView.text.toString().toInt()
             total.expensesFuel = expenseFuel
             total.expensesWash = expenseWash
             total.expensesOther = expenseOther
@@ -509,13 +516,13 @@ class TotalDayFragment : MvpAppCompatFragment() {
             total.vestaTask = (vestaTaskWithSalary + vestaTaskWithOutSalary)
             total.tasksWithSalary = totalTaskToPay
             total.totalTask = totalTask
-            total.salary = day_salary_textView.text.toString().toInt()
+            total.salary = binding.daySalaryTextView.text.toString().toInt()
             total.prepay = prepay
             total.holidayPay = holiday
             total.extraPay = extraPay
             total.qualityPay = qualityPay
             total.penalty = penalty
-            total.expenses = day_tea_textVew.text.toString().toInt()
+            total.expenses = binding.dayTeaTextVew.text.toString().toInt()
             total.deltaODO = deltaODO()
             total.carIndex = prefs.carPosition!!
 
@@ -588,161 +595,165 @@ class TotalDayFragment : MvpAppCompatFragment() {
     }
 
     private fun placeData() {
-        day_car_textView.text = total.carModel
-        day_date_textView.text = total.date
-        day_morning_odo_textView.text = total.morningODO.toString()
-        day_evening_odo_textView.text = total.eveningODO.toString()
-        day_morning_fuel_textView.text = total.morningFuel.toString()
-        day_evening_fuel_textView.text = total.eveningFuel.toString()
-        day_total_money_textView.text = total.totalMoney.toString()
-        day_total_money_cash_textView.text = total.totalCash.toString()
-        day_total_money_card_textView.text = total.totalCard.toString()
-        day_logan_delivery_value_textView.text = total.loganDeliveryValue.toString()
-        day_logan_money_textView.text = total.loganMoney.toString()
-        day_logan_cash_textView.text = total.loganCash.toString()
-        day_logan_card_textView.text = total.loganCard.toString()
-        day_vesta_delivery_value_textView.text = total.vestaDeliveryValue.toString()
-        day_vesta_money_textView.text = total.vestaMoney.toString()
-        day_vesta_cash_textView.text = total.vestaCash.toString()
-        day_vesta_card_textView.text = total.vestaCard.toString()
-        day_expenses_textView.text =
+        binding.dayCarTextView.text = total.carModel
+        binding.dayDateTextView.text = total.date
+        binding.dayMorningOdoTextView.text = total.morningODO.toString()
+        binding.dayEveningOdoTextView.text = total.eveningODO.toString()
+        binding.dayMorningFuelTextView.text = total.morningFuel.toString()
+        binding.dayEveningFuelTextView.text = total.eveningFuel.toString()
+        binding.dayTotalMoneyTextView.text = total.totalMoney.toString()
+        binding.dayTotalMoneyCashTextView.text = total.totalCash.toString()
+        binding.dayTotalMoneyCardTextView.text = total.totalCard.toString()
+        binding.dayLoganDeliveryValueTextView.text = total.loganDeliveryValue.toString()
+        binding.dayLoganMoneyTextView.text = total.loganMoney.toString()
+        binding.dayLoganCashTextView.text = total.loganCash.toString()
+        binding.dayLoganCardTextView.text = total.loganCard.toString()
+        binding.dayVestaDeliveryValueTextView.text = total.vestaDeliveryValue.toString()
+        binding.dayVestaMoneyTextView.text = total.vestaMoney.toString()
+        binding.dayVestaCashTextView.text = total.vestaCash.toString()
+        binding.dayVestaCardTextView.text = total.vestaCard.toString()
+        binding.dayExpensesTextView.text =
             (total.expensesFuel + total.expensesWash + total.expensesOther).toString()
-        day_expenses_fuel_textView.text = total.expensesFuel.toString()
-        day_expenses_wash_textView.text = total.expensesWash.toString()
-        day_expenses_other_textView.text = total.expensesOther.toString()
-        day_total_deliveries_textVew.text = total.totalDeliveries.toString()
+        binding.dayExpensesFuelTextView.text = total.expensesFuel.toString()
+        binding.dayExpensesWashTextView.text = total.expensesWash.toString()
+        binding.dayExpensesOtherTextView.text = total.expensesOther.toString()
+        binding.dayTotalDeliveriesTextVew.text = total.totalDeliveries.toString()
 
-        day_logan_move_textView.text = total.loganMove.toString()
+        binding.dayLoganMoveTextView.text = total.loganMove.toString()
 
-        day_logan_zhukova_move_textView.text = total.loganMoveToZhukova.toString()
-        day_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
-        day_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
-        day_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
-        day_logan_planernaya_move_textView.text = total.loganMoveToPlanernaya.toString()
-        day_logan_veteranov_move_textView.text = total.loganMoveToVeteranov.toString()
+        binding.dayLoganZhukovaMoveTextView.text = total.loganMoveToZhukova.toString()
+        binding.dayLoganKulturiMoveTextView.text = total.loganMoveToKulturi.toString()
+        binding.dayLoganSedovaMoveTextView.text = total.loganMoveToSedova.toString()
+        binding.dayLoganHimikovMoveTextView.text = total.loganMoveToHimikov.toString()
+        binding.dayLoganPlanernayaMoveTextView.text = total.loganMoveToPlanernaya.toString()
+        binding.dayLoganVeteranovMoveTextView.text = total.loganMoveToVeteranov.toString()
 
-        day_vesta_move_textView.text = total.vestaMove.toString()
+        binding.dayVestaMoveTextView.text = total.vestaMove.toString()
 
-        day_vesta_zhukova_move_textView.text = total.vestaMoveToZhukova.toString()
-        day_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
-        day_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
-        day_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
-        day_vesta_planernaya_move_textView.text = total.vestaMoveToPlanernaya.toString()
-        day_vesta_veteranov_move_textView.text = total.vestaMoveToVeteranov.toString()
+        binding.dayVestaZhukovaMoveTextView.text = total.vestaMoveToZhukova.toString()
+        binding.dayVestaKulturiMoveTextView.text = total.vestaMoveToKulturi.toString()
+        binding.dayVestaSedovaMoveTextView.text = total.vestaMoveToSedova.toString()
+        binding.dayVestaHimikovMoveTextView.text = total.vestaMoveToHimikov.toString()
+        binding.dayVestaPlanernayaMoveTextView.text = total.vestaMoveToPlanernaya.toString()
+        binding.dayVestaVeteranovMoveTextView.text = total.vestaMoveToVeteranov.toString()
 
-        day_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
-        day_logan_task_textView.text = total.loganTask.toString()
+        binding.dayTotalMoveTextView.text = "${total.movesWithSalary}(${total.totalMove})"
+        binding.dayLoganTaskTextView.text = total.loganTask.toString()
 
-        day_logan_zhukova_task_textView.text = total.loganTaskToZhukova.toString()
-        day_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
-        day_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
-        day_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
-        day_logan_planernaya_task_textView.text = total.loganTaskToPlanernaya.toString()
-        day_logan_veteranov_task_textView.text = total.loganTaskToVeteranov.toString()
-        day_logan_else_task_textView.text = total.loganTaskElse.toString()
+        binding.dayLoganZhukovaTaskTextView.text = total.loganTaskToZhukova.toString()
+        binding.dayLoganKulturiTaskTextView.text = total.loganTaskToKulturi.toString()
+        binding.dayLoganSedovaTaskTextView.text = total.loganTaskToSedova.toString()
+        binding.dayLoganHimikovTaskTextView.text = total.loganTaskToHimikov.toString()
+        binding.dayLoganPlanernayaTaskTextView.text = total.loganTaskToPlanernaya.toString()
+        binding.dayLoganVeteranovTaskTextView.text = total.loganTaskToVeteranov.toString()
+        binding.dayLoganElseTaskTextView.text = total.loganTaskElse.toString()
 
-        day_vesta_task_textView.text = total.vestaTask.toString()
+        binding.dayVestaTaskTextView.text = total.vestaTask.toString()
 
-        day_vesta_zhukova_task_textView.text = total.vestaTaskToZhukova.toString()
-        day_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
-        day_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
-        day_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
-        day_vesta_planernaya_task_textView.text = total.vestaTaskToPlanernaya.toString()
-        day_vesta_veteranov_task_textView.text = total.vestaTaskToVeteranov.toString()
-        day_vesta_else_task_textView.text = total.vestaTaskElse.toString()
+        binding.dayVestaZhukovaTaskTextView.text = total.vestaTaskToZhukova.toString()
+        binding.dayVestaKulturiTaskTextView.text = total.vestaTaskToKulturi.toString()
+        binding.dayVestaSedovaTaskTextView.text = total.vestaTaskToSedova.toString()
+        binding.dayVestaHimikovTaskTextView.text = total.vestaTaskToHimikov.toString()
+        binding.dayVestaPlanernayaTaskTextView.text = total.vestaTaskToPlanernaya.toString()
+        binding.dayVestaVeteranovTaskTextView.text = total.vestaTaskToVeteranov.toString()
+        binding.dayVestaElseTaskTextView.text = total.vestaTaskElse.toString()
 
-        day_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
-        day_tea_textVew.text = total.expenses.toString()
-        day_salary_textView.text = total.salary.toString()
-        day_prepay_textVew.text = total.prepay.toString()
-        day_holiday_textVew.text = total.holidayPay.toString()
-        day_extraPay_textView.text = total.extraPay.toString()
-        day_qualityPay_textView.text = total.qualityPay.toString()
-        day_penalty_textView.text = total.penalty.toString()
+        binding.dayTotalTaskTextView.text = "${total.tasksWithSalary}(${total.totalTask})"
+        binding.dayTeaTextVew.text = total.expenses.toString()
+        binding.daySalaryTextView.text = total.salary.toString()
+        binding.dayPrepayTextVew.text = total.prepay.toString()
+        binding.dayHolidayTextVew.text = total.holidayPay.toString()
+        binding.dayExtraPayTextView.text = total.extraPay.toString()
+        binding.dayQualityPayTextView.text = total.qualityPay.toString()
+        binding.dayPenaltyTextView.text = total.penalty.toString()
     }
 
     private fun shareData() = GlobalScope.launch {
-        var textToSend = "${day_car_textView.text} (${day_date_textView.text})\n" +
-                "${resources.getString(R.string.odo_morning)} ${day_morning_odo_textView.text}\n" +
-                "${resources.getString(R.string.odo_evening)} ${day_evening_odo_textView.text}\n" +
-                "${resources.getString(R.string.fuel_morning)} ${day_morning_fuel_textView.text} ${resources.getString(
-                    R.string.fuel_dividers
-                )}\n" +
-                "${resources.getString(R.string.fuel_evening)} ${day_evening_fuel_textView.text} ${resources.getString(
-                    R.string.fuel_dividers
-                )}\n" +
+        var textToSend = "${binding.dayCarTextView.text} (${binding.dayDateTextView.text})\n" +
+                "${resources.getString(R.string.odo_morning)} ${binding.dayMorningOdoTextView.text}\n" +
+                "${resources.getString(R.string.odo_evening)} ${binding.dayEveningOdoTextView.text}\n" +
+                "${resources.getString(R.string.fuel_morning)} ${binding.dayMorningFuelTextView.text} ${
+                    resources.getString(
+                        R.string.fuel_dividers
+                    )
+                }\n" +
+                "${resources.getString(R.string.fuel_evening)} ${binding.dayEveningFuelTextView.text} ${
+                    resources.getString(
+                        R.string.fuel_dividers
+                    )
+                }\n" +
                 "\n" +
                 "${resources.getString(R.string.totalMoney)}/${resources.getString(R.string.total_deliveries)}: " +
-                "${day_total_money_textView.text}/${day_total_deliveries_textVew.text}\n" +
+                "${binding.dayTotalMoneyTextView.text}/${binding.dayTotalDeliveriesTextVew.text}\n" +
                 "   ${resources.getString(R.string.logan_divider)}\n" +
                 "${resources.getString(R.string.money)}/${resources.getString(R.string.deliveryValue)}: " +
-                "${day_logan_money_textView.text}/${day_logan_delivery_value_textView.text}\n" +
-                "${resources.getString(R.string.cash)}: ${day_logan_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)}: ${day_logan_card_textView.text}\n" +
+                "${binding.dayLoganMoneyTextView.text}/${binding.dayLoganDeliveryValueTextView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${binding.dayLoganCashTextView.text}\n" +
+                "${resources.getString(R.string.card)}: ${binding.dayLoganCardTextView.text}\n" +
                 "   ${resources.getString(R.string.vesta_divider)}\n" +
                 "${resources.getString(R.string.money)}/${resources.getString(R.string.deliveryValue)}: " +
-                "${day_vesta_money_textView.text}/${day_vesta_delivery_value_textView.text}\n" +
-                "${resources.getString(R.string.cash)}: ${day_vesta_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)}: ${day_vesta_card_textView.text}\n" +
+                "${binding.dayVestaMoneyTextView.text}/${binding.dayVestaDeliveryValueTextView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${binding.dayVestaCashTextView.text}\n" +
+                "${resources.getString(R.string.card)}: ${binding.dayVestaCardTextView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_moves)}\n" +
-                "   ${resources.getString(R.string.logan_divider)}: ${day_logan_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_veteranov)}: ${day_logan_veteranov_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)}: ${day_logan_zhukova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)}: ${day_logan_kulturi_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_planernaya)}: ${day_logan_planernaya_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)}: ${day_logan_sedova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)}: ${day_logan_himikov_move_textView.text}\n" +
-                "   ${resources.getString(R.string.vesta_divider)}: ${day_vesta_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_veteranov)}: ${day_vesta_veteranov_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)}: ${day_vesta_zhukova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)}: ${day_vesta_kulturi_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_planernaya)}: ${day_vesta_planernaya_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)}: ${day_vesta_sedova_move_textView.text}\n" +
-//                "${resources.getString(R.string.shop_himikov)}: ${day_vesta_himikov_move_textView.text}\n" +
-                "${resources.getString(R.string.total_total)} ${day_total_move_textView.text}\n" +
+                "   ${resources.getString(R.string.logan_divider)}: ${binding.dayLoganMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_veteranov)}: ${binding.dayLoganVeteranovMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${binding.dayLoganZhukovaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${binding.dayLoganKulturiMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${binding.dayLoganPlanernayaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${binding.dayLoganSedovaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)}: ${binding.dayLoganHimikovMoveTextView.text}\n" +
+                "   ${resources.getString(R.string.vesta_divider)}: ${binding.dayVestaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_veteranov)}: ${binding.dayVestaVeteranovMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${binding.dayVestaZhukovaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${binding.dayVestaKulturiMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${binding.dayVestaPlanernayaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${binding.dayVestaSedovaMoveTextView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)}: ${binding.dayVestaHimikovMoveTextView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${binding.dayTotalMoveTextView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_tasks)}\n" +
-                "   ${resources.getString(R.string.logan_divider)}: ${day_logan_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_veteranov)}: ${day_logan_veteranov_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)}: ${day_logan_zhukova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)}: ${day_logan_kulturi_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_planernaya)}: ${day_logan_planernaya_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)}: ${day_logan_sedova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)}: ${day_logan_himikov_task_textView.text}\n" +
-                "${resources.getString(R.string.switch_else)}: ${day_logan_else_task_textView.text}\n" +
-                "   ${resources.getString(R.string.vesta_divider)}: ${day_vesta_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_veteranov)}: ${day_vesta_veteranov_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)}: ${day_vesta_zhukova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)}: ${day_vesta_kulturi_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_planernaya)}: ${day_vesta_planernaya_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)}: ${day_vesta_sedova_task_textView.text}\n" +
-//                "${resources.getString(R.string.shop_himikov)}: ${day_vesta_himikov_task_textView.text}\n" +
-                "${resources.getString(R.string.switch_else)}: ${day_vesta_else_task_textView.text}\n" +
-                "${resources.getString(R.string.total_total)} ${day_total_task_textView.text}\n" +
+                "   ${resources.getString(R.string.logan_divider)}: ${binding.dayLoganTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_veteranov)}: ${binding.dayLoganVeteranovTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${binding.dayLoganZhukovaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${binding.dayLoganKulturiTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${binding.dayLoganPlanernayaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${binding.dayLoganSedovaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)}: ${binding.dayLoganHimikovTaskTextView.text}\n" +
+                "${resources.getString(R.string.switch_else)}: ${binding.dayLoganElseTaskTextView.text}\n" +
+                "   ${resources.getString(R.string.vesta_divider)}: ${binding.dayVestaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_veteranov)}: ${binding.dayVestaVeteranovTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${binding.dayVestaZhukovaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${binding.dayVestaKulturiTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${binding.dayVestaPlanernayaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${binding.dayVestaSedovaTaskTextView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)}: ${binding.dayVestaHimikovTaskTextView.text}\n" +
+                "${resources.getString(R.string.switch_else)}: ${binding.dayVestaElseTaskTextView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${binding.dayTotalTaskTextView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.expenses)}\n" +
-                "${resources.getString(R.string.total_total)} ${day_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)}: ${day_expenses_fuel_textView.text}\n" +
-                "${resources.getString(R.string.wash)}: ${day_expenses_wash_textView.text}\n" +
-                "${resources.getString(R.string.other)}: ${day_expenses_other_textView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${binding.dayExpensesTextView.text}\n" +
+                "${resources.getString(R.string.fuel)}: ${binding.dayExpensesFuelTextView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${binding.dayExpensesWashTextView.text}\n" +
+                "${resources.getString(R.string.other)}: ${binding.dayExpensesOtherTextView.text}\n" +
                 "\n" +
-                "${resources.getString(R.string.salary)} ${prefs.family} ${day_salary_textView.text}"
-        if (day_prepay_textVew.text.toString().toInt() != 0) {
+                "${resources.getString(R.string.salary)} ${prefs.family} ${binding.daySalaryTextView.text}"
+        if (binding.dayPrepayTextVew.text.toString().toInt() != 0) {
             textToSend += "\n" +
-                    "${resources.getString(R.string.prepay)}: ${day_prepay_textVew.text}"
+                    "${resources.getString(R.string.prepay)}: ${binding.dayPrepayTextVew.text}"
         }
-        if (day_holiday_textVew.text.toString().toInt() != 0) {
+        if (binding.dayHolidayTextVew.text.toString().toInt() != 0) {
             textToSend += "\n" +
-                    "${resources.getString(R.string.holiday_pay)}: ${day_holiday_textVew.text}"
+                    "${resources.getString(R.string.holiday_pay)}: ${binding.dayHolidayTextVew.text}"
         }
-        if (day_qualityPay_textView.text.toString().toInt() != 0) {
+        if (binding.dayQualityPayTextView.text.toString().toInt() != 0) {
             textToSend += "\n" +
-                    "${resources.getText(R.string.qualityPay)}: ${day_qualityPay_textView.text}"
+                    "${resources.getText(R.string.qualityPay)}: ${binding.dayQualityPayTextView.text}"
         }
-        if (day_penalty_textView.text.toString().toInt() != 0) {
+        if (binding.dayPenaltyTextView.text.toString().toInt() != 0) {
             textToSend += "\n" +
-                    "${resources.getText(R.string.penalty)}: ${day_penalty_textView.text}"
+                    "${resources.getText(R.string.penalty)}: ${binding.dayPenaltyTextView.text}"
         }
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

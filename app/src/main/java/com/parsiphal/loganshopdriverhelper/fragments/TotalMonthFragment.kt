@@ -8,13 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
-
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Cars
 import com.parsiphal.loganshopdriverhelper.data.Total
+import com.parsiphal.loganshopdriverhelper.databinding.FragmentTotalMonthBinding
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
-import kotlinx.android.synthetic.main.fragment_total_month.*
 import kotlinx.coroutines.*
 import moxy.MvpAppCompatFragment
 import java.lang.Exception
@@ -130,6 +129,8 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     private var vestaSWExpenseWash = 0
     private var vestaSWExpenseOther = 0
     private var vestaSWExpenseTotal = 0
+    private var _binding: FragmentTotalMonthBinding? = null
+    private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -151,7 +152,8 @@ class TotalMonthFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_total_month, container, false)
+        _binding = FragmentTotalMonthBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -174,10 +176,10 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 placeExpenses()
                 delay(1000)
 //                saveData()
-                month_progress.visibility = View.GONE
-                month_data.visibility = View.VISIBLE
+                binding.monthProgress.visibility = View.GONE
+                binding.monthData.visibility = View.VISIBLE
             }
-            month_share.visibility = View.GONE
+            binding.monthShare.visibility = View.GONE
         } else {
             if (total.xRayDB == 1) {
                 hideXRay()
@@ -192,26 +194,31 @@ class TotalMonthFragment : MvpAppCompatFragment() {
                 data.await()
                 placeData()
                 placeExpenses()
-                month_progress.visibility = View.GONE
-                month_data.visibility = View.VISIBLE
+                binding.monthProgress.visibility = View.GONE
+                binding.monthData.visibility = View.VISIBLE
             }
-            month_write.visibility = View.GONE
+            binding.monthWrite.visibility = View.GONE
         }
-        month_write.setOnClickListener {
+        binding.monthWrite.setOnClickListener {
             saveData()
         }
-        month_share.setOnClickListener {
+        binding.monthShare.setOnClickListener {
             shareDate()
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun hideXRay() {
         xRayDB = true
-        month_xray_count.visibility = View.GONE
-        month_xray_total_expenses.visibility = View.GONE
-        month_xray_expenses_fuel.visibility = View.GONE
-        month_xray_expenses_wash.visibility = View.GONE
-        month_xray_expenses_other.visibility = View.GONE
+        binding.monthXrayCount.visibility = View.GONE
+        binding.monthXrayTotalExpenses.visibility = View.GONE
+        binding.monthXrayExpensesFuel.visibility = View.GONE
+        binding.monthXrayExpensesWash.visibility = View.GONE
+        binding.monthXrayExpensesOther.visibility = View.GONE
     }
 
     private fun getData(search: String) {
@@ -219,72 +226,72 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     }
 
     private fun setData() {
-        month_month.text = "${prefs.date!![3]}${prefs.date!![4]}"
-        month_year.text = "${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
-        month_total_shifts_value_textView.text = totalShifts.toString()
-        month_total_money_textView.text = totalMoney.toString()
-        month_total_cash_textView.text = totalCash.toString()
-        month_total_card_textView.text = totalCard.toString()
-        month_total_delivery_value_logan_textView.text = deliveryValueLogan.toString()
-        month_logan_money_textView.text = loganMoney.toString()
-        month_logan_cash_textView.text = loganCash.toString()
-        month_logan_card_textView.text = loganCard.toString()
-        month_total_delivery_value_vesta_textView.text = deliveryValueVesta.toString()
-        month_vesta_money_textView.text = vestaMoney.toString()
-        month_vesta_cash_textView.text = vestaCash.toString()
-        month_vesta_card_textView.text = vestaCard.toString()
-        month_prepay_textView.text = prepay.toString()
-        month_holiday_pay_textView.text = holiday.toString()
-        month_largus_count_textView.text = largusShifts.toString()
-        month_sandero_count_textView.text = sanderoShifts.toString()
-        month_xray_count_textView.text = xrayShifts.toString()
-        month_largusNew_count_textView.text = largusNewShifts.toString()
-        month_vestaSW_count_textView.text = vestaSWShifts.toString()
-        month_total_delivery_value_textView.text = totalDeliveries.toString()
-        month_logan_move_textView.text = loganMove.toString()
-        month_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
-        month_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
-        month_logan_sedova_move_textView.text = loganMoveToSedova.toString()
-        month_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
-        month_logan_planernaya_move_textView.text = loganMoveToPlanernya.toString()
-        month_logan_veteranov_move_textView.text = loganMoveToVeteranov.toString()
-        month_vesta_move_textView.text = vestaMove.toString()
-        month_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
-        month_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
-        month_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
-        month_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
-        month_vesta_planernaya_move_textView.text = vestaMoveToPlanernaya.toString()
-        month_vesta_veteranov_move_textView.text = vestaMoveToVeteranov.toString()
-        month_total_move_textView.text = "${totalMoveWithSalary}(${totalMove})"
-        month_logan_task_textView.text = loganTask.toString()
-        month_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
-        month_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
-        month_logan_sedova_task_textView.text = loganTaskToSedova.toString()
-        month_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
-        month_logan_planernaya_task_textView.text = loganTaskToPlanernaya.toString()
-        month_logan_veteranov_task_textView.text = loganTaskToVeteranov.toString()
-        month_logan_else_task_textView.text = loganTaskElse.toString()
-        month_vesta_task_textView.text = vestaTask.toString()
-        month_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
-        month_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
-        month_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
-        month_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
-        month_vesta_planernaya_task_textView.text = vestaTaskToPlanernaya.toString()
-        month_vesta_veteranov_task_textView.text = vestaTaskToVeteranov.toString()
-        month_vesta_else_task_textView.text = vestaTaskElse.toString()
-        month_total_task_textView.text = "${totalTaskWithSalary}(${totalTask})"
-        month_salary_textView.text = salary.toString()
-        month_tea_textView.text = teaMoney.toString()
-        month_extraPay_textView.text = extraPay.toString()
-        month_qualityPay_textView.text = qualityPay.toString()
-        month_penalty_textView.text = penalty.toString()
+        binding.monthMonth.text = "${prefs.date!![3]}${prefs.date!![4]}"
+        binding.monthYear.text = "${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
+        binding.monthTotalShiftsValueTextView.text = totalShifts.toString()
+        binding.monthTotalMoneyTextView.text = totalMoney.toString()
+        binding.monthTotalCashTextView.text = totalCash.toString()
+        binding.monthTotalCardTextView.text = totalCard.toString()
+        binding.monthTotalDeliveryValueLoganTextView.text = deliveryValueLogan.toString()
+        binding.monthLoganMoneyTextView.text = loganMoney.toString()
+        binding.monthLoganCashTextView.text = loganCash.toString()
+        binding.monthLoganCardTextView.text = loganCard.toString()
+        binding.monthTotalDeliveryValueVestaTextView.text = deliveryValueVesta.toString()
+        binding.monthVestaMoneyTextView.text = vestaMoney.toString()
+        binding.monthVestaCashTextView.text = vestaCash.toString()
+        binding.monthVestaCardTextView.text = vestaCard.toString()
+        binding.monthPrepayTextView.text = prepay.toString()
+        binding.monthHolidayPayTextView.text = holiday.toString()
+        binding.monthLargusCountTextView.text = largusShifts.toString()
+        binding.monthSanderoCountTextView.text = sanderoShifts.toString()
+        binding.monthXrayCountTextView.text = xrayShifts.toString()
+        binding.monthLargusNewCountTextView.text = largusNewShifts.toString()
+        binding.monthVestaSWCountTextView.text = vestaSWShifts.toString()
+        binding.monthTotalDeliveryValueTextView.text = totalDeliveries.toString()
+        binding.monthLoganMoveTextView.text = loganMove.toString()
+        binding.monthLoganZhukovaMoveTextView.text = loganMoveToZhukova.toString()
+        binding.monthLoganKulturiMoveTextView.text = loganMoveToKulturi.toString()
+        binding.monthLoganSedovaMoveTextView.text = loganMoveToSedova.toString()
+        binding.monthLoganHimikovMoveTextView.text = loganMoveToHimikov.toString()
+        binding.monthLoganPlanernayaMoveTextView.text = loganMoveToPlanernya.toString()
+        binding.monthLoganVeteranovMoveTextView.text = loganMoveToVeteranov.toString()
+        binding.monthVestaMoveTextView.text = vestaMove.toString()
+        binding.monthVestaZhukovaMoveTextView.text = vestaMoveToZhukova.toString()
+        binding.monthVestaKulturiMoveTextView.text = vestaMoveToKulturi.toString()
+        binding.monthVestaSedovaMoveTextView.text = vestaMoveToSedova.toString()
+        binding.monthVestaHimikovMoveTextView.text = vestaMoveToHimikov.toString()
+        binding.monthVestaPlanernayaMoveTextView.text = vestaMoveToPlanernaya.toString()
+        binding.monthVestaVeteranovMoveTextView.text = vestaMoveToVeteranov.toString()
+        binding.monthTotalMoveTextView.text = "${totalMoveWithSalary}(${totalMove})"
+        binding.monthLoganTaskTextView.text = loganTask.toString()
+        binding.monthLoganZhukovaTaskTextView.text = loganTaskToZhukova.toString()
+        binding.monthLoganKulturiTaskTextView.text = loganTaskToKulturi.toString()
+        binding.monthLoganSedovaTaskTextView.text = loganTaskToSedova.toString()
+        binding.monthLoganHimikovTaskTextView.text = loganTaskToHimikov.toString()
+        binding.monthLoganPlanernayaTaskTextView.text = loganTaskToPlanernaya.toString()
+        binding.monthLoganVeteranovTaskTextView.text = loganTaskToVeteranov.toString()
+        binding.monthLoganElseTaskTextView.text = loganTaskElse.toString()
+        binding.monthVestaTaskTextView.text = vestaTask.toString()
+        binding.monthVestaZhukovaTaskTextView.text = vestaTaskToZhukova.toString()
+        binding.monthVestaKulturiTaskTextView.text = vestaTaskToKulturi.toString()
+        binding.monthVestaSedovaTaskTextView.text = vestaTaskToSedova.toString()
+        binding.monthVestaHimikovTaskTextView.text = vestaTaskToHimikov.toString()
+        binding.monthVestaPlanernayaTaskTextView.text = vestaTaskToPlanernaya.toString()
+        binding.monthVestaVeteranovTaskTextView.text = vestaTaskToVeteranov.toString()
+        binding.monthVestaElseTaskTextView.text = vestaTaskElse.toString()
+        binding.monthTotalTaskTextView.text = "${totalTaskWithSalary}(${totalTask})"
+        binding.monthSalaryTextView.text = salary.toString()
+        binding.monthTeaTextView.text = teaMoney.toString()
+        binding.monthExtraPayTextView.text = extraPay.toString()
+        binding.monthQualityPayTextView.text = qualityPay.toString()
+        binding.monthPenaltyTextView.text = penalty.toString()
 
         try {
-            month_mid_salary_textView.text = if (totalShifts != 0) {
+            binding.monthMidSalaryTextView.text = if (totalShifts != 0) {
                 "${salary / totalShifts}"
             } else "0"
-            month_to_recieve_textView.text =
-                "${salary - month_prepay_textView.text.toString().toInt()}"
+            binding.monthToRecieveTextView.text =
+                "${salary - binding.monthPrepayTextView.text.toString().toInt()}"
         } catch (e: Exception) {
             e.printStackTrace()
             Snackbar.make(view!!, getString(R.string.error), Snackbar.LENGTH_SHORT).show()
@@ -421,33 +428,33 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     }
 
     private fun placeExpenses() {
-        month_largus_total_expenses_textView.text = largusExpenseTotal.toString()
-        month_largus_expenses_fuel_textView.text = largusExpenseFuel.toString()
-        month_largus_expenses_wash_textView.text = largusExpenseWash.toString()
-        month_largus_expenses_other_textView.text = largusExpenseOther.toString()
-        month_sandero_total_expenses_textView.text = sanderoExpenseTotal.toString()
-        month_sandero_expenses_fuel_textView.text = sanderoExpenseFuel.toString()
-        month_sandero_expenses_wash_textView.text = sanderoExpenseWash.toString()
-        month_sandero_expenses_other_textView.text = sanderoExpenseOther.toString()
-        month_xray_total_expenses_textView.text = xRayExpenseTotal.toString()
-        month_xray_expenses_fuel_textView.text = xRayExpenseFuel.toString()
-        month_xray_expenses_wash_textView.text = xRayExpenseWash.toString()
-        month_xray_expenses_other_textView.text = xRayExpenseOther.toString()
-        month_largusNew_total_expenses_textView.text = largusNewExpenseTotal.toString()
-        month_largusNew_expenses_fuel_textView.text = largusNewExpenseFuel.toString()
-        month_largusNew_expenses_wash_textView.text = largusNewExpenseWash.toString()
-        month_largusNew_expenses_other_textView.text = largusNewExpenseOther.toString()
-        month_vestaSW_total_expenses_textView.text = vestaSWExpenseTotal.toString()
-        month_vestaSW_expenses_fuel_textView.text = vestaSWExpenseFuel.toString()
-        month_vestaSW_expenses_wash_textView.text = vestaSWExpenseWash.toString()
-        month_vestaSW_expenses_other_textView.text = vestaSWExpenseOther.toString()
+        binding.monthLargusTotalExpensesTextView.text = largusExpenseTotal.toString()
+        binding.monthLargusExpensesFuelTextView.text = largusExpenseFuel.toString()
+        binding.monthLargusExpensesWashTextView.text = largusExpenseWash.toString()
+        binding.monthLargusExpensesOtherTextView.text = largusExpenseOther.toString()
+        binding.monthSanderoTotalExpensesTextView.text = sanderoExpenseTotal.toString()
+        binding.monthSanderoExpensesFuelTextView.text = sanderoExpenseFuel.toString()
+        binding.monthSanderoExpensesWashTextView.text = sanderoExpenseWash.toString()
+        binding.monthSanderoExpensesOtherTextView.text = sanderoExpenseOther.toString()
+        binding.monthXrayTotalExpensesTextView.text = xRayExpenseTotal.toString()
+        binding.monthXrayExpensesFuelTextView.text = xRayExpenseFuel.toString()
+        binding.monthXrayExpensesWashTextView.text = xRayExpenseWash.toString()
+        binding.monthXrayExpensesOtherTextView.text = xRayExpenseOther.toString()
+        binding.monthLargusNewTotalExpensesTextView.text = largusNewExpenseTotal.toString()
+        binding.monthLargusNewExpensesFuelTextView.text = largusNewExpenseFuel.toString()
+        binding.monthLargusNewExpensesWashTextView.text = largusNewExpenseWash.toString()
+        binding.monthLargusNewExpensesOtherTextView.text = largusNewExpenseOther.toString()
+        binding.monthVestaSWTotalExpensesTextView.text = vestaSWExpenseTotal.toString()
+        binding.monthVestaSWExpensesFuelTextView.text = vestaSWExpenseFuel.toString()
+        binding.monthVestaSWExpensesWashTextView.text = vestaSWExpenseWash.toString()
+        binding.monthVestaSWExpensesOtherTextView.text = vestaSWExpenseOther.toString()
     }
 
     private fun saveData() = GlobalScope.launch {
         try {
             total.dayOrMonth = 1
             total.date = prefs.date!!
-            total.totalShifts = month_total_shifts_value_textView.text.toString().toInt()
+            total.totalShifts = binding.monthTotalShiftsValueTextView.text.toString().toInt()
             total.totalDeliveries = totalDeliveries
             total.movesWithSalary = totalMoveWithSalary
             total.loganMove = loganMove
@@ -457,32 +464,32 @@ class TotalMonthFragment : MvpAppCompatFragment() {
             total.loganTask = loganTask
             total.vestaTask = vestaTask
             total.totalTask = totalTask
-            total.totalMoney = month_total_money_textView.text.toString().toInt()
-            total.totalCash = month_total_cash_textView.text.toString().toInt()
-            total.totalCard = month_total_card_textView.text.toString().toInt()
+            total.totalMoney = binding.monthTotalMoneyTextView.text.toString().toInt()
+            total.totalCash = binding.monthTotalCashTextView.text.toString().toInt()
+            total.totalCard = binding.monthTotalCardTextView.text.toString().toInt()
             total.loganDeliveryValue =
-                month_total_delivery_value_logan_textView.text.toString().toInt()
-            total.loganMoney = month_logan_money_textView.text.toString().toInt()
-            total.loganCash = month_logan_cash_textView.text.toString().toInt()
-            total.loganCard = month_logan_card_textView.text.toString().toInt()
+                binding.monthTotalDeliveryValueLoganTextView.text.toString().toInt()
+            total.loganMoney = binding.monthLoganMoneyTextView.text.toString().toInt()
+            total.loganCash = binding.monthLoganCashTextView.text.toString().toInt()
+            total.loganCard = binding.monthLoganCardTextView.text.toString().toInt()
             total.vestaDeliveryValue =
-                month_total_delivery_value_vesta_textView.text.toString().toInt()
-            total.vestaMoney = month_vesta_money_textView.text.toString().toInt()
-            total.vestaCash = month_vesta_cash_textView.text.toString().toInt()
-            total.vestaCard = month_vesta_card_textView.text.toString().toInt()
-            total.salary = month_salary_textView.text.toString().toInt()
-            total.expenses = month_tea_textView.text.toString().toInt()
-            total.extraPay = month_extraPay_textView.text.toString().toInt()
-            total.qualityPay = month_qualityPay_textView.text.toString().toInt()
-            total.penalty = month_penalty_textView.text.toString().toInt()
+                binding.monthTotalDeliveryValueVestaTextView.text.toString().toInt()
+            total.vestaMoney = binding.monthVestaMoneyTextView.text.toString().toInt()
+            total.vestaCash = binding.monthVestaCashTextView.text.toString().toInt()
+            total.vestaCard = binding.monthVestaCardTextView.text.toString().toInt()
+            total.salary = binding.monthSalaryTextView.text.toString().toInt()
+            total.expenses = binding.monthTeaTextView.text.toString().toInt()
+            total.extraPay = binding.monthExtraPayTextView.text.toString().toInt()
+            total.qualityPay = binding.monthQualityPayTextView.text.toString().toInt()
+            total.penalty = binding.monthPenaltyTextView.text.toString().toInt()
             total.deltaODO = deltaODO
-            total.prepay = month_prepay_textView.text.toString().toInt()
-            total.holidayPay = month_holiday_pay_textView.text.toString().toInt()
-            total.largusShifts = month_largus_count_textView.text.toString().toInt()
-            total.sanderoShifts = month_sandero_count_textView.text.toString().toInt()
-            total.xrayShifts = month_xray_count_textView.text.toString().toInt()
-            total.largusNewShifts = month_largusNew_count_textView.text.toString().toInt()
-            total.vestaSWShifts = month_vestaSW_count_textView.text.toString().toInt()
+            total.prepay = binding.monthPrepayTextView.text.toString().toInt()
+            total.holidayPay = binding.monthHolidayPayTextView.text.toString().toInt()
+            total.largusShifts = binding.monthLargusCountTextView.text.toString().toInt()
+            total.sanderoShifts = binding.monthSanderoCountTextView.text.toString().toInt()
+            total.xrayShifts = binding.monthXrayCountTextView.text.toString().toInt()
+            total.largusNewShifts = binding.monthLargusNewCountTextView.text.toString().toInt()
+            total.vestaSWShifts = binding.monthVestaSWCountTextView.text.toString().toInt()
 
             total.loganMoveFromZhukova = loganMoveFromZhukova
             total.loganMoveFromKulturi = loganMoveFromKulturi
@@ -559,174 +566,174 @@ class TotalMonthFragment : MvpAppCompatFragment() {
     }
 
     private fun placeData() {
-        month_month.text = "${total.date[3]}${total.date[4]}"
-        month_year.text = "${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
-        month_total_shifts_value_textView.text = total.totalShifts.toString()
-        month_total_delivery_value_textView.text = total.totalDeliveries.toString()
+        binding.monthMonth.text = "${total.date[3]}${total.date[4]}"
+        binding.monthYear.text = "${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
+        binding.monthTotalShiftsValueTextView.text = total.totalShifts.toString()
+        binding.monthTotalDeliveryValueTextView.text = total.totalDeliveries.toString()
 
-        month_logan_move_textView.text = total.loganMove.toString()
-        month_logan_zhukova_move_textView.text = total.loganMoveToZhukova.toString()
-        month_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
-        month_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
-        month_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
-        month_logan_planernaya_move_textView.text = total.loganMoveToPlanernaya.toString()
-        month_logan_veteranov_move_textView.text = total.loganMoveToVeteranov.toString()
+        binding.monthLoganMoveTextView.text = total.loganMove.toString()
+        binding.monthLoganZhukovaMoveTextView.text = total.loganMoveToZhukova.toString()
+        binding.monthLoganKulturiMoveTextView.text = total.loganMoveToKulturi.toString()
+        binding.monthLoganSedovaMoveTextView.text = total.loganMoveToSedova.toString()
+        binding.monthLoganHimikovMoveTextView.text = total.loganMoveToHimikov.toString()
+        binding.monthLoganPlanernayaMoveTextView.text = total.loganMoveToPlanernaya.toString()
+        binding.monthLoganVeteranovMoveTextView.text = total.loganMoveToVeteranov.toString()
 
-        month_vesta_move_textView.text = total.vestaMove.toString()
-        month_vesta_zhukova_move_textView.text = total.vestaMoveToZhukova.toString()
-        month_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
-        month_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
-        month_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
-        month_vesta_planernaya_move_textView.text = total.vestaMoveToPlanernaya.toString()
-        month_vesta_veteranov_move_textView.text = total.vestaMoveToVeteranov.toString()
+        binding.monthVestaMoveTextView.text = total.vestaMove.toString()
+        binding.monthVestaZhukovaMoveTextView.text = total.vestaMoveToZhukova.toString()
+        binding.monthVestaKulturiMoveTextView.text = total.vestaMoveToKulturi.toString()
+        binding.monthVestaSedovaMoveTextView.text = total.vestaMoveToSedova.toString()
+        binding.monthVestaHimikovMoveTextView.text = total.vestaMoveToHimikov.toString()
+        binding.monthVestaPlanernayaMoveTextView.text = total.vestaMoveToPlanernaya.toString()
+        binding.monthVestaVeteranovMoveTextView.text = total.vestaMoveToVeteranov.toString()
 
-        month_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
+        binding.monthTotalMoveTextView.text = "${total.movesWithSalary}(${total.totalMove})"
 
-        month_logan_task_textView.text = total.loganTask.toString()
-        month_logan_zhukova_task_textView.text = total.loganTaskToZhukova.toString()
-        month_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
-        month_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
-        month_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
-        month_logan_planernaya_task_textView.text = total.loganTaskToPlanernaya.toString()
-        month_logan_veteranov_task_textView.text = total.loganTaskToVeteranov.toString()
+        binding.monthLoganTaskTextView.text = total.loganTask.toString()
+        binding.monthLoganZhukovaTaskTextView.text = total.loganTaskToZhukova.toString()
+        binding.monthLoganKulturiTaskTextView.text = total.loganTaskToKulturi.toString()
+        binding.monthLoganSedovaTaskTextView.text = total.loganTaskToSedova.toString()
+        binding.monthLoganHimikovTaskTextView.text = total.loganTaskToHimikov.toString()
+        binding.monthLoganPlanernayaTaskTextView.text = total.loganTaskToPlanernaya.toString()
+        binding.monthLoganVeteranovTaskTextView.text = total.loganTaskToVeteranov.toString()
 
-        month_logan_else_task_textView.text = total.loganTaskElse.toString()
+        binding.monthLoganElseTaskTextView.text = total.loganTaskElse.toString()
 
-        month_vesta_task_textView.text = total.vestaTask.toString()
-        month_vesta_zhukova_task_textView.text = total.vestaTaskToZhukova.toString()
-        month_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
-        month_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
-        month_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
-        month_vesta_planernaya_task_textView.text = total.vestaTaskToPlanernaya.toString()
-        month_vesta_veteranov_task_textView.text = total.vestaTaskToVeteranov.toString()
+        binding.monthVestaTaskTextView.text = total.vestaTask.toString()
+        binding.monthVestaZhukovaTaskTextView.text = total.vestaTaskToZhukova.toString()
+        binding.monthVestaKulturiTaskTextView.text = total.vestaTaskToKulturi.toString()
+        binding.monthVestaSedovaTaskTextView.text = total.vestaTaskToSedova.toString()
+        binding.monthVestaHimikovTaskTextView.text = total.vestaTaskToHimikov.toString()
+        binding.monthVestaPlanernayaTaskTextView.text = total.vestaTaskToPlanernaya.toString()
+        binding.monthVestaVeteranovTaskTextView.text = total.vestaTaskToVeteranov.toString()
 
-        month_vesta_else_task_textView.text = total.vestaTaskElse.toString()
+        binding.monthVestaElseTaskTextView.text = total.vestaTaskElse.toString()
 
-        month_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
-        month_total_money_textView.text = total.totalMoney.toString()
-        month_total_cash_textView.text = total.totalCash.toString()
-        month_total_card_textView.text = total.totalCard.toString()
-        month_total_delivery_value_logan_textView.text = total.loganDeliveryValue.toString()
-        month_logan_money_textView.text = total.loganMoney.toString()
-        month_logan_cash_textView.text = total.loganCash.toString()
-        month_logan_card_textView.text = total.loganCard.toString()
-        month_total_delivery_value_vesta_textView.text = total.vestaDeliveryValue.toString()
-        month_vesta_money_textView.text = total.vestaMoney.toString()
-        month_vesta_cash_textView.text = total.vestaCash.toString()
-        month_vesta_card_textView.text = total.vestaCard.toString()
-        month_salary_textView.text = total.salary.toString()
-        month_mid_salary_textView.text = if (total.totalShifts != 0) {
+        binding.monthTotalTaskTextView.text = "${total.tasksWithSalary}(${total.totalTask})"
+        binding.monthTotalMoneyTextView.text = total.totalMoney.toString()
+        binding.monthTotalCashTextView.text = total.totalCash.toString()
+        binding.monthTotalCardTextView.text = total.totalCard.toString()
+        binding.monthTotalDeliveryValueLoganTextView.text = total.loganDeliveryValue.toString()
+        binding.monthLoganMoneyTextView.text = total.loganMoney.toString()
+        binding.monthLoganCashTextView.text = total.loganCash.toString()
+        binding.monthLoganCardTextView.text = total.loganCard.toString()
+        binding.monthTotalDeliveryValueVestaTextView.text = total.vestaDeliveryValue.toString()
+        binding.monthVestaMoneyTextView.text = total.vestaMoney.toString()
+        binding.monthVestaCashTextView.text = total.vestaCash.toString()
+        binding.monthVestaCardTextView.text = total.vestaCard.toString()
+        binding.monthSalaryTextView.text = total.salary.toString()
+        binding.monthMidSalaryTextView.text = if (total.totalShifts != 0) {
             "${total.salary / total.totalShifts}"
         } else "0"
-        month_tea_textView.text = total.expenses.toString()
-        month_prepay_textView.text = total.prepay.toString()
-        month_holiday_pay_textView.text = total.holidayPay.toString()
-        month_extraPay_textView.text = total.extraPay.toString()
-        month_qualityPay_textView.text = total.qualityPay.toString()
-        month_penalty_textView.text = total.penalty.toString()
-        month_to_recieve_textView.text = "${total.salary - total.prepay}"
-        month_largus_count_textView.text = total.largusShifts.toString()
-        month_sandero_count_textView.text = total.sanderoShifts.toString()
-        month_xray_count_textView.text = total.xrayShifts.toString()
-        month_largusNew_count_textView.text = total.largusNewShifts.toString()
-        month_vestaSW_count_textView.text = total.vestaSWShifts.toString()
+        binding.monthTeaTextView.text = total.expenses.toString()
+        binding.monthPrepayTextView.text = total.prepay.toString()
+        binding.monthHolidayPayTextView.text = total.holidayPay.toString()
+        binding.monthExtraPayTextView.text = total.extraPay.toString()
+        binding.monthQualityPayTextView.text = total.qualityPay.toString()
+        binding.monthPenaltyTextView.text = total.penalty.toString()
+        binding.monthToRecieveTextView.text = "${total.salary - total.prepay}"
+        binding.monthLargusCountTextView.text = total.largusShifts.toString()
+        binding.monthSanderoCountTextView.text = total.sanderoShifts.toString()
+        binding.monthXrayCountTextView.text = total.xrayShifts.toString()
+        binding.monthLargusNewCountTextView.text = total.largusNewShifts.toString()
+        binding.monthVestaSWCountTextView.text = total.vestaSWShifts.toString()
     }
 
     private fun shareDate() = GlobalScope.launch {
-        var textToSend = "${month_month.text} / ${month_year.text}\n" +
+        var textToSend = "${binding.monthMonth.text} / ${binding.monthYear.text}\n" +
                 "${prefs.family}\n" +
-                "${resources.getString(R.string.shiftsValue)} ${month_total_shifts_value_textView.text}\n" +
-                "${resources.getString(R.string.car_largus)}: ${month_largus_count_textView.text}\n" +
-                "${resources.getString(R.string.car_sandero)}: ${month_sandero_count_textView.text}\n"
+                "${resources.getString(R.string.shiftsValue)} ${binding.monthTotalShiftsValueTextView.text}\n" +
+                "${resources.getString(R.string.car_largus)}: ${binding.monthLargusCountTextView.text}\n" +
+                "${resources.getString(R.string.car_sandero)}: ${binding.monthSanderoCountTextView.text}\n"
         if (!xRayDB) {
-            textToSend += "${resources.getString(R.string.car_x_ray)}: ${month_xray_count_textView.text}\n"
+            textToSend += "${resources.getString(R.string.car_x_ray)}: ${binding.monthXrayCountTextView.text}\n"
         }
-        textToSend += "${resources.getString(R.string.car_largusNew)}: ${month_largusNew_count_textView.text}\n" +
-                "${resources.getString(R.string.car_vestaSW)}: ${month_vestaSW_count_textView.text}\n" +
+        textToSend += "${resources.getString(R.string.car_largusNew)}: ${binding.monthLargusNewCountTextView.text}\n" +
+                "${resources.getString(R.string.car_vestaSW)}: ${binding.monthVestaSWCountTextView.text}\n" +
                 "\n" +
-                "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_textView.text}\n" +
-                "${resources.getString(R.string.totalMoney)}: ${month_total_money_textView.text}\n" +
-                "${resources.getString(R.string.cash)}: ${month_total_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)}: ${month_total_card_textView.text}\n" +
+                "${resources.getString(R.string.deliveryValue)}: ${binding.monthTotalDeliveryValueTextView.text}\n" +
+                "${resources.getString(R.string.totalMoney)}: ${binding.monthTotalMoneyTextView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${binding.monthTotalCashTextView.text}\n" +
+                "${resources.getString(R.string.card)}: ${binding.monthTotalCardTextView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.logan_divider)}\n" +
-                "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_logan_textView.text}\n" +
-                "${resources.getString(R.string.money)}: ${month_logan_money_textView.text}\n" +
-                "${resources.getString(R.string.cash)}: ${month_logan_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)}: ${month_logan_card_textView.text}\n" +
+                "${resources.getString(R.string.deliveryValue)}: ${binding.monthTotalDeliveryValueLoganTextView.text}\n" +
+                "${resources.getString(R.string.money)}: ${binding.monthLoganMoneyTextView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${binding.monthLoganCashTextView.text}\n" +
+                "${resources.getString(R.string.card)}: ${binding.monthLoganCardTextView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.vesta_divider)}\n" +
-                "${resources.getString(R.string.deliveryValue)}: ${month_total_delivery_value_vesta_textView.text}\n" +
-                "${resources.getString(R.string.money)}: ${month_vesta_money_textView.text}\n" +
-                "${resources.getString(R.string.cash)}: ${month_vesta_cash_textView.text}\n" +
-                "${resources.getString(R.string.card)}: ${month_vesta_card_textView.text}\n" +
+                "${resources.getString(R.string.deliveryValue)}: ${binding.monthTotalDeliveryValueVestaTextView.text}\n" +
+                "${resources.getString(R.string.money)}: ${binding.monthVestaMoneyTextView.text}\n" +
+                "${resources.getString(R.string.cash)}: ${binding.monthVestaCashTextView.text}\n" +
+                "${resources.getString(R.string.card)}: ${binding.monthVestaCardTextView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_moves)}\n" +
-                "   ${resources.getString(R.string.logan_divider)}: ${month_logan_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_veteranov)}: ${month_logan_veteranov_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)}: ${month_logan_zhukova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)}: ${month_logan_kulturi_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_planernaya)}: ${month_logan_planernaya_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)}: ${month_logan_sedova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)}: ${month_logan_himikov_move_textView.text}\n" +
-                "   ${resources.getString(R.string.vesta_divider)}: ${month_vesta_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_veteranov)}: ${month_vesta_veteranov_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)}: ${month_vesta_zhukova_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)}: ${month_vesta_kulturi_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_planernaya)}: ${month_vesta_planernaya_move_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)}: ${month_vesta_sedova_move_textView.text}\n" +
-//                "${resources.getString(R.string.shop_himikov)}: ${month_vesta_himikov_move_textView.text}\n" +
-                "${resources.getString(R.string.total_total)} ${month_total_move_textView.text}\n" +
+                "   ${resources.getString(R.string.logan_divider)}: ${binding.monthLoganMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_veteranov)}: ${binding.monthLoganVeteranovMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${binding.monthLoganZhukovaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${binding.monthLoganKulturiMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${binding.monthLoganPlanernayaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${binding.monthLoganSedovaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)}: ${binding.monthLoganHimikovMoveTextView.text}\n" +
+                "   ${resources.getString(R.string.vesta_divider)}: ${binding.monthVestaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_veteranov)}: ${binding.monthVestaVeteranovMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${binding.monthVestaZhukovaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${binding.monthVestaKulturiMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${binding.monthVestaPlanernayaMoveTextView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${binding.monthVestaSedovaMoveTextView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)}: ${binding.monthVestaHimikovMoveTextView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${binding.monthTotalMoveTextView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.total_tasks)}\n" +
-                "   ${resources.getString(R.string.logan_divider)}: ${month_logan_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_veteranov)}: ${month_logan_veteranov_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)}: ${month_logan_zhukova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)} :${month_logan_kulturi_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_planernaya)}: ${month_logan_planernaya_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)}: ${month_logan_sedova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_himikov)}: ${month_logan_himikov_task_textView.text}\n" +
-                "${resources.getString(R.string.switch_else)}: ${month_logan_else_task_textView.text}\n" +
-                "   ${resources.getString(R.string.vesta_divider)}: ${month_vesta_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_veteranov)}: ${month_vesta_veteranov_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_zhukova)}: ${month_vesta_zhukova_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_kulturi)}: ${month_vesta_kulturi_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_planernaya)}: ${month_vesta_planernaya_task_textView.text}\n" +
-                "${resources.getString(R.string.shop_sedova)}: ${month_vesta_sedova_task_textView.text}\n" +
-//                "${resources.getString(R.string.shop_himikov)}: ${month_vesta_himikov_task_textView.text}\n" +
-                "${resources.getString(R.string.switch_else)}: ${month_vesta_else_task_textView.text}\n" +
-                "${resources.getString(R.string.total_total)} ${month_total_task_textView.text}\n" +
+                "   ${resources.getString(R.string.logan_divider)}: ${binding.monthLoganTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_veteranov)}: ${binding.monthLoganVeteranovTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${binding.monthLoganZhukovaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)} :${binding.monthLoganKulturiTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${binding.monthLoganPlanernayaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${binding.monthLoganSedovaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_himikov)}: ${binding.monthLoganHimikovTaskTextView.text}\n" +
+                "${resources.getString(R.string.switch_else)}: ${binding.monthLoganElseTaskTextView.text}\n" +
+                "   ${resources.getString(R.string.vesta_divider)}: ${binding.monthVestaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_veteranov)}: ${binding.monthVestaVeteranovTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_zhukova)}: ${binding.monthVestaZhukovaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_kulturi)}: ${binding.monthVestaKulturiTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_planernaya)}: ${binding.monthVestaPlanernayaTaskTextView.text}\n" +
+                "${resources.getString(R.string.shop_sedova)}: ${binding.monthVestaSedovaTaskTextView.text}\n" +
+//                "${resources.getString(R.string.shop_himikov)}: ${binding.monthVestaHimikovTaskTextView.text}\n" +
+                "${resources.getString(R.string.switch_else)}: ${binding.monthVestaElseTaskTextView.text}\n" +
+                "${resources.getString(R.string.total_total)} ${binding.monthTotalTaskTextView.text}\n" +
                 "\n" +
                 "${resources.getString(R.string.expenses)}\n" +
-                "   ${resources.getString(R.string.car_largus)}: ${month_largus_total_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)} ${month_largus_expenses_fuel_textView.text}\n" +
-                "${resources.getString(R.string.wash)}: ${month_largus_expenses_wash_textView.text}\n" +
-                "${resources.getString(R.string.other)}: ${month_largus_expenses_other_textView.text}\n" +
-                "   ${resources.getString(R.string.car_sandero)}: ${month_sandero_total_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)} ${month_sandero_expenses_fuel_textView.text}\n" +
-                "${resources.getString(R.string.wash)}: ${month_sandero_expenses_wash_textView.text}\n" +
-                "${resources.getString(R.string.other)}: ${month_sandero_expenses_other_textView.text}\n"
+                "   ${resources.getString(R.string.car_largus)}: ${binding.monthLargusTotalExpensesTextView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${binding.monthLargusExpensesFuelTextView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${binding.monthLargusExpensesWashTextView.text}\n" +
+                "${resources.getString(R.string.other)}: ${binding.monthLargusExpensesOtherTextView.text}\n" +
+                "   ${resources.getString(R.string.car_sandero)}: ${binding.monthSanderoTotalExpensesTextView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${binding.monthSanderoExpensesFuelTextView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${binding.monthSanderoExpensesWashTextView.text}\n" +
+                "${resources.getString(R.string.other)}: ${binding.monthSanderoExpensesOtherTextView.text}\n"
         if (!xRayDB) {
-            textToSend += "   ${resources.getString(R.string.car_x_ray)}: ${month_xray_total_expenses_textView.text}\n" +
-                    "${resources.getString(R.string.fuel)} ${month_xray_expenses_fuel_textView.text}\n" +
-                    "${resources.getString(R.string.wash)}: ${month_xray_expenses_wash_textView.text}\n" +
-                    "${resources.getString(R.string.other)}: ${month_xray_expenses_other_textView.text}\n"
+            textToSend += "   ${resources.getString(R.string.car_x_ray)}: ${binding.monthXrayTotalExpensesTextView.text}\n" +
+                    "${resources.getString(R.string.fuel)} ${binding.monthXrayExpensesFuelTextView.text}\n" +
+                    "${resources.getString(R.string.wash)}: ${binding.monthXrayExpensesWashTextView.text}\n" +
+                    "${resources.getString(R.string.other)}: ${binding.monthXrayExpensesOtherTextView.text}\n"
         }
-        textToSend += "   ${resources.getString(R.string.car_largusNew)}: ${month_largusNew_total_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)} ${month_largusNew_expenses_fuel_textView.text}\n" +
-                "${resources.getString(R.string.wash)}: ${month_largusNew_expenses_wash_textView.text}\n" +
-                "${resources.getString(R.string.other)}: ${month_largusNew_expenses_other_textView.text}\n" +
-                "   ${resources.getString(R.string.car_vestaSW)}: ${month_vestaSW_total_expenses_textView.text}\n" +
-                "${resources.getString(R.string.fuel)} ${month_vestaSW_expenses_fuel_textView.text}\n" +
-                "${resources.getString(R.string.wash)}: ${month_vestaSW_expenses_wash_textView.text}\n" +
-                "${resources.getString(R.string.other)}: ${month_vestaSW_expenses_other_textView.text}\n" +
+        textToSend += "   ${resources.getString(R.string.car_largusNew)}: ${binding.monthLargusNewTotalExpensesTextView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${binding.monthLargusNewExpensesFuelTextView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${binding.monthLargusNewExpensesWashTextView.text}\n" +
+                "${resources.getString(R.string.other)}: ${binding.monthLargusNewExpensesOtherTextView.text}\n" +
+                "   ${resources.getString(R.string.car_vestaSW)}: ${binding.monthVestaSWTotalExpensesTextView.text}\n" +
+                "${resources.getString(R.string.fuel)} ${binding.monthVestaSWExpensesFuelTextView.text}\n" +
+                "${resources.getString(R.string.wash)}: ${binding.monthVestaSWExpensesWashTextView.text}\n" +
+                "${resources.getString(R.string.other)}: ${binding.monthVestaSWExpensesOtherTextView.text}\n" +
                 "\n" +
-                "${resources.getString(R.string.salary)} ${month_salary_textView.text}\n" +
-                "${resources.getString(R.string.prepay)}: ${month_prepay_textView.text}\n" +
-                "${resources.getString(R.string.holiday_pay)}: ${month_holiday_pay_textView.text}\n" +
-                "${resources.getString(R.string.qualityPay)}: ${month_qualityPay_textView.text}\n" +
-                "${resources.getString(R.string.penalty)}: ${month_penalty_textView.text}\n" +
-                "${resources.getString(R.string.money_to_recieve)} ${month_to_recieve_textView.text}"
+                "${resources.getString(R.string.salary)} ${binding.monthSalaryTextView.text}\n" +
+                "${resources.getString(R.string.prepay)}: ${binding.monthPrepayTextView.text}\n" +
+                "${resources.getString(R.string.holiday_pay)}: ${binding.monthHolidayPayTextView.text}\n" +
+                "${resources.getString(R.string.qualityPay)}: ${binding.monthQualityPayTextView.text}\n" +
+                "${resources.getString(R.string.penalty)}: ${binding.monthPenaltyTextView.text}\n" +
+                "${resources.getString(R.string.money_to_recieve)} ${binding.monthToRecieveTextView.text}"
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(Intent.EXTRA_TEXT, textToSend)

@@ -11,20 +11,23 @@ import com.google.android.material.snackbar.Snackbar
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Cars
 import com.parsiphal.loganshopdriverhelper.data.Districts
+import com.parsiphal.loganshopdriverhelper.databinding.FragmentShiftNewBinding
 import com.parsiphal.loganshopdriverhelper.prefs
-import kotlinx.android.synthetic.main.fragment_shift_new.*
 import moxy.MvpAppCompatFragment
 import java.lang.Exception
 
 class ShiftFragmentNew : MvpAppCompatFragment() {
 
-    var ifMorning = true
+    private var ifMorning = true
+    private var _binding: FragmentShiftNewBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_shift_new, container, false)
+        _binding = FragmentShiftNewBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,14 +41,19 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
         closeShiftListener()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun familyTextListener() {
-        shiftN_family_textView.setOnClickListener {
+        binding.shiftNFamilyTextView.setOnClickListener {
             hideMainViews()
-            shiftN_enter_family.visibility = View.VISIBLE
-            shiftN_enter_family_write_button.setOnClickListener {
-                prefs.family = shiftN_enter_family_editText.text.toString()
-                shiftN_family_textView.text = shiftN_enter_family_editText.text.toString()
-                shiftN_enter_family.visibility = View.GONE
+            binding.shiftNEnterFamily.visibility = View.VISIBLE
+            binding.shiftNEnterFamilyWriteButton.setOnClickListener {
+                prefs.family = binding.shiftNEnterFamilyEditText.text.toString()
+                binding.shiftNFamilyTextView.text = binding.shiftNEnterFamilyEditText.text.toString()
+                binding.shiftNEnterFamily.visibility = View.GONE
                 showMainViews()
                 val imm =
                     context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -55,170 +63,176 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
     }
 
     private fun startShiftListener() {
-        shiftN_start_shift_button.setOnClickListener {
+        binding.shiftNStartShiftButton.setOnClickListener {
             ifMorning = true
             hideMainViews()
-            shiftN_enter_date.visibility = View.VISIBLE
+            binding.shiftNEnterDate.visibility = View.VISIBLE
         }
     }
 
     private fun enterDateListener() {
-        shiftN_enter_date_next_button.setOnClickListener {
-            val day = if (shiftN_enter_date_datePicker.dayOfMonth < 10) {
-                "0${shiftN_enter_date_datePicker.dayOfMonth}"
+        binding.shiftNEnterDateNextButton.setOnClickListener {
+            val day = if (binding.shiftNEnterDateDatePicker.dayOfMonth < 10) {
+                "0${binding.shiftNEnterDateDatePicker.dayOfMonth}"
             } else {
-                "${shiftN_enter_date_datePicker.dayOfMonth}"
+                "${binding.shiftNEnterDateDatePicker.dayOfMonth}"
             }
-            val month = if (shiftN_enter_date_datePicker.month + 1 < 10) {
-                "0${shiftN_enter_date_datePicker.month + 1}"
+            val month = if (binding.shiftNEnterDateDatePicker.month + 1 < 10) {
+                "0${binding.shiftNEnterDateDatePicker.month + 1}"
             } else {
-                "${shiftN_enter_date_datePicker.month + 1}"
+                "${binding.shiftNEnterDateDatePicker.month + 1}"
             }
-            val year = shiftN_enter_date_datePicker.year.toString()
+            val year = binding.shiftNEnterDateDatePicker.year.toString()
             val date = "$day/${month}/${year}"
             prefs.date = date
-            shiftN_date_textView.text = date
-            shiftN_enter_date.visibility = View.GONE
-            shiftN_enter_car.visibility = View.VISIBLE
+            binding.shiftNDateTextView.text = date
+            binding.shiftNEnterDate.visibility = View.GONE
+            binding.shiftNEnterCar.visibility = View.VISIBLE
         }
     }
 
     private fun enterCarListener() {
-        shiftN_enter_car_largus_button.setOnClickListener {
+        binding.shiftNEnterCarLargusButton.setOnClickListener {
             prefs.car = Cars.Largus.id
             prefs.carPosition = Cars.Largus.i
-            shiftN_car_textView.text = Cars.Largus.name
-            shiftN_enter_car.visibility = View.GONE
-            shiftN_enter_district.visibility = View.VISIBLE
+            binding.shiftNCarTextView.text = Cars.Largus.name
+            binding.shiftNEnterCar.visibility = View.GONE
+            binding.shiftNEnterDistrict.visibility = View.VISIBLE
         }
-        shiftN_enter_car_sandero_button.setOnClickListener {
+        binding.shiftNEnterCarSanderoButton.setOnClickListener {
             prefs.car = Cars.Sandero.id
             prefs.carPosition = Cars.Sandero.i
-            shiftN_car_textView.text = Cars.Sandero.name
-            shiftN_enter_car.visibility = View.GONE
-            shiftN_enter_district.visibility = View.VISIBLE
+            binding.shiftNCarTextView.text = Cars.Sandero.name
+            binding.shiftNEnterCar.visibility = View.GONE
+            binding.shiftNEnterDistrict.visibility = View.VISIBLE
         }
-        shiftN_enter_car_xray_button.setOnClickListener {
+        binding.shiftNEnterCarXrayButton.setOnClickListener {
             prefs.car = Cars.XRay.id
             prefs.carPosition = Cars.XRay.i
-            shiftN_car_textView.text = Cars.XRay.id
-            shiftN_enter_car.visibility = View.GONE
-            shiftN_enter_district.visibility = View.VISIBLE
+            binding.shiftNCarTextView.text = Cars.XRay.id
+            binding.shiftNEnterCar.visibility = View.GONE
+            binding.shiftNEnterDistrict.visibility = View.VISIBLE
         }
-        shiftN_enter_car_largusNew_button.setOnClickListener {
+        binding.shiftNEnterCarLargusNewButton.setOnClickListener {
             prefs.car = Cars.LargusNew.id
             prefs.carPosition = Cars.LargusNew.i
-            shiftN_car_textView.text = Cars.LargusNew.name
-            shiftN_enter_car.visibility = View.GONE
-            shiftN_enter_district.visibility = View.VISIBLE
+            binding.shiftNCarTextView.text = Cars.LargusNew.name
+            binding.shiftNEnterCar.visibility = View.GONE
+            binding.shiftNEnterDistrict.visibility = View.VISIBLE
         }
-        shiftN_enter_car_vestaSW_button.setOnClickListener {
+        binding.shiftNEnterCarVestaSWButton.setOnClickListener {
             prefs.car = Cars.VestaSW.id
             prefs.carPosition = Cars.VestaSW.i
-            shiftN_car_textView.text = Cars.VestaSW.name
-            shiftN_enter_car.visibility = View.GONE
-            shiftN_enter_district.visibility = View.VISIBLE
+            binding.shiftNCarTextView.text = Cars.VestaSW.name
+            binding.shiftNEnterCar.visibility = View.GONE
+            binding.shiftNEnterDistrict.visibility = View.VISIBLE
         }
     }
 
     private fun enterDistrictListener() {
-        shiftN_enter_district_north_button.setOnClickListener {
+        binding.shiftNEnterDistrictNorthButton.setOnClickListener {
             prefs.region = Districts.North.ruName
-            shiftN_district_textView.text = Districts.North.ruName
-            shiftN_enter_district.visibility = View.GONE
+            binding.shiftNDistrictTextView.text = Districts.North.ruName
+            binding.shiftNEnterDistrict.visibility = View.GONE
             odoAndFuelListener()
         }
-        shiftN_enter_district_center_button.setOnClickListener {
+        binding.shiftNEnterDistrictCenterButton.setOnClickListener {
             prefs.region = Districts.Center.ruName
-            shiftN_district_textView.text = Districts.Center.ruName
-            shiftN_enter_district.visibility = View.GONE
+            binding.shiftNDistrictTextView.text = Districts.Center.ruName
+            binding.shiftNEnterDistrict.visibility = View.GONE
             odoAndFuelListener()
         }
-        shiftN_enter_district_south_button.setOnClickListener {
+        binding.shiftNEnterDistrictSouthButton.setOnClickListener {
             prefs.region = Districts.South.ruName
-            shiftN_district_textView.text = Districts.Center.ruName
-            shiftN_enter_district.visibility = View.GONE
+            binding.shiftNDistrictTextView.text = Districts.Center.ruName
+            binding.shiftNEnterDistrict.visibility = View.GONE
             odoAndFuelListener()
         }
     }
 
     private fun odoAndFuelListener() {
-        shiftN_enter_odo_and_fuel.visibility = View.VISIBLE
-        when (shiftN_car_textView.text) {
+        binding.shiftNEnterOdoAndFuel.visibility = View.VISIBLE
+        when (binding.shiftNCarTextView.text) {
             Cars.XRay.id -> {
-                shiftN_fuel_seekbar_6.visibility = View.GONE
-                shiftN_fuel_seekbar_9.visibility = View.GONE
+                binding.shiftNFuelSeekbar6.visibility = View.GONE
+                binding.shiftNFuelSeekbar9.visibility = View.GONE
             }
             Cars.VestaSW.id -> {
-                shiftN_fuel_seekbar_8.visibility = View.GONE
-                shiftN_fuel_seekbar_9.visibility = View.GONE
+                binding.shiftNFuelSeekbar8.visibility = View.GONE
+                binding.shiftNFuelSeekbar9.visibility = View.GONE
             }
             else -> {
-                shiftN_fuel_seekbar_6.visibility = View.GONE
-                shiftN_fuel_seekbar_8.visibility = View.GONE
+                binding.shiftNFuelSeekbar6.visibility = View.GONE
+                binding.shiftNFuelSeekbar8.visibility = View.GONE
             }
         }
-        shiftN_fuel_seekbar_6.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.shiftNFuelSeekbar6.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                shiftN_fuel_textView.text = shiftN_fuel_seekbar_6.progress.toString()
+                binding.shiftNFuelTextView.text = binding.shiftNFuelSeekbar6.progress.toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
-        shiftN_fuel_seekbar_8.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.shiftNFuelSeekbar8.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                shiftN_fuel_textView.text = shiftN_fuel_seekbar_8.progress.toString()
+                binding.shiftNFuelTextView.text = binding.shiftNFuelSeekbar8.progress.toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
-        shiftN_fuel_seekbar_9.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.shiftNFuelSeekbar9.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                shiftN_fuel_textView.text = shiftN_fuel_seekbar_9.progress.toString()
+                binding.shiftNFuelTextView.text = binding.shiftNFuelSeekbar9.progress.toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
-        shiftN_enter_odo_and_fuel_write_button.setOnClickListener {
+        binding.shiftNEnterOdoAndFuelWriteButton.setOnClickListener {
             if (ifMorning) {
-                prefs.morningODO = shiftN_odo_editText.text.toString().toInt()
-                shiftN_odo_morning_textView.text = shiftN_odo_editText.text.toString()
-                when (shiftN_car_textView.text) {
+                prefs.morningODO = binding.shiftNOdoEditText.text.toString().toInt()
+                binding.shiftNOdoMorningTextView.text = binding.shiftNOdoEditText.text.toString()
+                when (binding.shiftNCarTextView.text) {
                     Cars.XRay.id -> {
-                        prefs.morningFuel = shiftN_fuel_seekbar_8.progress
-                        shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_8.progress.toString()
+                        prefs.morningFuel = binding.shiftNFuelSeekbar8.progress
+                        binding.shiftNFuelMorningTextView.text =
+                            binding.shiftNFuelSeekbar8.progress.toString()
                     }
                     Cars.VestaSW.id -> {
-                        prefs.morningFuel = shiftN_fuel_seekbar_6.progress
-                        shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_6.progress.toString()
+                        prefs.morningFuel = binding.shiftNFuelSeekbar6.progress
+                        binding.shiftNFuelMorningTextView.text =
+                            binding.shiftNFuelSeekbar6.progress.toString()
                     }
                     else -> {
-                        prefs.morningFuel = shiftN_fuel_seekbar_9.progress
-                        shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_9.progress.toString()
+                        prefs.morningFuel = binding.shiftNFuelSeekbar9.progress
+                        binding.shiftNFuelMorningTextView.text =
+                            binding.shiftNFuelSeekbar9.progress.toString()
                     }
                 }
             } else {
-                prefs.eveningODO = shiftN_odo_editText.text.toString().toInt()
-                shiftN_odo_evening_textView.text = shiftN_odo_editText.text.toString()
-                when (shiftN_car_textView.text) {
+                prefs.eveningODO = binding.shiftNOdoEditText.text.toString().toInt()
+                binding.shiftNOdoEveningTextView.text = binding.shiftNOdoEditText.text.toString()
+                when (binding.shiftNCarTextView.text) {
                     Cars.XRay.id -> {
-                        prefs.eveningFuel = shiftN_fuel_seekbar_8.progress
-                        shiftN_fuel_evening_textView.text = shiftN_fuel_seekbar_8.progress.toString()
+                        prefs.eveningFuel = binding.shiftNFuelSeekbar8.progress
+                        binding.shiftNFuelEveningTextView.text =
+                            binding.shiftNFuelSeekbar8.progress.toString()
                     }
                     Cars.VestaSW.id -> {
-                        prefs.morningFuel = shiftN_fuel_seekbar_6.progress
-                        shiftN_fuel_morning_textView.text = shiftN_fuel_seekbar_6.progress.toString()
+                        prefs.morningFuel = binding.shiftNFuelSeekbar6.progress
+                        binding.shiftNFuelMorningTextView.text =
+                            binding.shiftNFuelSeekbar6.progress.toString()
                     }
                     else -> {
-                        prefs.eveningFuel = shiftN_fuel_seekbar_9.progress
-                        shiftN_fuel_evening_textView.text = shiftN_fuel_seekbar_9.progress.toString()
+                        prefs.eveningFuel = binding.shiftNFuelSeekbar9.progress
+                        binding.shiftNFuelEveningTextView.text =
+                            binding.shiftNFuelSeekbar9.progress.toString()
                     }
                 }
             }
-            shiftN_enter_odo_and_fuel.visibility = View.GONE
+            binding.shiftNEnterOdoAndFuel.visibility = View.GONE
             val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view?.windowToken, 0)
             showMainViews()
@@ -226,12 +240,12 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
     }
 
     private fun closeShiftListener() {
-        shiftN_finish_shift_button.setOnClickListener {
+        binding.shiftNFinishShiftButton.setOnClickListener {
             ifMorning = false
-            shiftN_fuel_seekbar_6.progress = 0
-            shiftN_fuel_seekbar_8.progress = 0
-            shiftN_fuel_seekbar_9.progress = 0
-            shiftN_odo_editText.setText("")
+            binding.shiftNFuelSeekbar6.progress = 0
+            binding.shiftNFuelSeekbar8.progress = 0
+            binding.shiftNFuelSeekbar9.progress = 0
+            binding.shiftNOdoEditText.setText("")
             hideMainViews()
             odoAndFuelListener()
         }
@@ -239,44 +253,44 @@ class ShiftFragmentNew : MvpAppCompatFragment() {
 
     private fun getData() {
         try {
-            shiftN_status_textView.text = when (prefs.status) {
+            binding.shiftNStatusTextView.text = when (prefs.status) {
                 0 -> resources.getString(R.string.driver)
                 else -> resources.getString(R.string.newbie)
             }
-            shiftN_family_textView.text = prefs.family
-            shiftN_date_textView.text = prefs.date
-            shiftN_car_textView.text = prefs.car
-            shiftN_district_textView.text = prefs.region
-            shiftN_odo_morning_textView.text = prefs.morningODO.toString()
-            shiftN_fuel_morning_textView.text = prefs.morningFuel.toString()
-            shiftN_odo_evening_textView.text = prefs.eveningODO.toString()
-            shiftN_fuel_evening_textView.text = prefs.eveningFuel.toString()
+            binding.shiftNFamilyTextView.text = prefs.family
+            binding.shiftNDateTextView.text = prefs.date
+            binding.shiftNCarTextView.text = prefs.car
+            binding.shiftNDistrictTextView.text = prefs.region
+            binding.shiftNOdoMorningTextView.text = prefs.morningODO.toString()
+            binding.shiftNFuelMorningTextView.text = prefs.morningFuel.toString()
+            binding.shiftNOdoEveningTextView.text = prefs.eveningODO.toString()
+            binding.shiftNFuelEveningTextView.text = prefs.eveningFuel.toString()
         } catch (e: Exception) {
             Snackbar.make(view!!, getString(R.string.shiftError), Snackbar.LENGTH_LONG).show()
         }
     }
 
     private fun hideMainViews() {
-        shiftN_family.visibility = View.GONE
-        shiftN_date_and_car.visibility = View.GONE
-        shiftN_morning_divider.visibility = View.GONE
-        shiftN_morning_odo.visibility = View.GONE
-        shiftN_morning_fuel.visibility = View.GONE
-        shiftN_evening_divider.visibility = View.GONE
-        shiftN_evening_odo.visibility = View.GONE
-        shiftN_evening_fuel.visibility = View.GONE
-        shiftN_buttons.visibility = View.GONE
+        binding.shiftNFamily.visibility = View.GONE
+        binding.shiftNDateAndCar.visibility = View.GONE
+        binding.shiftNMorningDivider.visibility = View.GONE
+        binding.shiftNMorningOdo.visibility = View.GONE
+        binding.shiftNMorningFuel.visibility = View.GONE
+        binding.shiftNEveningDivider.visibility = View.GONE
+        binding.shiftNEveningOdo.visibility = View.GONE
+        binding.shiftNEveningFuel.visibility = View.GONE
+        binding.shiftNButtons.visibility = View.GONE
     }
 
     private fun showMainViews() {
-        shiftN_family.visibility = View.VISIBLE
-        shiftN_date_and_car.visibility = View.VISIBLE
-        shiftN_morning_divider.visibility = View.VISIBLE
-        shiftN_morning_odo.visibility = View.VISIBLE
-        shiftN_morning_fuel.visibility = View.VISIBLE
-        shiftN_evening_divider.visibility = View.VISIBLE
-        shiftN_evening_odo.visibility = View.VISIBLE
-        shiftN_evening_fuel.visibility = View.VISIBLE
-        shiftN_buttons.visibility = View.VISIBLE
+        binding.shiftNFamily.visibility = View.VISIBLE
+        binding.shiftNDateAndCar.visibility = View.VISIBLE
+        binding.shiftNMorningDivider.visibility = View.VISIBLE
+        binding.shiftNMorningOdo.visibility = View.VISIBLE
+        binding.shiftNMorningFuel.visibility = View.VISIBLE
+        binding.shiftNEveningDivider.visibility = View.VISIBLE
+        binding.shiftNEveningOdo.visibility = View.VISIBLE
+        binding.shiftNEveningFuel.visibility = View.VISIBLE
+        binding.shiftNButtons.visibility = View.VISIBLE
     }
 }

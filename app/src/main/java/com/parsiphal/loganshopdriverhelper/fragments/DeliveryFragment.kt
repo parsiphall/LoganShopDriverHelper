@@ -8,19 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
-
-import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
 import com.parsiphal.loganshopdriverhelper.data.PayType
 import com.parsiphal.loganshopdriverhelper.data.WorkType
+import com.parsiphal.loganshopdriverhelper.databinding.FragmentDeliveryBinding
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
 import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapter
 import com.parsiphal.loganshopdriverhelper.recycler.DeliveryViewAdapterNew
 import com.parsiphal.loganshopdriverhelper.recycler.OnItemClickListener
 import com.parsiphal.loganshopdriverhelper.recycler.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_delivery.*
-import kotlinx.android.synthetic.main.fragment_delivery.view.*
 import kotlinx.coroutines.*
 import moxy.MvpAppCompatFragment
 import java.util.*
@@ -36,6 +33,8 @@ class DeliveryFragment : MvpAppCompatFragment() {
     private lateinit var adapterNew: DeliveryViewAdapterNew
     private var searchDate: String = ""
     private var cashSum = 0
+    private var _binding: FragmentDeliveryBinding? = null
+    private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,23 +46,23 @@ class DeliveryFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_delivery, container, false)
+        _binding = FragmentDeliveryBinding.inflate(inflater, container, false)
         adapter = DeliveryViewAdapter(items, context!!)
         adapterNew = DeliveryViewAdapterNew(items, context!!)
-        root.delivery_recycler.layoutManager = LinearLayoutManager(context)
-        root.delivery_recycler.adapter = if (prefs.deliveryView == 0) {
+        binding.deliveryRecycler.layoutManager = LinearLayoutManager(context)
+        binding.deliveryRecycler.adapter = if (prefs.deliveryView == 0) {
             adapter
         } else {
             adapterNew
         }
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getDate()
         placeData(searchDate)
-        delivery_fab.setOnClickListener {
+        binding.deliveryFab.setOnClickListener {
             if (prefs.addSystem == 0) {
                 callBackActivity.fragmentPlace(NewDeliveryFragment())
             } else {
@@ -74,10 +73,10 @@ class DeliveryFragment : MvpAppCompatFragment() {
 //            callBackActivity.fragmentPlace(MaintananceFragment())
 //            return@setOnLongClickListener true
 //        }
-        calendar_fab.setOnClickListener {
+        binding.calendarFab.setOnClickListener {
             datePickerDialog()
         }
-        delivery_recycler.addOnItemClickListener(object : OnItemClickListener {
+        binding.deliveryRecycler.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
                 val bundle = Bundle()
                 bundle.putSerializable("ITEM", items[position])
@@ -86,15 +85,20 @@ class DeliveryFragment : MvpAppCompatFragment() {
         })
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun placeData(date: String) {
         val data = GlobalScope.async { getData(date) }
         MainScope().launch {
             data.await()
             if (items.isEmpty()) {
-                no_data_textView?.visibility = View.VISIBLE
+                binding.noDataTextView?.visibility = View.VISIBLE
                 cashSum = 0
             }
-            delivery_cashSum?.text = cashSum.toString()
+            binding.deliveryCashSum?.text = cashSum.toString()
             if (prefs.deliveryView == 0) {
                 adapter.dataChanged(items)
             } else {
@@ -128,12 +132,12 @@ class DeliveryFragment : MvpAppCompatFragment() {
             myDay = "0$myDay"
         }
         searchDate = "$myDay/$myMonth/$year"
-        date_textView.text = searchDate
+        binding.dateTextView.text = searchDate
     }
 
     override fun onResume() {
         super.onResume()
-        delivery_recycler.adapter!!.notifyDataSetChanged()
+        binding.deliveryRecycler.adapter!!.notifyDataSetChanged()
     }
 
     private fun dateListener(): DatePickerDialog.OnDateSetListener =
@@ -147,18 +151,15 @@ class DeliveryFragment : MvpAppCompatFragment() {
                 myDay = "0$myDay"
             }
             searchDate = "$myDay/$myMonth/$year"
-            date_textView.text = searchDate
+            binding.dateTextView.text = searchDate
             placeData(searchDate)
         }
 
     private fun datePickerDialog() {
         val cal = Calendar.getInstance()
-        val year: Int
-        val month: Int
-        val dayOfMonth: Int
-        year = cal.get(Calendar.YEAR)
-        month = cal.get(Calendar.MONTH)
-        dayOfMonth = cal.get(Calendar.DAY_OF_MONTH)
+        val year: Int = cal.get(Calendar.YEAR)
+        val month: Int = cal.get(Calendar.MONTH)
+        val dayOfMonth: Int = cal.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(
             context!!,
             dateListener(),

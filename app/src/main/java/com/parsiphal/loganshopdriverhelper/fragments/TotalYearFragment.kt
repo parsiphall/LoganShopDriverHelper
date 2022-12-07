@@ -10,9 +10,9 @@ import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Cars
 import com.parsiphal.loganshopdriverhelper.data.Total
+import com.parsiphal.loganshopdriverhelper.databinding.FragmentTotalYearBinding
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
-import kotlinx.android.synthetic.main.fragment_total_year.*
 import kotlinx.coroutines.*
 import moxy.MvpAppCompatFragment
 
@@ -99,6 +99,8 @@ class TotalYearFragment : MvpAppCompatFragment() {
     private var xRayExpenseWash = 0
     private var xRayExpenseOther = 0
     private var xRayExpenseTotal = 0
+    private var _binding: FragmentTotalYearBinding? = null
+    private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -120,7 +122,8 @@ class TotalYearFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_total_year, container, false)
+        _binding = FragmentTotalYearBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -138,8 +141,8 @@ class TotalYearFragment : MvpAppCompatFragment() {
                 placeExpenses()
                 delay(1000)
                 saveData()
-                year_progress.visibility = View.GONE
-                year_data.visibility = View.VISIBLE
+                binding.yearProgress.visibility = View.GONE
+                binding.yearData.visibility = View.VISIBLE
             }
         } else {
 //            val search = "${total.date[3]}${total.date[4]}"
@@ -151,10 +154,15 @@ class TotalYearFragment : MvpAppCompatFragment() {
                 data.await()
                 placeData()
                 placeExpenses()
-                year_progress.visibility = View.GONE
-                year_data.visibility = View.VISIBLE
+                binding.yearProgress.visibility = View.GONE
+                binding.yearData.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun getData() {
@@ -163,62 +171,62 @@ class TotalYearFragment : MvpAppCompatFragment() {
     }
 
     private fun setData() {
-        year_textView.text =
+        binding.yearTextView.text =
             "${prefs.date!![6]}${prefs.date!![7]}${prefs.date!![8]}${prefs.date!![9]}"
-        year_total_shifts_value_textView.text = totalShifts.toString()
-        year_total_money_textView.text = totalMoney.toString()
-        year_total_cash_textView.text = totalCash.toString()
-        year_total_card_textView.text = totalCard.toString()
-        year_total_delivery_value_logan_textView.text = deliveryValueLogan.toString()
-        year_logan_money_textView.text = loganMoney.toString()
-        year_logan_cash_textView.text = loganCash.toString()
-        year_logan_card_textView.text = loganCard.toString()
-        year_total_delivery_value_vesta_textView.text = deliveryValueVesta.toString()
-        year_vesta_money_textView.text = vestaMoney.toString()
-        year_vesta_cash_textView.text = vestaCash.toString()
-        year_vesta_card_textView.text = vestaCard.toString()
-        year_largus_count_textView.text = largusShifts.toString()
-        year_sandero_count_textView.text = sanderoShifts.toString()
-        year_xray_count_textView.text = xrayShifts.toString()
-        year_total_delivery_value_textView.text = totalDeliveries.toString()
-        year_logan_move_textView.text = loganMove.toString()
-        year_logan_zhukova_move_textView.text = loganMoveToZhukova.toString()
-        year_logan_kulturi_move_textView.text = loganMoveToKulturi.toString()
-        year_logan_sedova_move_textView.text = loganMoveToSedova.toString()
-        year_logan_himikov_move_textView.text = loganMoveToHimikov.toString()
-        year_vesta_move_textView.text = vestaMove.toString()
-        year_vesta_zhukova_move_textView.text = vestaMoveToZhukova.toString()
-        year_vesta_kulturi_move_textView.text = vestaMoveToKulturi.toString()
-        year_vesta_sedova_move_textView.text = vestaMoveToSedova.toString()
-        year_vesta_himikov_move_textView.text = vestaMoveToHimikov.toString()
-        year_total_move_textView.text = "${totalMoveWithSalary}(${totalMove})"
-        year_logan_task_textView.text = loganTask.toString()
-        year_logan_zhukova_task_textView.text = loganTaskToZhukova.toString()
-        year_logan_kulturi_task_textView.text = loganTaskToKulturi.toString()
-        year_logan_sedova_task_textView.text = loganTaskToSedova.toString()
-        year_logan_himikov_task_textView.text = loganTaskToHimikov.toString()
-        year_logan_else_task_textView.text = loganTaskElse.toString()
-        year_vesta_task_textView.text = vestaTask.toString()
-        year_vesta_zhukova_task_textView.text = vestaTaskToZhukova.toString()
-        year_vesta_kulturi_task_textView.text = vestaTaskToKulturi.toString()
-        year_vesta_sedova_task_textView.text = vestaTaskToSedova.toString()
-        year_vesta_himikov_task_textView.text = vestaTaskToHimikov.toString()
-        year_vesta_else_task_textView.text = vestaTaskElse.toString()
-        year_total_task_textView.text = "${totalTaskWithSalary}(${totalTask})"
-        year_salary_textView.text = salary.toString()
-        year_tea_textView.text = teaMoney.toString()
-        year_largus_total_expenses_textView.text = largusExpenseTotal.toString()
-        year_largus_expenses_fuel_textView.text = largusExpenseFuel.toString()
-        year_largus_expenses_wash_textView.text = largusExpenseWash.toString()
-        year_largus_expenses_other_textView.text = largusExpenseOther.toString()
-        year_sandero_total_expenses_textView.text = sanderoExpenseTotal.toString()
-        year_sandero_expenses_fuel_textView.text = sanderoExpenseFuel.toString()
-        year_sandero_expenses_wash_textView.text = sanderoExpenseWash.toString()
-        year_sandero_expenses_other_textView.text = sanderoExpenseOther.toString()
-        year_xray_total_expenses_textView.text = xRayExpenseTotal.toString()
-        year_xray_expenses_fuel_textView.text = xRayExpenseFuel.toString()
-        year_xray_expenses_wash_textView.text = xRayExpenseWash.toString()
-        year_xray_expenses_other_textView.text = xRayExpenseOther.toString()
+        binding.yearTotalShiftsValueTextView.text = totalShifts.toString()
+        binding.yearTotalMoneyTextView.text = totalMoney.toString()
+        binding.yearTotalCashTextView.text = totalCash.toString()
+        binding.yearTotalCardTextView.text = totalCard.toString()
+        binding.yearTotalDeliveryValueLoganTextView.text = deliveryValueLogan.toString()
+        binding.yearLoganMoneyTextView.text = loganMoney.toString()
+        binding.yearLoganCashTextView.text = loganCash.toString()
+        binding.yearLoganCardTextView.text = loganCard.toString()
+        binding.yearTotalDeliveryValueVestaTextView.text = deliveryValueVesta.toString()
+        binding.yearVestaMoneyTextView.text = vestaMoney.toString()
+        binding.yearVestaCashTextView.text = vestaCash.toString()
+        binding.yearVestaCardTextView.text = vestaCard.toString()
+        binding.yearLargusCountTextView.text = largusShifts.toString()
+        binding.yearSanderoCountTextView.text = sanderoShifts.toString()
+        binding.yearXrayCountTextView.text = xrayShifts.toString()
+        binding.yearTotalDeliveryValueTextView.text = totalDeliveries.toString()
+        binding.yearLoganMoveTextView.text = loganMove.toString()
+        binding.yearLoganZhukovaMoveTextView.text = loganMoveToZhukova.toString()
+        binding.yearLoganKulturiMoveTextView.text = loganMoveToKulturi.toString()
+        binding.yearLoganSedovaMoveTextView.text = loganMoveToSedova.toString()
+        binding.yearLoganHimikovMoveTextView.text = loganMoveToHimikov.toString()
+        binding.yearVestaMoveTextView.text = vestaMove.toString()
+        binding.yearVestaZhukovaMoveTextView.text = vestaMoveToZhukova.toString()
+        binding.yearVestaKulturiMoveTextView.text = vestaMoveToKulturi.toString()
+        binding.yearVestaSedovaMoveTextView.text = vestaMoveToSedova.toString()
+        binding.yearVestaHimikovMoveTextView.text = vestaMoveToHimikov.toString()
+        binding.yearTotalMoveTextView.text = "${totalMoveWithSalary}(${totalMove})"
+        binding.yearLoganTaskTextView.text = loganTask.toString()
+        binding.yearLoganZhukovaTaskTextView.text = loganTaskToZhukova.toString()
+        binding.yearLoganKulturiTaskTextView.text = loganTaskToKulturi.toString()
+        binding.yearLoganSedovaTaskTextView.text = loganTaskToSedova.toString()
+        binding.yearLoganHimikovTaskTextView.text = loganTaskToHimikov.toString()
+        binding.yearLoganElseTaskTextView.text = loganTaskElse.toString()
+        binding.yearVestaTaskTextView.text = vestaTask.toString()
+        binding.yearVestaZhukovaTaskTextView.text = vestaTaskToZhukova.toString()
+        binding.yearVestaKulturiTaskTextView.text = vestaTaskToKulturi.toString()
+        binding.yearVestaSedovaTaskTextView.text = vestaTaskToSedova.toString()
+        binding.yearVestaHimikovTaskTextView.text = vestaTaskToHimikov.toString()
+        binding.yearVestaElseTaskTextView.text = vestaTaskElse.toString()
+        binding.yearTotalTaskTextView.text = "${totalTaskWithSalary}(${totalTask})"
+        binding.yearSalaryTextView.text = salary.toString()
+        binding.yearTeaTextView.text = teaMoney.toString()
+        binding.yearLargusTotalExpensesTextView.text = largusExpenseTotal.toString()
+        binding.yearLargusExpensesFuelTextView.text = largusExpenseFuel.toString()
+        binding.yearLargusExpensesWashTextView.text = largusExpenseWash.toString()
+        binding.yearLargusExpensesOtherTextView.text = largusExpenseOther.toString()
+        binding.yearSanderoTotalExpensesTextView.text = sanderoExpenseTotal.toString()
+        binding.yearSanderoExpensesFuelTextView.text = sanderoExpenseFuel.toString()
+        binding.yearSanderoExpensesWashTextView.text = sanderoExpenseWash.toString()
+        binding.yearSanderoExpensesOtherTextView.text = sanderoExpenseOther.toString()
+        binding.yearXrayTotalExpensesTextView.text = xRayExpenseTotal.toString()
+        binding.yearXrayExpensesFuelTextView.text = xRayExpenseFuel.toString()
+        binding.yearXrayExpensesWashTextView.text = xRayExpenseWash.toString()
+        binding.yearXrayExpensesOtherTextView.text = xRayExpenseOther.toString()
     }
 
     private fun calculateSum() {
@@ -316,25 +324,25 @@ class TotalYearFragment : MvpAppCompatFragment() {
     }
 
     private fun placeExpenses() {
-        year_largus_total_expenses_textView.text = largusExpenseTotal.toString()
-        year_largus_expenses_fuel_textView.text = largusExpenseFuel.toString()
-        year_largus_expenses_wash_textView.text = largusExpenseWash.toString()
-        year_largus_expenses_other_textView.text = largusExpenseOther.toString()
-        year_sandero_total_expenses_textView.text = sanderoExpenseTotal.toString()
-        year_sandero_expenses_fuel_textView.text = sanderoExpenseFuel.toString()
-        year_sandero_expenses_wash_textView.text = sanderoExpenseWash.toString()
-        year_sandero_expenses_other_textView.text = sanderoExpenseOther.toString()
-        year_xray_total_expenses_textView.text = xRayExpenseTotal.toString()
-        year_xray_expenses_fuel_textView.text = xRayExpenseFuel.toString()
-        year_xray_expenses_wash_textView.text = xRayExpenseWash.toString()
-        year_xray_expenses_other_textView.text = xRayExpenseOther.toString()
+        binding.yearLargusTotalExpensesTextView.text = largusExpenseTotal.toString()
+        binding.yearLargusExpensesFuelTextView.text = largusExpenseFuel.toString()
+        binding.yearLargusExpensesWashTextView.text = largusExpenseWash.toString()
+        binding.yearLargusExpensesOtherTextView.text = largusExpenseOther.toString()
+        binding.yearSanderoTotalExpensesTextView.text = sanderoExpenseTotal.toString()
+        binding.yearSanderoExpensesFuelTextView.text = sanderoExpenseFuel.toString()
+        binding.yearSanderoExpensesWashTextView.text = sanderoExpenseWash.toString()
+        binding.yearSanderoExpensesOtherTextView.text = sanderoExpenseOther.toString()
+        binding.yearXrayTotalExpensesTextView.text = xRayExpenseTotal.toString()
+        binding.yearXrayExpensesFuelTextView.text = xRayExpenseFuel.toString()
+        binding.yearXrayExpensesWashTextView.text = xRayExpenseWash.toString()
+        binding.yearXrayExpensesOtherTextView.text = xRayExpenseOther.toString()
     }
 
     private fun saveData() = GlobalScope.launch {
         try {
             total.dayOrMonth = 2
             total.date = prefs.date!!
-            total.totalShifts = year_total_shifts_value_textView.text.toString().toInt()
+            total.totalShifts = binding.yearTotalShiftsValueTextView.text.toString().toInt()
             total.totalDeliveries = totalDeliveries
             total.movesWithSalary = totalMoveWithSalary
             total.loganMove = loganMove
@@ -344,25 +352,25 @@ class TotalYearFragment : MvpAppCompatFragment() {
             total.loganTask = loganTask
             total.vestaTask = vestaTask
             total.totalTask = totalTask
-            total.totalMoney = year_total_money_textView.text.toString().toInt()
-            total.totalCash = year_total_cash_textView.text.toString().toInt()
-            total.totalCard = year_total_card_textView.text.toString().toInt()
+            total.totalMoney = binding.yearTotalMoneyTextView.text.toString().toInt()
+            total.totalCash = binding.yearTotalCashTextView.text.toString().toInt()
+            total.totalCard = binding.yearTotalCardTextView.text.toString().toInt()
             total.loganDeliveryValue =
-                year_total_delivery_value_logan_textView.text.toString().toInt()
-            total.loganMoney = year_logan_money_textView.text.toString().toInt()
-            total.loganCash = year_logan_cash_textView.text.toString().toInt()
-            total.loganCard = year_logan_card_textView.text.toString().toInt()
+                binding.yearTotalDeliveryValueLoganTextView.text.toString().toInt()
+            total.loganMoney = binding.yearLoganMoneyTextView.text.toString().toInt()
+            total.loganCash = binding.yearLoganCashTextView.text.toString().toInt()
+            total.loganCard = binding.yearLoganCardTextView.text.toString().toInt()
             total.vestaDeliveryValue =
-                year_total_delivery_value_vesta_textView.text.toString().toInt()
-            total.vestaMoney = year_vesta_money_textView.text.toString().toInt()
-            total.vestaCash = year_vesta_cash_textView.text.toString().toInt()
-            total.vestaCard = year_vesta_card_textView.text.toString().toInt()
-            total.salary = year_salary_textView.text.toString().toInt()
-            total.expenses = year_tea_textView.text.toString().toInt()
+                binding.yearTotalDeliveryValueVestaTextView.text.toString().toInt()
+            total.vestaMoney = binding.yearVestaMoneyTextView.text.toString().toInt()
+            total.vestaCash = binding.yearVestaCashTextView.text.toString().toInt()
+            total.vestaCard = binding.yearVestaCardTextView.text.toString().toInt()
+            total.salary = binding.yearSalaryTextView.text.toString().toInt()
+            total.expenses = binding.yearTeaTextView.text.toString().toInt()
             total.deltaODO = deltaODO
-            total.largusShifts = year_largus_count_textView.text.toString().toInt()
-            total.sanderoShifts = year_sandero_count_textView.text.toString().toInt()
-            total.xrayShifts = year_xray_count_textView.text.toString().toInt()
+            total.largusShifts = binding.yearLargusCountTextView.text.toString().toInt()
+            total.sanderoShifts = binding.yearSanderoCountTextView.text.toString().toInt()
+            total.xrayShifts = binding.yearXrayCountTextView.text.toString().toInt()
             total.loganMoveFromZhukova = loganMoveFromZhukova
             total.loganMoveFromKulturi = loganMoveFromKulturi
             total.loganMoveFromSedova = loganMoveFromSedova
@@ -408,49 +416,49 @@ class TotalYearFragment : MvpAppCompatFragment() {
     }
 
     private fun placeData() {
-        year_textView.text = "${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
-        year_total_shifts_value_textView.text = total.totalShifts.toString()
-        year_total_delivery_value_textView.text = total.totalDeliveries.toString()
-        year_logan_move_textView.text = total.loganMove.toString()
-        year_logan_zhukova_move_textView.text = total.loganMoveToZhukova.toString()
-        year_logan_kulturi_move_textView.text = total.loganMoveToKulturi.toString()
-        year_logan_sedova_move_textView.text = total.loganMoveToSedova.toString()
-        year_logan_himikov_move_textView.text = total.loganMoveToHimikov.toString()
-        year_vesta_move_textView.text = total.vestaMove.toString()
-        year_vesta_zhukova_move_textView.text = total.vestaMoveToZhukova.toString()
-        year_vesta_kulturi_move_textView.text = total.vestaMoveToKulturi.toString()
-        year_vesta_sedova_move_textView.text = total.vestaMoveToSedova.toString()
-        year_vesta_himikov_move_textView.text = total.vestaMoveToHimikov.toString()
-        year_total_move_textView.text = "${total.movesWithSalary}(${total.totalMove})"
-        year_logan_task_textView.text = total.loganTask.toString()
-        year_logan_zhukova_task_textView.text = total.loganTaskToZhukova.toString()
-        year_logan_kulturi_task_textView.text = total.loganTaskToKulturi.toString()
-        year_logan_sedova_task_textView.text = total.loganTaskToSedova.toString()
-        year_logan_himikov_task_textView.text = total.loganTaskToHimikov.toString()
-        year_logan_else_task_textView.text = total.loganTaskElse.toString()
-        year_vesta_task_textView.text = total.vestaTask.toString()
-        year_vesta_zhukova_task_textView.text = total.vestaTaskToZhukova.toString()
-        year_vesta_kulturi_task_textView.text = total.vestaTaskToKulturi.toString()
-        year_vesta_sedova_task_textView.text = total.vestaTaskToSedova.toString()
-        year_vesta_himikov_task_textView.text = total.vestaTaskToHimikov.toString()
-        year_vesta_else_task_textView.text = total.vestaTaskElse.toString()
-        year_total_task_textView.text = "${total.tasksWithSalary}(${total.totalTask})"
-        year_total_money_textView.text = total.totalMoney.toString()
-        year_total_cash_textView.text = total.totalCash.toString()
-        year_total_card_textView.text = total.totalCard.toString()
-        year_total_delivery_value_logan_textView.text = total.loganDeliveryValue.toString()
-        year_logan_money_textView.text = total.loganMoney.toString()
-        year_logan_cash_textView.text = total.loganCash.toString()
-        year_logan_card_textView.text = total.loganCard.toString()
-        year_total_delivery_value_vesta_textView.text = total.vestaDeliveryValue.toString()
-        year_vesta_money_textView.text = total.vestaMoney.toString()
-        year_vesta_cash_textView.text = total.vestaCash.toString()
-        year_vesta_card_textView.text = total.vestaCard.toString()
-        year_salary_textView.text = total.salary.toString()
-        year_tea_textView.text = total.expenses.toString()
-        year_largus_count_textView.text = total.largusShifts.toString()
-        year_sandero_count_textView.text = total.sanderoShifts.toString()
-        year_xray_count_textView.text = total.xrayShifts.toString()
+        binding.yearTextView.text = "${total.date[6]}${total.date[7]}${total.date[8]}${total.date[9]}"
+        binding.yearTotalShiftsValueTextView.text = total.totalShifts.toString()
+        binding.yearTotalDeliveryValueTextView.text = total.totalDeliveries.toString()
+        binding.yearLoganMoveTextView.text = total.loganMove.toString()
+        binding.yearLoganZhukovaMoveTextView.text = total.loganMoveToZhukova.toString()
+        binding.yearLoganKulturiMoveTextView.text = total.loganMoveToKulturi.toString()
+        binding.yearLoganSedovaMoveTextView.text = total.loganMoveToSedova.toString()
+        binding.yearLoganHimikovMoveTextView.text = total.loganMoveToHimikov.toString()
+        binding.yearVestaMoveTextView.text = total.vestaMove.toString()
+        binding.yearVestaZhukovaMoveTextView.text = total.vestaMoveToZhukova.toString()
+        binding.yearVestaKulturiMoveTextView.text = total.vestaMoveToKulturi.toString()
+        binding.yearVestaSedovaMoveTextView.text = total.vestaMoveToSedova.toString()
+        binding.yearVestaHimikovMoveTextView.text = total.vestaMoveToHimikov.toString()
+        binding.yearTotalMoveTextView.text = "${total.movesWithSalary}(${total.totalMove})"
+        binding.yearLoganTaskTextView.text = total.loganTask.toString()
+        binding.yearLoganZhukovaTaskTextView.text = total.loganTaskToZhukova.toString()
+        binding.yearLoganKulturiTaskTextView.text = total.loganTaskToKulturi.toString()
+        binding.yearLoganSedovaTaskTextView.text = total.loganTaskToSedova.toString()
+        binding.yearLoganHimikovTaskTextView.text = total.loganTaskToHimikov.toString()
+        binding.yearLoganElseTaskTextView.text = total.loganTaskElse.toString()
+        binding.yearVestaTaskTextView.text = total.vestaTask.toString()
+        binding.yearVestaZhukovaTaskTextView.text = total.vestaTaskToZhukova.toString()
+        binding.yearVestaKulturiTaskTextView.text = total.vestaTaskToKulturi.toString()
+        binding.yearVestaSedovaTaskTextView.text = total.vestaTaskToSedova.toString()
+        binding.yearVestaHimikovTaskTextView.text = total.vestaTaskToHimikov.toString()
+        binding.yearVestaElseTaskTextView.text = total.vestaTaskElse.toString()
+        binding.yearTotalTaskTextView.text = "${total.tasksWithSalary}(${total.totalTask})"
+        binding.yearTotalMoneyTextView.text = total.totalMoney.toString()
+        binding.yearTotalCashTextView.text = total.totalCash.toString()
+        binding.yearTotalCardTextView.text = total.totalCard.toString()
+        binding.yearTotalDeliveryValueLoganTextView.text = total.loganDeliveryValue.toString()
+        binding.yearLoganMoneyTextView.text = total.loganMoney.toString()
+        binding.yearLoganCashTextView.text = total.loganCash.toString()
+        binding.yearLoganCardTextView.text = total.loganCard.toString()
+        binding.yearTotalDeliveryValueVestaTextView.text = total.vestaDeliveryValue.toString()
+        binding.yearVestaMoneyTextView.text = total.vestaMoney.toString()
+        binding.yearVestaCashTextView.text = total.vestaCash.toString()
+        binding.yearVestaCardTextView.text = total.vestaCard.toString()
+        binding.yearSalaryTextView.text = total.salary.toString()
+        binding.yearTeaTextView.text = total.expenses.toString()
+        binding.yearLargusCountTextView.text = total.largusShifts.toString()
+        binding.yearSanderoCountTextView.text = total.sanderoShifts.toString()
+        binding.yearXrayCountTextView.text = total.xrayShifts.toString()
     }
 
 }

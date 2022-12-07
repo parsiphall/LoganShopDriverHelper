@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.parsiphal.loganshopdriverhelper.data.Total
-import kotlinx.android.synthetic.main.activity_empty.*
+import com.parsiphal.loganshopdriverhelper.databinding.ActivityEmptyBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
@@ -16,9 +16,13 @@ const val DEADLINE_TEST = 1588104600
 
 class EmptyActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityEmptyBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_empty)
+        binding = ActivityEmptyBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         val time = System.currentTimeMillis() / 1000L
         if (!prefs.xRayDB) {
             try {
@@ -27,12 +31,8 @@ class EmptyActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-        if (time < DEADLINE) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        } else {
-            somethingWrong.visibility = View.VISIBLE
-        }
+        justStart()
+        //startWithIf(time)
     }
 
     private fun refactorDB() {
@@ -52,6 +52,19 @@ class EmptyActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun justStart() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun startWithIf(time: Long) {
+        if (time < DEADLINE) {
+            justStart()
+        } else {
+            binding.somethingWrong.visibility = View.VISIBLE
         }
     }
 }

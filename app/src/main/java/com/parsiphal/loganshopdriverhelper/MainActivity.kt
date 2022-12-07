@@ -11,9 +11,9 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.parsiphal.loganshopdriverhelper.databinding.ActivityMainBinding
 import com.parsiphal.loganshopdriverhelper.fragments.*
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import moxy.MvpAppCompatActivity
 import moxy.MvpAppCompatFragment
@@ -22,6 +22,7 @@ import moxy.MvpAppCompatFragment
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     private lateinit var mInterstitialAd: InterstitialAd
+    private lateinit var binding: ActivityMainBinding
 
     override fun fragmentPlace(fragment: MvpAppCompatFragment) {
         supportFragmentManager
@@ -57,17 +58,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                     } else {
                         fragmentPlace(ShiftFragmentNew())
                     }
-                    settings_fab.visibility = View.VISIBLE
+                    binding.settingsFab.visibility = View.VISIBLE
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_delivery -> {
                     fragmentPlace(DeliveryFragment())
-                    settings_fab.visibility = View.GONE
+                    binding.settingsFab.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_total -> {
                     fragmentPlace(TotalFragment())
-                    settings_fab.visibility = View.GONE
+                    binding.settingsFab.visibility = View.GONE
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -76,12 +77,14 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        nav_view.setOnNavigationItemSelectedListener(onNavigationItemMainSelectedListener)
-        nav_view.selectedItemId = R.id.navigation_delivery
-        settings_fab.setOnClickListener {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        binding.navView.setOnNavigationItemSelectedListener(onNavigationItemMainSelectedListener)
+        binding.navView.selectedItemId = R.id.navigation_delivery
+        binding.settingsFab.setOnClickListener {
             fragmentPlace(MaintananceFragment())
-            settings_fab.visibility = View.GONE
+            binding.settingsFab.visibility = View.GONE
         }
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -104,7 +107,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
 //        MobileAds.initialize(this) {}
 //        prepareAd()
-        version_TextView.text = "v${BuildConfig.VERSION_NAME}\nb${BuildConfig.VERSION_CODE}"
+        binding.versionTextView.text = "v${BuildConfig.VERSION_NAME}\nb${BuildConfig.VERSION_CODE}"
         fragmentPlace(DeliveryFragment())
     }
 

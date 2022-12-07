@@ -2,12 +2,13 @@ package com.parsiphal.loganshopdriverhelper.recycler
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
-import kotlinx.android.synthetic.main.total_item.view.*
+import com.parsiphal.loganshopdriverhelper.databinding.TotalItemBinding
 
 class TotalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val dayOrMonth = view.total_item_dayOrMonth!!
-    val date = view.total_item_date!!
-    val salary = view.total_item_salary!!
-    val distance = view.total_item_dist!!
-    val delete = view.total_delete_button!!
+    val binding = TotalItemBinding.bind(view)
+    val dayOrMonth = binding.totalItemDayOrMonth
+    val date = binding.totalItemDate
+    val salary = binding.totalItemSalary
+    val distance = binding.totalItemDist
+    val delete = binding.totalDeleteButton
 }

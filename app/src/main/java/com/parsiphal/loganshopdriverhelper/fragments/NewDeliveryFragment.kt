@@ -12,9 +12,9 @@ import com.parsiphal.loganshopdriverhelper.DB
 import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Delivery
 import com.parsiphal.loganshopdriverhelper.data.WorkType
+import com.parsiphal.loganshopdriverhelper.databinding.FragmentNewDeliveryBinding
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.prefs
-import kotlinx.android.synthetic.main.fragment_new_delivery.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,6 +26,8 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
     private lateinit var delivery: Delivery
     private lateinit var callBackActivity: MainView
     private var newDelivery = true
+    private var _binding: FragmentNewDeliveryBinding? = null
+    private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,7 +49,8 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_new_delivery, container, false)
+        _binding = FragmentNewDeliveryBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,7 +59,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
             when (delivery.workType) {
                 WorkType.Delivery.i -> {
                     layoutDelivery()
-                    newDelivery_cost_cash_editText.setText((delivery.expense + delivery.cost).toString())
+                    binding.newDeliveryCostCashEditText.setText((delivery.expense + delivery.cost).toString())
                 }
                 WorkType.Move.i -> {
                     layoutMove()
@@ -65,7 +68,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     layoutTask()
                 }
                 WorkType.Expense.i -> {
-                    layoutExpence()
+                    layoutExpense()
                 }
                 WorkType.Other.i -> {
                     layoutOther()
@@ -74,23 +77,23 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     layoutSalary()
                 }
             }
-            newDelivery_work_type_spinner.setSelection(delivery.workType)
-            newDelivery_delivery_type_spinner.setSelection(delivery.deliveryType)
-            newDelivery_pay_type_spinner.setSelection(delivery.payType)
-            newDelivery_salary_type_spinner.setSelection(delivery.deliveryType)
-            newDelivery_address.setText(delivery.address)
-            newDelivery_cost_editText.setText(delivery.cost.toString())
-            newDelivery_comment.setText(delivery.commentSimple)
-            newDelivery_expense_spinner.setSelection(delivery.expenseType)
-            newDelivery_isSalary_CheckBox.isChecked = delivery.ifSalary != 1
+            binding.newDeliveryWorkTypeSpinner.setSelection(delivery.workType)
+            binding.newDeliveryDeliveryTypeSpinner.setSelection(delivery.deliveryType)
+            binding.newDeliveryPayTypeSpinner.setSelection(delivery.payType)
+            binding.newDeliverySalaryTypeSpinner.setSelection(delivery.deliveryType)
+            binding.newDeliveryAddress.setText(delivery.address)
+            binding.newDeliveryCostEditText.setText(delivery.cost.toString())
+            binding.newDeliveryComment.setText(delivery.commentSimple)
+            binding.newDeliveryExpenseSpinner.setSelection(delivery.expenseType)
+            binding.newDeliveryIsSalaryCheckBox.isChecked = delivery.ifSalary != 1
             if (delivery.moveFrom != -1) {
-                newDelivery_move_from_spinner.setSelection(delivery.moveFrom)
+                binding.newDeliveryMoveFromSpinner.setSelection(delivery.moveFrom)
             }
             if (delivery.moveTo != -1) {
-                newDelivery_move_to_spinner.setSelection(delivery.moveTo)
+                binding.newDeliveryMoveToSpinner.setSelection(delivery.moveTo)
             }
         }
-        newDelivery_work_type_spinner.onItemSelectedListener =
+        binding.newDeliveryWorkTypeSpinner.onItemSelectedListener =
             (object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -113,7 +116,7 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                             layoutTask()
                         }
                         WorkType.Expense.i -> {
-                            layoutExpence()
+                            layoutExpense()
                         }
                         WorkType.Other.i -> {
                             layoutOther()
@@ -124,156 +127,156 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                     }
                 }
             })
-        newDelivery_write.setOnClickListener {
+        binding.newDeliveryWrite.setOnClickListener {
             try {
-                when (newDelivery_work_type_spinner.selectedItemPosition) {
+                when (binding.newDeliveryWorkTypeSpinner.selectedItemPosition) {
                     WorkType.Delivery.i -> {
                         delivery.deliveryDate = prefs.date!!
-                        delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
+                        delivery.workType = binding.newDeliveryWorkTypeSpinner.selectedItemPosition
                         delivery.deliveryType =
-                            newDelivery_delivery_type_spinner.selectedItemPosition
-                        delivery.payType = newDelivery_pay_type_spinner.selectedItemPosition
-                        delivery.address = newDelivery_address.text.toString()
-                        delivery.cost = newDelivery_cost_editText.text.toString().toInt()
-                        if (newDelivery_cost_cash_editText.text.toString() == "") {
+                            binding.newDeliveryDeliveryTypeSpinner.selectedItemPosition
+                        delivery.payType = binding.newDeliveryPayTypeSpinner.selectedItemPosition
+                        delivery.address = binding.newDeliveryAddress.text.toString()
+                        delivery.cost = binding.newDeliveryCostEditText.text.toString().toInt()
+                        if (binding.newDeliveryCostCashEditText.text.toString() == "") {
                             delivery.expense = 0
                         } else {
                             delivery.expense =
-                                (newDelivery_cost_cash_editText.text.toString().toInt() - newDelivery_cost_editText.text.toString().toInt())
+                                (binding.newDeliveryCostCashEditText.text.toString().toInt() - binding.newDeliveryCostEditText.text.toString().toInt())
                         }
-                        delivery.commentSimple = newDelivery_comment.text.toString()
-                        delivery.comment = newDelivery_comment.text.toString()
+                        delivery.commentSimple = binding.newDeliveryComment.text.toString()
+                        delivery.comment = binding.newDeliveryComment.text.toString()
                     }
                     WorkType.Move.i -> {
                         delivery.deliveryDate = prefs.date!!
-                        delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
+                        delivery.workType = binding.newDeliveryWorkTypeSpinner.selectedItemPosition
                         delivery.deliveryType =
-                            newDelivery_delivery_type_spinner.selectedItemPosition
-                        delivery.moveFrom = newDelivery_move_from_spinner.selectedItemPosition
-                        delivery.moveTo = newDelivery_move_to_spinner.selectedItemPosition
-                        delivery.commentSimple = newDelivery_comment.text.toString()
-                        if (newDelivery_isSalary_CheckBox.isChecked) {
+                            binding.newDeliveryDeliveryTypeSpinner.selectedItemPosition
+                        delivery.moveFrom = binding.newDeliveryMoveFromSpinner.selectedItemPosition
+                        delivery.moveTo = binding.newDeliveryMoveToSpinner.selectedItemPosition
+                        delivery.commentSimple = binding.newDeliveryComment.text.toString()
+                        if (binding.newDeliveryIsSalaryCheckBox.isChecked) {
                             delivery.ifSalary = 0
-                            if (newDelivery_comment.text.toString() == "") {
+                            if (binding.newDeliveryComment.text.toString() == "") {
                                 delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                                         "${resources.getString(R.string.move_from)} " +
-                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${binding.newDeliveryMoveFromSpinner.selectedItem} " +
                                         "${resources.getString(R.string.move_to)} " +
-                                        "${newDelivery_move_to_spinner.selectedItem}"
+                                        "${binding.newDeliveryMoveToSpinner.selectedItem}"
                             } else {
                                 delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                                         "${resources.getString(R.string.move_from)} " +
-                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${binding.newDeliveryMoveFromSpinner.selectedItem} " +
                                         "${resources.getString(R.string.move_to)} " +
-                                        "${newDelivery_move_to_spinner.selectedItem}\n" +
-                                        "${newDelivery_comment.text}"
+                                        "${binding.newDeliveryMoveToSpinner.selectedItem}\n" +
+                                        "${binding.newDeliveryComment.text}"
                             }
                         } else {
                             delivery.ifSalary = 1
-                            if (newDelivery_comment.text.toString() == "") {
+                            if (binding.newDeliveryComment.text.toString() == "") {
                                 delivery.comment = "${resources.getString(R.string.move_from)} " +
-                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${binding.newDeliveryMoveFromSpinner.selectedItem} " +
                                         "${resources.getString(R.string.move_to)} " +
-                                        "${newDelivery_move_to_spinner.selectedItem}"
+                                        "${binding.newDeliveryMoveToSpinner.selectedItem}"
                             } else {
                                 delivery.comment = "${resources.getString(R.string.move_from)} " +
-                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${binding.newDeliveryMoveFromSpinner.selectedItem} " +
                                         "${resources.getString(R.string.move_to)} " +
-                                        "${newDelivery_move_to_spinner.selectedItem}\n" +
-                                        "${newDelivery_comment.text}"
+                                        "${binding.newDeliveryMoveToSpinner.selectedItem}\n" +
+                                        "${binding.newDeliveryComment.text}"
                             }
                         }
                     }
                     WorkType.Task.i -> {
                         delivery.deliveryDate = prefs.date!!
-                        delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
+                        delivery.workType = binding.newDeliveryWorkTypeSpinner.selectedItemPosition
                         delivery.deliveryType =
-                            newDelivery_delivery_type_spinner.selectedItemPosition
-                        if (newDelivery_move_task_switch.isChecked) {
+                            binding.newDeliveryDeliveryTypeSpinner.selectedItemPosition
+                        if (binding.newDeliveryMoveTaskSwitch.isChecked) {
                             delivery.moveFrom = -1
                             delivery.moveTo = -1
                         } else {
-                            delivery.moveFrom = newDelivery_move_from_spinner.selectedItemPosition
-                            delivery.moveTo = newDelivery_move_to_spinner.selectedItemPosition
+                            delivery.moveFrom = binding.newDeliveryMoveFromSpinner.selectedItemPosition
+                            delivery.moveTo = binding.newDeliveryMoveToSpinner.selectedItemPosition
                         }
-                        delivery.commentSimple = newDelivery_comment.text.toString()
-                        if (newDelivery_isSalary_CheckBox.isChecked && !newDelivery_move_task_switch.isChecked) {
+                        delivery.commentSimple = binding.newDeliveryComment.text.toString()
+                        if (binding.newDeliveryIsSalaryCheckBox.isChecked && !binding.newDeliveryMoveTaskSwitch.isChecked) {
                             delivery.ifSalary = 0
-                            if (newDelivery_comment.text.toString() == "") {
+                            if (binding.newDeliveryComment.text.toString() == "") {
                                 delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                                         "${resources.getString(R.string.move_from)} " +
-                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${binding.newDeliveryMoveFromSpinner.selectedItem} " +
                                         "${resources.getString(R.string.move_to)} " +
-                                        "${newDelivery_move_to_spinner.selectedItem}"
+                                        "${binding.newDeliveryMoveToSpinner.selectedItem}"
                             } else {
                                 delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                                         "${resources.getString(R.string.move_from)} " +
-                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${binding.newDeliveryMoveFromSpinner.selectedItem} " +
                                         "${resources.getString(R.string.move_to)} " +
-                                        "${newDelivery_move_to_spinner.selectedItem}\n" +
-                                        "${newDelivery_comment.text}"
+                                        "${binding.newDeliveryMoveToSpinner.selectedItem}\n" +
+                                        "${binding.newDeliveryComment.text}"
                             }
-                        } else if (!newDelivery_isSalary_CheckBox.isChecked && !newDelivery_move_task_switch.isChecked) {
+                        } else if (!binding.newDeliveryIsSalaryCheckBox.isChecked && !binding.newDeliveryMoveTaskSwitch.isChecked) {
                             delivery.ifSalary = 1
-                            if (newDelivery_comment.text.toString() == "") {
+                            if (binding.newDeliveryComment.text.toString() == "") {
                                 delivery.comment = "${resources.getString(R.string.move_from)} " +
-                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${binding.newDeliveryMoveFromSpinner.selectedItem} " +
                                         "${resources.getString(R.string.move_to)} " +
-                                        "${newDelivery_move_to_spinner.selectedItem}"
+                                        "${binding.newDeliveryMoveToSpinner.selectedItem}"
                             } else {
                                 delivery.comment = "${resources.getString(R.string.move_from)} " +
-                                        "${newDelivery_move_from_spinner.selectedItem} " +
+                                        "${binding.newDeliveryMoveFromSpinner.selectedItem} " +
                                         "${resources.getString(R.string.move_to)} " +
-                                        "${newDelivery_move_to_spinner.selectedItem}\n" +
-                                        "${newDelivery_comment.text}"
+                                        "${binding.newDeliveryMoveToSpinner.selectedItem}\n" +
+                                        "${binding.newDeliveryComment.text}"
                             }
-                        } else if (newDelivery_isSalary_CheckBox.isChecked && newDelivery_move_task_switch.isChecked) {
+                        } else if (binding.newDeliveryIsSalaryCheckBox.isChecked && binding.newDeliveryMoveTaskSwitch.isChecked) {
                             delivery.ifSalary = 0
-                            if (newDelivery_comment.text.toString() == "") {
+                            if (binding.newDeliveryComment.text.toString() == "") {
                                 delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                                         resources.getString(R.string.switch_else)
                             } else {
                                 delivery.comment = "${resources.getString(R.string.no_salary)}\n" +
                                         "${resources.getString(R.string.switch_else)}\n" +
-                                        "${newDelivery_comment.text}"
+                                        "${binding.newDeliveryComment.text}"
                             }
-                        } else if (!newDelivery_isSalary_CheckBox.isChecked && newDelivery_move_task_switch.isChecked) {
+                        } else if (!binding.newDeliveryIsSalaryCheckBox.isChecked && binding.newDeliveryMoveTaskSwitch.isChecked) {
                             delivery.ifSalary = 1
-                            if (newDelivery_comment.text.toString() == "") {
+                            if (binding.newDeliveryComment.text.toString() == "") {
                                 delivery.comment = resources.getString(R.string.switch_else)
                             } else {
                                 delivery.comment =
                                     "${resources.getString(R.string.switch_else)}\n" +
-                                            "${newDelivery_comment.text}"
+                                            "${binding.newDeliveryComment.text}"
                             }
                         }
                     }
                     WorkType.Expense.i -> {
                         delivery.deliveryDate = prefs.date!!
-                        delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
-                        delivery.comment = newDelivery_comment.text.toString()
-                        delivery.cost = newDelivery_cost_editText.text.toString().toInt()
-                        delivery.expenseType = newDelivery_expense_spinner.selectedItemPosition
-                        delivery.commentSimple = newDelivery_comment.text.toString()
-                        if (newDelivery_comment.text.toString() == "") {
-                            delivery.comment = newDelivery_expense_spinner.selectedItem.toString()
+                        delivery.workType = binding.newDeliveryWorkTypeSpinner.selectedItemPosition
+                        delivery.comment = binding.newDeliveryComment.text.toString()
+                        delivery.cost = binding.newDeliveryCostEditText.text.toString().toInt()
+                        delivery.expenseType = binding.newDeliveryExpenseSpinner.selectedItemPosition
+                        delivery.commentSimple = binding.newDeliveryComment.text.toString()
+                        if (binding.newDeliveryComment.text.toString() == "") {
+                            delivery.comment = binding.newDeliveryExpenseSpinner.selectedItem.toString()
                         } else {
-                            delivery.comment = "${newDelivery_expense_spinner.selectedItem}\n" +
-                                    "${newDelivery_comment.text}"
+                            delivery.comment = "${binding.newDeliveryExpenseSpinner.selectedItem}\n" +
+                                    "${binding.newDeliveryComment.text}"
                         }
                     }
                     WorkType.Other.i -> {
                         delivery.deliveryDate = prefs.date!!
-                        delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
-                        delivery.commentSimple = newDelivery_comment.text.toString()
+                        delivery.workType = binding.newDeliveryWorkTypeSpinner.selectedItemPosition
+                        delivery.commentSimple = binding.newDeliveryComment.text.toString()
                     }
                     WorkType.Salary.i -> {
                         delivery.deliveryDate = prefs.date!!
-                        delivery.workType = newDelivery_work_type_spinner.selectedItemPosition
-                        delivery.deliveryType = newDelivery_salary_type_spinner.selectedItemPosition
-                        delivery.commentSimple = newDelivery_comment.text.toString()
-                        delivery.comment = newDelivery_comment.text.toString()
-                        delivery.cost = newDelivery_cost_editText.text.toString().toInt()
+                        delivery.workType = binding.newDeliveryWorkTypeSpinner.selectedItemPosition
+                        delivery.deliveryType = binding.newDeliverySalaryTypeSpinner.selectedItemPosition
+                        delivery.commentSimple = binding.newDeliveryComment.text.toString()
+                        delivery.comment = binding.newDeliveryComment.text.toString()
+                        delivery.cost = binding.newDeliveryCostEditText.text.toString().toInt()
                     }
                 }
                 saveToBase()
@@ -283,100 +286,105 @@ class NewDeliveryFragment : MvpAppCompatFragment() {
                 Snackbar.make(view, getString(R.string.wrongData), Snackbar.LENGTH_LONG).show()
             }
         }
-        newDelivery_move_task_switch.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.newDeliveryMoveTaskSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                newDelivery_move_task_switch.text = resources.getString(R.string.switch_else)
-                newDelivery_move.visibility = View.GONE
+                binding.newDeliveryMoveTaskSwitch.text = resources.getString(R.string.switch_else)
+                binding.newDeliveryMove.visibility = View.GONE
             } else {
-                newDelivery_move_task_switch.text =
+                binding.newDeliveryMoveTaskSwitch.text =
                     resources.getString(R.string.switch_between_shops)
-                newDelivery_move.visibility = View.VISIBLE
+                binding.newDeliveryMove.visibility = View.VISIBLE
             }
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun layoutSalary() {
-        newDelivery_delivery_type.visibility = View.GONE
-        newDelivery_salary_type.visibility = View.VISIBLE
-        newDelivery_pay_type.visibility = View.GONE
-        newDelivery_expense.visibility = View.GONE
-        newDelivery_move_task.visibility = View.GONE
-        newDelivery_move_task_switch.isChecked = false
-        newDelivery_address.visibility = View.GONE
-        newDelivery_cost.visibility = View.VISIBLE
-        newDelivery_cost_cash.visibility = View.GONE
-        newDelivery_move.visibility = View.GONE
-        newDelivery_isSalary.visibility = View.GONE
+        binding.newDeliveryDeliveryType.visibility = View.GONE
+        binding.newDeliverySalaryType.visibility = View.VISIBLE
+        binding.newDeliveryPayType.visibility = View.GONE
+        binding.newDeliveryExpense.visibility = View.GONE
+        binding.newDeliveryMoveTask.visibility = View.GONE
+        binding.newDeliveryMoveTaskSwitch.isChecked = false
+        binding.newDeliveryAddress.visibility = View.GONE
+        binding.newDeliveryCost.visibility = View.VISIBLE
+        binding.newDeliveryCostCash.visibility = View.GONE
+        binding.newDeliveryMove.visibility = View.GONE
+        binding.newDeliveryIsSalary.visibility = View.GONE
     }
 
     private fun layoutOther() {
-        newDelivery_delivery_type.visibility = View.GONE
-        newDelivery_salary_type.visibility = View.GONE
-        newDelivery_pay_type.visibility = View.GONE
-        newDelivery_expense.visibility = View.GONE
-        newDelivery_move_task.visibility = View.GONE
-        newDelivery_move_task_switch.isChecked = false
-        newDelivery_address.visibility = View.GONE
-        newDelivery_cost.visibility = View.GONE
-        newDelivery_cost_cash.visibility = View.GONE
-        newDelivery_move.visibility = View.GONE
-        newDelivery_isSalary.visibility = View.GONE
+        binding.newDeliveryDeliveryType.visibility = View.GONE
+        binding.newDeliverySalaryType.visibility = View.GONE
+        binding.newDeliveryPayType.visibility = View.GONE
+        binding.newDeliveryExpense.visibility = View.GONE
+        binding.newDeliveryMoveTask.visibility = View.GONE
+        binding.newDeliveryMoveTaskSwitch.isChecked = false
+        binding.newDeliveryAddress.visibility = View.GONE
+        binding.newDeliveryCost.visibility = View.GONE
+        binding.newDeliveryCostCash.visibility = View.GONE
+        binding.newDeliveryMove.visibility = View.GONE
+        binding.newDeliveryIsSalary.visibility = View.GONE
     }
 
-    private fun layoutExpence() {
-        newDelivery_delivery_type.visibility = View.GONE
-        newDelivery_salary_type.visibility = View.GONE
-        newDelivery_pay_type.visibility = View.GONE
-        newDelivery_expense.visibility = View.VISIBLE
-        newDelivery_move_task.visibility = View.GONE
-        newDelivery_move_task_switch.isChecked = false
-        newDelivery_address.visibility = View.GONE
-        newDelivery_cost.visibility = View.VISIBLE
-        newDelivery_cost_cash.visibility = View.GONE
-        newDelivery_move.visibility = View.GONE
-        newDelivery_isSalary.visibility = View.GONE
+    private fun layoutExpense() {
+        binding.newDeliveryDeliveryType.visibility = View.GONE
+        binding.newDeliverySalaryType.visibility = View.GONE
+        binding.newDeliveryPayType.visibility = View.GONE
+        binding.newDeliveryExpense.visibility = View.VISIBLE
+        binding.newDeliveryMoveTask.visibility = View.GONE
+        binding.newDeliveryMoveTaskSwitch.isChecked = false
+        binding.newDeliveryAddress.visibility = View.GONE
+        binding.newDeliveryCost.visibility = View.VISIBLE
+        binding.newDeliveryCostCash.visibility = View.GONE
+        binding.newDeliveryMove.visibility = View.GONE
+        binding.newDeliveryIsSalary.visibility = View.GONE
     }
 
     private fun layoutTask() {
-        newDelivery_delivery_type.visibility = View.VISIBLE
-        newDelivery_salary_type.visibility = View.GONE
-        newDelivery_pay_type.visibility = View.GONE
-        newDelivery_expense.visibility = View.GONE
-        newDelivery_move_task.visibility = View.VISIBLE
-        newDelivery_move_task_switch.isChecked = false
-        newDelivery_address.visibility = View.GONE
-        newDelivery_cost.visibility = View.GONE
-        newDelivery_cost_cash.visibility = View.GONE
-        newDelivery_move.visibility = View.VISIBLE
-        newDelivery_isSalary.visibility = View.VISIBLE
+        binding.newDeliveryDeliveryType.visibility = View.VISIBLE
+        binding.newDeliverySalaryType.visibility = View.GONE
+        binding.newDeliveryPayType.visibility = View.GONE
+        binding.newDeliveryExpense.visibility = View.GONE
+        binding.newDeliveryMoveTask.visibility = View.VISIBLE
+        binding.newDeliveryMoveTaskSwitch.isChecked = false
+        binding.newDeliveryAddress.visibility = View.GONE
+        binding.newDeliveryCost.visibility = View.GONE
+        binding.newDeliveryCostCash.visibility = View.GONE
+        binding.newDeliveryMove.visibility = View.VISIBLE
+        binding.newDeliveryIsSalary.visibility = View.VISIBLE
     }
 
     private fun layoutMove() {
-        newDelivery_delivery_type.visibility = View.VISIBLE
-        newDelivery_salary_type.visibility = View.GONE
-        newDelivery_pay_type.visibility = View.GONE
-        newDelivery_expense.visibility = View.GONE
-        newDelivery_move_task.visibility = View.GONE
-        newDelivery_move_task_switch.isChecked = false
-        newDelivery_address.visibility = View.GONE
-        newDelivery_cost.visibility = View.GONE
-        newDelivery_cost_cash.visibility = View.GONE
-        newDelivery_move.visibility = View.VISIBLE
-        newDelivery_isSalary.visibility = View.VISIBLE
+        binding.newDeliveryDeliveryType.visibility = View.VISIBLE
+        binding.newDeliverySalaryType.visibility = View.GONE
+        binding.newDeliveryPayType.visibility = View.GONE
+        binding.newDeliveryExpense.visibility = View.GONE
+        binding.newDeliveryMoveTask.visibility = View.GONE
+        binding.newDeliveryMoveTaskSwitch.isChecked = false
+        binding.newDeliveryAddress.visibility = View.GONE
+        binding.newDeliveryCost.visibility = View.GONE
+        binding.newDeliveryCostCash.visibility = View.GONE
+        binding.newDeliveryMove.visibility = View.VISIBLE
+        binding.newDeliveryIsSalary.visibility = View.VISIBLE
     }
 
     private fun layoutDelivery() {
-        newDelivery_delivery_type.visibility = View.VISIBLE
-        newDelivery_salary_type.visibility = View.GONE
-        newDelivery_pay_type.visibility = View.VISIBLE
-        newDelivery_expense.visibility = View.GONE
-        newDelivery_move_task.visibility = View.GONE
-        newDelivery_move_task_switch.isChecked = false
-        newDelivery_address.visibility = View.VISIBLE
-        newDelivery_cost.visibility = View.VISIBLE
-        newDelivery_cost_cash.visibility = View.VISIBLE
-        newDelivery_move.visibility = View.GONE
-        newDelivery_isSalary.visibility = View.GONE
+        binding.newDeliveryDeliveryType.visibility = View.VISIBLE
+        binding.newDeliverySalaryType.visibility = View.GONE
+        binding.newDeliveryPayType.visibility = View.VISIBLE
+        binding.newDeliveryExpense.visibility = View.GONE
+        binding.newDeliveryMoveTask.visibility = View.GONE
+        binding.newDeliveryMoveTaskSwitch.isChecked = false
+        binding.newDeliveryAddress.visibility = View.VISIBLE
+        binding.newDeliveryCost.visibility = View.VISIBLE
+        binding.newDeliveryCostCash.visibility = View.VISIBLE
+        binding.newDeliveryMove.visibility = View.GONE
+        binding.newDeliveryIsSalary.visibility = View.GONE
     }
 
     private fun saveToBase() = GlobalScope.launch {

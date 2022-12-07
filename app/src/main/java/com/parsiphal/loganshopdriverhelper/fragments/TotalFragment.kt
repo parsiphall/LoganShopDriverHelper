@@ -7,15 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.parsiphal.loganshopdriverhelper.DB
-
-import com.parsiphal.loganshopdriverhelper.R
 import com.parsiphal.loganshopdriverhelper.data.Total
+import com.parsiphal.loganshopdriverhelper.databinding.FragmentTotalBinding
 import com.parsiphal.loganshopdriverhelper.interfaces.MainView
 import com.parsiphal.loganshopdriverhelper.recycler.OnItemClickListener
 import com.parsiphal.loganshopdriverhelper.recycler.TotalViewAdapter
 import com.parsiphal.loganshopdriverhelper.recycler.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_total.*
-import kotlinx.android.synthetic.main.fragment_total.view.*
 import kotlinx.coroutines.*
 import moxy.MvpAppCompatFragment
 import java.util.Collections.reverse
@@ -27,6 +24,8 @@ class TotalFragment : MvpAppCompatFragment() {
     private lateinit var callBackActivity: MainView
     private var items: List<Total> = ArrayList()
     private lateinit var adapter: TotalViewAdapter
+    private var _binding: FragmentTotalBinding? = null
+    private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,12 +36,11 @@ class TotalFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_total, container, false)
+        _binding = FragmentTotalBinding.inflate(inflater, container, false)
         adapter = TotalViewAdapter(items, context!!)
-        root.total_recycler.layoutManager =
-            LinearLayoutManager(context)
-        root.total_recycler.adapter = adapter
-        return root
+        binding.totalRecycler.layoutManager = LinearLayoutManager(context)
+        binding.totalRecycler.adapter = adapter
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +53,7 @@ class TotalFragment : MvpAppCompatFragment() {
             data.await()
             adapter.dataChanged(items)
         }
-        total_recycler.addOnItemClickListener(object : OnItemClickListener {
+        binding.totalRecycler.addOnItemClickListener(object : OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
                 val bundle = Bundle()
                 bundle.putSerializable("ITEM", items[position])
@@ -70,21 +68,26 @@ class TotalFragment : MvpAppCompatFragment() {
                 callBackActivity.prepareAd()
             }
         })
-        total_day_button.setOnClickListener {
+        binding.totalDayButton.setOnClickListener {
             callBackActivity.showAd()
             callBackActivity.fragmentPlace(TotalDayFragment())
             callBackActivity.prepareAd()
         }
-        total_month_button.setOnClickListener {
+        binding.totalMonthButton.setOnClickListener {
             callBackActivity.showAd()
             callBackActivity.fragmentPlace(TotalMonthFragment())
             callBackActivity.prepareAd()
         }
-//        total_month_button.setOnLongClickListener {
+//        binding.totalMonthButton.setOnLongClickListener {
 //            callBackActivity.showAd()
 //            callBackActivity.fragmentPlace((TotalYearFragment()))
 //            callBackActivity.prepareAd()
 //            return@setOnLongClickListener true
 //        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

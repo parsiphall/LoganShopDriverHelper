@@ -2,12 +2,13 @@ package com.parsiphal.loganshopdriverhelper.recycler
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
-import kotlinx.android.synthetic.main.delivery_item.view.*
+import com.parsiphal.loganshopdriverhelper.databinding.DeliveryItemNewBinding
 
 class DeliveryViewHolderNew(view: View) : RecyclerView.ViewHolder(view) {
-    val workType = view.delivery_item_work_type!!
-    val deliveryType = view.delivery_item_delivery_type!!
-    val address = view.delivery_item_address!!
-    val comment = view.delivery_item_comment!!
-    val delete = view.delivery_delete_button!!
+    val binding = DeliveryItemNewBinding.bind(view)
+    val workType = binding.deliveryItemWorkType
+    val deliveryType = binding.deliveryItemDeliveryType
+    val address = binding.deliveryItemAddress
+    val comment = binding.deliveryItemComment
+    val delete = binding.deliveryDeleteButton
 }
